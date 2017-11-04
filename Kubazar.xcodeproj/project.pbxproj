@@ -22,6 +22,9 @@
 		9E5E8E3A1FAE058900CCCBDA /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5E8E381FAE058800CCCBDA /* SignInVC.swift */; };
 		9E5E8E3B1FAE058900CCCBDA /* SignInVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E5E8E391FAE058800CCCBDA /* SignInVC.xib */; };
 		9E5E8E3D1FAE059B00CCCBDA /* SignInVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5E8E3C1FAE059B00CCCBDA /* SignInVM.swift */; };
+		9E5E8E401FAE1E5500CCCBDA /* ForgotPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5E8E3E1FAE1E5500CCCBDA /* ForgotPasswordVC.swift */; };
+		9E5E8E411FAE1E5500CCCBDA /* ForgotPasswordVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E5E8E3F1FAE1E5500CCCBDA /* ForgotPasswordVC.xib */; };
+		9E5E8E431FAE1E6C00CCCBDA /* ForgotPasswordVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5E8E421FAE1E6C00CCCBDA /* ForgotPasswordVM.swift */; };
 		9E8964C41FACA21D004FFDCD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8964C31FACA21D004FFDCD /* AppDelegate.swift */; };
 		9E8964CB1FACA21D004FFDCD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E8964CA1FACA21D004FFDCD /* Assets.xcassets */; };
 		9E8964CE1FACA21D004FFDCD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E8964CC1FACA21D004FFDCD /* LaunchScreen.storyboard */; };
@@ -44,6 +47,9 @@
 		9E5E8E381FAE058800CCCBDA /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
 		9E5E8E391FAE058800CCCBDA /* SignInVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignInVC.xib; sourceTree = "<group>"; };
 		9E5E8E3C1FAE059B00CCCBDA /* SignInVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVM.swift; sourceTree = "<group>"; };
+		9E5E8E3E1FAE1E5500CCCBDA /* ForgotPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordVC.swift; sourceTree = "<group>"; };
+		9E5E8E3F1FAE1E5500CCCBDA /* ForgotPasswordVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForgotPasswordVC.xib; sourceTree = "<group>"; };
+		9E5E8E421FAE1E6C00CCCBDA /* ForgotPasswordVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordVM.swift; sourceTree = "<group>"; };
 		9E8964C01FACA21D004FFDCD /* Kubazar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kubazar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E8964C31FACA21D004FFDCD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9E8964CA1FACA21D004FFDCD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -165,6 +171,9 @@
 		9E5E8E2B1FADD3BD00CCCBDA /* ForgotPassword */ = {
 			isa = PBXGroup;
 			children = (
+				9E5E8E3E1FAE1E5500CCCBDA /* ForgotPasswordVC.swift */,
+				9E5E8E3F1FAE1E5500CCCBDA /* ForgotPasswordVC.xib */,
+				9E5E8E421FAE1E6C00CCCBDA /* ForgotPasswordVM.swift */,
 			);
 			path = ForgotPassword;
 			sourceTree = "<group>";
@@ -350,6 +359,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E5E8E351FADD3F400CCCBDA /* WelcomeVC.xib in Resources */,
+				9E5E8E411FAE1E5500CCCBDA /* ForgotPasswordVC.xib in Resources */,
 				9E1897891FACBA9C00780957 /* Info.plist in Resources */,
 				9E5E8E231FADC1C000CCCBDA /* Localizable.strings in Resources */,
 				9E5E8E111FADB54600CCCBDA /* Images.xcassets in Resources */,
@@ -444,6 +454,8 @@
 				9E5E8E291FADC46C00CCCBDA /* RootVM.swift in Sources */,
 				9E5E8E371FADD42D00CCCBDA /* WelcomeVM.swift in Sources */,
 				9E5E8E3A1FAE058900CCCBDA /* SignInVC.swift in Sources */,
+				9E5E8E401FAE1E5500CCCBDA /* ForgotPasswordVC.swift in Sources */,
+				9E5E8E431FAE1E6C00CCCBDA /* ForgotPasswordVM.swift in Sources */,
 				9E5E8E271FADC41A00CCCBDA /* BaseVM.swift in Sources */,
 				9E5E8E3D1FAE059B00CCCBDA /* SignInVM.swift in Sources */,
 				9E5E8E1C1FADBA7400CCCBDA /* ViewController.swift in Sources */,

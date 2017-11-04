@@ -60,11 +60,11 @@ class SignInVC: ViewController {
     
     private func localizeTitles() {
         
-        self.headerLabel.text = NSLocalizedString(SignInTitles.headerTitle, comment: "headerTitle")
+        self.headerLabel.text = NSLocalizedString(SignInTitles.headerLabel, comment: "headerLabel")
         self.emailTextField.placeholder = NSLocalizedString(SignInTitles.emailPlaceholder, comment: "emailPlaceholder")
         self.passwordTextField.placeholder = NSLocalizedString(SignInTitles.passwordPlaceholder, comment: "passwordPlaceholder")
-        self.forgotPasswordButton.setTitle(NSLocalizedString(SignInTitles.forgotPasswordButton, comment: "forgotPasswordButton").uppercased(), for: .normal)
-        self.loginButton.setTitle(NSLocalizedString(WelcomeTitles.registerButton, comment: "loginButton"), for: .normal)
+        self.forgotPasswordButton.setTitle(NSLocalizedString(SignInTitles.forgotPasswordButtonTitle, comment: "forgotPasswordButtonTitle").uppercased(), for: .normal)
+        self.loginButton.setTitle(NSLocalizedString(WelcomeTitles.registerButtonTitle, comment: "registerButtonTitle"), for: .normal)
     }
     
     //MARK: - Private functions
@@ -80,7 +80,7 @@ class SignInVC: ViewController {
     private func alignRightImageForLoginButton() {
         
         let buttonWidth = self.loginButton.frame.width
-        let imageWidth = CGFloat(WelcomeConstants.registerImageWidth)
+        let imageWidth = CGFloat(WelcomeConstants.arrowImageWidth)
         self.loginButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: buttonWidth - 2 * imageWidth, bottom: 0, right: 0)
         self.loginButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: -2 * imageWidth, bottom: 0, right: 0)
     }
@@ -89,6 +89,8 @@ class SignInVC: ViewController {
     
     @IBAction private func actionForgotPassword(_ sender: UIButton) {
         
+        let forgotPasswordViewController = ForgotPasswordVC(client: self.client)
+        self.navigationController?.pushViewController(forgotPasswordViewController, animated: true)
     }
     
     @IBAction private func actionLogin(_ sender: UIButton) {

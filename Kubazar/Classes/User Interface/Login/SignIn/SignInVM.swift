@@ -9,10 +9,10 @@
 import Foundation
 
 enum SignInTitles {
-    static let headerTitle = "SignInTitles_headerTitle"
+    static let headerLabel = "SignInTitles_headerLabel"
     static let emailPlaceholder = "SignInTitles_emailPlaceholder"
     static let passwordPlaceholder = "SignInTitles_passwordPlaceholder"
-    static let forgotPasswordButton = "SignInTitles_forgotPasswordButton"
+    static let forgotPasswordButtonTitle = "SignInTitles_forgotPasswordButtonTitle"
 }
 
 class SignInVM: BaseVM {

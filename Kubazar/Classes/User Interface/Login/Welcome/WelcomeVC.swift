@@ -57,17 +57,17 @@ class WelcomeVC: ViewController {
     
     private func localizeTitles() {
         
-        self.headerLabel.text = NSLocalizedString(WelcomeTitles.headerTitle, comment: "headerTitle")
-        self.descriptionLabel.text = NSLocalizedString(WelcomeTitles.description, comment: "description")
+        self.headerLabel.text = NSLocalizedString(WelcomeTitles.headerLabel, comment: "headerLabel")
+        self.descriptionLabel.text = NSLocalizedString(WelcomeTitles.descriptionLabel, comment: "descriptionLabel")
         self.loginLabel.text = NSLocalizedString(WelcomeTitles.loginLabel, comment: "loginLabel")
-        self.loginButton.setTitle(NSLocalizedString(WelcomeTitles.loginButton, comment: "loginButton").uppercased(), for: .normal)
-        self.registerButton.setTitle(NSLocalizedString(WelcomeTitles.registerButton, comment: "registerButton"), for: .normal)
+        self.loginButton.setTitle(NSLocalizedString(WelcomeTitles.loginButtonTitle, comment: "loginButtonTitle").uppercased(), for: .normal)
+        self.registerButton.setTitle(NSLocalizedString(WelcomeTitles.registerButtonTitle, comment: "registerButtonTitle"), for: .normal)
     }
     
     private func alignRightImageForRegisterButton() {
         
         let buttonWidth = self.registerButton.frame.width
-        let imageWidth = CGFloat(WelcomeConstants.registerImageWidth)
+        let imageWidth = CGFloat(WelcomeConstants.arrowImageWidth)
         self.registerButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: buttonWidth - 2 * imageWidth, bottom: 0, right: 0)
         self.registerButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: -2 * imageWidth, bottom: 0, right: 0)
     }

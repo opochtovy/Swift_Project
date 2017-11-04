@@ -9,15 +9,15 @@
 import Foundation
 
 enum WelcomeTitles {
-    static let headerTitle = "WelcomeTitles_headerTitle"
-    static let description = "WelcomeTitles_description"
+    static let headerLabel = "WelcomeTitles_headerLabel"
+    static let descriptionLabel = "WelcomeTitles_descriptionLabel"
     static let loginLabel = "WelcomeTitles_loginLabel"
-    static let loginButton = "WelcomeTitles_loginButton"
-    static let registerButton = "WelcomeTitles_registerButton"
+    static let loginButtonTitle = "WelcomeTitles_loginButtonTitle"
+    static let registerButtonTitle = "WelcomeTitles_registerButtonTitle"
 }
 
 enum WelcomeConstants {
-    static let registerImageWidth = 18
+    static let arrowImageWidth = 18
 }
 
 class WelcomeVM: BaseVM {
