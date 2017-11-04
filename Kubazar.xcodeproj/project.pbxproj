@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		9E1897891FACBA9C00780957 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9E1897881FACBA9C00780957 /* Info.plist */; };
 		9E8964C41FACA21D004FFDCD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8964C31FACA21D004FFDCD /* AppDelegate.swift */; };
-		9E8964C61FACA21D004FFDCD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8964C51FACA21D004FFDCD /* ViewController.swift */; };
-		9E8964C91FACA21D004FFDCD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E8964C71FACA21D004FFDCD /* Main.storyboard */; };
 		9E8964CB1FACA21D004FFDCD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E8964CA1FACA21D004FFDCD /* Assets.xcassets */; };
 		9E8964CE1FACA21D004FFDCD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E8964CC1FACA21D004FFDCD /* LaunchScreen.storyboard */; };
 		BEE04B2776028D322C4EE27E /* Pods_Kubazar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A253CC5A9FE6C38C3AD695DE /* Pods_Kubazar.framework */; };
@@ -20,8 +18,6 @@
 		9E1897881FACBA9C00780957 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E8964C01FACA21D004FFDCD /* Kubazar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kubazar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E8964C31FACA21D004FFDCD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		9E8964C51FACA21D004FFDCD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		9E8964C81FACA21D004FFDCD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9E8964CA1FACA21D004FFDCD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9E8964CD1FACA21D004FFDCD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A253CC5A9FE6C38C3AD695DE /* Pods_Kubazar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kubazar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -81,7 +77,6 @@
 			isa = PBXGroup;
 			children = (
 				9E8964CA1FACA21D004FFDCD /* Assets.xcassets */,
-				9E8964C71FACA21D004FFDCD /* Main.storyboard */,
 				9E8964CC1FACA21D004FFDCD /* LaunchScreen.storyboard */,
 				9E1897881FACBA9C00780957 /* Info.plist */,
 			);
@@ -92,7 +87,6 @@
 			isa = PBXGroup;
 			children = (
 				9E8964C31FACA21D004FFDCD /* AppDelegate.swift */,
-				9E8964C51FACA21D004FFDCD /* ViewController.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -126,6 +120,8 @@
 				9E8964BE1FACA21D004FFDCD /* Resources */,
 				2CB55D0669E9856166C3D21F /* [CP] Embed Pods Frameworks */,
 				72DE0AD8A6960B040E5606DC /* [CP] Copy Pods Resources */,
+				9E5E8E0E1FADA98200CCCBDA /* ShellScript */,
+				9E5E8E0F1FADAAFE00CCCBDA /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -178,7 +174,6 @@
 				9E1897891FACBA9C00780957 /* Info.plist in Resources */,
 				9E8964CE1FACA21D004FFDCD /* LaunchScreen.storyboard in Resources */,
 				9E8964CB1FACA21D004FFDCD /* Assets.xcassets in Resources */,
-				9E8964C91FACA21D004FFDCD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,6 +225,32 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Kubazar/Pods-Kubazar-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		9E5E8E0E1FADA98200CCCBDA /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 53c297472f17d747dbe40dbe9846d86d9f8c8a52 6e5a5ce0983b823e5aad1c12a3b30c48972ab5e0f9f735c54ea18e05b72dbc03";
+		};
+		9E5E8E0F1FADAAFE00CCCBDA /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "PREV_VERSION=`/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${INFOPLIST_FILE}\"`\nNEW_VERSION=`git rev-list HEAD --count`\n/usr/libexec/PListBuddy -c \"Set :CFBundleVersion ${PREV_VERSION%.*}.$(($NEW_VERSION))\" \"${INFOPLIST_FILE}\"\n/usr/libexec/PListBuddy -c \"Set :CFBundleShortVersionString ${PREV_VERSION%.*}.$(($NEW_VERSION))\" \"${INFOPLIST_FILE}\"";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -237,7 +258,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9E8964C61FACA21D004FFDCD /* ViewController.swift in Sources */,
 				9E8964C41FACA21D004FFDCD /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -245,14 +265,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		9E8964C71FACA21D004FFDCD /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9E8964C81FACA21D004FFDCD /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		9E8964CC1FACA21D004FFDCD /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
