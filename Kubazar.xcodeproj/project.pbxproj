@@ -19,6 +19,9 @@
 		9E5E8E341FADD3F400CCCBDA /* WelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5E8E321FADD3F400CCCBDA /* WelcomeVC.swift */; };
 		9E5E8E351FADD3F400CCCBDA /* WelcomeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E5E8E331FADD3F400CCCBDA /* WelcomeVC.xib */; };
 		9E5E8E371FADD42D00CCCBDA /* WelcomeVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5E8E361FADD42D00CCCBDA /* WelcomeVM.swift */; };
+		9E5E8E3A1FAE058900CCCBDA /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5E8E381FAE058800CCCBDA /* SignInVC.swift */; };
+		9E5E8E3B1FAE058900CCCBDA /* SignInVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E5E8E391FAE058800CCCBDA /* SignInVC.xib */; };
+		9E5E8E3D1FAE059B00CCCBDA /* SignInVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5E8E3C1FAE059B00CCCBDA /* SignInVM.swift */; };
 		9E8964C41FACA21D004FFDCD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8964C31FACA21D004FFDCD /* AppDelegate.swift */; };
 		9E8964CB1FACA21D004FFDCD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E8964CA1FACA21D004FFDCD /* Assets.xcassets */; };
 		9E8964CE1FACA21D004FFDCD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E8964CC1FACA21D004FFDCD /* LaunchScreen.storyboard */; };
@@ -38,6 +41,9 @@
 		9E5E8E321FADD3F400CCCBDA /* WelcomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeVC.swift; sourceTree = "<group>"; };
 		9E5E8E331FADD3F400CCCBDA /* WelcomeVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeVC.xib; sourceTree = "<group>"; };
 		9E5E8E361FADD42D00CCCBDA /* WelcomeVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeVM.swift; sourceTree = "<group>"; };
+		9E5E8E381FAE058800CCCBDA /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
+		9E5E8E391FAE058800CCCBDA /* SignInVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignInVC.xib; sourceTree = "<group>"; };
+		9E5E8E3C1FAE059B00CCCBDA /* SignInVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVM.swift; sourceTree = "<group>"; };
 		9E8964C01FACA21D004FFDCD /* Kubazar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kubazar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E8964C31FACA21D004FFDCD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9E8964CA1FACA21D004FFDCD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -190,6 +196,9 @@
 		9E5E8E2F1FADD3BD00CCCBDA /* SignIn */ = {
 			isa = PBXGroup;
 			children = (
+				9E5E8E381FAE058800CCCBDA /* SignInVC.swift */,
+				9E5E8E391FAE058800CCCBDA /* SignInVC.xib */,
+				9E5E8E3C1FAE059B00CCCBDA /* SignInVM.swift */,
 			);
 			path = SignIn;
 			sourceTree = "<group>";
@@ -346,6 +355,7 @@
 				9E5E8E111FADB54600CCCBDA /* Images.xcassets in Resources */,
 				9E8964CE1FACA21D004FFDCD /* LaunchScreen.storyboard in Resources */,
 				9E5E8E171FADB6CE00CCCBDA /* RootVC.xib in Resources */,
+				9E5E8E3B1FAE058900CCCBDA /* SignInVC.xib in Resources */,
 				9E8964CB1FACA21D004FFDCD /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -433,7 +443,9 @@
 			files = (
 				9E5E8E291FADC46C00CCCBDA /* RootVM.swift in Sources */,
 				9E5E8E371FADD42D00CCCBDA /* WelcomeVM.swift in Sources */,
+				9E5E8E3A1FAE058900CCCBDA /* SignInVC.swift in Sources */,
 				9E5E8E271FADC41A00CCCBDA /* BaseVM.swift in Sources */,
+				9E5E8E3D1FAE059B00CCCBDA /* SignInVM.swift in Sources */,
 				9E5E8E1C1FADBA7400CCCBDA /* ViewController.swift in Sources */,
 				9E8964C41FACA21D004FFDCD /* AppDelegate.swift in Sources */,
 				9E5E8E1F1FADBC9E00CCCBDA /* Client.swift in Sources */,

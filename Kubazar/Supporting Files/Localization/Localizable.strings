@@ -1,6 +1,11 @@
-/**/"WelcomeTitles_headerTitle" = "Welcome to Kubazar";
+/**/"WelcomeTitles_headerTitle" = "Welcome to Kubazar!";
 /**/"WelcomeTitles_description" = "Create short stories, in secret (for yourself) or together with one or two friends. Have a nice picture that made you think of someone or that simply shouldn't be forgotten? Pick one and make it into an unforgettable haiku.";
-/**/"WelcomeTitles_signUpLabel" = "Already Have an Account";
-/**/"WelcomeTitles_signUpButton" = "SIGN UP";
-/**/"WelcomeTitles_loginButton" = "Next";
+/**/"WelcomeTitles_loginLabel" = "Already Have an Account";
+/**/"WelcomeTitles_loginButton" = "Sign Up";
+/**/"WelcomeTitles_registerButton" = "Next";
+/**/"SignInTitles_headerTitle" = "Sign In";
+/**/"SignInTitles_emailPlaceholder" = "Email";
+/**/"SignInTitles_passwordPlaceholder" = "Password";
+/**/"SignInTitles_forgotPasswordButton" = "Forgot Password?";
 /**/"ButtonTitles_backButtonTitle" = "Back";
+/**/"ButtonTitles_cancelButtonTitle" = "Cancel";

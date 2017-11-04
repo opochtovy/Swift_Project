@@ -11,13 +11,13 @@ import Foundation
 enum WelcomeTitles {
     static let headerTitle = "WelcomeTitles_headerTitle"
     static let description = "WelcomeTitles_description"
-    static let signUpLabel = "WelcomeTitles_signUpLabel"
-    static let signUpButton = "WelcomeTitles_signUpButton"
+    static let loginLabel = "WelcomeTitles_loginLabel"
     static let loginButton = "WelcomeTitles_loginButton"
+    static let registerButton = "WelcomeTitles_registerButton"
 }
 
 enum WelcomeConstants {
-    static let loginImageWidth = 18
+    static let registerImageWidth = 18
 }
 
 class WelcomeVM: BaseVM {

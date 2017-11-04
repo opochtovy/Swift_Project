@@ -14,9 +14,11 @@ class WelcomeVC: ViewController {
     
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var signUpLabel: UILabel!
-    @IBOutlet weak var signUpButton: UIButton!
-    @IBOutlet weak var loginButton:  UIButton!
+    @IBOutlet weak var loginLabel: UILabel!
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var registerButton:  UIButton!
+    
+    private var wasLoadedBefore = false
     
     //MARK: - LyfeCycle
     
@@ -39,7 +41,16 @@ class WelcomeVC: ViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.alignRightImageForLoginButton()
+        if !self.wasLoadedBefore {
+            self.alignRightImageForRegisterButton()
+        }
+        self.wasLoadedBefore = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        
+        super.viewWillDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
     //MARK: - Private functions
@@ -48,27 +59,28 @@ class WelcomeVC: ViewController {
         
         self.headerLabel.text = NSLocalizedString(WelcomeTitles.headerTitle, comment: "headerTitle")
         self.descriptionLabel.text = NSLocalizedString(WelcomeTitles.description, comment: "description")
-        self.signUpLabel.text = NSLocalizedString(WelcomeTitles.signUpLabel, comment: "signUpLabel")
-        self.signUpButton.setTitle(NSLocalizedString(WelcomeTitles.signUpButton, comment: "signUpButton"), for: .normal)
-        self.loginButton.setTitle(NSLocalizedString(WelcomeTitles.loginButton, comment: "loginButton"), for: .normal)
+        self.loginLabel.text = NSLocalizedString(WelcomeTitles.loginLabel, comment: "loginLabel")
+        self.loginButton.setTitle(NSLocalizedString(WelcomeTitles.loginButton, comment: "loginButton").uppercased(), for: .normal)
+        self.registerButton.setTitle(NSLocalizedString(WelcomeTitles.registerButton, comment: "registerButton"), for: .normal)
     }
     
-    private func alignRightImageForLoginButton() {
+    private func alignRightImageForRegisterButton() {
         
-        let buttonWidth = self.loginButton.frame.width
-        let imageWidth = CGFloat(WelcomeConstants.loginImageWidth)
-        self.loginButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: buttonWidth - 2 * imageWidth, bottom: 0, right: 0)
-        self.loginButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: -2 * imageWidth, bottom: 0, right: 0)
+        let buttonWidth = self.registerButton.frame.width
+        let imageWidth = CGFloat(WelcomeConstants.registerImageWidth)
+        self.registerButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: buttonWidth - 2 * imageWidth, bottom: 0, right: 0)
+        self.registerButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: -2 * imageWidth, bottom: 0, right: 0)
     }
     
     //MARK: - Actions
     
-    @IBAction private func actionLogin(_ sender: UIButton) {
+    @IBAction private func actionRegister(_ sender: UIButton) {
         
-        print("self.loginButton.frame.width =", self.loginButton.frame.width)
     }
     
-    @IBAction private func actionSignUp(_ sender: UIButton) {
+    @IBAction private func actionLogin(_ sender: UIButton) {
         
+        let signInViewController = SignInVC(client: self.client)
+        self.navigationController?.pushViewController(signInViewController, animated: true)
     }
 }

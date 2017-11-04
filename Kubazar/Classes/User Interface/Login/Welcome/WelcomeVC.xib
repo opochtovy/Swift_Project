@@ -14,9 +14,9 @@
             <connections>
                 <outlet property="descriptionLabel" destination="0RL-hI-yL1" id="RM9-K9-4yn"/>
                 <outlet property="headerLabel" destination="R8F-Zu-tmO" id="pEf-e0-tN4"/>
-                <outlet property="loginButton" destination="e8M-6B-1PV" id="sq4-RU-DOZ"/>
-                <outlet property="signUpButton" destination="tiI-LD-vO1" id="fN0-SN-JCv"/>
-                <outlet property="signUpLabel" destination="W7O-8q-0QI" id="G82-G3-sUC"/>
+                <outlet property="loginButton" destination="tiI-LD-vO1" id="Ccu-5I-Wmz"/>
+                <outlet property="loginLabel" destination="W7O-8q-0QI" id="8yb-VC-jqL"/>
+                <outlet property="registerButton" destination="e8M-6B-1PV" id="7lE-QC-Bq3"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -32,7 +32,7 @@
                         <constraint firstAttribute="width" constant="189" id="zgM-mA-0ZK"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R8F-Zu-tmO">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R8F-Zu-tmO">
                     <rect key="frame" x="131.5" y="285" width="57" height="29"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="29" id="WxU-gZ-q7i"/>
@@ -55,16 +55,16 @@
                     <rect key="frame" x="0.0" y="354" width="320" height="163"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e8M-6B-1PV">
-                            <rect key="frame" x="116.5" y="70" width="87" height="22"/>
+                            <rect key="frame" x="116.5" y="59" width="87" height="44"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="22" id="7On-gA-Dve"/>
+                                <constraint firstAttribute="height" constant="44" id="7On-gA-Dve"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="24"/>
                             <state key="normal" title="Button" image="welcomeArrow">
                                 <color key="titleColor" red="0.34509803921568627" green="0.74117647058823533" blue="0.73333333333333328" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <connections>
-                                <action selector="actionLogin:" destination="-1" eventType="touchUpInside" id="o7h-qR-nUZ"/>
+                                <action selector="actionRegister:" destination="-1" eventType="touchUpInside" id="o95-aJ-45L"/>
                             </connections>
                         </button>
                     </subviews>
@@ -96,7 +96,7 @@
                                 <color key="titleColor" red="0.34509803921568627" green="0.74117647058823533" blue="0.73333333333333328" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <connections>
-                                <action selector="actionSignUp:" destination="-1" eventType="touchUpInside" id="Rue-2S-D7e"/>
+                                <action selector="actionLogin:" destination="-1" eventType="touchUpInside" id="fEh-sl-Oao"/>
                             </connections>
                         </button>
                     </subviews>
