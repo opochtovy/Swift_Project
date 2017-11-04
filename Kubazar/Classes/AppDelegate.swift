@@ -14,11 +14,16 @@ import Crashlytics
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    let client = Client()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         Fabric.with([Crashlytics.self])
+        
+        let controller = RootVC(client: self.client)
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window?.rootViewController = controller;
+        self.window?.makeKeyAndVisible();
         
         return true
     }
