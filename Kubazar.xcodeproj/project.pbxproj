@@ -28,6 +28,8 @@
 		9E8964C41FACA21D004FFDCD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8964C31FACA21D004FFDCD /* AppDelegate.swift */; };
 		9E8964CB1FACA21D004FFDCD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E8964CA1FACA21D004FFDCD /* Assets.xcassets */; };
 		9E8964CE1FACA21D004FFDCD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E8964CC1FACA21D004FFDCD /* LaunchScreen.storyboard */; };
+		9EB170AD1FB065FE00A70A10 /* TabbedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB170AC1FB065FE00A70A10 /* TabbedController.swift */; };
+		9EB170AF1FB0668500A70A10 /* TabbedControllerVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB170AE1FB0668500A70A10 /* TabbedControllerVM.swift */; };
 		BEE04B2776028D322C4EE27E /* Pods_Kubazar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A253CC5A9FE6C38C3AD695DE /* Pods_Kubazar.framework */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +56,8 @@
 		9E8964C31FACA21D004FFDCD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9E8964CA1FACA21D004FFDCD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9E8964CD1FACA21D004FFDCD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		9EB170AC1FB065FE00A70A10 /* TabbedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbedController.swift; sourceTree = "<group>"; };
+		9EB170AE1FB0668500A70A10 /* TabbedControllerVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbedControllerVM.swift; sourceTree = "<group>"; };
 		A253CC5A9FE6C38C3AD695DE /* Pods_Kubazar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kubazar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCCD990FEAC61BE1A7C35E5A /* Pods-Kubazar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kubazar.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kubazar/Pods-Kubazar.debug.xcconfig"; sourceTree = "<group>"; };
 		C96C8C2A05A77F3E563D985D /* Pods-Kubazar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kubazar.release.xcconfig"; path = "Pods/Target Support Files/Pods-Kubazar/Pods-Kubazar.release.xcconfig"; sourceTree = "<group>"; };
@@ -84,6 +88,7 @@
 			children = (
 				9E5E8E2A1FADD3BD00CCCBDA /* Login */,
 				9E5E8E131FADB68300CCCBDA /* Root */,
+				9EB170AB1FB065FE00A70A10 /* TabBar */,
 			);
 			path = "User Interface";
 			sourceTree = "<group>";
@@ -285,6 +290,15 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		9EB170AB1FB065FE00A70A10 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				9EB170AC1FB065FE00A70A10 /* TabbedController.swift */,
+				9EB170AE1FB0668500A70A10 /* TabbedControllerVM.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
 		FA4BD90D3972633479640F1E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -455,6 +469,7 @@
 				9E5E8E371FADD42D00CCCBDA /* WelcomeVM.swift in Sources */,
 				9E5E8E3A1FAE058900CCCBDA /* SignInVC.swift in Sources */,
 				9E5E8E401FAE1E5500CCCBDA /* ForgotPasswordVC.swift in Sources */,
+				9EB170AF1FB0668500A70A10 /* TabbedControllerVM.swift in Sources */,
 				9E5E8E431FAE1E6C00CCCBDA /* ForgotPasswordVM.swift in Sources */,
 				9E5E8E271FADC41A00CCCBDA /* BaseVM.swift in Sources */,
 				9E5E8E3D1FAE059B00CCCBDA /* SignInVM.swift in Sources */,
@@ -462,6 +477,7 @@
 				9E8964C41FACA21D004FFDCD /* AppDelegate.swift in Sources */,
 				9E5E8E1F1FADBC9E00CCCBDA /* Client.swift in Sources */,
 				9E5E8E341FADD3F400CCCBDA /* WelcomeVC.swift in Sources */,
+				9EB170AD1FB065FE00A70A10 /* TabbedController.swift in Sources */,
 				9E5E8E161FADB6CE00CCCBDA /* RootVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

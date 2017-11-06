@@ -68,5 +68,7 @@ class ForgotPasswordVC: ViewController {
     
     @IBAction private func actionSend(_ sender: UIButton) {
         
+        let tabbedVC = TabbedController(client: self.viewModel.client)
+        self.present(tabbedVC, animated: true, completion: nil)
     }
 }
