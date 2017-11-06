@@ -13,3 +13,6 @@
 /**/"ButtonTitles_backButtonTitle" = "Back";
 /**/"ButtonTitles_cancelButtonTitle" = "Cancel";
 /**/"TabBarTitles_bazar" = "Bazar";
+/**/"TabBarTitles_write" = "Write";
+/**/"WriteMainMenuTitles_title" = "Write";
+/**/"WriteMainMenuTitles_headerLabel" = "Create a new haiku!";

@@ -35,13 +35,20 @@ class TabbedController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.setNavigationBarAppearance()
         self.setTabBarAppearance()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+        super.viewWillAppear(animated)
         
         self.createTabBarViewControllers()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.setStatusBarAppearance()
     }
     
     //MARK: -  Private functions
@@ -49,16 +56,16 @@ class TabbedController: UITabBarController {
     private func createTabBarViewControllers() {
         
         let welcomeViewController = WelcomeVC(client: self.viewModel.client)
-        let tabOneBarItem = UITabBarItem(title: NSLocalizedString(TabBarTitles.bazar, comment: "Bazar TabBar Item Title"), image: UIImage(named: "bazarBarItem.png"), selectedImage: UIImage(named: "bazarBarItem.png"))
-        welcomeViewController.tabBarItem = tabOneBarItem
+        let welcomeBarItem = UITabBarItem(title: NSLocalizedString(TabBarTitles.bazar, comment: "Bazar TabBar Item Title"), image: UIImage(named: TabBarImages.bazar), selectedImage: UIImage(named: TabBarImages.bazar))
+        welcomeViewController.tabBarItem = welcomeBarItem
+        let welcomeNavViewController = UINavigationController(rootViewController: welcomeViewController)
         
+        let writeViewController = WriteMainMenuVC(client: self.viewModel.client)
+        let writeBarItem = UITabBarItem(title: NSLocalizedString(TabBarTitles.write, comment: "Write TabBar Item Title"), image: UIImage(named: TabBarImages.write), selectedImage: UIImage(named: TabBarImages.write))
+        writeViewController.tabBarItem = writeBarItem
+        let writeNavViewController = UINavigationController(rootViewController: writeViewController)
         
-        // Create Tab two
-        let forgotPasswordViewController = ForgotPasswordVC(client: self.viewModel.client)
-        let tabTwoBarItem = UITabBarItem(title: NSLocalizedString(TabBarTitles.bazar, comment: "Bazar TabBar Item Title"), image: UIImage(named: "bazarBarItem.png"), selectedImage: UIImage(named: "bazarBarItem.png"))
-        forgotPasswordViewController.tabBarItem = tabTwoBarItem
-        
-        self.viewControllers = [welcomeViewController, forgotPasswordViewController]
+        self.viewControllers = [welcomeNavViewController, writeNavViewController]
     }
     
     private func setTabBarAppearance() {
@@ -66,4 +73,21 @@ class TabbedController: UITabBarController {
         UITabBar.appearance().tintColor = #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)
         
     }
+    
+    private func setNavigationBarAppearance() {
+        
+        UINavigationBar.appearance().backgroundColor = #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)
+        UINavigationBar.appearance().tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor : #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)]
+        
+        UIApplication.shared.statusBarStyle = .lightContent
+    }
+
+    private func setStatusBarAppearance() {
+        
+        let statusBarView = UIApplication.shared.value(forKey: "statusBar") as? UIView
+        statusBarView?.backgroundColor = #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)
+        statusBarView?.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+    }
+
 }

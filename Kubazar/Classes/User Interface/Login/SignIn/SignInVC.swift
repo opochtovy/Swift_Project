@@ -55,6 +55,7 @@ class SignInVC: ViewController {
         UINavigationBar.appearance().setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().tintColor = #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor : #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)]
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString(ButtonTitles.cancelButtonTitle, comment: "Back Button Title"), style: .plain, target: self, action: #selector(SignInVC.cancel))
     }
     

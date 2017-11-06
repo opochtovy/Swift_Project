@@ -10,6 +10,16 @@ import Foundation
 
 enum TabBarTitles {
     static let bazar = "TabBarTitles_bazar"
+    static let write = "TabBarTitles_write"
+}
+
+enum TabBarImages {
+    static let bazar = "bazarBarItem.png"
+    static let write = "writeBarItem.png"
+}
+
+enum TabBarConstants {
+    static let statusBarHeight = 20
 }
 
 class TabbedControllerVM: BaseVM {

@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		9E1897891FACBA9C00780957 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9E1897881FACBA9C00780957 /* Info.plist */; };
+		9E455BCB1FB07DD500BC9A11 /* WriteMainMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E455BC91FB07DD500BC9A11 /* WriteMainMenuVC.swift */; };
+		9E455BCC1FB07DD500BC9A11 /* WriteMainMenuVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E455BCA1FB07DD500BC9A11 /* WriteMainMenuVC.xib */; };
+		9E455BCE1FB07DE600BC9A11 /* WriteMainMenuVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E455BCD1FB07DE600BC9A11 /* WriteMainMenuVM.swift */; };
 		9E5E8E111FADB54600CCCBDA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E5E8E101FADB54600CCCBDA /* Images.xcassets */; };
 		9E5E8E161FADB6CE00CCCBDA /* RootVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5E8E141FADB6CE00CCCBDA /* RootVC.swift */; };
 		9E5E8E171FADB6CE00CCCBDA /* RootVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E5E8E151FADB6CE00CCCBDA /* RootVC.xib */; };
@@ -35,6 +38,9 @@
 
 /* Begin PBXFileReference section */
 		9E1897881FACBA9C00780957 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9E455BC91FB07DD500BC9A11 /* WriteMainMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteMainMenuVC.swift; sourceTree = "<group>"; };
+		9E455BCA1FB07DD500BC9A11 /* WriteMainMenuVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WriteMainMenuVC.xib; sourceTree = "<group>"; };
+		9E455BCD1FB07DE600BC9A11 /* WriteMainMenuVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteMainMenuVM.swift; sourceTree = "<group>"; };
 		9E5E8E101FADB54600CCCBDA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9E5E8E141FADB6CE00CCCBDA /* RootVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootVC.swift; sourceTree = "<group>"; };
 		9E5E8E151FADB6CE00CCCBDA /* RootVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RootVC.xib; sourceTree = "<group>"; };
@@ -83,12 +89,39 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		9E455BC61FB07D9700BC9A11 /* TabBarItems */ = {
+			isa = PBXGroup;
+			children = (
+				9E455BC71FB07D9700BC9A11 /* Write */,
+			);
+			path = TabBarItems;
+			sourceTree = "<group>";
+		};
+		9E455BC71FB07D9700BC9A11 /* Write */ = {
+			isa = PBXGroup;
+			children = (
+				9E455BC81FB07D9700BC9A11 /* WriteMainMenu */,
+			);
+			path = Write;
+			sourceTree = "<group>";
+		};
+		9E455BC81FB07D9700BC9A11 /* WriteMainMenu */ = {
+			isa = PBXGroup;
+			children = (
+				9E455BC91FB07DD500BC9A11 /* WriteMainMenuVC.swift */,
+				9E455BCA1FB07DD500BC9A11 /* WriteMainMenuVC.xib */,
+				9E455BCD1FB07DE600BC9A11 /* WriteMainMenuVM.swift */,
+			);
+			path = WriteMainMenu;
+			sourceTree = "<group>";
+		};
 		9E5E8E121FADB63E00CCCBDA /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
 				9E5E8E2A1FADD3BD00CCCBDA /* Login */,
 				9E5E8E131FADB68300CCCBDA /* Root */,
 				9EB170AB1FB065FE00A70A10 /* TabBar */,
+				9E455BC61FB07D9700BC9A11 /* TabBarItems */,
 			);
 			path = "User Interface";
 			sourceTree = "<group>";
@@ -380,6 +413,7 @@
 				9E8964CE1FACA21D004FFDCD /* LaunchScreen.storyboard in Resources */,
 				9E5E8E171FADB6CE00CCCBDA /* RootVC.xib in Resources */,
 				9E5E8E3B1FAE058900CCCBDA /* SignInVC.xib in Resources */,
+				9E455BCC1FB07DD500BC9A11 /* WriteMainMenuVC.xib in Resources */,
 				9E8964CB1FACA21D004FFDCD /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -467,11 +501,13 @@
 			files = (
 				9E5E8E291FADC46C00CCCBDA /* RootVM.swift in Sources */,
 				9E5E8E371FADD42D00CCCBDA /* WelcomeVM.swift in Sources */,
+				9E455BCB1FB07DD500BC9A11 /* WriteMainMenuVC.swift in Sources */,
 				9E5E8E3A1FAE058900CCCBDA /* SignInVC.swift in Sources */,
 				9E5E8E401FAE1E5500CCCBDA /* ForgotPasswordVC.swift in Sources */,
 				9EB170AF1FB0668500A70A10 /* TabbedControllerVM.swift in Sources */,
 				9E5E8E431FAE1E6C00CCCBDA /* ForgotPasswordVM.swift in Sources */,
 				9E5E8E271FADC41A00CCCBDA /* BaseVM.swift in Sources */,
+				9E455BCE1FB07DE600BC9A11 /* WriteMainMenuVM.swift in Sources */,
 				9E5E8E3D1FAE059B00CCCBDA /* SignInVM.swift in Sources */,
 				9E5E8E1C1FADBA7400CCCBDA /* ViewController.swift in Sources */,
 				9E8964C41FACA21D004FFDCD /* AppDelegate.swift in Sources */,
