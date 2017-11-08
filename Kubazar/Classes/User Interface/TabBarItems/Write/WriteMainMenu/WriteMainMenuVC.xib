@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WriteMainMenuVC" customModule="Kubazar" customModuleProvider="target">
             <connections>
+                <outlet property="allParticipantsView" destination="TSK-rJ-oCK" id="8do-ug-ljR"/>
                 <outlet property="headerLabel" destination="5Jg-xa-Xqm" id="AmQ-Ce-5aU"/>
-                <outlet property="stackView" destination="8Oa-H6-PlJ" id="jkW-PL-Lrq"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -38,21 +38,43 @@
                     <color key="textColor" red="0.34509803921568627" green="0.74117647058823533" blue="0.73333333333333328" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="8Oa-H6-PlJ">
-                    <rect key="frame" x="0.0" y="130" width="320" height="428"/>
+                <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="aKG-Ql-FCq">
+                    <rect key="frame" x="0.0" y="130" width="320" height="390"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LcZ-eq-SBY" customClass="ParticipantsCountView" customModule="Kubazar" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="130"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="saf-XT-lCG" customClass="ParticipantsCountView" customModule="Kubazar" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="130" width="320" height="130"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Wa-4F-ApO" customClass="ParticipantsCountView" customModule="Kubazar" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="260" width="320" height="130"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                    </subviews>
                 </stackView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TSK-rJ-oCK" customClass="AllParticipantsView" customModule="Kubazar" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="130" width="320" height="390"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="8Oa-H6-PlJ" secondAttribute="bottom" constant="10" id="0Ow-ky-nbb"/>
+                <constraint firstItem="aKG-Ql-FCq" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="2L7-DV-w1r"/>
+                <constraint firstItem="aKG-Ql-FCq" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="4F5-6T-FYU"/>
                 <constraint firstItem="5Jg-xa-Xqm" firstAttribute="leading" secondItem="kDF-GI-ksQ" secondAttribute="trailing" constant="12" id="50X-Uk-US4"/>
-                <constraint firstItem="8Oa-H6-PlJ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="CBK-hw-5Hr"/>
-                <constraint firstItem="8Oa-H6-PlJ" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="QJC-Fh-95f"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="aKG-Ql-FCq" secondAttribute="bottom" constant="48" id="73b-jg-LtL"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="TSK-rJ-oCK" secondAttribute="bottom" constant="48" id="Gbl-kV-v09"/>
                 <constraint firstItem="kDF-GI-ksQ" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="19" id="SNR-if-7uX"/>
-                <constraint firstItem="8Oa-H6-PlJ" firstAttribute="top" secondItem="kDF-GI-ksQ" secondAttribute="bottom" constant="10" id="X2c-ux-6wz"/>
+                <constraint firstItem="TSK-rJ-oCK" firstAttribute="top" secondItem="kDF-GI-ksQ" secondAttribute="bottom" constant="10" id="ahk-xk-Dr9"/>
+                <constraint firstItem="aKG-Ql-FCq" firstAttribute="top" secondItem="kDF-GI-ksQ" secondAttribute="bottom" constant="10" id="ehY-pK-xxt"/>
                 <constraint firstItem="5Jg-xa-Xqm" firstAttribute="centerY" secondItem="kDF-GI-ksQ" secondAttribute="centerY" id="hPF-kY-Cy0"/>
                 <constraint firstItem="kDF-GI-ksQ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="18" id="ob0-Ov-SuF"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="5Jg-xa-Xqm" secondAttribute="trailing" constant="10" id="tba-dw-Q4Z"/>
+                <constraint firstItem="TSK-rJ-oCK" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="ubi-Nd-fsU"/>
+                <constraint firstItem="TSK-rJ-oCK" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="upY-X9-d6k"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="24" y="52"/>

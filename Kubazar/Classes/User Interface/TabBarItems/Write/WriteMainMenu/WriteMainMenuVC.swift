@@ -8,12 +8,12 @@
 
 import UIKit
 
-class WriteMainMenuVC: ViewController {
+class WriteMainMenuVC: ViewController, AllParticipantsViewDataSource {
     
     var viewModel: WriteMainMenuVM
     
     @IBOutlet weak var headerLabel: UILabel!
-    @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var allParticipantsView: AllParticipantsView!
     
     private var participantsCountViews = [ParticipantsCountView]()
 
@@ -23,20 +23,18 @@ class WriteMainMenuVC: ViewController {
         
         self.viewModel = WriteMainMenuVM(client: client)
         super.init(client: client)
-        
-        self.drawParticipantsCountViews()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-        
-        self.drawParticipantsCountViews()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.localizeTitles()
+        
+        self.allParticipantsView.dataSource = self
     }
     
     //MARK: - Private functions
@@ -48,48 +46,10 @@ class WriteMainMenuVC: ViewController {
         self.headerLabel.text = NSLocalizedString(WriteMainMenuTitles.headerLabel, comment: "Header title").uppercased()
     }
     
-    private func drawParticipantsCountViews() {
-        let titles = ["1", "1"]
-        for view in self.participantsCountViews {
-            self.stackView.removeArrangedSubview(view)
-        }
-        self.participantsCountViews.removeAll()
-        
-        var index : CGFloat = 0
-        for item in titles {
-            
-            let participantsCountView = ParticipantsCountView()
-            var image: UIImage = UIImage()
-            switch index {
-                
-            case 0:
-                    if let anImage = UIImage(named: TabBarImages.bazar) {
-                        image = anImage
-                    }
-            case 1:
-                if let anImage = UIImage(named: TabBarImages.write) {
-                    image = anImage
-                }
-            default: break
-            }
-            participantsCountView.participantImageView.image = image
-            participantsCountView.participantButton.setTitle(item as String, for: .normal)
-            participantsCountView.tag = Int(index)
-            participantsCountView.participantButton.tag = Int(index)
-            participantsCountView.participantButton.addTarget(self, action: #selector(didPressParticipantButton(sender:)), for: .touchUpInside)
-            
-            self.stackView.addArrangedSubview(participantsCountView)
-            self.participantsCountViews.append(participantsCountView)
-            
-            index += 1
-        }
-    }
+    // MARK: - AllParticipantsViewDataSource
     
-    // MARK: -  Actions
-    
-    @objc private func didPressParticipantButton(sender: UIButton) {
+    func titlesForAllParticipants(view: AllParticipantsView) -> [String] {
         
-//        self.currentIndex = sender.tag
-//        self.selectItem(atIndex: sender.tag)
+        return ["one", "two", "three"]
     }
 }

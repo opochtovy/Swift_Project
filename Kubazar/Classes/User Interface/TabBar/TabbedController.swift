@@ -76,6 +76,8 @@ class TabbedController: UITabBarController {
     
     private func setNavigationBarAppearance() {
         
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().backgroundColor = #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)
         UINavigationBar.appearance().tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor : #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)]

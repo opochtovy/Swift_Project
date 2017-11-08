@@ -76,6 +76,10 @@ class WelcomeVC: ViewController {
     
     @IBAction private func actionRegister(_ sender: UIButton) {
         
+        // just for test
+        
+        let tabbedVC = TabbedController(client: self.viewModel.client)
+        self.present(tabbedVC, animated: true, completion: nil)
     }
     
     @IBAction private func actionLogin(_ sender: UIButton) {

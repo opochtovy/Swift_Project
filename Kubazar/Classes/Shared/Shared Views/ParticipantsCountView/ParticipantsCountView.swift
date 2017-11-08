@@ -39,6 +39,8 @@ class ParticipantsCountView: UIView {
         self.view = loadViewFromNib()
         addSubview(self.view)
         self.view.frame = bounds
+        
+        self.contentView.dropShadow()
+        self.contentView.addCornerRadius(cornerRadius: 5.0, borderWidth: 0.5, borderColor: UIColor.lightGray)
     }
-
 }
