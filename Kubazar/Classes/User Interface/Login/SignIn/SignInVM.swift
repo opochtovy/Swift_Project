@@ -12,6 +12,7 @@ enum SignInTitles {
     static let headerLabel = "SignInTitles_headerLabel"
     static let emailPlaceholder = "SignInTitles_emailPlaceholder"
     static let passwordPlaceholder = "SignInTitles_passwordPlaceholder"
+    static let confirmPasswordPlaceholder = "SignInTitles_confirmPasswordPlaceholder"
     static let forgotPasswordButtonTitle = "SignInTitles_forgotPasswordButtonTitle"
 }
 

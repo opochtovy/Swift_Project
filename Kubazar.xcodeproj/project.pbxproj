@@ -28,6 +28,9 @@
 		9E5E8E401FAE1E5500CCCBDA /* ForgotPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5E8E3E1FAE1E5500CCCBDA /* ForgotPasswordVC.swift */; };
 		9E5E8E411FAE1E5500CCCBDA /* ForgotPasswordVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E5E8E3F1FAE1E5500CCCBDA /* ForgotPasswordVC.xib */; };
 		9E5E8E431FAE1E6C00CCCBDA /* ForgotPasswordVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5E8E421FAE1E6C00CCCBDA /* ForgotPasswordVM.swift */; };
+		9E6144411FB2F5D000067295 /* StartEditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E61443F1FB2F5D000067295 /* StartEditProfileVC.swift */; };
+		9E6144421FB2F5D000067295 /* StartEditProfileVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E6144401FB2F5D000067295 /* StartEditProfileVC.xib */; };
+		9E6144441FB2F5F100067295 /* StartEditProfileVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6144431FB2F5F100067295 /* StartEditProfileVM.swift */; };
 		9E6B14931FB0A42900220942 /* ParticipantsCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6B14921FB0A42900220942 /* ParticipantsCountView.swift */; };
 		9E6B14951FB0A43900220942 /* ParticipantsCountView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E6B14941FB0A43900220942 /* ParticipantsCountView.xib */; };
 		9E6B14A11FB0AC6200220942 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6B14A01FB0AC6200220942 /* UIView+Extension.swift */; };
@@ -63,6 +66,9 @@
 		9E5E8E3E1FAE1E5500CCCBDA /* ForgotPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordVC.swift; sourceTree = "<group>"; };
 		9E5E8E3F1FAE1E5500CCCBDA /* ForgotPasswordVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForgotPasswordVC.xib; sourceTree = "<group>"; };
 		9E5E8E421FAE1E6C00CCCBDA /* ForgotPasswordVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordVM.swift; sourceTree = "<group>"; };
+		9E61443F1FB2F5D000067295 /* StartEditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartEditProfileVC.swift; sourceTree = "<group>"; };
+		9E6144401FB2F5D000067295 /* StartEditProfileVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StartEditProfileVC.xib; sourceTree = "<group>"; };
+		9E6144431FB2F5F100067295 /* StartEditProfileVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartEditProfileVM.swift; sourceTree = "<group>"; };
 		9E6B14921FB0A42900220942 /* ParticipantsCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantsCountView.swift; sourceTree = "<group>"; };
 		9E6B14941FB0A43900220942 /* ParticipantsCountView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ParticipantsCountView.xib; sourceTree = "<group>"; };
 		9E6B14A01FB0AC6200220942 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
@@ -272,6 +278,9 @@
 		9E5E8E311FADD3BD00CCCBDA /* StartEditProfile */ = {
 			isa = PBXGroup;
 			children = (
+				9E61443F1FB2F5D000067295 /* StartEditProfileVC.swift */,
+				9E6144401FB2F5D000067295 /* StartEditProfileVC.xib */,
+				9E6144431FB2F5F100067295 /* StartEditProfileVM.swift */,
 			);
 			path = StartEditProfile;
 			sourceTree = "<group>";
@@ -451,6 +460,7 @@
 				9E6B14951FB0A43900220942 /* ParticipantsCountView.xib in Resources */,
 				9E5E8E231FADC1C000CCCBDA /* Localizable.strings in Resources */,
 				9E5E8E111FADB54600CCCBDA /* Images.xcassets in Resources */,
+				9E6144421FB2F5D000067295 /* StartEditProfileVC.xib in Resources */,
 				9E8964CE1FACA21D004FFDCD /* LaunchScreen.storyboard in Resources */,
 				9E5E8E171FADB6CE00CCCBDA /* RootVC.xib in Resources */,
 				9E5E8E3B1FAE058900CCCBDA /* SignInVC.xib in Resources */,
@@ -555,9 +565,11 @@
 				9E5E8E1C1FADBA7400CCCBDA /* ViewController.swift in Sources */,
 				9E6B14A11FB0AC6200220942 /* UIView+Extension.swift in Sources */,
 				A2D677091FB1D37C0055F025 /* AllParticipantsView.swift in Sources */,
+				9E6144441FB2F5F100067295 /* StartEditProfileVM.swift in Sources */,
 				9E8964C41FACA21D004FFDCD /* AppDelegate.swift in Sources */,
 				9E5E8E1F1FADBC9E00CCCBDA /* Client.swift in Sources */,
 				9E5E8E341FADD3F400CCCBDA /* WelcomeVC.swift in Sources */,
+				9E6144411FB2F5D000067295 /* StartEditProfileVC.swift in Sources */,
 				9EB170AD1FB065FE00A70A10 /* TabbedController.swift in Sources */,
 				9E5E8E161FADB6CE00CCCBDA /* RootVC.swift in Sources */,
 			);

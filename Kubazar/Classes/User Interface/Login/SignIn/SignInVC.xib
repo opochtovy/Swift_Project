@@ -61,7 +61,7 @@
                     </connections>
                 </textField>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a8V-lv-OcE">
-                    <rect key="frame" x="0.0" y="341" width="320" height="1"/>
+                    <rect key="frame" x="20" y="341" width="300" height="1"/>
                     <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="HUt-iN-5ZQ"/>
@@ -132,7 +132,7 @@
                 <constraint firstItem="emz-9z-iwQ" firstAttribute="top" secondItem="ETo-TO-4SR" secondAttribute="bottom" constant="35" id="FI0-0n-h3o"/>
                 <constraint firstItem="qmZ-fK-T4g" firstAttribute="top" secondItem="emz-9z-iwQ" secondAttribute="bottom" constant="20" id="GR6-Sb-72f"/>
                 <constraint firstAttribute="trailing" secondItem="a8V-lv-OcE" secondAttribute="trailing" id="Hnj-DT-MDd"/>
-                <constraint firstItem="a8V-lv-OcE" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Hr8-qc-XBS"/>
+                <constraint firstItem="a8V-lv-OcE" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="Hr8-qc-XBS"/>
                 <constraint firstItem="a8V-lv-OcE" firstAttribute="top" secondItem="tq0-hj-qP2" secondAttribute="bottom" constant="10" id="Hzk-Ga-8Pe"/>
                 <constraint firstItem="qmZ-fK-T4g" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Qex-EH-sJj"/>
                 <constraint firstItem="Lor-cz-qAp" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="VsF-sM-Vck"/>

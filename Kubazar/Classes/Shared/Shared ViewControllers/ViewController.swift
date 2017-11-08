@@ -11,6 +11,7 @@ import UIKit
 enum ButtonTitles {
     static let backButtonTitle = "ButtonTitles_backButtonTitle"
     static let cancelButtonTitle = "ButtonTitles_cancelButtonTitle"
+    static let doneButtonTitle = "ButtonTitles_doneButtonTitle"
 }
 
 class ViewController: UIViewController {

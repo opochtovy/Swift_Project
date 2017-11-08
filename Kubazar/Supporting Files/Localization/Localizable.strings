@@ -6,13 +6,17 @@
 /**/"SignInTitles_headerLabel" = "Sign In";
 /**/"SignInTitles_emailPlaceholder" = "Email";
 /**/"SignInTitles_passwordPlaceholder" = "Password";
+/**/"SignInTitles_confirmPasswordPlaceholder" = "Confirm Password";
 /**/"SignInTitles_forgotPasswordButtonTitle" = "Forgot Password?";
 /**/"ForgotPasswordTitles_headerLabel" = "Forgot Password?";
 /**/"ForgotPasswordTitles_descriptionLabel" = "We will send you an email with a new password";
 /**/"ForgotPasswordTitles_sendButtonTitle" = "Send";
 /**/"ButtonTitles_backButtonTitle" = "Back";
 /**/"ButtonTitles_cancelButtonTitle" = "Cancel";
+/**/"ButtonTitles_doneButtonTitle" = "Done";
 /**/"TabBarTitles_bazar" = "Bazar";
 /**/"TabBarTitles_write" = "Write";
 /**/"WriteMainMenuTitles_title" = "Write";
 /**/"WriteMainMenuTitles_headerLabel" = "Create a new haiku!";
+/**/"StartEditProfileTitles_title" = "Edit Profile";
+/**/"StartEditProfileTitles_descriptionLabel" = "Trusted email and password are used to verify your identity when signing in and to help recover you account if the lost phone to recover your account in case the phone is lost";
