@@ -1,26 +1,54 @@
+/*WelcomeVC*/
 /**/"WelcomeTitles_headerLabel" = "Welcome to Kubazar!";
 /**/"WelcomeTitles_descriptionLabel" = "Create short stories, in secret (for yourself) or together with one or two friends. Have a nice picture that made you think of someone or that simply shouldn't be forgotten? Pick one and make it into an unforgettable haiku.";
 /**/"WelcomeTitles_loginLabel" = "Already Have an Account";
 /**/"WelcomeTitles_loginButtonTitle" = "Sign Up";
 /**/"WelcomeTitles_registerButtonTitle" = "Next";
+
+/*SignInVC*/
 /**/"SignInTitles_headerLabel" = "Sign In";
 /**/"SignInTitles_emailPlaceholder" = "Email";
 /**/"SignInTitles_passwordPlaceholder" = "Password";
 /**/"SignInTitles_confirmPasswordPlaceholder" = "Confirm Password";
 /**/"SignInTitles_usernamePlaceholder" = "Username";
 /**/"SignInTitles_forgotPasswordButtonTitle" = "Forgot Password?";
+
+/*ForgotPasswordVC*/
 /**/"ForgotPasswordTitles_headerLabel" = "Forgot Password?";
 /**/"ForgotPasswordTitles_descriptionLabel" = "We will send you an email with a new password";
 /**/"ForgotPasswordTitles_sendButtonTitle" = "Send";
+
+/*ViewController*/
 /**/"ButtonTitles_backButtonTitle" = "Back";
 /**/"ButtonTitles_cancelButtonTitle" = "Cancel";
 /**/"ButtonTitles_doneButtonTitle" = "Done";
+/**/"ButtonTitles_nextButtonTitle" = "Next";
+/**/"ButtonTitles_editButtonTitle" = "Edit";
+/**/"ButtonTitles_yesButtonTitle" = "Yes";
+
+/*TabbedController*/
 /**/"TabBarTitles_bazar" = "Bazar";
 /**/"TabBarTitles_write" = "Write";
+
+/*WriteMainMenuVC*/
 /**/"WriteMainMenuTitles_title" = "Write";
 /**/"WriteMainMenuTitles_headerLabel" = "Create a new haiku!";
+
+/*StartEditProfileVC*/
 /**/"StartEditProfileTitles_title" = "Edit Profile";
 /**/"StartEditProfileTitles_descriptionLabel" = "Trusted email and password are used to verify your identity when signing in and to help recover you account if the lost phone to recover your account in case the phone is lost";
+
+/*CompleteEditProfileVC*/
 /**/"CompleteEditProfileTitles_descriptionLabel" = "Enter your name and an optional profile picture";
 /**/"CompleteEditProfileTitles_usernameLabel" = "Your Name";
 /**/"CompleteEditProfileTitles_profileLabel" = "Add photo";
+
+/*StartPhoneVerificationVC*/
+/**/"StartPhoneVerificationVC_title" = "Verify phone number";
+/**/"StartPhoneVerificationVC_descriptionLabel" = "Kubazar app will send you a one time SMS message to verify your phone number.";
+/**/"StartPhoneVerificationVC_countryLabel" = "Country";
+/**/"StartPhoneVerificationVC_numberLabel" = "Number";
+/**/"StartPhoneVerificationVC_confirmNumberLabel" = "Please confirm your country code and enter your phone number";
+/**/"StartPhoneVerificationVC_numberPlaceholder" = "Required";
+/**/"StartPhoneVerificationVC_confirmationAlertTitle" = "Number confirmation";
+/**/"StartPhoneVerificationVC_confirmationAlertMessage" = "\nIs your phone number above correct?";

@@ -12,6 +12,9 @@ enum ButtonTitles {
     static let backButtonTitle = "ButtonTitles_backButtonTitle"
     static let cancelButtonTitle = "ButtonTitles_cancelButtonTitle"
     static let doneButtonTitle = "ButtonTitles_doneButtonTitle"
+    static let nextButtonTitle = "ButtonTitles_nextButtonTitle"
+    static let editButtonTitle = "ButtonTitles_editButtonTitle"
+    static let yesButtonTitle = "ButtonTitles_yesButtonTitle"
 }
 
 class ViewController: UIViewController {

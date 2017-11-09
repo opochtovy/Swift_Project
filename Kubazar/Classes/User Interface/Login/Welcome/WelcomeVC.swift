@@ -81,9 +81,9 @@ class WelcomeVC: ViewController {
 //        let tabbedVC = TabbedController(client: self.viewModel.client)
 //        self.present(tabbedVC, animated: true, completion: nil)
         
-        let editProfileVC = StartEditProfileVC(client: self.viewModel.client)
-        let editProfileNavViewController = UINavigationController(rootViewController: editProfileVC)
-        self.present(editProfileNavViewController, animated: true, completion: nil)
+        let phoneVerificationVC = StartPhoneVerificationVC(client: self.viewModel.client)
+        let phoneVerificationNavViewController = UINavigationController(rootViewController: phoneVerificationVC)
+        self.present(phoneVerificationNavViewController, animated: true, completion: nil)
     }
     
     @IBAction private func actionLogin(_ sender: UIButton) {
