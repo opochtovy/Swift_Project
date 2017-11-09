@@ -47,6 +47,9 @@
 		9EE16E971FB4A56500B4C5C5 /* StartPhoneVerificationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE16E951FB4A56500B4C5C5 /* StartPhoneVerificationVC.swift */; };
 		9EE16E981FB4A56500B4C5C5 /* StartPhoneVerificationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EE16E961FB4A56500B4C5C5 /* StartPhoneVerificationVC.xib */; };
 		9EE16E9A1FB4A57500B4C5C5 /* StartPhoneVerificationVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE16E991FB4A57500B4C5C5 /* StartPhoneVerificationVM.swift */; };
+		9EE16E9D1FB4BF7C00B4C5C5 /* CompletePhoneVerificationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE16E9B1FB4BF7C00B4C5C5 /* CompletePhoneVerificationVC.swift */; };
+		9EE16E9E1FB4BF7C00B4C5C5 /* CompletePhoneVerificationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EE16E9C1FB4BF7C00B4C5C5 /* CompletePhoneVerificationVC.xib */; };
+		9EE16EA01FB4BF8700B4C5C5 /* CompletePhoneVerificationVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE16E9F1FB4BF8700B4C5C5 /* CompletePhoneVerificationVM.swift */; };
 		A2D677091FB1D37C0055F025 /* AllParticipantsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D677081FB1D37C0055F025 /* AllParticipantsView.swift */; };
 		A2D6770B1FB1D3910055F025 /* AllParticipantsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2D6770A1FB1D3910055F025 /* AllParticipantsView.xib */; };
 		BEE04B2776028D322C4EE27E /* Pods_Kubazar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A253CC5A9FE6C38C3AD695DE /* Pods_Kubazar.framework */; };
@@ -95,6 +98,9 @@
 		9EE16E951FB4A56500B4C5C5 /* StartPhoneVerificationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartPhoneVerificationVC.swift; sourceTree = "<group>"; };
 		9EE16E961FB4A56500B4C5C5 /* StartPhoneVerificationVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StartPhoneVerificationVC.xib; sourceTree = "<group>"; };
 		9EE16E991FB4A57500B4C5C5 /* StartPhoneVerificationVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartPhoneVerificationVM.swift; sourceTree = "<group>"; };
+		9EE16E9B1FB4BF7C00B4C5C5 /* CompletePhoneVerificationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletePhoneVerificationVC.swift; sourceTree = "<group>"; };
+		9EE16E9C1FB4BF7C00B4C5C5 /* CompletePhoneVerificationVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CompletePhoneVerificationVC.xib; sourceTree = "<group>"; };
+		9EE16E9F1FB4BF8700B4C5C5 /* CompletePhoneVerificationVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletePhoneVerificationVM.swift; sourceTree = "<group>"; };
 		A253CC5A9FE6C38C3AD695DE /* Pods_Kubazar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kubazar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2D677081FB1D37C0055F025 /* AllParticipantsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllParticipantsView.swift; sourceTree = "<group>"; };
 		A2D6770A1FB1D3910055F025 /* AllParticipantsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AllParticipantsView.xib; sourceTree = "<group>"; };
@@ -274,6 +280,9 @@
 		9E5E8E2E1FADD3BD00CCCBDA /* CompletePhoneVerification */ = {
 			isa = PBXGroup;
 			children = (
+				9EE16E9B1FB4BF7C00B4C5C5 /* CompletePhoneVerificationVC.swift */,
+				9EE16E9C1FB4BF7C00B4C5C5 /* CompletePhoneVerificationVC.xib */,
+				9EE16E9F1FB4BF8700B4C5C5 /* CompletePhoneVerificationVM.swift */,
 			);
 			path = CompletePhoneVerification;
 			sourceTree = "<group>";
@@ -493,6 +502,7 @@
 				9E6B14951FB0A43900220942 /* ParticipantsCountView.xib in Resources */,
 				9E5E8E231FADC1C000CCCBDA /* Localizable.strings in Resources */,
 				9E5E8E111FADB54600CCCBDA /* Images.xcassets in Resources */,
+				9EE16E9E1FB4BF7C00B4C5C5 /* CompletePhoneVerificationVC.xib in Resources */,
 				9E6144421FB2F5D000067295 /* StartEditProfileVC.xib in Resources */,
 				9E8964CE1FACA21D004FFDCD /* LaunchScreen.storyboard in Resources */,
 				9E6144481FB305E400067295 /* CompleteEditProfileVC.xib in Resources */,
@@ -589,6 +599,7 @@
 				9E5E8E371FADD42D00CCCBDA /* WelcomeVM.swift in Sources */,
 				9E455BCB1FB07DD500BC9A11 /* WriteMainMenuVC.swift in Sources */,
 				9E5E8E3A1FAE058900CCCBDA /* SignInVC.swift in Sources */,
+				9EE16E9D1FB4BF7C00B4C5C5 /* CompletePhoneVerificationVC.swift in Sources */,
 				9E5E8E401FAE1E5500CCCBDA /* ForgotPasswordVC.swift in Sources */,
 				9EB170AF1FB0668500A70A10 /* TabbedControllerVM.swift in Sources */,
 				9E5E8E431FAE1E6C00CCCBDA /* ForgotPasswordVM.swift in Sources */,
@@ -607,6 +618,7 @@
 				9E5E8E341FADD3F400CCCBDA /* WelcomeVC.swift in Sources */,
 				9EE16E971FB4A56500B4C5C5 /* StartPhoneVerificationVC.swift in Sources */,
 				9EE16E9A1FB4A57500B4C5C5 /* StartPhoneVerificationVM.swift in Sources */,
+				9EE16EA01FB4BF8700B4C5C5 /* CompletePhoneVerificationVM.swift in Sources */,
 				9E61444A1FB305F900067295 /* CompleteEditProfileVM.swift in Sources */,
 				9E6144411FB2F5D000067295 /* StartEditProfileVC.swift in Sources */,
 				9EB170AD1FB065FE00A70A10 /* TabbedController.swift in Sources */,

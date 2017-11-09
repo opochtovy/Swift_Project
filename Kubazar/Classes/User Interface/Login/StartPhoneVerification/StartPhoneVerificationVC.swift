@@ -43,7 +43,6 @@ class StartPhoneVerificationVC: ViewController {
         super.viewDidLoad()
         
         self.setNavigationBarAppearance()
-        self.setTabBarAppearance()
         self.localizeTitles()
     }
     
@@ -54,12 +53,6 @@ class StartPhoneVerificationVC: ViewController {
     }
     
     //MARK: - Private functions
-    
-    private func setTabBarAppearance() {
-        
-        UITabBar.appearance().tintColor = #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)
-        
-    }
     
     private func setNavigationBarAppearance() {
         
@@ -105,9 +98,9 @@ class StartPhoneVerificationVC: ViewController {
         
         let okAction = UIAlertAction(title: NSLocalizedString(ButtonTitles.yesButtonTitle, comment: "Yes Button Title on Phone Verification"), style: .default) { (_) in
             
-//            self.navigationController?.popViewController(animated: true)
-            let completeEditProfileViewController = CompleteEditProfileVC(client: self.client)
-            self.navigationController?.pushViewController(completeEditProfileViewController, animated: true)
+            let completePhoneVerificationViewController = CompletePhoneVerificationVC(client: self.client)
+            completePhoneVerificationViewController.number = "451-987-8754"
+            self.navigationController?.pushViewController(completePhoneVerificationViewController, animated: true)
         }
         
         alertController.addAction(cancelAction)

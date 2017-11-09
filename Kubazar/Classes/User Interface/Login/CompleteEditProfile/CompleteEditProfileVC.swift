@@ -67,7 +67,7 @@ class CompleteEditProfileVC: ViewController, UIImagePickerControllerDelegate, UI
     
     private func setNavigationBarAppearance() {
         
-        self.navigationItem.setHidesBackButton(true, animated:true);
+        self.navigationItem.setHidesBackButton(true, animated:true)
         self.navigationItem.leftBarButtonItem = nil
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString(ButtonTitles.doneButtonTitle, comment: "Done Button Title"), style: .plain, target: self, action: #selector(CompleteEditProfileVC.done))
     }

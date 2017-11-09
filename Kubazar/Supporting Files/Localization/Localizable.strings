@@ -52,3 +52,9 @@
 /**/"StartPhoneVerificationVC_numberPlaceholder" = "Required";
 /**/"StartPhoneVerificationVC_confirmationAlertTitle" = "Number confirmation";
 /**/"StartPhoneVerificationVC_confirmationAlertMessage" = "\nIs your phone number above correct?";
+
+/*CompletePhoneVerificationVC*/
+/**/"CompletePhoneVerificationVC_backButtonTitle" = "Edit number";
+/**/"CompletePhoneVerificationVC_descriptionLabel" = "We have sent you an SMS with a code to the number adove";
+/**/"CompletePhoneVerificationVC_completionLabel" = "To complete your phone number verification, plase enter the activation code.";
+/**/"CompletePhoneVerificationVC_resendButtonTitle" = "Resend Code";

@@ -61,6 +61,8 @@ class StartEditProfileVC: ViewController {
         
         UIApplication.shared.statusBarStyle = .lightContent
         
+        self.navigationItem.setHidesBackButton(true, animated:true)
+        self.navigationItem.leftBarButtonItem = nil
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString(ButtonTitles.doneButtonTitle, comment: "Done Button Title"), style: .plain, target: self, action: #selector(StartEditProfileVC.done))
     }
     
