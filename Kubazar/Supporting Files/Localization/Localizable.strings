@@ -24,3 +24,10 @@
 /**/"CompleteEditProfileTitles_descriptionLabel" = "Enter your name and an optional profile picture";
 /**/"CompleteEditProfileTitles_usernameLabel" = "Your Name";
 /**/"CompleteEditProfileTitles_profileLabel" = "Add photo";
+
+/*BazarVC*/
+/**/ "Bazar_all_haikus" = "All Haikus";
+/**/ "Bazar_my_haikus" = "My Haikus";
+/**/ "Bazar_active_haikus" = "Active Haikus";
+/**/ "Bazar_likes" = "likes";
+/**/ "Bazar_publish" = "Publish";

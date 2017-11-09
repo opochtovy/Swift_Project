@@ -14,8 +14,8 @@ enum TabBarTitles {
 }
 
 enum TabBarImages {
-    static let bazar = "bazarBarItem.png"
-    static let write = "writeBarItem.png"
+    static let bazar = "bazarBarItem"
+    static let write = "writeBarItem"
 }
 
 enum TabBarConstants {
