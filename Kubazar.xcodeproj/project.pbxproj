@@ -31,6 +31,9 @@
 		9E6144411FB2F5D000067295 /* StartEditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E61443F1FB2F5D000067295 /* StartEditProfileVC.swift */; };
 		9E6144421FB2F5D000067295 /* StartEditProfileVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E6144401FB2F5D000067295 /* StartEditProfileVC.xib */; };
 		9E6144441FB2F5F100067295 /* StartEditProfileVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6144431FB2F5F100067295 /* StartEditProfileVM.swift */; };
+		9E6144471FB305E400067295 /* CompleteEditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6144451FB305E400067295 /* CompleteEditProfileVC.swift */; };
+		9E6144481FB305E400067295 /* CompleteEditProfileVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E6144461FB305E400067295 /* CompleteEditProfileVC.xib */; };
+		9E61444A1FB305F900067295 /* CompleteEditProfileVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6144491FB305F900067295 /* CompleteEditProfileVM.swift */; };
 		9E6B14931FB0A42900220942 /* ParticipantsCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6B14921FB0A42900220942 /* ParticipantsCountView.swift */; };
 		9E6B14951FB0A43900220942 /* ParticipantsCountView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E6B14941FB0A43900220942 /* ParticipantsCountView.xib */; };
 		9E6B14A11FB0AC6200220942 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6B14A01FB0AC6200220942 /* UIView+Extension.swift */; };
@@ -69,6 +72,9 @@
 		9E61443F1FB2F5D000067295 /* StartEditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartEditProfileVC.swift; sourceTree = "<group>"; };
 		9E6144401FB2F5D000067295 /* StartEditProfileVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StartEditProfileVC.xib; sourceTree = "<group>"; };
 		9E6144431FB2F5F100067295 /* StartEditProfileVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartEditProfileVM.swift; sourceTree = "<group>"; };
+		9E6144451FB305E400067295 /* CompleteEditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteEditProfileVC.swift; sourceTree = "<group>"; };
+		9E6144461FB305E400067295 /* CompleteEditProfileVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CompleteEditProfileVC.xib; sourceTree = "<group>"; };
+		9E6144491FB305F900067295 /* CompleteEditProfileVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteEditProfileVM.swift; sourceTree = "<group>"; };
 		9E6B14921FB0A42900220942 /* ParticipantsCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantsCountView.swift; sourceTree = "<group>"; };
 		9E6B14941FB0A43900220942 /* ParticipantsCountView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ParticipantsCountView.xib; sourceTree = "<group>"; };
 		9E6B14A01FB0AC6200220942 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
@@ -271,6 +277,9 @@
 		9E5E8E301FADD3BD00CCCBDA /* CompleteEditProfile */ = {
 			isa = PBXGroup;
 			children = (
+				9E6144451FB305E400067295 /* CompleteEditProfileVC.swift */,
+				9E6144461FB305E400067295 /* CompleteEditProfileVC.xib */,
+				9E6144491FB305F900067295 /* CompleteEditProfileVM.swift */,
 			);
 			path = CompleteEditProfile;
 			sourceTree = "<group>";
@@ -462,6 +471,7 @@
 				9E5E8E111FADB54600CCCBDA /* Images.xcassets in Resources */,
 				9E6144421FB2F5D000067295 /* StartEditProfileVC.xib in Resources */,
 				9E8964CE1FACA21D004FFDCD /* LaunchScreen.storyboard in Resources */,
+				9E6144481FB305E400067295 /* CompleteEditProfileVC.xib in Resources */,
 				9E5E8E171FADB6CE00CCCBDA /* RootVC.xib in Resources */,
 				9E5E8E3B1FAE058900CCCBDA /* SignInVC.xib in Resources */,
 				9E455BCC1FB07DD500BC9A11 /* WriteMainMenuVC.xib in Resources */,
@@ -561,6 +571,7 @@
 				9E5E8E271FADC41A00CCCBDA /* BaseVM.swift in Sources */,
 				9E455BCE1FB07DE600BC9A11 /* WriteMainMenuVM.swift in Sources */,
 				9E5E8E3D1FAE059B00CCCBDA /* SignInVM.swift in Sources */,
+				9E6144471FB305E400067295 /* CompleteEditProfileVC.swift in Sources */,
 				9E6B14931FB0A42900220942 /* ParticipantsCountView.swift in Sources */,
 				9E5E8E1C1FADBA7400CCCBDA /* ViewController.swift in Sources */,
 				9E6B14A11FB0AC6200220942 /* UIView+Extension.swift in Sources */,
@@ -569,6 +580,7 @@
 				9E8964C41FACA21D004FFDCD /* AppDelegate.swift in Sources */,
 				9E5E8E1F1FADBC9E00CCCBDA /* Client.swift in Sources */,
 				9E5E8E341FADD3F400CCCBDA /* WelcomeVC.swift in Sources */,
+				9E61444A1FB305F900067295 /* CompleteEditProfileVM.swift in Sources */,
 				9E6144411FB2F5D000067295 /* StartEditProfileVC.swift in Sources */,
 				9EB170AD1FB065FE00A70A10 /* TabbedController.swift in Sources */,
 				9E5E8E161FADB6CE00CCCBDA /* RootVC.swift in Sources */,

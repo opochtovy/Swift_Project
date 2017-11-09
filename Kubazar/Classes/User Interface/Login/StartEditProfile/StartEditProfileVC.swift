@@ -84,7 +84,8 @@ class StartEditProfileVC: ViewController {
     
     @objc private func done() {
         
-        
+        let completeEditProfileViewController = CompleteEditProfileVC(client: self.client)
+        self.navigationController?.pushViewController(completeEditProfileViewController, animated: true)
     }
 
 }

@@ -7,6 +7,7 @@
 /**/"SignInTitles_emailPlaceholder" = "Email";
 /**/"SignInTitles_passwordPlaceholder" = "Password";
 /**/"SignInTitles_confirmPasswordPlaceholder" = "Confirm Password";
+/**/"SignInTitles_usernamePlaceholder" = "Username";
 /**/"SignInTitles_forgotPasswordButtonTitle" = "Forgot Password?";
 /**/"ForgotPasswordTitles_headerLabel" = "Forgot Password?";
 /**/"ForgotPasswordTitles_descriptionLabel" = "We will send you an email with a new password";
@@ -20,3 +21,6 @@
 /**/"WriteMainMenuTitles_headerLabel" = "Create a new haiku!";
 /**/"StartEditProfileTitles_title" = "Edit Profile";
 /**/"StartEditProfileTitles_descriptionLabel" = "Trusted email and password are used to verify your identity when signing in and to help recover you account if the lost phone to recover your account in case the phone is lost";
+/**/"CompleteEditProfileTitles_descriptionLabel" = "Enter your name and an optional profile picture";
+/**/"CompleteEditProfileTitles_usernameLabel" = "Your Name";
+/**/"CompleteEditProfileTitles_profileLabel" = "Add photo";
