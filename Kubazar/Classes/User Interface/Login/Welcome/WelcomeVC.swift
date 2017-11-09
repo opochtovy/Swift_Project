@@ -39,10 +39,10 @@ class WelcomeVC: ViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+        super.viewWillAppear(animated)
         
         if !self.wasLoadedBefore {
-            self.alignRightImageForRegisterButton()
+            self.registerButton.semanticContentAttribute = .forceRightToLeft
         }
         self.wasLoadedBefore = true
     }
@@ -60,16 +60,8 @@ class WelcomeVC: ViewController {
         self.headerLabel.text = NSLocalizedString(WelcomeTitles.headerLabel, comment: "headerLabel")
         self.descriptionLabel.text = NSLocalizedString(WelcomeTitles.descriptionLabel, comment: "descriptionLabel")
         self.loginLabel.text = NSLocalizedString(WelcomeTitles.loginLabel, comment: "loginLabel")
-        self.loginButton.setTitle(NSLocalizedString(WelcomeTitles.loginButtonTitle, comment: "loginButtonTitle").uppercased(), for: .normal)
-        self.registerButton.setTitle(NSLocalizedString(WelcomeTitles.registerButtonTitle, comment: "registerButtonTitle"), for: .normal)
-    }
-    
-    private func alignRightImageForRegisterButton() {
-        
-        let buttonWidth = self.registerButton.frame.width
-        let imageWidth = CGFloat(WelcomeConstants.arrowImageWidth)
-        self.registerButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: buttonWidth - 2 * imageWidth, bottom: 0, right: 0)
-        self.registerButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: -2 * imageWidth, bottom: 0, right: 0)
+        self.loginButton.setTitle(NSLocalizedString(WelcomeTitles.loginButtonTitle, comment: "loginButtonTitle"), for: .normal)
+        self.registerButton.setTitle(NSLocalizedString(WelcomeTitles.registerButtonTitle, comment: "registerButtonTitle") + " ", for: .normal)
     }
     
     //MARK: - Actions

@@ -1,9 +1,9 @@
 /*WelcomeVC*/
 /**/"WelcomeTitles_headerLabel" = "Welcome to Kubazar!";
 /**/"WelcomeTitles_descriptionLabel" = "Create short stories, in secret (for yourself) or together with one or two friends. Have a nice picture that made you think of someone or that simply shouldn't be forgotten? Pick one and make it into an unforgettable haiku.";
-/**/"WelcomeTitles_loginLabel" = "Already Have an Account";
+/**/"WelcomeTitles_loginLabel" = "Already have an account";
 /**/"WelcomeTitles_loginButtonTitle" = "Sign Up";
-/**/"WelcomeTitles_registerButtonTitle" = "Next";
+/**/"WelcomeTitles_registerButtonTitle" = "Sign In";
 
 /*SignInVC*/
 /**/"SignInTitles_headerLabel" = "Sign In";
@@ -12,6 +12,7 @@
 /**/"SignInTitles_confirmPasswordPlaceholder" = "Confirm Password";
 /**/"SignInTitles_usernamePlaceholder" = "Username";
 /**/"SignInTitles_forgotPasswordButtonTitle" = "Forgot Password?";
+/**/"SignInVC_loginButtonTitle" = "Next";
 
 /*ForgotPasswordVC*/
 /**/"ForgotPasswordTitles_headerLabel" = "Forgot Password?";

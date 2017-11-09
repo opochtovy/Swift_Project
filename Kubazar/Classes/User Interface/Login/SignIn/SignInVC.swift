@@ -10,6 +10,8 @@ import UIKit
 
 class SignInVC: ViewController {
     
+    static let loginButtonTitle = "SignInVC_loginButtonTitle"
+    
     var viewModel: SignInVM
     
     @IBOutlet weak var headerLabel: UILabel!
@@ -40,10 +42,10 @@ class SignInVC: ViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+        super.viewWillAppear(animated)
         
         if !self.wasLoadedBefore {
-            self.alignRightImageForLoginButton()
+            self.loginButton.semanticContentAttribute = .forceRightToLeft
         }
         self.wasLoadedBefore = true
     }
@@ -65,7 +67,7 @@ class SignInVC: ViewController {
         self.emailTextField.placeholder = NSLocalizedString(SignInTitles.emailPlaceholder, comment: "emailPlaceholder")
         self.passwordTextField.placeholder = NSLocalizedString(SignInTitles.passwordPlaceholder, comment: "passwordPlaceholder")
         self.forgotPasswordButton.setTitle(NSLocalizedString(SignInTitles.forgotPasswordButtonTitle, comment: "forgotPasswordButtonTitle").uppercased(), for: .normal)
-        self.loginButton.setTitle(NSLocalizedString(WelcomeTitles.registerButtonTitle, comment: "registerButtonTitle"), for: .normal)
+        self.loginButton.setTitle(NSLocalizedString(SignInVC.loginButtonTitle, comment: "registerButtonTitle") + " ", for: .normal)
     }
     
     //MARK: - Private functions
@@ -76,14 +78,6 @@ class SignInVC: ViewController {
             
             navigationController.popViewController(animated: true)
         }
-    }
-    
-    private func alignRightImageForLoginButton() {
-        
-        let buttonWidth = self.loginButton.frame.width
-        let imageWidth = CGFloat(WelcomeConstants.arrowImageWidth)
-        self.loginButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: buttonWidth - 2 * imageWidth, bottom: 0, right: 0)
-        self.loginButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: -2 * imageWidth, bottom: 0, right: 0)
     }
     
     //MARK: - Actions

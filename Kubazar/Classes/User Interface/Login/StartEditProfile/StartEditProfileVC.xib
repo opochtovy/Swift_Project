@@ -74,7 +74,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="Wa0-x6-bRA"/>
                     </constraints>
-                    <nil key="textColor"/>
+                    <color key="textColor" red="0.22352941176470587" green="0.22352941176470587" blue="0.22745098039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="go" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
                     <connections>

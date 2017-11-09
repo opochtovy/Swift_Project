@@ -41,7 +41,7 @@ class ForgotPasswordVC: ViewController {
         super.viewDidAppear(animated)
         
         if !self.wasLoadedBefore {
-            self.alignRightImageForSendButton()
+            self.sendButton.semanticContentAttribute = .forceRightToLeft
         }
         self.wasLoadedBefore = true
     }
@@ -53,15 +53,7 @@ class ForgotPasswordVC: ViewController {
         self.headerLabel.text = NSLocalizedString(ForgotPasswordTitles.headerLabel, comment: "headerLabel")
         self.emailTextField.placeholder = NSLocalizedString(SignInTitles.emailPlaceholder, comment: "emailPlaceholder")
         self.descriptionLabel.text = NSLocalizedString(ForgotPasswordTitles.descriptionLabel, comment: "descriptionLabel")
-        self.sendButton.setTitle(NSLocalizedString(ForgotPasswordTitles.sendButtonTitle, comment: "sendButtonTitle"), for: .normal)
-    }
-    
-    private func alignRightImageForSendButton() {
-        
-        let buttonWidth = self.sendButton.frame.width
-        let imageWidth = CGFloat(WelcomeConstants.arrowImageWidth)
-        self.sendButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: buttonWidth - 2 * imageWidth + 4, bottom: 0, right: 0)
-        self.sendButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: -2 * imageWidth, bottom: 0, right: 0)
+        self.sendButton.setTitle(NSLocalizedString(ForgotPasswordTitles.sendButtonTitle, comment: "sendButtonTitle") + " ", for: .normal)
     }
     
     //MARK: - Actions
