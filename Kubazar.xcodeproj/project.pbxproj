@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9E1897891FACBA9C00780957 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9E1897881FACBA9C00780957 /* Info.plist */; };
 		9E455BCB1FB07DD500BC9A11 /* WriteMainMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E455BC91FB07DD500BC9A11 /* WriteMainMenuVC.swift */; };
 		9E455BCC1FB07DD500BC9A11 /* WriteMainMenuVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E455BCA1FB07DD500BC9A11 /* WriteMainMenuVC.xib */; };
 		9E455BCE1FB07DE600BC9A11 /* WriteMainMenuVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E455BCD1FB07DE600BC9A11 /* WriteMainMenuVM.swift */; };
@@ -430,7 +429,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0910;
 				ORGANIZATIONNAME = Mobexs;
 				TargetAttributes = {
 					9E8964BF1FACA21D004FFDCD = {
@@ -465,7 +464,6 @@
 			files = (
 				9E5E8E351FADD3F400CCCBDA /* WelcomeVC.xib in Resources */,
 				9E5E8E411FAE1E5500CCCBDA /* ForgotPasswordVC.xib in Resources */,
-				9E1897891FACBA9C00780957 /* Info.plist in Resources */,
 				9E6B14951FB0A43900220942 /* ParticipantsCountView.xib in Resources */,
 				9E5E8E231FADC1C000CCCBDA /* Localizable.strings in Resources */,
 				9E5E8E111FADB54600CCCBDA /* Images.xcassets in Resources */,
