@@ -11,6 +11,7 @@ target 'Kubazar' do
   pod 'PromiseKit', '~> 4.4'
   pod 'PromiseKit/Alamofire', '~> 4.0'
   pod 'Firebase/Core'
+  pod 'Firebase/Auth'
   pod 'Fabric'
   pod 'Crashlytics'
 

@@ -8,7 +8,9 @@
 
 import UIKit
 
-class CompleteEditProfileVC: ViewController, UIImagePickerControllerDelegate {
+class CompleteEditProfileVC: ViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    static let imagePickerMinSide: CGFloat = 200
     
     var viewModel: CompleteEditProfileVM
     
@@ -16,15 +18,16 @@ class CompleteEditProfileVC: ViewController, UIImagePickerControllerDelegate {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var profileLabel: UILabel!
+    @IBOutlet weak var profileImageView: UIImageView!
     
-//    lazy private var imagePicker: UIImagePickerController = {
-//
-//        let picker = UIImagePickerController()
-//        picker.allowsEditing = false
-//        picker.delegate = self
-//
-//        return picker
-//    }()
+    lazy private var imagePicker: UIImagePickerController = {
+
+        let picker = UIImagePickerController()
+        picker.allowsEditing = false
+        picker.delegate = self
+
+        return picker
+    }()
     
     //MARK: - LyfeCycle
     
@@ -44,6 +47,9 @@ class CompleteEditProfileVC: ViewController, UIImagePickerControllerDelegate {
         self.localizeTitles()
         self.setNavigationBarAppearance()
         self.usernameTextField.becomeFirstResponder()
+        
+        self.profileImageView.addCornerRadius(cornerRadius: self.profileImageView.frame.size.width / 2, borderWidth: 1, borderColor: #colorLiteral(red: 0.9215686275, green: 0.9215686275, blue: 0.9215686275, alpha: 1))
+        self.profileImageView.clipsToBounds = true
     }
     
     //MARK: - Private functions
@@ -69,7 +75,7 @@ class CompleteEditProfileVC: ViewController, UIImagePickerControllerDelegate {
     @objc private func done() {
         
     }
-/*
+
     //MARK: - UIImagePickerControllerDelegate
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
@@ -79,35 +85,36 @@ class CompleteEditProfileVC: ViewController, UIImagePickerControllerDelegate {
             let size = pickedImage.size
             let minSide = min(size.width, size.height)
             var scale: CGFloat = 1
-            while minSide / scale > EvidenceKeys.imagePickerMinSide {
+            while minSide / scale > CompleteEditProfileVC.imagePickerMinSide {
                 
                 scale = scale + 0.2
             }
             
             if let editedImage = UIImage().resizePhoto(image: pickedImage, scale: scale) {
                 
-                if let data = UIImageJPEGRepresentation(editedImage, 1.0) {
-                    
-                    self.viewModel.appendImageData(data: data)
-                }
+                self.profileImageView.image = editedImage
             }
         }
+        
+        self.profileLabel.isHidden = self.profileImageView.image != nil
         
         self.dismiss(animated: true, completion: nil)
     }
     
     internal func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         
+        self.profileLabel.isHidden = self.profileImageView.image != nil
+        
         self.dismiss(animated: true, completion: nil)
     }
-*/
+
     //MARK: - Actions
     
     @IBAction private func actionAddPhoto(_ sender: UIButton) {
         
         self.usernameTextField.resignFirstResponder()
         
-//        self.imagePicker.sourceType = .photoLibrary
-//        self.present(self.imagePicker, animated: true, completion: nil)
+        self.imagePicker.sourceType = .photoLibrary
+        self.present(self.imagePicker, animated: true, completion: nil)
     }
 }

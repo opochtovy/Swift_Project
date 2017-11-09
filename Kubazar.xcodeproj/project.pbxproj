@@ -34,6 +34,7 @@
 		9E6144471FB305E400067295 /* CompleteEditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6144451FB305E400067295 /* CompleteEditProfileVC.swift */; };
 		9E6144481FB305E400067295 /* CompleteEditProfileVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E6144461FB305E400067295 /* CompleteEditProfileVC.xib */; };
 		9E61444A1FB305F900067295 /* CompleteEditProfileVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6144491FB305F900067295 /* CompleteEditProfileVM.swift */; };
+		9E62B69B1FB48AEC00AA814E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9E62B69A1FB48AEB00AA814E /* GoogleService-Info.plist */; };
 		9E6B14931FB0A42900220942 /* ParticipantsCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6B14921FB0A42900220942 /* ParticipantsCountView.swift */; };
 		9E6B14951FB0A43900220942 /* ParticipantsCountView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E6B14941FB0A43900220942 /* ParticipantsCountView.xib */; };
 		9E6B14A11FB0AC6200220942 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6B14A01FB0AC6200220942 /* UIView+Extension.swift */; };
@@ -42,6 +43,7 @@
 		9E8964CE1FACA21D004FFDCD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E8964CC1FACA21D004FFDCD /* LaunchScreen.storyboard */; };
 		9EB170AD1FB065FE00A70A10 /* TabbedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB170AC1FB065FE00A70A10 /* TabbedController.swift */; };
 		9EB170AF1FB0668500A70A10 /* TabbedControllerVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB170AE1FB0668500A70A10 /* TabbedControllerVM.swift */; };
+		9EE16E941FB49F4700B4C5C5 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE16E931FB49F4700B4C5C5 /* UIImage+Extensions.swift */; };
 		A2D677091FB1D37C0055F025 /* AllParticipantsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D677081FB1D37C0055F025 /* AllParticipantsView.swift */; };
 		A2D6770B1FB1D3910055F025 /* AllParticipantsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2D6770A1FB1D3910055F025 /* AllParticipantsView.xib */; };
 		BEE04B2776028D322C4EE27E /* Pods_Kubazar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A253CC5A9FE6C38C3AD695DE /* Pods_Kubazar.framework */; };
@@ -75,6 +77,8 @@
 		9E6144451FB305E400067295 /* CompleteEditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteEditProfileVC.swift; sourceTree = "<group>"; };
 		9E6144461FB305E400067295 /* CompleteEditProfileVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CompleteEditProfileVC.xib; sourceTree = "<group>"; };
 		9E6144491FB305F900067295 /* CompleteEditProfileVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteEditProfileVM.swift; sourceTree = "<group>"; };
+		9E62B69A1FB48AEB00AA814E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		9E62B69C1FB48DF900AA814E /* Kubazar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Kubazar.entitlements; sourceTree = "<group>"; };
 		9E6B14921FB0A42900220942 /* ParticipantsCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantsCountView.swift; sourceTree = "<group>"; };
 		9E6B14941FB0A43900220942 /* ParticipantsCountView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ParticipantsCountView.xib; sourceTree = "<group>"; };
 		9E6B14A01FB0AC6200220942 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
@@ -84,6 +88,7 @@
 		9E8964CD1FACA21D004FFDCD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9EB170AC1FB065FE00A70A10 /* TabbedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbedController.swift; sourceTree = "<group>"; };
 		9EB170AE1FB0668500A70A10 /* TabbedControllerVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbedControllerVM.swift; sourceTree = "<group>"; };
+		9EE16E931FB49F4700B4C5C5 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		A253CC5A9FE6C38C3AD695DE /* Pods_Kubazar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kubazar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2D677081FB1D37C0055F025 /* AllParticipantsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllParticipantsView.swift; sourceTree = "<group>"; };
 		A2D6770A1FB1D3910055F025 /* AllParticipantsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AllParticipantsView.xib; sourceTree = "<group>"; };
@@ -306,6 +311,7 @@
 		9E6B14961FB0A81000220942 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				9EE16E931FB49F4700B4C5C5 /* UIImage+Extensions.swift */,
 				9E6B14A01FB0AC6200220942 /* UIView+Extension.swift */,
 			);
 			path = Categories;
@@ -332,6 +338,8 @@
 		9E8964C21FACA21D004FFDCD /* Kubazar */ = {
 			isa = PBXGroup;
 			children = (
+				9E62B69C1FB48DF900AA814E /* Kubazar.entitlements */,
+				9E62B69A1FB48AEB00AA814E /* GoogleService-Info.plist */,
 				9E8964D61FACA53B004FFDCD /* Classes */,
 				9E8964D71FACA53B004FFDCD /* Resources */,
 				9E8964D51FACA53B004FFDCD /* Supporting Files */,
@@ -437,6 +445,11 @@
 						CreatedOnToolsVersion = 9.0;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -465,6 +478,7 @@
 			files = (
 				9E5E8E351FADD3F400CCCBDA /* WelcomeVC.xib in Resources */,
 				9E5E8E411FAE1E5500CCCBDA /* ForgotPasswordVC.xib in Resources */,
+				9E62B69B1FB48AEC00AA814E /* GoogleService-Info.plist in Resources */,
 				9E1897891FACBA9C00780957 /* Info.plist in Resources */,
 				9E6B14951FB0A43900220942 /* ParticipantsCountView.xib in Resources */,
 				9E5E8E231FADC1C000CCCBDA /* Localizable.strings in Resources */,
@@ -576,6 +590,7 @@
 				9E5E8E1C1FADBA7400CCCBDA /* ViewController.swift in Sources */,
 				9E6B14A11FB0AC6200220942 /* UIView+Extension.swift in Sources */,
 				A2D677091FB1D37C0055F025 /* AllParticipantsView.swift in Sources */,
+				9EE16E941FB49F4700B4C5C5 /* UIImage+Extensions.swift in Sources */,
 				9E6144441FB2F5F100067295 /* StartEditProfileVM.swift in Sources */,
 				9E8964C41FACA21D004FFDCD /* AppDelegate.swift in Sources */,
 				9E5E8E1F1FADBC9E00CCCBDA /* Client.swift in Sources */,
@@ -716,6 +731,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Kubazar/Kubazar.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y2V6NG4VN2;
 				INFOPLIST_FILE = "Kubazar/Supporting Files/Info.plist";
@@ -735,6 +751,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Kubazar/Kubazar.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y2V6NG4VN2;
 				INFOPLIST_FILE = "Kubazar/Supporting Files/Info.plist";

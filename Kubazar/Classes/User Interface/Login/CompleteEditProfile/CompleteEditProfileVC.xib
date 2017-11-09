@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CompleteEditProfileVC" customModule="Kubazar" customModuleProvider="target">
             <connections>
                 <outlet property="descriptionLabel" destination="tpj-Qk-8aW" id="u2p-dz-l5P"/>
+                <outlet property="profileImageView" destination="5Qv-Od-XwN" id="g8Q-R1-ZGM"/>
                 <outlet property="profileLabel" destination="2u5-Sa-1Y3" id="vzS-cf-QC6"/>
                 <outlet property="usernameLabel" destination="Et8-bf-rOu" id="b9Q-nN-TOT"/>
                 <outlet property="usernameTextField" destination="b3U-c3-yi2" id="Kkc-Xd-80Q"/>
@@ -27,8 +28,9 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bVx-Xc-y6x">
                     <rect key="frame" x="16" y="45" width="90" height="90"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5Qv-Od-XwN">
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5Qv-Od-XwN">
                             <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2u5-Sa-1Y3">
                             <rect key="frame" x="10" y="36" width="70" height="18"/>
@@ -47,18 +49,18 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="afJ-Ey-xVu" secondAttribute="trailing" id="36C-KH-hk1"/>
-                        <constraint firstItem="5Qv-Od-XwN" firstAttribute="top" secondItem="bVx-Xc-y6x" secondAttribute="top" id="3Uy-tX-G1r"/>
+                        <constraint firstItem="5Qv-Od-XwN" firstAttribute="top" secondItem="bVx-Xc-y6x" secondAttribute="top" id="7gz-2e-Bvb"/>
                         <constraint firstItem="afJ-Ey-xVu" firstAttribute="top" secondItem="bVx-Xc-y6x" secondAttribute="top" id="BPE-vI-3Fx"/>
                         <constraint firstItem="afJ-Ey-xVu" firstAttribute="leading" secondItem="bVx-Xc-y6x" secondAttribute="leading" id="BT3-lf-df4"/>
-                        <constraint firstItem="5Qv-Od-XwN" firstAttribute="leading" secondItem="bVx-Xc-y6x" secondAttribute="leading" id="GfQ-u1-mdx"/>
-                        <constraint firstAttribute="bottom" secondItem="5Qv-Od-XwN" secondAttribute="bottom" id="LWl-Cl-gKD"/>
+                        <constraint firstAttribute="bottom" secondItem="5Qv-Od-XwN" secondAttribute="bottom" id="GQN-Fs-nb8"/>
+                        <constraint firstAttribute="trailing" secondItem="5Qv-Od-XwN" secondAttribute="trailing" id="LxC-1H-EyR"/>
                         <constraint firstItem="2u5-Sa-1Y3" firstAttribute="centerY" secondItem="bVx-Xc-y6x" secondAttribute="centerY" id="WXI-Dx-CMa"/>
                         <constraint firstAttribute="width" constant="90" id="ZJX-1s-uDH"/>
                         <constraint firstAttribute="height" constant="90" id="c7R-Ur-sXG"/>
+                        <constraint firstItem="5Qv-Od-XwN" firstAttribute="leading" secondItem="bVx-Xc-y6x" secondAttribute="leading" id="gkB-UA-BjF"/>
                         <constraint firstItem="2u5-Sa-1Y3" firstAttribute="leading" secondItem="bVx-Xc-y6x" secondAttribute="leading" constant="10" id="kBN-Xh-CHc"/>
                         <constraint firstAttribute="trailing" secondItem="2u5-Sa-1Y3" secondAttribute="trailing" constant="10" id="rdP-Cc-YN7"/>
                         <constraint firstAttribute="bottom" secondItem="afJ-Ey-xVu" secondAttribute="bottom" id="x1g-iR-1XW"/>
-                        <constraint firstAttribute="trailing" secondItem="5Qv-Od-XwN" secondAttribute="trailing" id="zd5-Py-hke"/>
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tpj-Qk-8aW">
