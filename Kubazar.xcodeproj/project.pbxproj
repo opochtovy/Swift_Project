@@ -48,6 +48,10 @@
 		9E8964CE1FACA21D004FFDCD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E8964CC1FACA21D004FFDCD /* LaunchScreen.storyboard */; };
 		9EB170AD1FB065FE00A70A10 /* TabbedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB170AC1FB065FE00A70A10 /* TabbedController.swift */; };
 		9EB170AF1FB0668500A70A10 /* TabbedControllerVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB170AE1FB0668500A70A10 /* TabbedControllerVM.swift */; };
+		9EED066C1FB59D2900CCD82E /* Haiku.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED066B1FB59D2800CCD82E /* Haiku.swift */; };
+		9EED066E1FB59E5B00CCD82E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED066D1FB59E5B00CCD82E /* User.swift */; };
+		9EED06701FB5A2D300CCD82E /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED066F1FB5A2D300CCD82E /* Array+Extension.swift */; };
+		9EED06721FB5DE3700CCD82E /* Collection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED06711FB5DE3700CCD82E /* Collection+Extension.swift */; };
 		A2D677091FB1D37C0055F025 /* AllParticipantsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D677081FB1D37C0055F025 /* AllParticipantsView.swift */; };
 		A2D6770B1FB1D3910055F025 /* AllParticipantsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2D6770A1FB1D3910055F025 /* AllParticipantsView.xib */; };
 		BEE04B2776028D322C4EE27E /* Pods_Kubazar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A253CC5A9FE6C38C3AD695DE /* Pods_Kubazar.framework */; };
@@ -97,6 +101,10 @@
 		9E8964CD1FACA21D004FFDCD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9EB170AC1FB065FE00A70A10 /* TabbedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbedController.swift; sourceTree = "<group>"; };
 		9EB170AE1FB0668500A70A10 /* TabbedControllerVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbedControllerVM.swift; sourceTree = "<group>"; };
+		9EED066B1FB59D2800CCD82E /* Haiku.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haiku.swift; sourceTree = "<group>"; };
+		9EED066D1FB59E5B00CCD82E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		9EED066F1FB5A2D300CCD82E /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
+		9EED06711FB5DE3700CCD82E /* Collection+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extension.swift"; sourceTree = "<group>"; };
 		A253CC5A9FE6C38C3AD695DE /* Pods_Kubazar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kubazar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2D677081FB1D37C0055F025 /* AllParticipantsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllParticipantsView.swift; sourceTree = "<group>"; };
 		A2D6770A1FB1D3910055F025 /* AllParticipantsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AllParticipantsView.xib; sourceTree = "<group>"; };
@@ -231,6 +239,8 @@
 			isa = PBXGroup;
 			children = (
 				9E5E8E1E1FADBC9E00CCCBDA /* Client.swift */,
+				9EED066B1FB59D2800CCD82E /* Haiku.swift */,
+				9EED066D1FB59E5B00CCD82E /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -350,6 +360,8 @@
 			isa = PBXGroup;
 			children = (
 				9E6B14A01FB0AC6200220942 /* UIView+Extension.swift */,
+				9EED066F1FB5A2D300CCD82E /* Array+Extension.swift */,
+				9EED06711FB5DE3700CCD82E /* Collection+Extension.swift */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -615,6 +627,7 @@
 				9E5E8E401FAE1E5500CCCBDA /* ForgotPasswordVC.swift in Sources */,
 				9EB170AF1FB0668500A70A10 /* TabbedControllerVM.swift in Sources */,
 				9E5E8E431FAE1E6C00CCCBDA /* ForgotPasswordVM.swift in Sources */,
+				9EED066E1FB59E5B00CCD82E /* User.swift in Sources */,
 				9E5E8E271FADC41A00CCCBDA /* BaseVM.swift in Sources */,
 				9E455BCE1FB07DE600BC9A11 /* WriteMainMenuVM.swift in Sources */,
 				9E15889E1FB452F50063C816 /* BazarCellVM.swift in Sources */,
@@ -623,11 +636,14 @@
 				9E6B14931FB0A42900220942 /* ParticipantsCountView.swift in Sources */,
 				9E5E8E1C1FADBA7400CCCBDA /* ViewController.swift in Sources */,
 				9E15889B1FB452E40063C816 /* BazarCell.swift in Sources */,
+				9EED066C1FB59D2900CCD82E /* Haiku.swift in Sources */,
 				9E6B14A11FB0AC6200220942 /* UIView+Extension.swift in Sources */,
 				A2D677091FB1D37C0055F025 /* AllParticipantsView.swift in Sources */,
 				9E1588971FB44D4E0063C816 /* BazarVM.swift in Sources */,
+				9EED06701FB5A2D300CCD82E /* Array+Extension.swift in Sources */,
 				9E6144441FB2F5F100067295 /* StartEditProfileVM.swift in Sources */,
 				9E8964C41FACA21D004FFDCD /* AppDelegate.swift in Sources */,
+				9EED06721FB5DE3700CCD82E /* Collection+Extension.swift in Sources */,
 				9E5E8E1F1FADBC9E00CCCBDA /* Client.swift in Sources */,
 				9E5E8E341FADD3F400CCCBDA /* WelcomeVC.swift in Sources */,
 				9E61444A1FB305F900067295 /* CompleteEditProfileVM.swift in Sources */,

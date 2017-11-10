@@ -67,7 +67,22 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
     
     @objc private func didSelectSegment(_ sender: UISegmentedControl) {
         
-        self.viewModel.filter = BazarVM.BazarFilter(rawValue: sender.selectedSegmentIndex)!
+        if let value = BazarVM.BazarFilter(rawValue: sender.selectedSegmentIndex) {
+            
+           self.viewModel.filter = value
+        }
+    }
+    
+    @objc private func didPressLikeButton (_ sender: UIButton) {
+        
+        switch self.viewModel.filter {
+        case .all:
+            print("like")
+        case .mine:
+            print("like")
+        case .active:
+            print("publish")
+        }
     }
     
     //MARK: - UITableViewDataSource
@@ -80,6 +95,7 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: BazarCell.reuseID, for: indexPath) as! BazarCell
         cell.viewModel = self.viewModel.getCellVM(forIndexPath: indexPath)
+        cell.btnLike.addTarget(self, action: #selector(BazarVC.didPressLikeButton(_:)), for: .touchUpInside)
         
         return cell
     }
