@@ -46,6 +46,11 @@ class BazarVM: BaseVM {
         return BazarCellVM(haiku: self.haikus[indexPath.row])
     }
     
+    public func getDetailVM(forIndexPath indexPath: IndexPath) -> BazarDetailVM {
+        
+        return BazarDetailVM(client: self.client, haiku: self.haikus[indexPath.row])        
+    }
+    
     //MARK: - Private functions
     
     private func prepareVMs() {
