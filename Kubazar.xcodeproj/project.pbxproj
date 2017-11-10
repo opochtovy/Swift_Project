@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9E1897891FACBA9C00780957 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9E1897881FACBA9C00780957 /* Info.plist */; };
+		9E3F9CF01FB5D6BF003BC12A /* FirebaseServerClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3F9CEF1FB5D6BF003BC12A /* FirebaseServerClient.swift */; };
 		9E455BCB1FB07DD500BC9A11 /* WriteMainMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E455BC91FB07DD500BC9A11 /* WriteMainMenuVC.swift */; };
 		9E455BCC1FB07DD500BC9A11 /* WriteMainMenuVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E455BCA1FB07DD500BC9A11 /* WriteMainMenuVC.xib */; };
 		9E455BCE1FB07DE600BC9A11 /* WriteMainMenuVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E455BCD1FB07DE600BC9A11 /* WriteMainMenuVM.swift */; };
@@ -57,6 +58,7 @@
 
 /* Begin PBXFileReference section */
 		9E1897881FACBA9C00780957 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9E3F9CEF1FB5D6BF003BC12A /* FirebaseServerClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseServerClient.swift; sourceTree = "<group>"; };
 		9E455BC91FB07DD500BC9A11 /* WriteMainMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteMainMenuVC.swift; sourceTree = "<group>"; };
 		9E455BCA1FB07DD500BC9A11 /* WriteMainMenuVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WriteMainMenuVC.xib; sourceTree = "<group>"; };
 		9E455BCD1FB07DE600BC9A11 /* WriteMainMenuVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteMainMenuVM.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				9E5E8E251FADC40100CCCBDA /* ViewModel */,
+				9E3F9CEF1FB5D6BF003BC12A /* FirebaseServerClient.swift */,
 			);
 			path = "Middle Ware";
 			sourceTree = "<group>";
@@ -596,6 +599,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E5E8E291FADC46C00CCCBDA /* RootVM.swift in Sources */,
+				9E3F9CF01FB5D6BF003BC12A /* FirebaseServerClient.swift in Sources */,
 				9E5E8E371FADD42D00CCCBDA /* WelcomeVM.swift in Sources */,
 				9E455BCB1FB07DD500BC9A11 /* WriteMainMenuVC.swift in Sources */,
 				9E5E8E3A1FAE058900CCCBDA /* SignInVC.swift in Sources */,

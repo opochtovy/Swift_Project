@@ -7,13 +7,16 @@
 //
 
 import Foundation
+import Alamofire
 
 class Client {
     
-    // left to set
+    let sessionManager: SessionManager
+    let authenticator: FirebaseServerClient
     
     init() {
         
-        // left to set
+        self.sessionManager = SessionManager()
+        self.authenticator = FirebaseServerClient()
     }
 }

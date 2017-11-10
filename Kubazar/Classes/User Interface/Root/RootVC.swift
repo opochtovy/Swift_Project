@@ -33,6 +33,8 @@ class RootVC: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.client.authenticator.setStateOfCurrentUser()
+        
         self.chooseController()
     }
     

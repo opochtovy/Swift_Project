@@ -2,8 +2,8 @@
 /**/"WelcomeTitles_headerLabel" = "Welcome to Kubazar!";
 /**/"WelcomeTitles_descriptionLabel" = "Create short stories, in secret (for yourself) or together with one or two friends. Have a nice picture that made you think of someone or that simply shouldn't be forgotten? Pick one and make it into an unforgettable haiku.";
 /**/"WelcomeTitles_loginLabel" = "Already have an account";
-/**/"WelcomeTitles_loginButtonTitle" = "Sign Up";
-/**/"WelcomeTitles_registerButtonTitle" = "Sign In";
+/**/"WelcomeTitles_loginButtonTitle" = "Sign In";
+/**/"WelcomeTitles_registerButtonTitle" = "Sign Up";
 
 /*SignInVC*/
 /**/"SignInTitles_headerLabel" = "Sign In";
@@ -57,5 +57,9 @@
 /*CompletePhoneVerificationVC*/
 /**/"CompletePhoneVerificationVC_backButtonTitle" = "Edit number";
 /**/"CompletePhoneVerificationVC_descriptionLabel" = "We have sent you an SMS with a code to the number adove";
-/**/"CompletePhoneVerificationVC_completionLabel" = "To complete your phone number verification, plase enter the activation code.";
+/**/"CompletePhoneVerificationVC_completionLabel" = "To complete your phone number verification, please enter the activation code.";
 /**/"CompletePhoneVerificationVC_resendButtonTitle" = "Resend Code";
+/**/"CompletePhoneVerificationVC_wrongCodeAlertTitle" = "Check Code";
+/**/"CompletePhoneVerificationVC_wrongCodeAlertMessage" = "Your code is not full. Please enter correct verification code.";
+/**/"CompletePhoneVerificationVC_errorDuringSignInAlertTitle" = "Error during Sign In";
+/**/"CompletePhoneVerificationVC_errorDuringSignInAlertMessage" = "There was an error during sign in via phone.";
