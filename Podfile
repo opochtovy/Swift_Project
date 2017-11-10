@@ -14,5 +14,6 @@ target 'Kubazar' do
   pod 'Firebase/Auth'
   pod 'Fabric'
   pod 'Crashlytics'
+  pod 'AlamofireImage', '~> 3.3'
 
 end

@@ -36,7 +36,6 @@ class TabbedController: UITabBarController {
         super.viewDidLoad()
         
         self.setNavigationBarAppearance()
-        self.setTabBarAppearance()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,15 +44,14 @@ class TabbedController: UITabBarController {
         self.createTabBarViewControllers()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        self.setStatusBarAppearance()
-    }
-    
     //MARK: -  Private functions
     
     private func createTabBarViewControllers() {
+        
+        let bazarCtrl = BazarVC(client: self.viewModel.client)
+        let bazarBarItem = UITabBarItem(title: NSLocalizedString(TabBarTitles.bazar, comment: "Bazar TabBar Item Title"), image: UIImage(named: TabBarImages.bazar), selectedImage: UIImage(named: TabBarImages.bazar))
+        bazarCtrl.tabBarItem = bazarBarItem
+        let bazarNavCtrl = UINavigationController(rootViewController: bazarCtrl)
         
         let welcomeViewController = WelcomeVC(client: self.viewModel.client)
         let welcomeBarItem = UITabBarItem(title: NSLocalizedString(TabBarTitles.bazar, comment: "Bazar TabBar Item Title"), image: UIImage(named: TabBarImages.bazar), selectedImage: UIImage(named: TabBarImages.bazar))
@@ -65,13 +63,7 @@ class TabbedController: UITabBarController {
         writeViewController.tabBarItem = writeBarItem
         let writeNavViewController = UINavigationController(rootViewController: writeViewController)
         
-        self.viewControllers = [welcomeNavViewController, writeNavViewController]
-    }
-    
-    private func setTabBarAppearance() {
-        
-        UITabBar.appearance().tintColor = #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)
-        
+        self.viewControllers = [bazarNavCtrl, welcomeNavViewController, writeNavViewController]
     }
     
     private func setNavigationBarAppearance() {

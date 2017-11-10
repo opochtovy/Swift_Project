@@ -70,8 +70,8 @@ class WelcomeVC: ViewController {
         
         // just for test
         
-//        let tabbedVC = TabbedController(client: self.viewModel.client)
-//        self.present(tabbedVC, animated: true, completion: nil)
+        let tabbedVC = TabbedController(client: self.viewModel.client)
+        self.present(tabbedVC, animated: true, completion: nil)
         
         let phoneVerificationVC = StartPhoneVerificationVC(client: self.viewModel.client)
         let phoneVerificationNavViewController = UINavigationController(rootViewController: phoneVerificationVC)
