@@ -46,6 +46,8 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.edgesForExtendedLayout = []
+        
         self.setNavigationBarAppearance()
         self.localizeTitles()
         
@@ -92,24 +94,10 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate {
     
     private func sendPhoneNumber() {
         
-        self.client.authenticator.sendPhoneNumber { success in
+        self.client.authenticator.sendPhoneNumber(phoneNumber: "+375297509711") { success in
             
             print(success)
         }
-/*
-        PhoneAuthProvider.provider().verifyPhoneNumber("+375297509711", uiDelegate: nil) { (verificationID, error) in
-            
-            if let error = error {
-                // TODO: show error
-                print("CompletePhoneVerification: error = ", error)
-                return
-            }
-            guard let verificationID = verificationID else { return }
-            print("verificationID =", verificationID)
-            UserDefaults.standard.set(verificationID, forKey: "authVerificationID")
-            UserDefaults.standard.synchronize()
-        }
-*/
     }
     
     private func showWrongCodeAlert() {
@@ -164,11 +152,6 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate {
         
         if string.count == 1, textField.text?.count == 0 {
             
-//            let aSet = NSCharacterSet(charactersIn:"0123456789").inverted
-//            let compSepByCharInSet = string.components(separatedBy: aSet)
-//            let numberFiltered = compSepByCharInSet.joined(separator: "")
-//            return string == numberFiltered
-            
             let allowedCharacters = CharacterSet.decimalDigits
             let characterSet = CharacterSet(charactersIn: string)
             return allowedCharacters.isSuperset(of: characterSet)
@@ -197,9 +180,6 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate {
     
     @objc private func actionDone() {
         
-//        let editProfileViewController = StartEditProfileVC(client: self.client)
-//        self.navigationController?.pushViewController(editProfileViewController, animated: true)
-        
         self.verificationCode = ""
         for textField in self.codeTextFields {
             
@@ -225,27 +205,13 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate {
             if !success {
                 
                 self.showErrorDuringSignInAlert()
-            }
-        }
-/*
-        let verificationID = UserDefaults.standard.value(forKey: "authVerificationID")
-        let credential = PhoneAuthProvider.provider().credential(withVerificationID: verificationID as! String, verificationCode: self.verificationCode)
-        
-        Auth.auth().signIn(with: credential) { (user, error) in
-            if error != nil {
-                // ...
-                return
-            }
-            
-            // User is signed in
-            if let user = user {
                 
-                print("Phone number: \(user.phoneNumber ?? "nil")")
-                let userInfo: Any? = user.providerData[0]
-                print(userInfo ?? "no user info")
+            } else {
+                
+                let editProfileViewController = StartEditProfileVC(client: self.client)
+                self.navigationController?.pushViewController(editProfileViewController, animated: true)
             }
         }
-*/
     }
     
     @objc func textFieldDidChange(textField: UITextField){

@@ -37,6 +37,8 @@ class SignInVC: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.edgesForExtendedLayout = []
+        
         self.setNavigationBarAppearance()        
         self.localizeTitles()
     }

@@ -38,11 +38,25 @@
 /*StartEditProfileVC*/
 /**/"StartEditProfileTitles_title" = "Edit Profile";
 /**/"StartEditProfileTitles_descriptionLabel" = "Trusted email and password are used to verify your identity when signing in and to help recover you account if the lost phone to recover your account in case the phone is lost";
+/**/"StartEditProfileVC_wrongPasswordAlertTitle" = "Check Password";
+/**/"StartEditProfileVC_wrongPasswordAlertMessage" = "The password confirmation has not passed. Please confirm your password correctly.";
+/**/"StartEditProfileVC_shortPasswordAlertTitle" = "Short Password";
+/**/"StartEditProfileVC_shortPasswordAlertMessage" = "Your password is less than 4 symbols.";
+/**/"StartEditProfileVC_wrongEmailAlertTitle" = "Wrong Email";
+/**/"StartEditProfileVC_wrongEmailAlertMessage" = "Your email address is wrong. Please provide a valid email.";
 
 /*CompleteEditProfileVC*/
 /**/"CompleteEditProfileTitles_descriptionLabel" = "Enter your name and an optional profile picture";
 /**/"CompleteEditProfileTitles_usernameLabel" = "Your Name";
 /**/"CompleteEditProfileTitles_profileLabel" = "Add photo";
+/**/"CompleteEditProfileVC_shortUsernameAlertTitle" = "Short Username";
+/**/"CompleteEditProfileVC_shortUsernameAlertMessage" = "Your username is less than 3 symbols.";
+/**/"CompleteEditProfileVC_emptyPhotoAlertTitle" = "Empty Profile Photo";
+/**/"CompleteEditProfileVC_emptyPhotoAlertMessage" = "Please choose your profile photo.";
+/**/"CompleteEditProfileVC_unsuccessDisplayNameUpdateAlertTitle" = "Unsuccessful Update";
+/**/"CompleteEditProfileVC_unsuccessDisplayNameUpdateAlertMessage" = "There was an error during displayName setting for user profile.";
+/**/"CompleteEditProfileVC_unsuccessfulPhotoUploadAlertTitle" = "Unsuccessful Photo Upload";
+/**/"CompleteEditProfileVC_unsuccessfulPhotoUploadAlertMessage" = "There was an error during photo upload for user profile.";
 
 /*BazarVC*/
 /**/ "Bazar_all_haikus" = "All Haikus";

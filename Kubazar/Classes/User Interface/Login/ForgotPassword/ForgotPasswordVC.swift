@@ -34,6 +34,8 @@ class ForgotPasswordVC: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.edgesForExtendedLayout = []
+        
         self.localizeTitles()
     }
     
