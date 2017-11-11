@@ -16,6 +16,7 @@ class ForgotPasswordVC: ViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var sendButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
     
     private var wasLoadedBefore = false
     
@@ -61,9 +62,18 @@ class ForgotPasswordVC: ViewController {
         self.emailTextField.placeholder = NSLocalizedString(SignInTitles.emailPlaceholder, comment: "emailPlaceholder")
         self.descriptionLabel.text = NSLocalizedString(ForgotPasswordTitles.descriptionLabel, comment: "descriptionLabel")
         self.sendButton.setTitle(NSLocalizedString(ForgotPasswordTitles.sendButtonTitle, comment: "sendButtonTitle") + " ", for: .normal)
+        self.backButton.setTitle(" " + NSLocalizedString(ButtonTitles.backButtonTitle, comment: "Back Button Title"), for: .normal)
     }
     
     //MARK: - Actions
+    
+    @IBAction func actionBack(_ sender: UIButton) {
+        
+        if let navigationController = self.navigationController {
+            
+            navigationController.popViewController(animated: true)
+        }
+    }
     
     @IBAction private func actionSend(_ sender: UIButton) {
         

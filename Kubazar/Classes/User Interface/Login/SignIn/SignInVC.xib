@@ -27,7 +27,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ddn-ao-L7d">
-                    <rect key="frame" x="26" y="20" width="51" height="44"/>
+                    <rect key="frame" x="16" y="20" width="51" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="JUd-dq-Oep"/>
                     </constraints>
@@ -154,8 +154,8 @@
                 <constraint firstItem="tq0-hj-qP2" firstAttribute="top" secondItem="qmZ-fK-T4g" secondAttribute="bottom" constant="10" id="Wyc-jd-SI7"/>
                 <constraint firstItem="2dB-Hl-330" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="Zdy-6N-5q0"/>
                 <constraint firstItem="l5Z-td-uJE" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="e3P-Cy-n7L"/>
-                <constraint firstItem="ETo-TO-4SR" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="67" id="fnR-1J-ILK"/>
-                <constraint firstItem="ddn-ao-L7d" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="26" id="hUf-Zd-jGQ"/>
+                <constraint firstItem="ETo-TO-4SR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="87" id="fnR-1J-ILK"/>
+                <constraint firstItem="ddn-ao-L7d" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="hUf-Zd-jGQ"/>
                 <constraint firstItem="l5Z-td-uJE" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="lY9-pn-3C2"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="2dB-Hl-330" secondAttribute="trailing" constant="20" id="lqK-EA-2xT"/>
                 <constraint firstItem="jvm-2n-PYy" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="mhm-R9-wBY"/>
