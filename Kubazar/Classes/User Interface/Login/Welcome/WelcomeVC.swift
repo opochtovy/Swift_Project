@@ -47,12 +47,6 @@ class WelcomeVC: ViewController {
         self.wasLoadedBefore = true
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        
-        super.viewWillDisappear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
-    }
-    
     //MARK: - Private functions
     
     private func localizeTitles() {
@@ -75,13 +69,7 @@ class WelcomeVC: ViewController {
     
     @IBAction private func actionLogin(_ sender: UIButton) {
         
-//        let signInViewController = SignInVC(client: self.client)
-//        self.navigationController?.pushViewController(signInViewController, animated: true)
-        
-        // last test
-        
-        let completeEditProfileViewController = CompleteEditProfileVC(client: self.client)
-        let completeEditProfileNavViewController = UINavigationController(rootViewController: completeEditProfileViewController)
-        self.present(completeEditProfileNavViewController, animated: true, completion: nil)
+        let signInViewController = SignInVC(client: self.client)
+        self.navigationController?.pushViewController(signInViewController, animated: true)
     }
 }

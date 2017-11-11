@@ -19,6 +19,7 @@ class SignInVC: ViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var forgotPasswordButton: UIButton!
     @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
     
     private var wasLoadedBefore = false
 
@@ -39,7 +40,6 @@ class SignInVC: ViewController {
         
         self.edgesForExtendedLayout = []
         
-        self.setNavigationBarAppearance()        
         self.localizeTitles()
     }
     
@@ -52,16 +52,12 @@ class SignInVC: ViewController {
         self.wasLoadedBefore = true
     }
     
-    //MARK: - Private functions
-    
-    private func setNavigationBarAppearance() {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        UINavigationBar.appearance().shadowImage = UIImage()
-        UINavigationBar.appearance().tintColor = #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor : #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)]
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString(ButtonTitles.cancelButtonTitle, comment: "Back Button Title"), style: .plain, target: self, action: #selector(SignInVC.cancel))
+        self.view.endEditing(true)
     }
+    
+    //MARK: - Private functions
     
     private func localizeTitles() {
         
@@ -70,11 +66,12 @@ class SignInVC: ViewController {
         self.passwordTextField.placeholder = NSLocalizedString(SignInTitles.passwordPlaceholder, comment: "passwordPlaceholder")
         self.forgotPasswordButton.setTitle(NSLocalizedString(SignInTitles.forgotPasswordButtonTitle, comment: "forgotPasswordButtonTitle").uppercased(), for: .normal)
         self.loginButton.setTitle(NSLocalizedString(SignInVC.loginButtonTitle, comment: "registerButtonTitle") + " ", for: .normal)
+        self.cancelButton.setTitle(NSLocalizedString(ButtonTitles.cancelButtonTitle, comment: "Cancel Button Title"), for: .normal)
     }
     
-    //MARK: - Private functions
+    //MARK: - Actions
     
-    @objc private func cancel() {
+    @IBAction func actionCancel(_ sender: UIButton) {
         
         if let navigationController = self.navigationController {
             
@@ -82,7 +79,6 @@ class SignInVC: ViewController {
         }
     }
     
-    //MARK: - Actions
     
     @IBAction private func actionForgotPassword(_ sender: UIButton) {
         
