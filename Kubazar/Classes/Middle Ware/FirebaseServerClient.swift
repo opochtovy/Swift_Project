@@ -63,7 +63,7 @@ class FirebaseServerClient {
         
         Auth.auth().signIn(with: credential) { (user, error) in
             if error != nil {
-                // ...
+                
                 completionHandler(false)
                 return
             }
@@ -76,6 +76,21 @@ class FirebaseServerClient {
                 print(userInfo ?? "no user info")
                 completionHandler(true)
             }
+        }
+    }
+    
+    public func signInWithEmailPassword(email: String, password: String, completionHandler:@escaping (Bool) -> ()) {
+        
+        let credential = EmailAuthProvider.credential(withEmail: email, password: password)
+        
+        Auth.auth().signIn(with: credential) { (user, error) in
+            if error != nil {
+                
+                completionHandler(false)
+                return
+            }
+            
+            completionHandler(true)
         }
     }
     

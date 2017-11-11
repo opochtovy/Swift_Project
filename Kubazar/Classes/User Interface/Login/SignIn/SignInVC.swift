@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MBProgressHUD
 
-class SignInVC: ViewController {
+class SignInVC: ViewController, UITextFieldDelegate {
     
     static let loginButtonTitle = "SignInVC_loginButtonTitle"
     
@@ -69,6 +70,56 @@ class SignInVC: ViewController {
         self.cancelButton.setTitle(NSLocalizedString(ButtonTitles.cancelButtonTitle, comment: "Cancel Button Title"), for: .normal)
     }
     
+    private func showShortPasswordAlert() {
+        
+        let alertTitle = NSLocalizedString(StartEditProfileVC.shortPasswordAlertTitle, comment: "Title for short password alert on Start Edit Profile")
+        let alertMessage = NSLocalizedString(StartEditProfileVC.shortPasswordAlertMessage, comment: "Message for short password alert on Start Edit Profile")
+        
+        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: NSLocalizedString(ButtonTitles.doneButtonTitle, comment: "Done Button Title on Start Edit Profile"), style: .default) { (_) in
+            
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        
+        alertController.addAction(okAction)
+        
+        alertController.view.tintColor = #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    private func showWrongEmailAlert() {
+        
+        let alertTitle = NSLocalizedString(StartEditProfileVC.wrongEmailAlertTitle, comment: "Title for wrong email alert on Start Edit Profile")
+        let alertMessage = NSLocalizedString(StartEditProfileVC.wrongEmailAlertMessage, comment: "Message for wrong email alert on Start Edit Profile")
+        
+        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: NSLocalizedString(ButtonTitles.doneButtonTitle, comment: "Done Button Title on Start Edit Profile"), style: .default) { (_) in
+            
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        
+        alertController.addAction(okAction)
+        
+        alertController.view.tintColor = #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    //MARK: - UITextFieldDelegate
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        switch textField {
+        case self.emailTextField: self.passwordTextField.becomeFirstResponder()
+        default: textField.resignFirstResponder()
+        }
+        
+        return true
+    }
+    
     //MARK: - Actions
     
     @IBAction func actionCancel(_ sender: UIButton) {
@@ -88,5 +139,35 @@ class SignInVC: ViewController {
     
     @IBAction private func actionLogin(_ sender: UIButton) {
         
+        if let email = self.emailTextField.text, let password = self.passwordTextField.text  {
+            
+            if email.count < 7 {
+                
+                self.showWrongEmailAlert()
+                return
+                
+            } else if password.count < 6 {
+                
+                self.showShortPasswordAlert()
+                return
+                
+            }
+            
+            MBProgressHUD.showAdded(to: self.view, animated: true)
+            self.client.authenticator.signInWithEmailPassword(email: email, password: password, completionHandler: { success in
+                
+                MBProgressHUD.hide(for: self.view, animated: true)
+                
+                if !success {
+                    
+                    self.navigationController?.popViewController(animated: true)
+                    
+                } else {
+                    
+                    let tabbedVC = TabbedController(client: self.viewModel.client)
+                    self.present(tabbedVC, animated: true, completion: nil)
+                }
+            })
+        }
     }
 }
