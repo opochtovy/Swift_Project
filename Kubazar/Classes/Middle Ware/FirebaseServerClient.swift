@@ -20,20 +20,42 @@ class FirebaseServerClient {
     
     static let AuthenticatorStateDidChangeNotification = "AuthenticatorStateDidChangeNotification"
     
-    public var state : AuthenticatorState?
+    public var state : AuthenticatorState? {
+        
+        didSet {
+            
+            UserDefaults.standard.set(state == .authorized, forKey: "isUserAuthorized")
+            UserDefaults.standard.synchronize()
+            
+            let notification = Notification(name: Notification.Name(rawValue: FirebaseServerClient.AuthenticatorStateDidChangeNotification))
+            NotificationCenter.default.post(notification)
+        }
+    }
     
     //MARK: - Public functions
     
     public func setStateOfCurrentUser() {
-        
-//        do {
-//            try Auth.auth().signOut()
-//            
-//        } catch let signOutError as NSError {
-//            print ("Error signing out: %@", signOutError)
-//        }
     
         self.setState()
+        
+        if self.state == .authorized, let user = Auth.auth().currentUser {
+            
+            print("user.uid =", user.uid)
+            print("user.email =", user.email ?? "no email")
+            print("user.photoURL =", user.photoURL ?? "no photoURL")
+            print("user.displayName =", user.displayName ?? "no displayName")
+        }
+    }
+    
+    public func signOut() {
+        
+        do {
+            try Auth.auth().signOut()
+            self.state = .unauthorized
+            
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
     }
     
     public func sendPhoneNumber(phoneNumber: String, completionHandler:@escaping (Bool) -> ()) {
@@ -49,7 +71,7 @@ class FirebaseServerClient {
             guard let verificationID = verificationID else { return }
             print("verificationID =", verificationID)
             UserDefaults.standard.set(verificationID, forKey: "authVerificationID")
-            UserDefaults.standard.set(phoneNumber, forKey: "authPhoneNumber")
+            UserDefaults.standard.set(true, forKey: "isUserAuthorized")
             UserDefaults.standard.synchronize()
             
             completionHandler(true)
@@ -209,16 +231,6 @@ class FirebaseServerClient {
 
     private func setState() {
         
-        let user = Auth.auth().currentUser
-        
-        self.state = user != nil ? .authorized : .unauthorized
-        
-        if self.state == .authorized, let user = user {
-            
-            print("user.uid =", user.uid)
-            print("user.email =", user.email ?? "no email")
-            print("user.photoURL =", user.photoURL ?? "no photoURL")
-            print("user.displayName =", user.displayName ?? "no displayName")
-        }
+        self.state = UserDefaults.standard.bool(forKey: "isUserAuthorized") ? .authorized : .unauthorized
     }
 }

@@ -15,13 +15,27 @@ class RootVM: BaseVM {
     override init(client: Client) {
         
         super.init(client: client)
+        self.allowToPassAuth()
+    }
+    
+    deinit {
+        
+        NotificationCenter.default.removeObserver(self)
     }
     
     //MARK: - Private functions
     
     private func allowToPassAuth() {
         
-//        NotificationCenter.default.addObserver(self, selector: #selector(userChanged), name: NSNotification.Name(rawValue: Authenticator.AuthenticatorStateDidChangeNotification), object: nil)
-//        self.loginAccepted = self.client.authenticator.user != nil
+        self.loginAccepted = UserDefaults.standard.bool(forKey: "isUserAuthorized")
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(userChanged), name: NSNotification.Name(rawValue: FirebaseServerClient.AuthenticatorStateDidChangeNotification), object: nil)
+    }
+    
+    //MARK: - Notification
+    
+    @objc private func userChanged() {
+        
+        self.loginAccepted = self.client.authenticator.state == .authorized
     }
 }

@@ -33,9 +33,7 @@ class RootVC: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.client.authenticator.setStateOfCurrentUser()
-        
-        self.chooseController()
+        self.setupObserving()
     }
     
     override func viewDidLayoutSubviews() {
@@ -48,9 +46,18 @@ class RootVC: ViewController {
         }
     }
     
+    //MARK: - Private functions
+    
+    private func setupObserving() {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(RootVC.chooseController), name: NSNotification.Name(rawValue: FirebaseServerClient.AuthenticatorStateDidChangeNotification), object: nil)
+        
+        self.client.authenticator.setStateOfCurrentUser()
+    }
+    
     //MARK: - Notifications
     
-    private func chooseController() {
+    @objc private func chooseController() {
         
         if let viewController = self.viewController {
             
@@ -59,21 +66,20 @@ class RootVC: ViewController {
             viewController.removeFromParentViewController()
         }
         
-        let welcomeViewController = WelcomeVC(client: self.client)
-        let newViewController = UINavigationController(rootViewController: welcomeViewController)
-        newViewController.isNavigationBarHidden = true
-        self.viewController = newViewController
+        var newViewController = UINavigationController()
         
         if viewModel.loginAccepted {
             
-            // left to be set
+            let tabbedVC = TabbedController(client: self.viewModel.client)
+            newViewController = UINavigationController(rootViewController: tabbedVC)
         }
         else {
             
-//            let welcomeViewController = WelcomeVC(client: self.client)
-//            let newViewController = UINavigationController(rootViewController: welcomeViewController)
-//            self.viewController = newViewController
+            let welcomeViewController = WelcomeVC(client: self.client)
+            newViewController = UINavigationController(rootViewController: welcomeViewController)
+            newViewController.isNavigationBarHidden = true
         }
+        self.viewController = newViewController
         
         if let viewController = self.viewController {
             

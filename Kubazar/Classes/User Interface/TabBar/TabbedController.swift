@@ -42,6 +42,7 @@ class TabbedController: UITabBarController {
         super.viewWillAppear(animated)
         
         self.createTabBarViewControllers()
+        self.setStatusBarAppearance()
     }
     
     //MARK: -  Private functions

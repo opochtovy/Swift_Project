@@ -45,6 +45,8 @@ class WelcomeVC: ViewController {
             self.registerButton.semanticContentAttribute = .forceRightToLeft
         }
         self.wasLoadedBefore = true
+        
+        self.setStatusBarAppearance()
     }
     
     //MARK: - Private functions
@@ -56,6 +58,13 @@ class WelcomeVC: ViewController {
         self.loginLabel.text = NSLocalizedString(WelcomeTitles.loginLabel, comment: "loginLabel")
         self.loginButton.setTitle(NSLocalizedString(WelcomeTitles.loginButtonTitle, comment: "loginButtonTitle"), for: .normal)
         self.registerButton.setTitle(NSLocalizedString(WelcomeTitles.registerButtonTitle, comment: "registerButtonTitle") + " ", for: .normal)
+    }
+    
+    private func setStatusBarAppearance() {
+        
+        let statusBarView = UIApplication.shared.value(forKey: "statusBar") as? UIView
+        statusBarView?.backgroundColor = UIColor.clear
+        statusBarView?.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     }
     
     //MARK: - Actions

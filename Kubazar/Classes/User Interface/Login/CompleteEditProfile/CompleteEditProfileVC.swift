@@ -174,8 +174,7 @@ class CompleteEditProfileVC: ViewController, UIImagePickerControllerDelegate, UI
                 
             } else {
                 
-                let tabbedVC = TabbedController(client: self.viewModel.client)
-                self.present(tabbedVC, animated: true, completion: nil)
+                self.client.authenticator.state = .authorized
             }
         })
     }
