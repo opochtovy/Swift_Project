@@ -29,6 +29,8 @@
 /**/"ButtonTitles_editButtonTitle" = "Edit";
 /**/"ButtonTitles_yesButtonTitle" = "Yes";
 
+/**/"CommonTitles_errorTitle" = "Error";
+
 /*TabbedController*/
 /**/"TabBarTitles_bazar" = "Bazar";
 /**/"TabBarTitles_write" = "Write";

@@ -79,18 +79,21 @@ class FirebaseServerClient {
         }
     }
     
-    public func signInWithEmailPassword(email: String, password: String, completionHandler:@escaping (Bool) -> ()) {
+    public func signInWithEmailPassword(email: String, password: String, completionHandler:@escaping (String?, Bool) -> ()) {
         
         let credential = EmailAuthProvider.credential(withEmail: email, password: password)
         
         Auth.auth().signIn(with: credential) { (user, error) in
             if error != nil {
                 
-                completionHandler(false)
-                return
+                if let error = error {
+                    
+                    completionHandler(error.localizedDescription, false)
+                    return
+                }
             }
             
-            completionHandler(true)
+            completionHandler(nil, true)
         }
     }
     

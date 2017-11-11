@@ -158,6 +158,9 @@
                     <state key="normal" title="Button">
                         <color key="titleColor" red="0.40784313725490196" green="0.73333333333333328" blue="0.72549019607843135" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
+                    <connections>
+                        <action selector="actionResendCode:" destination="-1" eventType="touchUpInside" id="XlX-pl-M3H"/>
+                    </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fbd-t6-yjg">
                     <rect key="frame" x="0.0" y="287" width="320" height="1"/>

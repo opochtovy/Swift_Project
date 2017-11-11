@@ -228,4 +228,9 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate {
             }
         }
     }
+    
+    @IBAction func actionResendCode(_ sender: UIButton) {
+        
+        self.sendPhoneNumber()
+    }
 }

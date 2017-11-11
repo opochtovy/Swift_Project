@@ -108,6 +108,29 @@ class SignInVC: ViewController, UITextFieldDelegate {
         self.present(alertController, animated: true, completion: nil)
     }
     
+    private func showWrongResponseAlert(message: String?) {
+        
+        let alertTitle = NSLocalizedString(CommonTitles.errorTitle, comment: "Error Title")
+        var alertMessage = NSLocalizedString(ForgotPasswordVC.wrongResponseAlertMessage, comment: "Message for wrong respond alert on Start Edit Profile")
+        if let message = message {
+            
+            alertMessage = message
+        }
+        
+        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: NSLocalizedString(ButtonTitles.doneButtonTitle, comment: "Done Button Title on Forgot Password"), style: .default) { (_) in
+            
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        
+        alertController.addAction(okAction)
+        
+        alertController.view.tintColor = #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     //MARK: - UITextFieldDelegate
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -154,13 +177,13 @@ class SignInVC: ViewController, UITextFieldDelegate {
             }
             
             MBProgressHUD.showAdded(to: self.view, animated: true)
-            self.client.authenticator.signInWithEmailPassword(email: email, password: password, completionHandler: { success in
+            self.client.authenticator.signInWithEmailPassword(email: email, password: password, completionHandler: { errorDescription, success in
                 
                 MBProgressHUD.hide(for: self.view, animated: true)
                 
                 if !success {
                     
-                    self.navigationController?.popViewController(animated: true)
+                    self.showWrongResponseAlert(message: errorDescription)
                     
                 } else {
                     
