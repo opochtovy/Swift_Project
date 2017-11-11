@@ -7,8 +7,12 @@
 //
 
 import UIKit
+import MBProgressHUD
 
-class ForgotPasswordVC: ViewController {
+class ForgotPasswordVC: ViewController, UITextFieldDelegate {
+    
+    static let wrongResponseAlertTitle = "ForgotPasswordVC_wrongResponseAlertTitle"
+    static let wrongResponseAlertMessage = "ForgotPasswordVC_wrongResponseAlertMessage"
     
     var viewModel: ForgotPasswordVM
     
@@ -65,6 +69,57 @@ class ForgotPasswordVC: ViewController {
         self.backButton.setTitle(" " + NSLocalizedString(ButtonTitles.backButtonTitle, comment: "Back Button Title"), for: .normal)
     }
     
+    private func showWrongEmailAlert() {
+        
+        let alertTitle = NSLocalizedString(StartEditProfileVC.wrongEmailAlertTitle, comment: "Title for wrong email alert on Start Edit Profile")
+        let alertMessage = NSLocalizedString(StartEditProfileVC.wrongEmailAlertMessage, comment: "Message for wrong email alert on Start Edit Profile")
+        
+        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: NSLocalizedString(ButtonTitles.doneButtonTitle, comment: "Done Button Title on Start Edit Profile"), style: .default) { (_) in
+            
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        
+        alertController.addAction(okAction)
+        
+        alertController.view.tintColor = #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    private func showWrongResponseAlert(message: String?) {
+        
+        let alertTitle = NSLocalizedString(ForgotPasswordVC.wrongResponseAlertTitle, comment: "Title for wrong respond alert on Start Edit Profile")
+        var alertMessage = NSLocalizedString(ForgotPasswordVC.wrongResponseAlertMessage, comment: "Message for wrong respond alert on Start Edit Profile")
+        if let message = message {
+            
+            alertMessage = message
+        }
+        
+        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: NSLocalizedString(ButtonTitles.doneButtonTitle, comment: "Done Button Title on Forgot Password"), style: .default) { (_) in
+            
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        
+        alertController.addAction(okAction)
+        
+        alertController.view.tintColor = #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    //MARK: - UITextFieldDelegate
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        
+        return true
+    }
+    
     //MARK: - Actions
     
     @IBAction func actionBack(_ sender: UIButton) {
@@ -77,7 +132,29 @@ class ForgotPasswordVC: ViewController {
     
     @IBAction private func actionSend(_ sender: UIButton) {
         
-        let tabbedVC = TabbedController(client: self.viewModel.client)
-        self.present(tabbedVC, animated: true, completion: nil)
+        if let email = self.emailTextField.text  {
+            
+            if email.count < 7 {
+                
+                self.showWrongEmailAlert()
+                return
+                
+            }
+            
+            MBProgressHUD.showAdded(to: self.view, animated: true)
+            self.client.authenticator.resetPassword(email: email, completionHandler: { errorDescription, success in
+                
+                MBProgressHUD.hide(for: self.view, animated: true)
+                
+                if !success {
+                    
+                    self.showWrongResponseAlert(message: errorDescription)
+                    
+                } else {
+                    
+                    self.navigationController?.popViewController(animated: true)
+                }
+            })
+        }
     }
 }

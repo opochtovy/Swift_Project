@@ -18,6 +18,8 @@
 /**/"ForgotPasswordTitles_headerLabel" = "Forgot Password?";
 /**/"ForgotPasswordTitles_descriptionLabel" = "We will send you an email with a new password";
 /**/"ForgotPasswordTitles_sendButtonTitle" = "Send";
+/**/"ForgotPasswordVC_wrongResponseAlertTitle" = "Wrong Email";
+/**/"ForgotPasswordVC_wrongResponseAlertMessage" = "There is no user record corresponding to this email. The user or email may have been deleted.";
 
 /*ViewController*/
 /**/"ButtonTitles_backButtonTitle" = "Back";

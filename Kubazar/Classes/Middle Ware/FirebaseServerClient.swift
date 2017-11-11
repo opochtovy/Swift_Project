@@ -119,6 +119,20 @@ class FirebaseServerClient {
         }        
     }
     
+    public func resetPassword(email: String, completionHandler:@escaping (String?, Bool) -> ()) {
+        
+        Auth.auth().sendPasswordReset(withEmail: email) { (error) in
+            
+            if let error = error {
+                
+                completionHandler(error.localizedDescription, false)
+                return
+            }
+            
+            completionHandler(nil, true)
+        }
+    }
+    
     public func updateUserProfile(displayName: String, photoURL: URL?, completionHandler:@escaping (Bool) -> ()) {
         
         let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
