@@ -46,6 +46,9 @@
 		9E6B14931FB0A42900220942 /* ParticipantsCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6B14921FB0A42900220942 /* ParticipantsCountView.swift */; };
 		9E6B14951FB0A43900220942 /* ParticipantsCountView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E6B14941FB0A43900220942 /* ParticipantsCountView.xib */; };
 		9E6B14A11FB0AC6200220942 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6B14A01FB0AC6200220942 /* UIView+Extension.swift */; };
+		9E72A9CF1FB991EC009468DB /* HaikuPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E72A9CE1FB991EC009468DB /* HaikuPreview.swift */; };
+		9E72A9D11FB991FA009468DB /* HaikuPreview.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E72A9D01FB991FA009468DB /* HaikuPreview.xib */; };
+		9E72A9D31FB997BF009468DB /* HaikuPreviewVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E72A9D21FB997BF009468DB /* HaikuPreviewVM.swift */; };
 		9E8964C41FACA21D004FFDCD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8964C31FACA21D004FFDCD /* AppDelegate.swift */; };
 		9E8964CB1FACA21D004FFDCD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E8964CA1FACA21D004FFDCD /* Assets.xcassets */; };
 		9E8964CE1FACA21D004FFDCD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E8964CC1FACA21D004FFDCD /* LaunchScreen.storyboard */; };
@@ -114,6 +117,9 @@
 		9E6B14921FB0A42900220942 /* ParticipantsCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantsCountView.swift; sourceTree = "<group>"; };
 		9E6B14941FB0A43900220942 /* ParticipantsCountView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ParticipantsCountView.xib; sourceTree = "<group>"; };
 		9E6B14A01FB0AC6200220942 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		9E72A9CE1FB991EC009468DB /* HaikuPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaikuPreview.swift; sourceTree = "<group>"; };
+		9E72A9D01FB991FA009468DB /* HaikuPreview.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HaikuPreview.xib; sourceTree = "<group>"; };
+		9E72A9D21FB997BF009468DB /* HaikuPreviewVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaikuPreviewVM.swift; sourceTree = "<group>"; };
 		9E8964C01FACA21D004FFDCD /* Kubazar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kubazar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E8964C31FACA21D004FFDCD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9E8964CA1FACA21D004FFDCD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -254,6 +260,7 @@
 		9E5E8E1A1FADBA4500CCCBDA /* Shared Views */ = {
 			isa = PBXGroup;
 			children = (
+				9E72A9CD1FB991CD009468DB /* HaikuPreview */,
 				9EE93B8F1FB5FD06005D3B45 /* UserView */,
 				A2D677071FB1D3480055F025 /* AllParticipantsView */,
 				9E6B14911FB0A41400220942 /* ParticipantsCountView */,
@@ -398,6 +405,16 @@
 				9EED06711FB5DE3700CCD82E /* Collection+Extension.swift */,
 			);
 			path = Categories;
+			sourceTree = "<group>";
+		};
+		9E72A9CD1FB991CD009468DB /* HaikuPreview */ = {
+			isa = PBXGroup;
+			children = (
+				9E72A9CE1FB991EC009468DB /* HaikuPreview.swift */,
+				9E72A9D01FB991FA009468DB /* HaikuPreview.xib */,
+				9E72A9D21FB997BF009468DB /* HaikuPreviewVM.swift */,
+			);
+			path = HaikuPreview;
 			sourceTree = "<group>";
 		};
 		9E8964B71FACA21D004FFDCD = {
@@ -595,6 +612,7 @@
 				9E6144421FB2F5D000067295 /* StartEditProfileVC.xib in Resources */,
 				9E8964CE1FACA21D004FFDCD /* LaunchScreen.storyboard in Resources */,
 				9E6144481FB305E400067295 /* CompleteEditProfileVC.xib in Resources */,
+				9E72A9D11FB991FA009468DB /* HaikuPreview.xib in Resources */,
 				9E1588A31FB45DE10063C816 /* Media.xcassets in Resources */,
 				9E5E8E171FADB6CE00CCCBDA /* RootVC.xib in Resources */,
 				9E5E8E3B1FAE058900CCCBDA /* SignInVC.xib in Resources */,
@@ -687,6 +705,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E5E8E291FADC46C00CCCBDA /* RootVM.swift in Sources */,
+				9E72A9CF1FB991EC009468DB /* HaikuPreview.swift in Sources */,
 				9E1588941FB44D330063C816 /* BazarVC.swift in Sources */,
 				9E3F9CF01FB5D6BF003BC12A /* FirebaseServerClient.swift in Sources */,
 				9E5E8E371FADD42D00CCCBDA /* WelcomeVM.swift in Sources */,
@@ -714,6 +733,7 @@
 				9EE16E941FB49F4700B4C5C5 /* UIImage+Extensions.swift in Sources */,
 				9E6144441FB2F5F100067295 /* StartEditProfileVM.swift in Sources */,
 				9EE93B921FB5FD1E005D3B45 /* UserView.swift in Sources */,
+				9E72A9D31FB997BF009468DB /* HaikuPreviewVM.swift in Sources */,
 				9E8964C41FACA21D004FFDCD /* AppDelegate.swift in Sources */,
 				9EED06721FB5DE3700CCD82E /* Collection+Extension.swift in Sources */,
 				9EE93B961FB5FE6F005D3B45 /* UserViewVM.swift in Sources */,

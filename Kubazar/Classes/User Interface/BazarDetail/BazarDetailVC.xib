@@ -13,8 +13,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BazarDetailVC" customModule="Kubazar" customModuleProvider="target">
             <connections>
-                <outlet property="ivHaiku" destination="Z6t-Xc-tBA" id="jms-fp-IDc"/>
                 <outlet property="lbDate" destination="qok-9A-bCk" id="QeQ-38-nOj"/>
+                <outlet property="vHaikuContent" destination="W6w-Nq-1bH" id="Og8-Yf-s17"/>
                 <outlet property="vUser1" destination="BLF-fZ-k0O" id="Quu-VI-b3Q"/>
                 <outlet property="vUser2" destination="tXd-y0-40M" id="YKQ-5W-P2e"/>
                 <outlet property="vUser3" destination="8iX-0p-7ix" id="M1G-1A-6yB"/>
@@ -26,19 +26,10 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W6w-Nq-1bH">
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W6w-Nq-1bH" customClass="HaikuPreview" customModule="Kubazar" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="94" width="375" height="375"/>
-                    <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testHaikuIMage" translatesAutoresizingMaskIntoConstraints="NO" id="Z6t-Xc-tBA">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
-                        </imageView>
-                    </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="Z6t-Xc-tBA" firstAttribute="top" secondItem="W6w-Nq-1bH" secondAttribute="top" id="DFd-VJ-TbW"/>
-                        <constraint firstItem="Z6t-Xc-tBA" firstAttribute="leading" secondItem="W6w-Nq-1bH" secondAttribute="leading" id="Wi8-xE-Kyb"/>
-                        <constraint firstAttribute="trailing" secondItem="Z6t-Xc-tBA" secondAttribute="trailing" id="XBS-TU-3Zg"/>
-                        <constraint firstAttribute="bottom" secondItem="Z6t-Xc-tBA" secondAttribute="bottom" id="nrG-tk-vVX"/>
                         <constraint firstAttribute="width" secondItem="W6w-Nq-1bH" secondAttribute="height" multiplier="1:1" id="uPW-Dy-bRk"/>
                     </constraints>
                 </view>
@@ -84,7 +75,4 @@
             <point key="canvasLocation" x="24.5" y="51.5"/>
         </view>
     </objects>
-    <resources>
-        <image name="testHaikuIMage" width="343" height="343"/>
-    </resources>
 </document>

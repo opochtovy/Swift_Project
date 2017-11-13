@@ -13,8 +13,7 @@ class BazarDetailVC: ViewController {
     let viewModel: BazarDetailVM
     
     @IBOutlet private weak var lbDate: UILabel!
-    
-    @IBOutlet private weak var ivHaiku: UIImageView!
+    @IBOutlet private weak var vHaikuContent: HaikuPreview!
     
     @IBOutlet private weak var vUser1: UserView!
     @IBOutlet private weak var vUser2: UserView!
@@ -47,7 +46,7 @@ class BazarDetailVC: ViewController {
         self.setStatusBarAppearance()
         self.tabBarController?.tabBar.isHidden = true
         
-        self.navigationController?.navigationBar.backgroundColor = UIColor.clear        
+        self.navigationController?.navigationBar.backgroundColor = UIColor.clear
         let back = UIBarButtonItem(image: #imageLiteral(resourceName: "iconClose"), style: .plain, target: self, action: #selector(BazarDetailVC.didPressCloseButton(_:)))
         self.navigationItem.leftBarButtonItem = back
     }
@@ -69,14 +68,11 @@ class BazarDetailVC: ViewController {
         
         lbDate.text = viewModel.dateText
         
-        if let url = viewModel.haikuImageURL {
-            
-            self.ivHaiku.af_setImage(withURL: url)
-        }
+        vHaikuContent.viewModel = self.viewModel.getPreviewVM();
         
-        vUser1.viewModel = self.viewModel.getUserViewVM(forIndex: 0)
-        vUser2.viewModel = self.viewModel.getUserViewVM(forIndex: 1)
-        vUser3.viewModel = self.viewModel.getUserViewVM(forIndex: 2)
+        vUser1.viewModel = viewModel.getUserViewVM(forIndex: 0)
+        vUser2.viewModel = viewModel.getUserViewVM(forIndex: 1)
+        vUser3.viewModel = viewModel.getUserViewVM(forIndex: 2)
     }
     private func setStatusBarAppearance() {
         

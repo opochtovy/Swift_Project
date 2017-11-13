@@ -29,6 +29,11 @@ class BazarDetailVM: BaseVM {
         return self.userViewVMs[safe: index]
     }
     
+    public func getPreviewVM() -> HaikuPreviewVM {
+        
+        return HaikuPreviewVM(withHaiku: self.haiku)
+    }
+    
     //MARK: - Private functions
     private func prepareModel() {
     

@@ -14,18 +14,17 @@ class BazarCellVM {
     private(set) var participants: String = ""
     private(set) var dateInfo: String = ""
     private(set) var authorPictureURL: URL?
-    private(set) var haikuPictureURL: URL?
     
     private(set) var btnText: String = ""
     private(set) var isSingle: Bool = false
 
-    private(set) var field1: String?
-    private(set) var field2: String?
-    private(set) var field3: String?
     private(set) var textColor: HaikuTextColor = .white
+    
+    private let haiku: Haiku
     
     init(haiku: Haiku) {
         
+        self.haiku = haiku
         guard let author = haiku.author else { return }
         
         authorName = author.fullName
@@ -41,16 +40,15 @@ class BazarCellVM {
         //TODO: udpate dates info with ago cases
         dateInfo = "23 min ago".uppercased()
         
-        self.field1 = haiku.fields[safe: 0]
-        self.field2 = haiku.fields[safe: 1]
-        self.field3 = haiku.fields[safe: 2]
-        
-        self.textColor = haiku.color
-        
         authorPictureURL = URL(string: author.avatarURL ?? "")
-        haikuPictureURL = URL(string: haiku.pictureURL ?? "")
+        
         
         btnText = "\(haiku.likesCount) \(NSLocalizedString("Bazar_likes", comment: ""))"
+    }
+    
+    public func getPreviewVM() -> HaikuPreviewVM {
+        
+        return HaikuPreviewVM(withHaiku: self.haiku)
     }
 
 }
