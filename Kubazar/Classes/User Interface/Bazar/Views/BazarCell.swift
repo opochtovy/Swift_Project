@@ -32,6 +32,7 @@ class BazarCell: UITableViewCell {
             self.lbParticipants.text = viewModel.participants
             self.lbDate.text = viewModel.dateInfo
             self.btnLike.setTitle(viewModel.btnText, for: .normal)
+            self.btnLike.isSelected = viewModel.isLiked            
             self.svNames.axis = viewModel.isSingle ? .horizontal : .vertical
             self.ivAuthor.image = nil
             

@@ -2,12 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "iconHeart.png",
+      "filename" : "iconShare.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "iconHeart@2x.png",
+      "filename" : "iconShare@2x.png",
       "scale" : "2x"
     },
     {
@@ -20,6 +20,6 @@
     "author" : "xcode"
   },
   "properties" : {
-    "template-rendering-intent" : "template"
+    "template-rendering-intent" : "original"
   }
 }

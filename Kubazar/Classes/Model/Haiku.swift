@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum HaikuTextColor {
+enum HaikuColorStyle {
     case black
     case white
 }
@@ -19,9 +19,17 @@ class Haiku {
     public var date: Date?
     public var pictureURL: String?
     public var likesCount: Int = 0
-    public var author: User?
-    public var participants: [User] = []
-    public var fields: [String] = []
-    public var color: HaikuTextColor = .black
+    public var author: User?    
+    public var fields: [Field] = []
+    public var color: HaikuColorStyle = .black
+    public var published: Bool = false
+    public var liked: Bool = false
+}
+
+extension Haiku {
+    
+    public var friends: [User] {
+        return self.fields.flatMap{$0.owner}
+    }
 }
 

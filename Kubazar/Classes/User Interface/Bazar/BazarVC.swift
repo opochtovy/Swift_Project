@@ -77,6 +77,7 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
     
     @objc private func didPressLikeButton (_ sender: UIButton) {
         
+        sender.isSelected = !sender.isSelected
         switch self.viewModel.filter {
         case .all:
             print("like")

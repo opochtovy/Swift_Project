@@ -17,8 +17,9 @@ class BazarCellVM {
     
     private(set) var btnText: String = ""
     private(set) var isSingle: Bool = false
+    private(set) var isLiked: Bool = false
 
-    private(set) var textColor: HaikuTextColor = .white
+    private(set) var textColor: HaikuColorStyle = .white
     
     private let haiku: Haiku
     
@@ -29,7 +30,7 @@ class BazarCellVM {
         
         authorName = author.fullName
         
-        var friends: [User] = haiku.participants
+        var friends: [User] = haiku.friends
         friends.remove(object: author)
         let friendNames = friends.flatMap({$0.fullName}).joined(separator: ", ")
         isSingle = friends.count == 0
@@ -42,7 +43,7 @@ class BazarCellVM {
         
         authorPictureURL = URL(string: author.avatarURL ?? "")
         
-        
+        isLiked = haiku.liked
         btnText = "\(haiku.likesCount) \(NSLocalizedString("Bazar_likes", comment: ""))"
     }
     

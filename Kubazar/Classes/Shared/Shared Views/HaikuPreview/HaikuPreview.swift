@@ -44,7 +44,7 @@ class HaikuPreview: UIView {
         
         super.init(coder: aDecoder)
         self.view = loadViewFromNib()
-        addSubview(self.view)
+        self.insertSubview(view, at: 0)
         self.view.frame = self.bounds
     }
     
@@ -56,8 +56,7 @@ class HaikuPreview: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.updateGradientFrame()
-        print(self.bounds)
+        self.updateGradientFrame()        
     }
     
     override func draw(_ rect: CGRect) {

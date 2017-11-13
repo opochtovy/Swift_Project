@@ -46,23 +46,17 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hqj-Sh-gWB">
-                                <rect key="frame" x="328" y="3" width="16" height="22"/>
-                                <color key="tintColor" red="0.23000000000000001" green="0.23000000000000001" blue="0.23000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" image="iconPoint"/>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="AKt-Lw-KQi" firstAttribute="leading" secondItem="ioi-Q6-JAQ" secondAttribute="leading" id="31F-QP-BpF"/>
-                            <constraint firstAttribute="trailing" secondItem="hqj-Sh-gWB" secondAttribute="trailing" id="3Ja-kz-k7c"/>
-                            <constraint firstItem="hqj-Sh-gWB" firstAttribute="centerY" secondItem="AKt-Lw-KQi" secondAttribute="centerY" id="Bbe-UM-1h4"/>
                             <constraint firstItem="AKt-Lw-KQi" firstAttribute="top" secondItem="ioi-Q6-JAQ" secondAttribute="top" id="EM3-m1-N5n"/>
                             <constraint firstAttribute="bottom" secondItem="JWQ-PG-mTk" secondAttribute="bottom" id="QDl-Lo-qUw"/>
                             <constraint firstAttribute="height" constant="28" id="Saj-Zz-hVh"/>
                             <constraint firstItem="JWQ-PG-mTk" firstAttribute="top" secondItem="ioi-Q6-JAQ" secondAttribute="top" id="gmo-fT-JHh"/>
-                            <constraint firstItem="hqj-Sh-gWB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="JWQ-PG-mTk" secondAttribute="trailing" constant="10" id="lf9-6m-NIC"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="JWQ-PG-mTk" secondAttribute="trailing" constant="10" id="j0g-qf-hQX"/>
                             <constraint firstItem="JWQ-PG-mTk" firstAttribute="leading" secondItem="AKt-Lw-KQi" secondAttribute="trailing" constant="8" id="tn0-Zt-eBZ"/>
                         </constraints>
                     </view>
@@ -75,7 +69,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JJE-L9-33p">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JJE-L9-33p" customClass="TintMutableButton" customModule="Kubazar" customModuleProvider="target">
                                 <rect key="frame" x="16" y="302" width="57" height="26"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="26" id="3SH-bc-0gO"/>
@@ -86,6 +80,7 @@
                                 <state key="normal" title="likes" image="iconLike">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <state key="selected" image="iconLike"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -98,6 +93,7 @@
                         </constraints>
                     </view>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="ioi-Q6-JAQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="23" id="9kV-aq-HGN"/>
                     <constraint firstAttribute="bottom" secondItem="ucg-yt-gwc" secondAttribute="bottom" id="Byk-KR-sCH"/>
@@ -124,7 +120,6 @@
     </objects>
     <resources>
         <image name="iconLike" width="20" height="17"/>
-        <image name="iconPoint" width="16" height="4"/>
         <image name="testAuthor" width="215" height="235"/>
     </resources>
 </document>

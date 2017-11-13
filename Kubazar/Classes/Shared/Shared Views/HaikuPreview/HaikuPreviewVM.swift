@@ -14,13 +14,13 @@ class HaikuPreviewVM {
     private(set) var field1: String?
     private(set) var field2: String?
     private(set) var field3: String?
-    private(set) var textColor: HaikuTextColor = .white
+    private(set) var textColor: HaikuColorStyle = .white
     
     init(withHaiku haiku: Haiku) {
         
-        self.field1 = haiku.fields[safe: 0]
-        self.field2 = haiku.fields[safe: 1]
-        self.field3 = haiku.fields[safe: 2]
+        self.field1 = haiku.fields[safe: 0]?.text
+        self.field2 = haiku.fields[safe: 1]?.text
+        self.field3 = haiku.fields[safe: 2]?.text
         
         self.textColor = haiku.color
         

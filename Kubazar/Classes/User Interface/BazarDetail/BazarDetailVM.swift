@@ -10,10 +10,21 @@ import Foundation
 
 class BazarDetailVM: BaseVM {
 
+    enum DetailBazarMode {
+        
+        case solo
+        case read
+        case party
+        case partyAuthor
+    }
+    
     private let haiku : Haiku
+    public var mode : DetailBazarMode = .party
     
     public var dateText : String = ""
-    public var haikuImageURL : URL?
+    public var isPublished : Bool = false
+    public var isLiked: Bool = false
+    
     private var userViewVMs : [UserViewVM] = []
     
     init(client: Client, haiku: Haiku) {
@@ -38,11 +49,12 @@ class BazarDetailVM: BaseVM {
     private func prepareModel() {
     
         self.dateText = "23 Min Ago" //TODO: add date stamp
-        self.haikuImageURL = URL(string: self.haiku.pictureURL ?? "")
+        self.isPublished = self.haiku.published
+        self.isLiked = self.haiku.liked
         
         self.userViewVMs = []
         
-        for user in self.haiku.participants {
+        for user in self.haiku.friends {
             self.userViewVMs.append(UserViewVM(withUser: user))
         }
     }
