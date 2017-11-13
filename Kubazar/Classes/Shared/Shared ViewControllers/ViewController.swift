@@ -19,6 +19,7 @@ enum ButtonTitles {
 
 enum CommonTitles {
     static let errorTitle = "CommonTitles_errorTitle"
+    static let wrongResponseMessage = "CommonTitles_wrongResponseMessage"
 }
 
 class ViewController: UIViewController {

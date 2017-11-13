@@ -8,6 +8,7 @@
 
 import UIKit
 import MBProgressHUD
+import IQKeyboardManagerSwift
 
 class StartEditProfileVC: ViewController, UITextFieldDelegate {
     
@@ -156,14 +157,37 @@ class StartEditProfileVC: ViewController, UITextFieldDelegate {
         self.present(alertController, animated: true, completion: nil)
     }
     
+    private func showWrongResponseAlert(message: String?) {
+        
+        let alertTitle = NSLocalizedString(CommonTitles.errorTitle, comment: "")
+        var alertMessage = NSLocalizedString(CommonTitles.wrongResponseMessage, comment: "")
+        if let message = message {
+            
+            alertMessage = message
+        }
+        
+        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: NSLocalizedString(ButtonTitles.doneButtonTitle, comment: ""), style: .default) { (_) in
+            
+            alertController.dismiss(animated: true, completion: nil)
+            self.navigationController?.popViewController(animated: true)
+        }
+        
+        alertController.addAction(okAction)
+        
+        alertController.view.tintColor = #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     //MARK: - UITextFieldDelegate
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         switch textField {
-        case self.emailTextField: self.passwordTextField.becomeFirstResponder()
-        case self.passwordTextField: self.confirmPasswordTextField.becomeFirstResponder()
-        default: textField.resignFirstResponder()
+        case self.confirmPasswordTextField: self.done()
+        default: IQKeyboardManager.sharedManager().goNext()
         }
         
         return true
@@ -192,13 +216,13 @@ class StartEditProfileVC: ViewController, UITextFieldDelegate {
             }
             
             MBProgressHUD.showAdded(to: self.view, animated: true)
-            self.client.authenticator.linkEmailPasswordToAccount(email: email, password: password, completionHandler: { success in
+            self.client.authenticator.linkEmailPasswordToAccount(email: email, password: password, completionHandler: { errorDescription, success in
                 
                 MBProgressHUD.hide(for: self.view, animated: true)
                 
                 if !success {
                     
-                    self.navigationController?.popViewController(animated: true)
+                    self.showWrongResponseAlert(message: errorDescription)
                 
                 } else {
                     
@@ -209,5 +233,4 @@ class StartEditProfileVC: ViewController, UITextFieldDelegate {
             })
         }
     }
-
 }

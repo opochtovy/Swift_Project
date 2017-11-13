@@ -58,27 +58,26 @@ class FirebaseServerClient {
         }
     }
     
-    public func sendPhoneNumber(phoneNumber: String, completionHandler:@escaping (Bool) -> ()) {
+    public func sendPhoneNumber(phoneNumber: String, completionHandler:@escaping (String?, Bool) -> ()) {
         
         PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil) { (verificationID, error) in
             
             if let error = error {
-                // TODO: show error
-                print(error)
-                completionHandler(false)
+                
+                completionHandler(error.localizedDescription, false)
                 return
             }
             guard let verificationID = verificationID else { return }
-            print("verificationID =", verificationID)
+            
             UserDefaults.standard.set(verificationID, forKey: "authVerificationID")
             UserDefaults.standard.set(true, forKey: "isUserAuthorized")
             UserDefaults.standard.synchronize()
             
-            completionHandler(true)
+            completionHandler(nil, true)
         }
     }
     
-    public func signInWithPhoneNumber(verificationCode: String, completionHandler:@escaping (Bool) -> ()) {
+    public func signInWithPhoneNumber(verificationCode: String, completionHandler:@escaping (String?, Bool) -> ()) {
         
         let verificationID = UserDefaults.standard.value(forKey: "authVerificationID")
         let credential = PhoneAuthProvider.provider().credential(withVerificationID: verificationID as! String, verificationCode: verificationCode)
@@ -86,8 +85,11 @@ class FirebaseServerClient {
         Auth.auth().signIn(with: credential) { (user, error) in
             if error != nil {
                 
-                completionHandler(false)
-                return
+                if let error = error {
+                    
+                    completionHandler(error.localizedDescription, false)
+                    return
+                }
             }
             
             // User is signed in
@@ -96,7 +98,7 @@ class FirebaseServerClient {
                 print("Phone number: \(user.phoneNumber ?? "nil")")
                 let userInfo: Any? = user.providerData[0]
                 print(userInfo ?? "no user info")
-                completionHandler(true)
+                completionHandler(nil, true)
             }
         }
     }
@@ -119,7 +121,7 @@ class FirebaseServerClient {
         }
     }
     
-    public func linkEmailPasswordToAccount(email: String, password: String, completionHandler:@escaping (Bool) -> ()) {
+    public func linkEmailPasswordToAccount(email: String, password: String, completionHandler:@escaping (String?, Bool) -> ()) {
         
         let credential = EmailAuthProvider.credential(withEmail: email, password: password)
         if let user = Auth.auth().currentUser {
@@ -135,11 +137,14 @@ class FirebaseServerClient {
                         print ("Error signing out: %@", signOutError)
                     }
                     
-                    completionHandler(false)
-                    return
+                    if let error = error {
+                        
+                        completionHandler(error.localizedDescription, false)
+                        return
+                    }
                 }
                 
-                completionHandler(true)
+                completionHandler(nil, true)
             }
         }        
     }
@@ -158,7 +163,7 @@ class FirebaseServerClient {
         }
     }
     
-    public func updateUserProfile(displayName: String, photoURL: URL?, completionHandler:@escaping (Bool) -> ()) {
+    public func updateUserProfile(displayName: String, photoURL: URL?, completionHandler:@escaping (String?, Bool) -> ()) {
         
         let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
         changeRequest?.displayName = displayName
@@ -168,11 +173,14 @@ class FirebaseServerClient {
             
             if error != nil {
                 
-                completionHandler(false)
-                return
+                if let error = error {
+                    
+                    completionHandler(error.localizedDescription, false)
+                    return
+                }
             }
             
-            completionHandler(true)
+            completionHandler(nil, true)
         }
     }
     

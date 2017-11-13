@@ -30,6 +30,7 @@
 /**/"ButtonTitles_yesButtonTitle" = "Yes";
 
 /**/"CommonTitles_errorTitle" = "Error";
+/**/"CommonTitles_wrongResponseMessage" = "There was an error during your request.";
 
 /*TabbedController*/
 /**/"TabBarTitles_bazar" = "Bazar";

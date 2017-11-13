@@ -167,16 +167,41 @@ class CompleteEditProfileVC: ViewController, UIImagePickerControllerDelegate, UI
     
     private func updateUserProfile(displayName: String, photoURL: URL?) {
         
-        self.client.authenticator.updateUserProfile(displayName: displayName, photoURL: photoURL, completionHandler: { success in
+        self.client.authenticator.updateUserProfile(displayName: displayName, photoURL: photoURL, completionHandler: { errorDescription, success in
             
             MBProgressHUD.hide(for: self.view, animated: true)
             if !success {
+                
+                self.showWrongResponseAlert(message: errorDescription)
                 
             } else {
                 
                 self.client.authenticator.state = .authorized
             }
         })
+    }
+    
+    private func showWrongResponseAlert(message: String?) {
+        
+        let alertTitle = NSLocalizedString(CommonTitles.errorTitle, comment: "")
+        var alertMessage = NSLocalizedString(CommonTitles.wrongResponseMessage, comment: "")
+        if let message = message {
+            
+            alertMessage = message
+        }
+        
+        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: NSLocalizedString(ButtonTitles.doneButtonTitle, comment: ""), style: .default) { (_) in
+            
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        
+        alertController.addAction(okAction)
+        
+        alertController.view.tintColor = #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)
+        
+        self.present(alertController, animated: true, completion: nil)
     }
     
     //MARK: - Actions

@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import MBProgressHUD
+import IQKeyboardManagerSwift
 
 class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate {
     
@@ -93,9 +94,15 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate {
     
     private func sendPhoneNumber() {
         
-        self.client.authenticator.sendPhoneNumber(phoneNumber: self.viewModel.number) { success in
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        self.client.authenticator.sendPhoneNumber(phoneNumber: self.viewModel.number) { errorDescription, success in
             
-            print(success)
+            MBProgressHUD.hide(for: self.view, animated: true)
+            if !success {
+                
+                self.showWrongResponseAlert(message: errorDescription)
+                
+            }
         }
     }
     
@@ -137,6 +144,29 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate {
         self.present(alertController, animated: true, completion: nil)
     }
     
+    private func showWrongResponseAlert(message: String?) {
+        
+        let alertTitle = NSLocalizedString(CommonTitles.errorTitle, comment: "")
+        var alertMessage = NSLocalizedString(CommonTitles.wrongResponseMessage, comment: "")
+        if let message = message {
+            
+            alertMessage = message
+        }
+        
+        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: NSLocalizedString(ButtonTitles.doneButtonTitle, comment: ""), style: .default) { (_) in
+            
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        
+        alertController.addAction(okAction)
+        
+        alertController.view.tintColor = #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     private func allowOnlyOneDigitOnTextFields() {
         
         for textField in self.codeTextFields {
@@ -164,11 +194,10 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate {
             
             if textFieldIndex < self.codeTextFields.count - 1 {
                 
-                let nextTextField = self.codeTextFields[textFieldIndex + 1]
-                nextTextField.becomeFirstResponder()
+                IQKeyboardManager.sharedManager().goNext()
                 
             } else {
-                textField.resignFirstResponder()
+                self.actionDone()
             }
         }
         
@@ -178,7 +207,7 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate {
     //MARK: - Actions
     
     @objc private func actionDone() {
-        
+
         self.verificationCode = ""
         for textField in self.codeTextFields {
             
@@ -195,12 +224,19 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate {
         }
         
         MBProgressHUD.showAdded(to: self.view, animated: true)
-        self.client.authenticator.signInWithPhoneNumber(verificationCode: self.verificationCode) { success in
+        self.client.authenticator.signInWithPhoneNumber(verificationCode: self.verificationCode) { errorDescription, success in
             
             MBProgressHUD.hide(for: self.view, animated: true)
             if !success {
                 
-                self.showErrorDuringSignInAlert()
+                if errorDescription != nil {
+                    
+                    self.showWrongResponseAlert(message: errorDescription)
+                    
+                } else {
+                    
+                    self.showErrorDuringSignInAlert()
+                }
                 
             } else {
                 
