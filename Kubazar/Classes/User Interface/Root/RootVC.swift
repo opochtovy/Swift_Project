@@ -66,20 +66,18 @@ class RootVC: ViewController {
             viewController.removeFromParentViewController()
         }
         
-        var newViewController = UINavigationController()
-        
         if viewModel.loginAccepted {
             
             let tabbedVC = TabbedController(client: self.viewModel.client)
-            newViewController = UINavigationController(rootViewController: tabbedVC)
+            self.viewController = tabbedVC
         }
         else {
             
             let welcomeViewController = WelcomeVC(client: self.client)
-            newViewController = UINavigationController(rootViewController: welcomeViewController)
-            newViewController.isNavigationBarHidden = true
+            let newViewController = UINavigationController(rootViewController: welcomeViewController)
+            newViewController.isNavigationBarHidden = true            
+            self.viewController = newViewController
         }
-        self.viewController = newViewController
         
         if let viewController = self.viewController {
             

@@ -62,6 +62,12 @@
 		9EED066E1FB59E5B00CCD82E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED066D1FB59E5B00CCD82E /* User.swift */; };
 		9EED06701FB5A2D300CCD82E /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED066F1FB5A2D300CCD82E /* Array+Extension.swift */; };
 		9EED06721FB5DE3700CCD82E /* Collection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED06711FB5DE3700CCD82E /* Collection+Extension.swift */; };
+		9EFB03641FB9800B00A78845 /* BazarDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EFB03611FB9800B00A78845 /* BazarDetailVC.xib */; };
+		9EFB03651FB9800B00A78845 /* BazarDetailVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFB03621FB9800B00A78845 /* BazarDetailVM.swift */; };
+		9EFB03661FB9800B00A78845 /* BazarDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFB03631FB9800B00A78845 /* BazarDetailVC.swift */; };
+		9EFB036B1FB9805600A78845 /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFB03681FB9805600A78845 /* UserView.swift */; };
+		9EFB036C1FB9805600A78845 /* UserView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EFB03691FB9805600A78845 /* UserView.xib */; };
+		9EFB036D1FB9805600A78845 /* UserViewVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFB036A1FB9805600A78845 /* UserViewVM.swift */; };
 		A2D677091FB1D37C0055F025 /* AllParticipantsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D677081FB1D37C0055F025 /* AllParticipantsView.swift */; };
 		A2D6770B1FB1D3910055F025 /* AllParticipantsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2D6770A1FB1D3910055F025 /* AllParticipantsView.xib */; };
 		BEE04B2776028D322C4EE27E /* Pods_Kubazar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A253CC5A9FE6C38C3AD695DE /* Pods_Kubazar.framework */; };
@@ -125,6 +131,12 @@
 		9EED066D1FB59E5B00CCD82E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9EED066F1FB5A2D300CCD82E /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		9EED06711FB5DE3700CCD82E /* Collection+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extension.swift"; sourceTree = "<group>"; };
+		9EFB03611FB9800B00A78845 /* BazarDetailVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BazarDetailVC.xib; sourceTree = "<group>"; };
+		9EFB03621FB9800B00A78845 /* BazarDetailVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BazarDetailVM.swift; sourceTree = "<group>"; };
+		9EFB03631FB9800B00A78845 /* BazarDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BazarDetailVC.swift; sourceTree = "<group>"; };
+		9EFB03681FB9805600A78845 /* UserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
+		9EFB03691FB9805600A78845 /* UserView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserView.xib; sourceTree = "<group>"; };
+		9EFB036A1FB9805600A78845 /* UserViewVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewVM.swift; sourceTree = "<group>"; };
 		A253CC5A9FE6C38C3AD695DE /* Pods_Kubazar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kubazar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2D677081FB1D37C0055F025 /* AllParticipantsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllParticipantsView.swift; sourceTree = "<group>"; };
 		A2D6770A1FB1D3910055F025 /* AllParticipantsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AllParticipantsView.xib; sourceTree = "<group>"; };
@@ -202,6 +214,7 @@
 		9E5E8E121FADB63E00CCCBDA /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
+				9EFB03601FB9800B00A78845 /* BazarDetail */,
 				9E1588911FB44CDD0063C816 /* Bazar */,
 				9E5E8E2A1FADD3BD00CCCBDA /* Login */,
 				9E5E8E131FADB68300CCCBDA /* Root */,
@@ -241,6 +254,7 @@
 		9E5E8E1A1FADBA4500CCCBDA /* Shared Views */ = {
 			isa = PBXGroup;
 			children = (
+				9EFB03671FB9805600A78845 /* UserView */,
 				A2D677071FB1D3480055F025 /* AllParticipantsView */,
 				9E6B14911FB0A41400220942 /* ParticipantsCountView */,
 			);
@@ -458,6 +472,26 @@
 			path = TabBar;
 			sourceTree = "<group>";
 		};
+		9EFB03601FB9800B00A78845 /* BazarDetail */ = {
+			isa = PBXGroup;
+			children = (
+				9EFB03611FB9800B00A78845 /* BazarDetailVC.xib */,
+				9EFB03621FB9800B00A78845 /* BazarDetailVM.swift */,
+				9EFB03631FB9800B00A78845 /* BazarDetailVC.swift */,
+			);
+			path = BazarDetail;
+			sourceTree = "<group>";
+		};
+		9EFB03671FB9805600A78845 /* UserView */ = {
+			isa = PBXGroup;
+			children = (
+				9EFB03681FB9805600A78845 /* UserView.swift */,
+				9EFB03691FB9805600A78845 /* UserView.xib */,
+				9EFB036A1FB9805600A78845 /* UserViewVM.swift */,
+			);
+			path = UserView;
+			sourceTree = "<group>";
+		};
 		A2D677071FB1D3480055F025 /* AllParticipantsView */ = {
 			isa = PBXGroup;
 			children = (
@@ -556,6 +590,7 @@
 				9E62B69B1FB48AEC00AA814E /* GoogleService-Info.plist in Resources */,
 				9E1897891FACBA9C00780957 /* Info.plist in Resources */,
 				9E6B14951FB0A43900220942 /* ParticipantsCountView.xib in Resources */,
+				9EFB03641FB9800B00A78845 /* BazarDetailVC.xib in Resources */,
 				9E1588951FB44D330063C816 /* BazarVC.xib in Resources */,
 				9E5E8E231FADC1C000CCCBDA /* Localizable.strings in Resources */,
 				9E5E8E111FADB54600CCCBDA /* Images.xcassets in Resources */,
@@ -567,6 +602,7 @@
 				9E5E8E171FADB6CE00CCCBDA /* RootVC.xib in Resources */,
 				9E5E8E3B1FAE058900CCCBDA /* SignInVC.xib in Resources */,
 				9E455BCC1FB07DD500BC9A11 /* WriteMainMenuVC.xib in Resources */,
+				9EFB036C1FB9805600A78845 /* UserView.xib in Resources */,
 				A2D6770B1FB1D3910055F025 /* AllParticipantsView.xib in Resources */,
 				9E8964CB1FACA21D004FFDCD /* Assets.xcassets in Resources */,
 			);
@@ -680,9 +716,13 @@
 				9EE16E941FB49F4700B4C5C5 /* UIImage+Extensions.swift in Sources */,
 				9E6144441FB2F5F100067295 /* StartEditProfileVM.swift in Sources */,
 				9E8964C41FACA21D004FFDCD /* AppDelegate.swift in Sources */,
+				9EFB036B1FB9805600A78845 /* UserView.swift in Sources */,
 				9EED06721FB5DE3700CCD82E /* Collection+Extension.swift in Sources */,
+				9EFB03661FB9800B00A78845 /* BazarDetailVC.swift in Sources */,
+				9EFB036D1FB9805600A78845 /* UserViewVM.swift in Sources */,
 				9E5E8E1F1FADBC9E00CCCBDA /* Client.swift in Sources */,
 				9E5E8E341FADD3F400CCCBDA /* WelcomeVC.swift in Sources */,
+				9EFB03651FB9800B00A78845 /* BazarDetailVM.swift in Sources */,
 				9EE16E971FB4A56500B4C5C5 /* StartPhoneVerificationVC.swift in Sources */,
 				9EE16E9A1FB4A57500B4C5C5 /* StartPhoneVerificationVM.swift in Sources */,
 				9EE16EA01FB4BF8700B4C5C5 /* CompletePhoneVerificationVM.swift in Sources */,
