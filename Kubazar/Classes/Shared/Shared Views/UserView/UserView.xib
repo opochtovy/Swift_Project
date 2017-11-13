@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UserView" customModule="Kubazar" customModuleProvider="target">
+            <connections>
+                <outlet property="ivUser" destination="At9-8s-cpd" id="CA9-S2-COE"/>
+                <outlet property="lbFirstName" destination="DtY-p6-4IX" id="fhQ-rw-igx"/>
+                <outlet property="lbLastName" destination="of7-ux-gum" id="1cH-u8-8yK"/>
+                <outlet property="view" destination="iN0-l3-epB" id="Dyh-Li-vnW"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="213" height="95"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="At9-8s-cpd">
+                    <rect key="frame" x="0.0" y="30" width="35" height="35"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="COR-rs-AkE"/>
+                        <constraint firstAttribute="width" constant="35" id="c7R-gS-YqH"/>
+                    </constraints>
+                </imageView>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="cDw-6A-dk5">
+                    <rect key="frame" x="43" y="29" width="170" height="37"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="John dominic" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DtY-p6-4IX">
+                            <rect key="frame" x="0.0" y="0.0" width="81" height="16"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Toreto" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="of7-ux-gum">
+                            <rect key="frame" x="0.0" y="21" width="39" height="16"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="cDw-6A-dk5" secondAttribute="trailing" id="6D5-yC-WhQ"/>
+                <constraint firstItem="cDw-6A-dk5" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Zjj-sY-2sG"/>
+                <constraint firstItem="cDw-6A-dk5" firstAttribute="leading" secondItem="At9-8s-cpd" secondAttribute="trailing" constant="8" id="cdD-Td-hJT"/>
+                <constraint firstItem="At9-8s-cpd" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="tb3-0m-vRX"/>
+                <constraint firstItem="At9-8s-cpd" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="uIP-Z4-xn7"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="-56.5" y="47.5"/>
+        </view>
+    </objects>
+</document>

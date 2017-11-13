@@ -43,6 +43,8 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setStatusBarAppearance()
+        self.tabBarController?.tabBar.isHidden = false
+        self.navigationController?.navigationBar.backgroundColor = #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)
     }
     
     private func setStatusBarAppearance() {
@@ -101,6 +103,13 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     //MARK: - UITableViewDelegate
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        
+        let ctrl = BazarDetailVC(client: self.client, viewModel: self.viewModel.getDetailVM(forIndexPath: indexPath))
+        self.navigationController?.pushViewController(ctrl, animated: true)
+    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
