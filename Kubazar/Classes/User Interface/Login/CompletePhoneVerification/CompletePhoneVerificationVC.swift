@@ -28,7 +28,6 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate {
     @IBOutlet weak var resendButton: UIButton!
     @IBOutlet var codeTextFields: [UITextField]!
     
-    var number: String = ""
     private var verificationCode: String = ""
     
     //MARK: - LyfeCycle
@@ -77,7 +76,7 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate {
     
     private func localizeTitles() {
         
-        self.title = self.number
+        self.title = self.viewModel.number
         
         self.descriptionLabel.text = NSLocalizedString(CompletePhoneVerificationVC.descriptionLabelText, comment: "Description on Complete Phone Verification")
         self.completionLabel.text = NSLocalizedString(CompletePhoneVerificationVC.completionLabelText, comment: "Completion Label title on Complete Phone Verification")
@@ -94,7 +93,7 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate {
     
     private func sendPhoneNumber() {
         
-        self.client.authenticator.sendPhoneNumber(phoneNumber: "+375297509711") { success in
+        self.client.authenticator.sendPhoneNumber(phoneNumber: self.viewModel.number) { success in
             
             print(success)
         }
@@ -188,9 +187,6 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate {
                 self.verificationCode.append(text)
             }
         }
-        
-        print("self.verificationCode =", self.verificationCode)
-        print("number of textFields =", self.codeTextFields.count)
         
         if self.verificationCode.count < self.codeTextFields.count {
             

@@ -10,6 +10,8 @@ import Foundation
 
 class CompletePhoneVerificationVM: BaseVM {
     
+    public var number: String = ""
+    
     override init(client: Client) {
         super.init(client: client)
     }
