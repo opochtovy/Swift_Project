@@ -34,6 +34,8 @@ class RootVC: ViewController {
         super.viewDidLoad()
         
         self.setupObserving()
+        
+        self.client.authenticator.signOut()
     }
     
     override func viewDidLayoutSubviews() {

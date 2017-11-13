@@ -12,9 +12,10 @@ target 'Kubazar' do
   pod 'PromiseKit/Alamofire', '~> 4.0'
   pod 'Firebase/Core', '~> 4.0'
   pod 'Firebase/Auth', '~> 4.3'
-  pod 'Firebase/Storage', '~> 2.0'
+  pod 'Firebase/Storage'
   pod 'Fabric', '~> 1.7'
   pod 'Crashlytics', '~> 3.9'
   pod 'AlamofireImage', '~> 3.3'
+  pod 'IQKeyboardManagerSwift', '5.0.0'
 
 end

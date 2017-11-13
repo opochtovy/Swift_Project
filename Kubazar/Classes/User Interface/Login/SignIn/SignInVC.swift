@@ -8,6 +8,7 @@
 
 import UIKit
 import MBProgressHUD
+import IQKeyboardManagerSwift
 
 class SignInVC: ViewController, UITextFieldDelegate {
     
@@ -136,8 +137,8 @@ class SignInVC: ViewController, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         switch textField {
-        case self.emailTextField: self.passwordTextField.becomeFirstResponder()
-        default: textField.resignFirstResponder()
+        case self.emailTextField: IQKeyboardManager.sharedManager().goNext()
+        default: self.actionLogin(self.loginButton)
         }
         
         return true

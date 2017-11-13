@@ -8,6 +8,7 @@
 
 import UIKit
 import MBProgressHUD
+import IQKeyboardManagerSwift
 
 class ForgotPasswordVC: ViewController, UITextFieldDelegate {
     
@@ -115,7 +116,7 @@ class ForgotPasswordVC: ViewController, UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
-        textField.resignFirstResponder()
+        self.actionSend(self.sendButton)
         
         return true
     }
