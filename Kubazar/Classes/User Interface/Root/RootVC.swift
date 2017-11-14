@@ -35,7 +35,10 @@ class RootVC: ViewController {
         
         self.setupObserving()
         
-        self.client.authenticator.signOut()
+        self.client.authenticator.signOut { (errorDescription, success) in
+            
+            self.client.sessionManager.adapter = nil
+        }
     }
     
     override func viewDidLayoutSubviews() {

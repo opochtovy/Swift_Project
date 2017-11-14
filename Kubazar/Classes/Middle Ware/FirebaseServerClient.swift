@@ -85,14 +85,19 @@ class FirebaseServerClient {
         }
     }
     
-    public func signOut() {
+    public func signOut(completionHandler:@escaping (String?, Bool) -> ()) {
         
         do {
             try Auth.auth().signOut()
             self.state = .unauthorized
             
+            completionHandler(nil, true)
+            // in completion block -> self.client.sessionManager.adapter = nil
+            
         } catch let signOutError as NSError {
+            
             print ("Error signing out: %@", signOutError)
+            completionHandler(signOutError.localizedDescription, false)
         }
     }
     
@@ -287,6 +292,7 @@ class FirebaseServerClient {
                 }
                 
                 self.authToken = idToken
+                // in completion block -> self.client.sessionManager.adapter = SessionTokenAdapter(sessionToken: idToken)
                 completionHandler(nil, true)
             })
         }

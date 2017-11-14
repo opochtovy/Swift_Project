@@ -222,6 +222,7 @@ class StartEditProfileVC: ViewController, UITextFieldDelegate {
                 
                 if !success {
                     
+                    self.client.sessionManager.adapter = nil
                     self.showWrongResponseAlert(message: errorDescription)
                 
                 } else {
