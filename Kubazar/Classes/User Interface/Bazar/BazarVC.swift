@@ -34,6 +34,7 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
         self.scFilter.addTarget(self, action: #selector(BazarVC.didSelectSegment), for: .valueChanged)
         self.scFilter.selectedSegmentIndex = self.viewModel.filter.rawValue
         self.navigationItem.titleView = self.scFilter
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "iconSort"), style: .plain, target: self, action: #selector(BazarVC.didPressSortButton))
         
         self.tblView?.register(UINib.init(nibName: "BazarCell", bundle: nil), forCellReuseIdentifier: BazarCell.reuseID)
         
@@ -58,8 +59,6 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
     private func updateContent() {
     
         self.tblView?.reloadData()
-        
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "iconSort"), style: .plain, target: self, action: #selector(BazarVC.didPressSortButton))
     }
     
     //MARK: - Actions
@@ -72,6 +71,7 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
         if let value = BazarVM.BazarFilter(rawValue: sender.selectedSegmentIndex) {
             
            self.viewModel.filter = value
+           self.updateContent()
         }
     }
     

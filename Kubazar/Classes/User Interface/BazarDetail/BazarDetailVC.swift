@@ -33,13 +33,8 @@ class BazarDetailVC: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let barButton = UIBarButtonItem(image: #imageLiteral(resourceName: "iconPoint"), style: .plain, target: self, action: #selector(BazarDetailVC.didPressPointButton(_:)))
-        barButton.tintColor = UIColor.white
-        self.navigationItem.rightBarButtonItem = barButton
 
-        self.updateContent()
-        self.toolBar.isHidden = false        
+        self.updateContent()        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,10 +54,7 @@ class BazarDetailVC: ViewController {
         
         self.navigationController?.popViewController(animated: true)
     }
-    
-    @objc private func didPressPointButton(_ sender: UIButton) {
-        
-    }
+
     //MARK: - Toolbar  actions
     
     @objc private func didPressLikeButton(_ sender: UIButton) {
@@ -114,7 +106,7 @@ class BazarDetailVC: ViewController {
 
         //Publish
         let barButtonPublish = UIBarButtonItem(image: nil, style: .plain, target: self, action: #selector(BazarDetailVC.didPressPublishButton(_:)))
-        barButtonPublish.image = !self.viewModel.isPublished ? #imageLiteral(resourceName: "iconUnPublish") : #imageLiteral(resourceName: "iconPublish")
+        barButtonPublish.image = self.viewModel.isPublished ? #imageLiteral(resourceName: "iconUnPublish") : #imageLiteral(resourceName: "iconPublish")
         barButtonPublish.tintColor = UIColor.lightGray
         
         //Like
@@ -132,7 +124,13 @@ class BazarDetailVC: ViewController {
         barButtonShare.tintColor = UIColor.lightGray
         
         switch self.viewModel.mode {
-        case .solo:
+        case .soloPrivate:
+            
+            barItems.append(barButtonPublish)
+            barItems.append(flexItem)
+            barItems.append(barButtonDelete)
+            
+        case .soloPublic:
             
             barItems.append(barButtonLike)
             barItems.append(flexItem)
@@ -146,19 +144,21 @@ class BazarDetailVC: ViewController {
             barItems.append(flexItem)
             barItems.append(barButtonShare)
             
-        case .party:
+        case .partyMember:
             
             barItems.append(barButtonLike)
             barItems.append(flexItem)
             barItems.append(barButtonShare)
             barItems.append(flexItem)
-            barItems.append(barButtonPublish)
-            barItems.append(flexItem)
             barItems.append(barButtonDelete)
             
-            break
         case .partyAuthor:
-            break
+            
+            barItems.append(barButtonLike)
+            barItems.append(flexItem)
+            barItems.append(barButtonShare)
+            barItems.append(flexItem)
+            barItems.append(barButtonDelete)
         }
         
         barItems.append(flexItem)

@@ -13,6 +13,7 @@ class Field {
     public var id: Int = 0
     public var text: String = ""
     public var owner: User
+    public var isActive: Bool = true
     
     init(user: User, text: String) {
         self.owner = user

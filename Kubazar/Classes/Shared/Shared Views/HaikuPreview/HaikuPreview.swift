@@ -106,6 +106,6 @@ class HaikuPreview: UIView {
     private func updateGradientFrame() {
         
         self.ivHaiku.frame = self.bounds
-        gradient?.frame = self.ivHaiku.bounds        
+        self.gradient?.frame = self.ivHaiku.bounds
     }
 }

@@ -10,7 +10,7 @@ import Foundation
 
 class BazarCellVM {
     
-    private(set) var authorName: String = ""
+    private(set) var creatorName: String = ""
     private(set) var participants: String = ""
     private(set) var dateInfo: String = ""
     private(set) var authorPictureURL: URL?
@@ -26,14 +26,16 @@ class BazarCellVM {
     init(haiku: Haiku) {
         
         self.haiku = haiku
-        guard let author = haiku.author else { return }
+        guard let creator = haiku.creator else { return }
         
-        authorName = author.fullName
+        creatorName = creator.fullName
         
-        var friends: [User] = haiku.friends
-        friends.remove(object: author)
-        let friendNames = friends.flatMap({$0.fullName}).joined(separator: ", ")
-        isSingle = friends.count == 0
+        var haikuParticipants: Set<User> = Set(haiku.participants)
+        haikuParticipants.remove(creator)        
+        
+        let friendNames = haikuParticipants.flatMap({$0.fullName}).joined(separator: ", ")
+        
+        isSingle = haikuParticipants.count == 0
         
         let andString = self.isSingle ? "" : NSLocalizedString("Bazar_and", comment: "")
         participants = "\(andString) \(friendNames)"
@@ -41,7 +43,7 @@ class BazarCellVM {
         //TODO: udpate dates info with ago cases
         dateInfo = "23 min ago".uppercased()
         
-        authorPictureURL = URL(string: author.avatarURL ?? "")
+        authorPictureURL = URL(string: creator.avatarURL ?? "")
         
         isLiked = haiku.liked
         btnText = "\(haiku.likesCount) \(NSLocalizedString("Bazar_likes", comment: ""))"

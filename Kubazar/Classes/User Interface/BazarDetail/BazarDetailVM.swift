@@ -12,14 +12,15 @@ class BazarDetailVM: BaseVM {
 
     enum DetailBazarMode {
         
-        case solo
         case read
-        case party
+        case soloPrivate
+        case soloPublic
         case partyAuthor
+        case partyMember
     }
     
     private let haiku : Haiku
-    public var mode : DetailBazarMode = .party
+    public var mode : DetailBazarMode = .read
     
     public var dateText : String = ""
     public var isPublished : Bool = false
@@ -47,6 +48,40 @@ class BazarDetailVM: BaseVM {
     
     //MARK: - Private functions
     private func prepareModel() {
+        
+        //mode choosing
+        
+        let isUserParticipant = self.haiku.participants.contains { (user) -> Bool in
+            user.id == 1
+        }
+        
+        let isUserAuthor = self.haiku.creator?.id == 1
+        
+        let isUserSoloWritten = Set(self.haiku.participants).count == 1 && self.haiku.participants[0].id == 1 //-- Mocked userID
+        
+        if isUserSoloWritten {
+            
+            self.mode = self.haiku.published == true ? .soloPublic : .soloPrivate
+            
+        } else if isUserParticipant == false && haiku.published == true {
+            
+            self.mode = .read
+            
+        } else if isUserParticipant == true && isUserAuthor == true {
+            
+            self.mode = .partyAuthor
+            
+        } else if isUserParticipant == true && isUserAuthor == false {
+            
+            self.mode = .partyMember
+            
+        }  else {
+            
+            self.mode = .read
+            print("Unexpected state")
+        }
+        
+        print(self.mode)
     
         self.dateText = "23 Min Ago" //TODO: add date stamp
         self.isPublished = self.haiku.published
@@ -54,7 +89,7 @@ class BazarDetailVM: BaseVM {
         
         self.userViewVMs = []
         
-        for user in self.haiku.friends {
+        for user in Set(self.haiku.participants) {
             self.userViewVMs.append(UserViewVM(withUser: user))
         }
     }

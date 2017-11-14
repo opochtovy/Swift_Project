@@ -19,7 +19,7 @@ class Haiku {
     public var date: Date?
     public var pictureURL: String?
     public var likesCount: Int = 0
-    public var author: User?    
+    public var creator: User?
     public var fields: [Field] = []
     public var color: HaikuColorStyle = .black
     public var published: Bool = false
@@ -28,8 +28,14 @@ class Haiku {
 
 extension Haiku {
     
-    public var friends: [User] {
+    public var participants: [User] {
+        
         return self.fields.flatMap{$0.owner}
+    }
+    
+    public var activeParticipants: [User] {
+        
+        return self.fields.filter({$0.isActive}).flatMap({$0.owner})
     }
 }
 

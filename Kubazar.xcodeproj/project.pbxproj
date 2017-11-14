@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E06A9C81FBAC91700FF74A5 /* HaikuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E06A9C71FBAC91700FF74A5 /* HaikuManager.swift */; };
 		9E1588941FB44D330063C816 /* BazarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1588921FB44D330063C816 /* BazarVC.swift */; };
 		9E1588951FB44D330063C816 /* BazarVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E1588931FB44D330063C816 /* BazarVC.xib */; };
 		9E1588971FB44D4E0063C816 /* BazarVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1588961FB44D4E0063C816 /* BazarVM.swift */; };
@@ -81,6 +82,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9E06A9C71FBAC91700FF74A5 /* HaikuManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaikuManager.swift; sourceTree = "<group>"; };
 		9E1588921FB44D330063C816 /* BazarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BazarVC.swift; sourceTree = "<group>"; };
 		9E1588931FB44D330063C816 /* BazarVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BazarVC.xib; sourceTree = "<group>"; };
 		9E1588961FB44D4E0063C816 /* BazarVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BazarVM.swift; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 				9E9B4DBC1FB9E0C8001DB448 /* Field.swift */,
 				9EED066B1FB59D2800CCD82E /* Haiku.swift */,
 				9EED066D1FB59E5B00CCD82E /* User.swift */,
+				9E06A9C71FBAC91700FF74A5 /* HaikuManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -760,6 +763,7 @@
 				9E8964C41FACA21D004FFDCD /* AppDelegate.swift in Sources */,
 				9EED06721FB5DE3700CCD82E /* Collection+Extension.swift in Sources */,
 				9EE93B961FB5FE6F005D3B45 /* UserViewVM.swift in Sources */,
+				9E06A9C81FBAC91700FF74A5 /* HaikuManager.swift in Sources */,
 				9EFBEC0E1FB9F4E600A889BC /* TintMutableButton.swift in Sources */,
 				9E5E8E1F1FADBC9E00CCCBDA /* Client.swift in Sources */,
 				9E5E8E341FADD3F400CCCBDA /* WelcomeVC.swift in Sources */,

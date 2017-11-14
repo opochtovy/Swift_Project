@@ -28,7 +28,7 @@ class BazarCell: UITableViewCell {
         
         didSet {
             
-            self.lbAuthorName.text = viewModel.authorName
+            self.lbAuthorName.text = viewModel.creatorName
             self.lbParticipants.text = viewModel.participants
             self.lbDate.text = viewModel.dateInfo
             self.btnLike.setTitle(viewModel.btnText, for: .normal)
