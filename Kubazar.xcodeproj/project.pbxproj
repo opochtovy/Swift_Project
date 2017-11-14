@@ -50,6 +50,9 @@
 		9E8964CE1FACA21D004FFDCD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E8964CC1FACA21D004FFDCD /* LaunchScreen.storyboard */; };
 		9EB170AD1FB065FE00A70A10 /* TabbedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB170AC1FB065FE00A70A10 /* TabbedController.swift */; };
 		9EB170AF1FB0668500A70A10 /* TabbedControllerVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB170AE1FB0668500A70A10 /* TabbedControllerVM.swift */; };
+		9EBEBD441FBAFF4E00DE831F /* SessionTokenAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBEBD431FBAFF4E00DE831F /* SessionTokenAdapter.swift */; };
+		9EBEBD471FBAFFE600DE831F /* AuthenticationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBEBD461FBAFFE600DE831F /* AuthenticationRouter.swift */; };
+		9EBEBD4A1FBB091200DE831F /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBEBD491FBB091200DE831F /* KeychainPasswordItem.swift */; };
 		9EE16E941FB49F4700B4C5C5 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE16E931FB49F4700B4C5C5 /* UIImage+Extensions.swift */; };
 		9EE16E971FB4A56500B4C5C5 /* StartPhoneVerificationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE16E951FB4A56500B4C5C5 /* StartPhoneVerificationVC.swift */; };
 		9EE16E981FB4A56500B4C5C5 /* StartPhoneVerificationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EE16E961FB4A56500B4C5C5 /* StartPhoneVerificationVC.xib */; };
@@ -126,6 +129,9 @@
 		9E8964CD1FACA21D004FFDCD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9EB170AC1FB065FE00A70A10 /* TabbedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbedController.swift; sourceTree = "<group>"; };
 		9EB170AE1FB0668500A70A10 /* TabbedControllerVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbedControllerVM.swift; sourceTree = "<group>"; };
+		9EBEBD431FBAFF4E00DE831F /* SessionTokenAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionTokenAdapter.swift; sourceTree = "<group>"; };
+		9EBEBD461FBAFFE600DE831F /* AuthenticationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationRouter.swift; sourceTree = "<group>"; };
+		9EBEBD491FBB091200DE831F /* KeychainPasswordItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainPasswordItem.swift; sourceTree = "<group>"; };
 		9EE16E931FB49F4700B4C5C5 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		9EE16E951FB4A56500B4C5C5 /* StartPhoneVerificationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartPhoneVerificationVC.swift; sourceTree = "<group>"; };
 		9EE16E961FB4A56500B4C5C5 /* StartPhoneVerificationVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StartPhoneVerificationVC.xib; sourceTree = "<group>"; };
@@ -295,8 +301,11 @@
 		9E5E8E241FADC3E800CCCBDA /* Middle Ware */ = {
 			isa = PBXGroup;
 			children = (
+				9EBEBD481FBB091200DE831F /* Generic Keychain */,
+				9EBEBD451FBAFFD100DE831F /* Routers */,
 				9E5E8E251FADC40100CCCBDA /* ViewModel */,
 				9E3F9CEF1FB5D6BF003BC12A /* FirebaseServerClient.swift */,
+				9EBEBD431FBAFF4E00DE831F /* SessionTokenAdapter.swift */,
 			);
 			path = "Middle Ware";
 			sourceTree = "<group>";
@@ -485,6 +494,22 @@
 				9EB170AE1FB0668500A70A10 /* TabbedControllerVM.swift */,
 			);
 			path = TabBar;
+			sourceTree = "<group>";
+		};
+		9EBEBD451FBAFFD100DE831F /* Routers */ = {
+			isa = PBXGroup;
+			children = (
+				9EBEBD461FBAFFE600DE831F /* AuthenticationRouter.swift */,
+			);
+			path = Routers;
+			sourceTree = "<group>";
+		};
+		9EBEBD481FBB091200DE831F /* Generic Keychain */ = {
+			isa = PBXGroup;
+			children = (
+				9EBEBD491FBB091200DE831F /* KeychainPasswordItem.swift */,
+			);
+			path = "Generic Keychain";
 			sourceTree = "<group>";
 		};
 		9EFB03601FB9800B00A78845 /* BazarDetail */ = {
@@ -737,6 +762,7 @@
 				9E5E8E401FAE1E5500CCCBDA /* ForgotPasswordVC.swift in Sources */,
 				9EB170AF1FB0668500A70A10 /* TabbedControllerVM.swift in Sources */,
 				9E5E8E431FAE1E6C00CCCBDA /* ForgotPasswordVM.swift in Sources */,
+				9EBEBD441FBAFF4E00DE831F /* SessionTokenAdapter.swift in Sources */,
 				9EED066E1FB59E5B00CCD82E /* User.swift in Sources */,
 				9E5E8E271FADC41A00CCCBDA /* BaseVM.swift in Sources */,
 				9EFB03741FB997F900A78845 /* CountryCodesVC.swift in Sources */,
@@ -761,6 +787,7 @@
 				9EED06721FB5DE3700CCD82E /* Collection+Extension.swift in Sources */,
 				9EFB03661FB9800B00A78845 /* BazarDetailVC.swift in Sources */,
 				9EFB036D1FB9805600A78845 /* UserViewVM.swift in Sources */,
+				9EBEBD4A1FBB091200DE831F /* KeychainPasswordItem.swift in Sources */,
 				9E5E8E1F1FADBC9E00CCCBDA /* Client.swift in Sources */,
 				9E5E8E341FADD3F400CCCBDA /* WelcomeVC.swift in Sources */,
 				9EFB03651FB9800B00A78845 /* BazarDetailVM.swift in Sources */,
@@ -768,6 +795,7 @@
 				9EFB037D1FB99A5200A78845 /* CountryCodeCellVM.swift in Sources */,
 				9EE16E9A1FB4A57500B4C5C5 /* StartPhoneVerificationVM.swift in Sources */,
 				9EE16EA01FB4BF8700B4C5C5 /* CompletePhoneVerificationVM.swift in Sources */,
+				9EBEBD471FBAFFE600DE831F /* AuthenticationRouter.swift in Sources */,
 				9E61444A1FB305F900067295 /* CompleteEditProfileVM.swift in Sources */,
 				9E6144411FB2F5D000067295 /* StartEditProfileVC.swift in Sources */,
 				9EB170AD1FB065FE00A70A10 /* TabbedController.swift in Sources */,

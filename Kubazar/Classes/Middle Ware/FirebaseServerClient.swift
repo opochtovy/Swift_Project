@@ -16,6 +16,13 @@ enum AuthenticatorState {
     case authorized
 }
 
+enum StoreKeys {
+    
+    static let isUserAuthorized = "isUserAuthorized"
+    static let authVerificationID = "authVerificationID"
+    static let authToken = "Authentication-Token"
+}
+
 class FirebaseServerClient {
     
     static let AuthenticatorStateDidChangeNotification = "AuthenticatorStateDidChangeNotification"
@@ -24,11 +31,42 @@ class FirebaseServerClient {
         
         didSet {
             
-            UserDefaults.standard.set(state == .authorized, forKey: "isUserAuthorized")
+            UserDefaults.standard.set(state == .authorized, forKey: StoreKeys.isUserAuthorized)
             UserDefaults.standard.synchronize()
             
             let notification = Notification(name: Notification.Name(rawValue: FirebaseServerClient.AuthenticatorStateDidChangeNotification))
             NotificationCenter.default.post(notification)
+        }
+    }
+    
+    var authToken: String? {
+        
+        get {
+            
+            var password = ""
+            do {
+                
+                let passwordItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName, account: StoreKeys.authToken, accessGroup: KeychainConfiguration.accessGroup)
+                password = try passwordItem.readPassword()
+            }
+            catch {
+                fatalError("Error reading password from keychain - \(error)")
+            }
+            return password
+        }
+        set {
+            
+            do {
+                
+                let passwordItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName, account: StoreKeys.authToken, accessGroup: KeychainConfiguration.accessGroup)
+                if let newValue = newValue {
+                    
+                    try passwordItem.savePassword(newValue)
+                }
+            }
+            catch {
+                fatalError("Error saving password to keychain - \(error)")
+            }
         }
     }
     
@@ -69,8 +107,8 @@ class FirebaseServerClient {
             }
             guard let verificationID = verificationID else { return }
             
-            UserDefaults.standard.set(verificationID, forKey: "authVerificationID")
-            UserDefaults.standard.set(true, forKey: "isUserAuthorized")
+            UserDefaults.standard.set(verificationID, forKey: StoreKeys.authVerificationID)
+            UserDefaults.standard.set(true, forKey: StoreKeys.isUserAuthorized)
             UserDefaults.standard.synchronize()
             
             completionHandler(nil, true)
@@ -79,7 +117,7 @@ class FirebaseServerClient {
     
     public func signInWithPhoneNumber(verificationCode: String, completionHandler:@escaping (String?, Bool) -> ()) {
         
-        let verificationID = UserDefaults.standard.value(forKey: "authVerificationID")
+        let verificationID = UserDefaults.standard.value(forKey: StoreKeys.authVerificationID)
         let credential = PhoneAuthProvider.provider().credential(withVerificationID: verificationID as! String, verificationCode: verificationCode)
         
         Auth.auth().signIn(with: credential) { (user, error) in
@@ -235,10 +273,29 @@ class FirebaseServerClient {
         }
     }
     
+    public func getToken(completionHandler:@escaping (String?, Bool) -> ()) {
+        
+        let user = Auth.auth().currentUser
+        if let user = user {
+            
+            user.getIDTokenForcingRefresh(true, completion: { (idToken, error) in
+                
+                if let error = error {
+                    
+                    completionHandler(error.localizedDescription, false)
+                    return
+                }
+                
+                self.authToken = idToken
+                completionHandler(nil, true)
+            })
+        }
+    }
+    
     //MARK: - Private functions
 
     private func setState() {
         
-        self.state = UserDefaults.standard.bool(forKey: "isUserAuthorized") ? .authorized : .unauthorized
+        self.state = UserDefaults.standard.bool(forKey: StoreKeys.isUserAuthorized) ? .authorized : .unauthorized
     }
 }
