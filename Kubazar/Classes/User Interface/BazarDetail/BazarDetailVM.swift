@@ -25,6 +25,7 @@ class BazarDetailVM: BaseVM {
     public var dateText : String = ""
     public var isPublished : Bool = false
     public var isLiked: Bool = false
+    public var likesCount: String = "0"
     
     private var userViewVMs : [UserViewVM] = []
     
@@ -46,8 +47,43 @@ class BazarDetailVM: BaseVM {
         return HaikuPreviewVM(withHaiku: self.haiku)
     }
     
+    public func like() {
+
+        HaikuManager.shared.like(toLike: !self.haiku.liked, haiku: self.haiku)
+        self.prepareModel()
+    }
+    
+    public func publish() {
+ 
+        HaikuManager.shared.publish(toPublish: !self.haiku.published, haiku: self.haiku)
+        self.prepareModel()        
+    }
+    
+    public func delete() {
+        
+        let user = User()
+        user.id = 1
+        HaikuManager.shared.delete(haiku: self.haiku, user: user)
+    }
+    
     //MARK: - Private functions
     private func prepareModel() {
+    
+        self.chooseMode()
+        
+        self.dateText = "23 Min Ago" //TODO: add date stamp
+        self.isPublished = self.haiku.published
+        self.isLiked = self.haiku.liked
+        self.likesCount = "\(self.haiku.likesCount)"
+        
+        self.userViewVMs = []
+        
+        for user in Set(self.haiku.participants) {
+            self.userViewVMs.append(UserViewVM(withUser: user))
+        }
+    }
+    
+    private func chooseMode() {
         
         //mode choosing
         
@@ -82,15 +118,5 @@ class BazarDetailVM: BaseVM {
         }
         
         print(self.mode)
-    
-        self.dateText = "23 Min Ago" //TODO: add date stamp
-        self.isPublished = self.haiku.published
-        self.isLiked = self.haiku.liked
-        
-        self.userViewVMs = []
-        
-        for user in Set(self.haiku.participants) {
-            self.userViewVMs.append(UserViewVM(withUser: user))
-        }
     }
 }

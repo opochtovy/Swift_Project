@@ -23,7 +23,7 @@ class ActionButton: UIControl {
     
     public var title: String = "" {
         didSet {
-            
+            self.lbTitle.text = title
         }
     }
     

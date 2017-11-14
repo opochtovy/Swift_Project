@@ -60,6 +60,8 @@ class BazarDetailVC: ViewController {
     @objc private func didPressLikeButton(_ sender: UIButton) {
         print("-- Like Detail")
         sender.isSelected = !sender.isSelected
+        self.viewModel.like()
+        self.updateToolBar()
     }
     
     @objc private func didPressShareButton(_ sender: UIBarButtonItem) {
@@ -68,20 +70,28 @@ class BazarDetailVC: ViewController {
     
     @objc private func didPressPublishButton(_ sender: UIBarButtonItem) {
         print("-- Publish")
+        self.viewModel.publish()
+        self.updateToolBar()
     }
     
     @objc private func didPressDeleteButton(_ sender: UIBarButtonItem) {
-        print("-- Delete")
-        let alertCtrl = UIAlertController(title: "Removing Haiku", message: "Haiku will be completely deleted", preferredStyle: .actionSheet)
-        let action1 = UIAlertAction(title: "Delete", style: .destructive) { (_) in
-            //remove
+        
+        let alertTitle: String = NSLocalizedString("BazarDetail_alert_removing_title", comment: "")
+        let alertMessage: String = NSLocalizedString("BazarDetail_alert_removing_message", comment: "")
+        
+        let alertCtrl = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .actionSheet)
+        let action1 = UIAlertAction(title: NSLocalizedString("BazarDetail_alert_removing_delete", comment: ""), style: .destructive) { (_) in
+            
+            self.viewModel.delete()
+            self.navigationController?.popViewController(animated: true)
         }
-        let action2 = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let action2 = UIAlertAction(title: NSLocalizedString("BazarDetail_alert_cancel", comment: ""), style: .cancel, handler: nil)
         alertCtrl.addAction(action1)
         alertCtrl.addAction(action2)
         
         self.present(alertCtrl, animated: true, completion: nil)
     }
+    
     //MARK: - Private functions
     
     private func updateContent() {
@@ -110,10 +120,12 @@ class BazarDetailVC: ViewController {
         barButtonPublish.tintColor = UIColor.lightGray
         
         //Like
-        let btnLike = ActionButton(frame: CGRect(x: 0, y: 0, width: 55, height: 30))
+        let btnLike = ActionButton(frame: CGRect(x: 0, y: 0, width: 40, height: 35))
         btnLike.addTarget(self, action: #selector(BazarDetailVC.didPressLikeButton(_:)), for: .touchUpInside)
         btnLike.isSelected = self.viewModel.isLiked
+        btnLike.title = self.viewModel.likesCount
         let barButtonLike = UIBarButtonItem(customView: btnLike)
+        barButtonLike.width = 40
         
         //Delete
         let barButtonDelete = UIBarButtonItem(image: #imageLiteral(resourceName: "iconDelete"), style: .plain, target: self, action: #selector(BazarDetailVC.didPressDeleteButton(_:)))
@@ -133,6 +145,8 @@ class BazarDetailVC: ViewController {
         case .soloPublic:
             
             barItems.append(barButtonLike)
+            barItems.append(flexItem)
+            barItems.append(barButtonShare)
             barItems.append(flexItem)
             barItems.append(barButtonPublish)
             barItems.append(flexItem)

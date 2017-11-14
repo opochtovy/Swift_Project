@@ -81,6 +81,9 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <state key="selected" image="iconLike"/>
+                                <connections>
+                                    <action selector="didPressActionButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="dUM-w7-6K2"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

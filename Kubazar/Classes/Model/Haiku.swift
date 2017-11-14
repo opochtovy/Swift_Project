@@ -37,5 +37,18 @@ extension Haiku {
         
         return self.fields.filter({$0.isActive}).flatMap({$0.owner})
     }
+    
+    public var isCompleted: Bool {
+        
+        return self.fields.count == 3
+    }
+}
+
+extension Haiku: Equatable {
+    
+    public static func ==(lhs: Haiku, rhs: Haiku) -> Bool {
+        
+        return  lhs.id == rhs.id
+    }
 }
 

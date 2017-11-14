@@ -51,6 +51,13 @@
 /**/ "Bazar_likes" = "likes";
 /**/ "Bazar_publish" = "Publish";
 /**/ "Bazar_and" = "And";
+
+/*BazarDetailVC*/
+/**/ "BazarDetail_alert_removing_title" = "Removing Haiku";
+/**/ "BazarDetail_alert_removing_message" = "The Haiku will be removed from your collection.";
+/**/ "BazarDetail_alert_removing_delete" = "Delete";
+/**/ "BazarDetail_alert_cancel" = "Cancel";
+
 /*StartPhoneVerificationVC*/
 /**/"StartPhoneVerificationVC_title" = "Verify phone number";
 /**/"StartPhoneVerificationVC_descriptionLabel" = "Kubazar app will send you a one time SMS message to verify your phone number.";

@@ -23,21 +23,10 @@ class BazarVM: BaseVM {
         case likes = 1
     }
     
-    public var filter: BazarFilter = .all {
-        didSet {
-            self.updateData()
-        }
-    }
+    public var filter: BazarFilter = .all
     public var sort: BazarSort = .date
     
     private var dataSource: [Haiku] = []
-    
-    //MARK: - init
-    
-    override init(client: Client) {
-        super.init(client: client)
-        self.updateData()
-    }
     
     //MARK: - Public functions
     public func numberOfItems() -> Int {
@@ -53,10 +42,9 @@ class BazarVM: BaseVM {
     public func getDetailVM(forIndexPath indexPath: IndexPath) -> BazarDetailVM {
         
         return BazarDetailVM(client: self.client, haiku: self.dataSource[indexPath.row])
-    }
-    
-    //MARK: - Private functions
-    private func updateData() {
+    }    
+
+    public func refreshData() {
         
         switch self.filter {
         case .all:
@@ -69,15 +57,24 @@ class BazarVM: BaseVM {
             
             self.dataSource = HaikuManager.shared.haikus.filter({ (haiku) -> Bool in
                 
-                haiku.participants.contains(where: { (user) -> Bool in
+                let isHaikuIncompleted: Bool = haiku.fields.count < 3
+                let isUserParticipant: Bool = haiku.participants.contains(where: { (user) -> Bool in
                     return user.id == 1 //-- Mocked
                 })
+                
+                return isUserParticipant && isHaikuIncompleted
             })
             
         case .mine:
             
             self.dataSource = HaikuManager.shared.haikus.filter({ (haiku) -> Bool in
-                haiku.creator?.id == 1 //-- Mocked
+                
+                let isUserCreator = haiku.creator?.id == 1 //-- Mocked
+                let isUserActiveParticipant = haiku.activeParticipants.contains(where: { (user) -> Bool in
+                    return user.id == 1 //-- Mocked
+                })
+                
+                return isUserCreator && isUserActiveParticipant
             })
         }
     }

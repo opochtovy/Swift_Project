@@ -28,20 +28,7 @@ class BazarCell: UITableViewCell {
         
         didSet {
             
-            self.lbAuthorName.text = viewModel.creatorName
-            self.lbParticipants.text = viewModel.participants
-            self.lbDate.text = viewModel.dateInfo
-            self.btnLike.setTitle(viewModel.btnText, for: .normal)
-            self.btnLike.isSelected = viewModel.isLiked            
-            self.svNames.axis = viewModel.isSingle ? .horizontal : .vertical
-            self.ivAuthor.image = nil
-            
-            if let url = viewModel.authorPictureURL {
-                
-                self.ivAuthor.af_setImage(withURL: url)
-            }
-            
-            self.vHaikuContent.viewModel = viewModel.getPreviewVM()
+            self.updateContent()
         }
     }
     
@@ -50,7 +37,45 @@ class BazarCell: UITableViewCell {
         self.setup()        
     }
     
+    //MARK: - Actions
+    
+    @IBAction private func didPressActionButton(_ sender: UIButton) {
+        
+        self.viewModel.performAction()
+        self.updateContent()
+    }
+    
     //MARK: Private functions
+    
+    private func updateContent() {
+        
+        self.lbAuthorName.text = viewModel.creatorName
+        self.lbParticipants.text = viewModel.participants
+        self.lbDate.text = viewModel.dateInfo
+        self.svNames.axis = viewModel.isSingle ? .horizontal : .vertical
+        
+        self.btnLike.setTitle(viewModel.btnText, for: .normal)
+        
+        if viewModel.actionType == .like {
+            
+            self.btnLike.setImage(#imageLiteral(resourceName: "iconLike"), for: .normal)
+            self.btnLike.isSelected = viewModel.isLiked
+        }
+        else {
+            
+            self.btnLike.setImage(#imageLiteral(resourceName: "iconPublish"), for: .normal)
+            self.btnLike.isSelected = false
+        }
+        
+        self.ivAuthor.image = nil
+        
+        if let url = viewModel.authorPictureURL {
+            
+            self.ivAuthor.af_setImage(withURL: url)
+        }
+        
+        self.vHaikuContent.viewModel = viewModel.getPreviewVM()
+    }
     
     private func setup() {
         

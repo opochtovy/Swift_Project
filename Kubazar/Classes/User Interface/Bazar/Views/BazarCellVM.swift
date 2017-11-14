@@ -10,6 +10,12 @@ import Foundation
 
 class BazarCellVM {
     
+    enum ActionType {
+        
+        case like
+        case publish
+    }
+    
     private(set) var creatorName: String = ""
     private(set) var participants: String = ""
     private(set) var dateInfo: String = ""
@@ -20,18 +26,46 @@ class BazarCellVM {
     private(set) var isLiked: Bool = false
 
     private(set) var textColor: HaikuColorStyle = .white
+    private(set) var actionType: ActionType = .like
     
     private let haiku: Haiku
     
     init(haiku: Haiku) {
         
         self.haiku = haiku
+        self.prepareModel()
+    }
+    
+    //MARK: - Public functions
+    
+    public func getPreviewVM() -> HaikuPreviewVM {
+        
+        return HaikuPreviewVM(withHaiku: self.haiku)
+    }
+    
+    public func performAction() {
+        
+        if self.actionType == .like {
+            
+            HaikuManager.shared.like(toLike: !self.haiku.liked, haiku: self.haiku)
+            self.prepareLikes()
+        }
+        else if actionType == .publish {
+            
+            HaikuManager.shared.publish(toPublish: true, haiku: self.haiku)
+        }
+    }
+    
+    //MARK: - Private functions
+    
+    private func prepareModel() {
+        
         guard let creator = haiku.creator else { return }
         
         creatorName = creator.fullName
         
         var haikuParticipants: Set<User> = Set(haiku.participants)
-        haikuParticipants.remove(creator)        
+        haikuParticipants.remove(creator)
         
         let friendNames = haikuParticipants.flatMap({$0.fullName}).joined(separator: ", ")
         
@@ -45,13 +79,30 @@ class BazarCellVM {
         
         authorPictureURL = URL(string: creator.avatarURL ?? "")
         
-        isLiked = haiku.liked
-        btnText = "\(haiku.likesCount) \(NSLocalizedString("Bazar_likes", comment: ""))"
+        self.actionType = haiku.isCompleted == true ? .like : .publish
+        
+        if haiku.isCompleted == true {
+            
+            self.prepareLikes()
+        }
+        else {
+            
+            btnText = NSLocalizedString("Bazar_publish", comment: "")
+        }
     }
     
-    public func getPreviewVM() -> HaikuPreviewVM {
+    private func prepareLikes() {
         
-        return HaikuPreviewVM(withHaiku: self.haiku)
+        isLiked = haiku.liked
+        
+        if haiku.likesCount > 0 {
+            
+            btnText = "\(haiku.likesCount) \(NSLocalizedString("Bazar_likes", comment: ""))"
+        }
+        else {
+            
+            btnText = ""
+        }
     }
 
 }
