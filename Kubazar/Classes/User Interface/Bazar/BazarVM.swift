@@ -17,10 +17,10 @@ class BazarVM: BaseVM {
         case active = 2
     }
     
-    enum BazarSort: Int {
+    enum BazarSort {
         
-        case date = 0
-        case likes = 1
+        case date
+        case likes
     }
     
     public var filter: BazarFilter = .all
@@ -74,7 +74,7 @@ class BazarVM: BaseVM {
                     return user.id == 1 //-- Mocked
                 })
                 
-                return isUserCreator && isUserActiveParticipant
+                return isUserCreator && isUserActiveParticipant && haiku.isCompleted
             })
         }
     }

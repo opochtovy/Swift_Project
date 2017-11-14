@@ -17,7 +17,7 @@ class ActionButton: UIControl {
     override var isSelected: Bool {
         didSet {
             super.isSelected = isSelected
-            self.ivIcon.tintColor = isSelected ? UIColor.red.withAlphaComponent(0.8) : UIColor.white.withAlphaComponent(0.6)
+            self.ivIcon.tintColor = isSelected ? #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1) : UIColor.white.withAlphaComponent(0.6)
         }
     }
     

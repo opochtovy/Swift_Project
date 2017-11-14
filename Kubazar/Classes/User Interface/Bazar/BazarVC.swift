@@ -64,7 +64,26 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
     
     //MARK: - Actions
     @objc private func didPressSortButton(_ sender: UIBarButtonItem) {
-        //TODO: set sort rule to viewModel
+        
+        let alertCtrl = UIAlertController(title: NSLocalizedString("Bazar_sort_title", comment: ""), message: "", preferredStyle: .actionSheet)
+
+        let action1 = UIAlertAction(title: NSLocalizedString("Bazar_sort_bylike", comment: ""), style: .default){ (_) in
+            
+            self.viewModel.sort = .likes
+        }
+        
+        let action2 = UIAlertAction(title: NSLocalizedString("Bazar_sort_bydate", comment: ""), style: .default){ (_) in
+            
+            self.viewModel.sort = .date
+        }
+        
+        let action3 = UIAlertAction(title: NSLocalizedString("BazarDetail_alert_cancel", comment: ""), style: .cancel, handler: nil)
+        
+        alertCtrl.addAction(action1)
+        alertCtrl.addAction(action2)
+        alertCtrl.addAction(action3)
+        
+        self.present(alertCtrl, animated: true, completion: nil)
     }
     
     @objc private func didSelectSegment(_ sender: UISegmentedControl) {
@@ -103,8 +122,7 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
             let ctrl = BazarDetailVC(client: self.client, viewModel: self.viewModel.getDetailVM(forIndexPath: indexPath))
             self.navigationController?.pushViewController(ctrl, animated: true)
             
-        case .active:
-            break
+        case .active: break
         }
     }
     

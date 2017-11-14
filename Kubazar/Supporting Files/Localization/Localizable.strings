@@ -51,6 +51,9 @@
 /**/ "Bazar_likes" = "likes";
 /**/ "Bazar_publish" = "Publish";
 /**/ "Bazar_and" = "And";
+/**/ "Bazar_sort_bylike" = "Sort by Date";
+/**/ "Bazar_sort_bydate" = "Sort by Likes";
+/**/ "Bazar_sort_title" = "Choose sort for haiku list";
 
 /*BazarDetailVC*/
 /**/ "BazarDetail_alert_removing_title" = "Removing Haiku";

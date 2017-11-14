@@ -18,7 +18,7 @@ class TintMutableButton: UIButton {
             
             if isSelected {
                 
-                self.tintColor = UIColor.red.withAlphaComponent(0.8)
+                self.tintColor = #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)
             }
             else {
                 
