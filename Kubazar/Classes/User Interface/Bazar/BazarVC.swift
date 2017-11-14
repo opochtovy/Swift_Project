@@ -10,7 +10,7 @@ import UIKit
 
 class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
     
-    @IBOutlet private var tblView: UITableView?
+    @IBOutlet private var tblView: UITableView!
     private var scFilter: UISegmentedControl!
     
     private let viewModel: BazarVM
@@ -36,7 +36,7 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
         self.navigationItem.titleView = self.scFilter
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "iconSort"), style: .plain, target: self, action: #selector(BazarVC.didPressSortButton))
         
-        self.tblView?.register(UINib.init(nibName: "BazarCell", bundle: nil), forCellReuseIdentifier: BazarCell.reuseID)
+        self.tblView.register(UINib.init(nibName: "BazarCell", bundle: nil), forCellReuseIdentifier: BazarCell.reuseID)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,7 +59,7 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
     private func updateContent() {
         
         self.viewModel.refreshData()
-        self.tblView?.reloadData()
+        self.tblView.reloadData()
     }
     
     //MARK: - Actions
@@ -72,9 +72,8 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
         if let value = BazarVM.BazarFilter(rawValue: sender.selectedSegmentIndex) {
             
             self.viewModel.filter = value
-            
             self.updateContent()
-            self.tblView?.scrollsToTop = true
+            self.tblView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
         }
     }
     
