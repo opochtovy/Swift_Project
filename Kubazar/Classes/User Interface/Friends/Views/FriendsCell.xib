@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="121" id="KGk-i7-Jjw" customClass="FriendsCell" customModule="Kubazar" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="362" height="121"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="362" height="120.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JiQ-C7-SPv">
+                        <rect key="frame" x="0.0" y="38.5" width="44" height="44"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="JiQ-C7-SPv" secondAttribute="height" multiplier="1:1" id="dHW-8B-2Ke"/>
+                            <constraint firstAttribute="height" constant="44" id="hIu-V5-Dla"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ult-ce-eQf">
+                        <rect key="frame" x="60" y="50" width="42" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.23000000000000001" green="0.23000000000000001" blue="0.23000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hAV-ud-doT">
+                        <rect key="frame" x="333" y="49.5" width="22" height="22"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="22" id="W7e-iX-aB6"/>
+                            <constraint firstAttribute="width" secondItem="hAV-ud-doT" secondAttribute="height" multiplier="1:1" id="k3O-gp-v2b"/>
+                        </constraints>
+                        <state key="normal" image="iconUncheck"/>
+                        <state key="selected" image="iconCheck"/>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="JiQ-C7-SPv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="2lU-1Z-zhm"/>
+                    <constraint firstAttribute="trailing" secondItem="hAV-ud-doT" secondAttribute="trailing" constant="7" id="AkI-oI-GX9"/>
+                    <constraint firstItem="Ult-ce-eQf" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Lsh-zg-RCj"/>
+                    <constraint firstItem="Ult-ce-eQf" firstAttribute="leading" secondItem="JiQ-C7-SPv" secondAttribute="trailing" constant="16" id="N4o-xK-1dO"/>
+                    <constraint firstItem="JiQ-C7-SPv" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="top" constant="9" id="aAa-k4-PcB"/>
+                    <constraint firstItem="hAV-ud-doT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Ult-ce-eQf" secondAttribute="trailing" constant="10" id="lai-uk-46X"/>
+                    <constraint firstItem="JiQ-C7-SPv" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="pBb-Nz-ndW"/>
+                    <constraint firstItem="hAV-ud-doT" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ulE-IO-O5E"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="btnCheck" destination="hAV-ud-doT" id="F4H-dt-krl"/>
+                <outlet property="ivUser" destination="JiQ-C7-SPv" id="8Jl-co-hAr"/>
+                <outlet property="lbName" destination="Ult-ce-eQf" id="0eQ-ew-78r"/>
+            </connections>
+            <point key="canvasLocation" x="54" y="93.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="iconCheck" width="22" height="22"/>
+        <image name="iconUncheck" width="22" height="22"/>
+    </resources>
+</document>

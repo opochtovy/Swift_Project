@@ -8,14 +8,11 @@
 
 import UIKit
 
-class WriteMainMenuVC: ViewController, AllParticipantsViewDataSource {
+class WriteMainMenuVC: ViewController {
     
-    var viewModel: WriteMainMenuVM
+    private var viewModel: WriteMainMenuVM
     
     @IBOutlet weak var headerLabel: UILabel!
-    @IBOutlet weak var allParticipantsView: AllParticipantsView!
-    
-    private var participantsCountViews = [ParticipantsCountView]()
 
     //MARK: - LyfeCycle
     
@@ -32,24 +29,36 @@ class WriteMainMenuVC: ViewController, AllParticipantsViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.localizeTitles()
-        
-        self.allParticipantsView.dataSource = self
+        self.updateContent()
     }
+    
+    //MARK: - Actions
+    
+    @IBAction func didPressOnePlayerStart(_ sender: UIButton) {
+        
+        
+    }
+    
+    @IBAction func didPressTwoPlayerStart(_ sender: UIButton) {
+        
+        let ctrl = FriendsVC(client: self.client, viewModel: self.viewModel.getFriendsVM(players: 1))
+        self.navigationController?.pushViewController(ctrl, animated: true)
+    }
+    
+    @IBAction func didPressThreePlayerStart(_ sender: UIButton) {
+        
+        let ctrl = FriendsVC(client: self.client, viewModel: self.viewModel.getFriendsVM(players: 2))
+        self.navigationController?.pushViewController(ctrl, animated: true)
+    }
+    
     
     //MARK: - Private functions
     
-    private func localizeTitles() {
+    private func updateContent() {
         
-        self.title = NSLocalizedString(WriteMainMenuTitles.title, comment: "Title for Write Main Menu")
-        
-        self.headerLabel.text = NSLocalizedString(WriteMainMenuTitles.headerLabel, comment: "Header title").uppercased()
+        self.title = NSLocalizedString("WriteMainMenuTitles_title", comment: "")
+        self.headerLabel.text = NSLocalizedString("WriteMainMenuTitles_headerLabel", comment: "").uppercased()
     }
-    
-    // MARK: - AllParticipantsViewDataSource
-    
-    func titlesForAllParticipants(view: AllParticipantsView) -> [String] {
-        
-        return ["one", "two", "three"]
-    }
+
+
 }

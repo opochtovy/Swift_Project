@@ -8,14 +8,15 @@
 
 import Foundation
 
-enum WriteMainMenuTitles {
-    static let title = "WriteMainMenuTitles_title"
-    static let headerLabel = "WriteMainMenuTitles_headerLabel"
-}
-
 class WriteMainMenuVM: BaseVM {
     
     override init(client: Client) {
         super.init(client: client)
+    }
+    
+    //MAKR: - public functions
+    public func getFriendsVM(players: Int) -> FriendsVM {
+        
+        return FriendsVM(client: self.client, maxFriends: players)
     }
 }

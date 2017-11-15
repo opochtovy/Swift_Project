@@ -15,6 +15,13 @@
 		9E15889C1FB452E40063C816 /* BazarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E15889A1FB452E40063C816 /* BazarCell.xib */; };
 		9E15889E1FB452F50063C816 /* BazarCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E15889D1FB452F50063C816 /* BazarCellVM.swift */; };
 		9E1588A31FB45DE10063C816 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E1588A21FB45DE10063C816 /* Media.xcassets */; };
+		9E2BFBE81FBC360000860CA0 /* StartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2BFBE71FBC360000860CA0 /* StartButton.swift */; };
+		9E2BFBEC1FBC54DC00860CA0 /* FriendsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2BFBEA1FBC54DC00860CA0 /* FriendsVC.swift */; };
+		9E2BFBED1FBC54DC00860CA0 /* FriendsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E2BFBEB1FBC54DC00860CA0 /* FriendsVC.xib */; };
+		9E2BFBEF1FBC57E000860CA0 /* FriendsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2BFBEE1FBC57DF00860CA0 /* FriendsVM.swift */; };
+		9E2BFBF21FBC5D3E00860CA0 /* FriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2BFBF01FBC5D3E00860CA0 /* FriendsCell.swift */; };
+		9E2BFBF31FBC5D3E00860CA0 /* FriendsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E2BFBF11FBC5D3E00860CA0 /* FriendsCell.xib */; };
+		9E2BFBF61FBC5D6500860CA0 /* FriendsCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2BFBF51FBC5D6500860CA0 /* FriendsCellVM.swift */; };
 		9E3F9CF01FB5D6BF003BC12A /* FirebaseServerClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3F9CEF1FB5D6BF003BC12A /* FirebaseServerClient.swift */; };
 		9E455BCB1FB07DD500BC9A11 /* WriteMainMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E455BC91FB07DD500BC9A11 /* WriteMainMenuVC.swift */; };
 		9E455BCC1FB07DD500BC9A11 /* WriteMainMenuVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E455BCA1FB07DD500BC9A11 /* WriteMainMenuVC.xib */; };
@@ -43,8 +50,6 @@
 		9E6144481FB305E400067295 /* CompleteEditProfileVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E6144461FB305E400067295 /* CompleteEditProfileVC.xib */; };
 		9E61444A1FB305F900067295 /* CompleteEditProfileVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6144491FB305F900067295 /* CompleteEditProfileVM.swift */; };
 		9E62B69B1FB48AEC00AA814E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9E62B69A1FB48AEB00AA814E /* GoogleService-Info.plist */; };
-		9E6B14931FB0A42900220942 /* ParticipantsCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6B14921FB0A42900220942 /* ParticipantsCountView.swift */; };
-		9E6B14951FB0A43900220942 /* ParticipantsCountView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E6B14941FB0A43900220942 /* ParticipantsCountView.xib */; };
 		9E6B14A11FB0AC6200220942 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6B14A01FB0AC6200220942 /* UIView+Extension.swift */; };
 		9E72A9CF1FB991EC009468DB /* HaikuPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E72A9CE1FB991EC009468DB /* HaikuPreview.swift */; };
 		9E72A9D11FB991FA009468DB /* HaikuPreview.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E72A9D01FB991FA009468DB /* HaikuPreview.xib */; };
@@ -85,8 +90,6 @@
 		9EFB037B1FB99A3800A78845 /* CountryCodeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EFB03791FB99A3800A78845 /* CountryCodeCell.xib */; };
 		9EFB037D1FB99A5200A78845 /* CountryCodeCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFB037C1FB99A5200A78845 /* CountryCodeCellVM.swift */; };
 		9EFBEC0E1FB9F4E600A889BC /* TintMutableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFBEC0D1FB9F4E600A889BC /* TintMutableButton.swift */; };
-		A2D677091FB1D37C0055F025 /* AllParticipantsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D677081FB1D37C0055F025 /* AllParticipantsView.swift */; };
-		A2D6770B1FB1D3910055F025 /* AllParticipantsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2D6770A1FB1D3910055F025 /* AllParticipantsView.xib */; };
 		BEE04B2776028D322C4EE27E /* Pods_Kubazar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A253CC5A9FE6C38C3AD695DE /* Pods_Kubazar.framework */; };
 /* End PBXBuildFile section */
 
@@ -100,6 +103,13 @@
 		9E15889D1FB452F50063C816 /* BazarCellVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BazarCellVM.swift; sourceTree = "<group>"; };
 		9E1588A21FB45DE10063C816 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		9E1897881FACBA9C00780957 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9E2BFBE71FBC360000860CA0 /* StartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartButton.swift; sourceTree = "<group>"; };
+		9E2BFBEA1FBC54DC00860CA0 /* FriendsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsVC.swift; sourceTree = "<group>"; };
+		9E2BFBEB1FBC54DC00860CA0 /* FriendsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendsVC.xib; sourceTree = "<group>"; };
+		9E2BFBEE1FBC57DF00860CA0 /* FriendsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FriendsVM.swift; path = "/Users/mobexs/Documents/MobexProjects/kubazar/Kubazar/Classes/User Interface/Friends/FriendsVM.swift"; sourceTree = "<absolute>"; };
+		9E2BFBF01FBC5D3E00860CA0 /* FriendsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCell.swift; sourceTree = "<group>"; };
+		9E2BFBF11FBC5D3E00860CA0 /* FriendsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendsCell.xib; sourceTree = "<group>"; };
+		9E2BFBF51FBC5D6500860CA0 /* FriendsCellVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCellVM.swift; sourceTree = "<group>"; };
 		9E3F9CEF1FB5D6BF003BC12A /* FirebaseServerClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseServerClient.swift; sourceTree = "<group>"; };
 		9E455BC91FB07DD500BC9A11 /* WriteMainMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteMainMenuVC.swift; sourceTree = "<group>"; };
 		9E455BCA1FB07DD500BC9A11 /* WriteMainMenuVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WriteMainMenuVC.xib; sourceTree = "<group>"; };
@@ -129,8 +139,6 @@
 		9E6144491FB305F900067295 /* CompleteEditProfileVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteEditProfileVM.swift; sourceTree = "<group>"; };
 		9E62B69A1FB48AEB00AA814E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		9E62B69C1FB48DF900AA814E /* Kubazar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Kubazar.entitlements; sourceTree = "<group>"; };
-		9E6B14921FB0A42900220942 /* ParticipantsCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantsCountView.swift; sourceTree = "<group>"; };
-		9E6B14941FB0A43900220942 /* ParticipantsCountView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ParticipantsCountView.xib; sourceTree = "<group>"; };
 		9E6B14A01FB0AC6200220942 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		9E72A9CE1FB991EC009468DB /* HaikuPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaikuPreview.swift; sourceTree = "<group>"; };
 		9E72A9D01FB991FA009468DB /* HaikuPreview.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HaikuPreview.xib; sourceTree = "<group>"; };
@@ -175,8 +183,6 @@
 		9EFB037C1FB99A5200A78845 /* CountryCodeCellVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCodeCellVM.swift; sourceTree = "<group>"; };
 		9EFBEC0D1FB9F4E600A889BC /* TintMutableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TintMutableButton.swift; sourceTree = "<group>"; };
 		A253CC5A9FE6C38C3AD695DE /* Pods_Kubazar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kubazar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A2D677081FB1D37C0055F025 /* AllParticipantsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllParticipantsView.swift; sourceTree = "<group>"; };
-		A2D6770A1FB1D3910055F025 /* AllParticipantsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AllParticipantsView.xib; sourceTree = "<group>"; };
 		BCCD990FEAC61BE1A7C35E5A /* Pods-Kubazar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kubazar.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kubazar/Pods-Kubazar.debug.xcconfig"; sourceTree = "<group>"; };
 		C96C8C2A05A77F3E563D985D /* Pods-Kubazar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kubazar.release.xcconfig"; path = "Pods/Target Support Files/Pods-Kubazar/Pods-Kubazar.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -222,6 +228,27 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		9E2BFBE91FBC547F00860CA0 /* Friends */ = {
+			isa = PBXGroup;
+			children = (
+				9E2BFBEA1FBC54DC00860CA0 /* FriendsVC.swift */,
+				9E2BFBEB1FBC54DC00860CA0 /* FriendsVC.xib */,
+				9E2BFBEE1FBC57DF00860CA0 /* FriendsVM.swift */,
+				9E2BFBF41FBC5D4600860CA0 /* Views */,
+			);
+			path = Friends;
+			sourceTree = "<group>";
+		};
+		9E2BFBF41FBC5D4600860CA0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9E2BFBF01FBC5D3E00860CA0 /* FriendsCell.swift */,
+				9E2BFBF11FBC5D3E00860CA0 /* FriendsCell.xib */,
+				9E2BFBF51FBC5D6500860CA0 /* FriendsCellVM.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		9E455BC61FB07D9700BC9A11 /* TabBarItems */ = {
 			isa = PBXGroup;
 			children = (
@@ -251,8 +278,9 @@
 		9E5E8E121FADB63E00CCCBDA /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
-				9EFB03601FB9800B00A78845 /* BazarDetail */,
 				9E1588911FB44CDD0063C816 /* Bazar */,
+				9EFB03601FB9800B00A78845 /* BazarDetail */,
+				9E2BFBE91FBC547F00860CA0 /* Friends */,
 				9E5E8E2A1FADD3BD00CCCBDA /* Login */,
 				9E5E8E131FADB68300CCCBDA /* Root */,
 				9EB170AB1FB065FE00A70A10 /* TabBar */,
@@ -294,8 +322,6 @@
 				9EADF1FF1FBC2F3E00B69FFE /* UserView */,
 				9E9B4DB71FB9BC21001DB448 /* Controls */,
 				9E72A9CD1FB991CD009468DB /* HaikuPreview */,
-				A2D677071FB1D3480055F025 /* AllParticipantsView */,
-				9E6B14911FB0A41400220942 /* ParticipantsCountView */,
 			);
 			path = "Shared Views";
 			sourceTree = "<group>";
@@ -425,15 +451,6 @@
 			path = StartEditProfile;
 			sourceTree = "<group>";
 		};
-		9E6B14911FB0A41400220942 /* ParticipantsCountView */ = {
-			isa = PBXGroup;
-			children = (
-				9E6B14921FB0A42900220942 /* ParticipantsCountView.swift */,
-				9E6B14941FB0A43900220942 /* ParticipantsCountView.xib */,
-			);
-			path = ParticipantsCountView;
-			sourceTree = "<group>";
-		};
 		9E6B14961FB0A81000220942 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -526,6 +543,7 @@
 				9E9B4DB81FB9BC4C001DB448 /* ActionButton.swift */,
 				9E9B4DBA1FB9D146001DB448 /* ActionButton.xib */,
 				9EFBEC0D1FB9F4E600A889BC /* TintMutableButton.swift */,
+				9E2BFBE71FBC360000860CA0 /* StartButton.swift */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -577,9 +595,9 @@
 		9EFB03601FB9800B00A78845 /* BazarDetail */ = {
 			isa = PBXGroup;
 			children = (
+				9EFB03631FB9800B00A78845 /* BazarDetailVC.swift */,
 				9EFB03611FB9800B00A78845 /* BazarDetailVC.xib */,
 				9EFB03621FB9800B00A78845 /* BazarDetailVM.swift */,
-				9EFB03631FB9800B00A78845 /* BazarDetailVC.swift */,
 			);
 			path = BazarDetail;
 			sourceTree = "<group>";
@@ -603,15 +621,6 @@
 				9EFB037C1FB99A5200A78845 /* CountryCodeCellVM.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		A2D677071FB1D3480055F025 /* AllParticipantsView */ = {
-			isa = PBXGroup;
-			children = (
-				A2D677081FB1D37C0055F025 /* AllParticipantsView.swift */,
-				A2D6770A1FB1D3910055F025 /* AllParticipantsView.xib */,
-			);
-			path = AllParticipantsView;
 			sourceTree = "<group>";
 		};
 		FA4BD90D3972633479640F1E /* Pods */ = {
@@ -697,12 +706,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E5E8E351FADD3F400CCCBDA /* WelcomeVC.xib in Resources */,
+				9E2BFBED1FBC54DC00860CA0 /* FriendsVC.xib in Resources */,
 				9EE16E981FB4A56500B4C5C5 /* StartPhoneVerificationVC.xib in Resources */,
 				9EFB036F1FB997BC00A78845 /* countryCodes.json in Resources */,
 				9E5E8E411FAE1E5500CCCBDA /* ForgotPasswordVC.xib in Resources */,
 				9E15889C1FB452E40063C816 /* BazarCell.xib in Resources */,
 				9E62B69B1FB48AEC00AA814E /* GoogleService-Info.plist in Resources */,
-				9E6B14951FB0A43900220942 /* ParticipantsCountView.xib in Resources */,
 				9EFB03641FB9800B00A78845 /* BazarDetailVC.xib in Resources */,
 				9E1588951FB44D330063C816 /* BazarVC.xib in Resources */,
 				9E5E8E231FADC1C000CCCBDA /* Localizable.strings in Resources */,
@@ -717,9 +726,9 @@
 				9E5E8E3B1FAE058900CCCBDA /* SignInVC.xib in Resources */,
 				9E9B4DBB1FB9D146001DB448 /* ActionButton.xib in Resources */,
 				9E455BCC1FB07DD500BC9A11 /* WriteMainMenuVC.xib in Resources */,
-				A2D6770B1FB1D3910055F025 /* AllParticipantsView.xib in Resources */,
 				9EFB037B1FB99A3800A78845 /* CountryCodeCell.xib in Resources */,
 				9EADF2041FBC2F3F00B69FFE /* UserView.xib in Resources */,
+				9E2BFBF31FBC5D3E00860CA0 /* FriendsCell.xib in Resources */,
 				9EFB03751FB997F900A78845 /* CountryCodesVC.xib in Resources */,
 				9E8964CB1FACA21D004FFDCD /* Assets.xcassets in Resources */,
 			);
@@ -825,9 +834,9 @@
 				9EFB03741FB997F900A78845 /* CountryCodesVC.swift in Sources */,
 				9E455BCE1FB07DE600BC9A11 /* WriteMainMenuVM.swift in Sources */,
 				9E15889E1FB452F50063C816 /* BazarCellVM.swift in Sources */,
+				9E2BFBEF1FBC57E000860CA0 /* FriendsVM.swift in Sources */,
 				9E5E8E3D1FAE059B00CCCBDA /* SignInVM.swift in Sources */,
 				9E6144471FB305E400067295 /* CompleteEditProfileVC.swift in Sources */,
-				9E6B14931FB0A42900220942 /* ParticipantsCountView.swift in Sources */,
 				9E5E8E1C1FADBA7400CCCBDA /* ViewController.swift in Sources */,
 				9E15889B1FB452E40063C816 /* BazarCell.swift in Sources */,
 				9EFB03761FB997F900A78845 /* CountryCodesVM.swift in Sources */,
@@ -835,17 +844,18 @@
 				9EED066C1FB59D2900CCD82E /* Haiku.swift in Sources */,
 				9E6B14A11FB0AC6200220942 /* UIView+Extension.swift in Sources */,
 				9EADF2051FBC2F3F00B69FFE /* UserViewVM.swift in Sources */,
-				A2D677091FB1D37C0055F025 /* AllParticipantsView.swift in Sources */,
 				9E1588971FB44D4E0063C816 /* BazarVM.swift in Sources */,
 				9EED06701FB5A2D300CCD82E /* Array+Extension.swift in Sources */,
 				9EE16E941FB49F4700B4C5C5 /* UIImage+Extensions.swift in Sources */,
 				9EFB037A1FB99A3800A78845 /* CountryCodeCell.swift in Sources */,
+				9E2BFBEC1FBC54DC00860CA0 /* FriendsVC.swift in Sources */,
 				9E6144441FB2F5F100067295 /* StartEditProfileVM.swift in Sources */,
 				9E72A9D31FB997BF009468DB /* HaikuPreviewVM.swift in Sources */,
 				9E8964C41FACA21D004FFDCD /* AppDelegate.swift in Sources */,
 				9EED06721FB5DE3700CCD82E /* Collection+Extension.swift in Sources */,
 				9E06A9C81FBAC91700FF74A5 /* HaikuManager.swift in Sources */,
 				9EFBEC0E1FB9F4E600A889BC /* TintMutableButton.swift in Sources */,
+				9E2BFBF61FBC5D6500860CA0 /* FriendsCellVM.swift in Sources */,
 				9EFB03661FB9800B00A78845 /* BazarDetailVC.swift in Sources */,
 				9EBEBD4A1FBB091200DE831F /* KeychainPasswordItem.swift in Sources */,
 				9E5E8E1F1FADBC9E00CCCBDA /* Client.swift in Sources */,
@@ -853,6 +863,7 @@
 				9EFB03651FB9800B00A78845 /* BazarDetailVM.swift in Sources */,
 				9EE16E971FB4A56500B4C5C5 /* StartPhoneVerificationVC.swift in Sources */,
 				9EFB037D1FB99A5200A78845 /* CountryCodeCellVM.swift in Sources */,
+				9E2BFBE81FBC360000860CA0 /* StartButton.swift in Sources */,
 				9EE16E9A1FB4A57500B4C5C5 /* StartPhoneVerificationVM.swift in Sources */,
 				9EE16EA01FB4BF8700B4C5C5 /* CompletePhoneVerificationVM.swift in Sources */,
 				9EBEBD471FBAFFE600DE831F /* AuthenticationRouter.swift in Sources */,
@@ -860,6 +871,7 @@
 				9E6144411FB2F5D000067295 /* StartEditProfileVC.swift in Sources */,
 				9EB170AD1FB065FE00A70A10 /* TabbedController.swift in Sources */,
 				9E5E8E161FADB6CE00CCCBDA /* RootVC.swift in Sources */,
+				9E2BFBF21FBC5D3E00860CA0 /* FriendsCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

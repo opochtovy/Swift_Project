@@ -58,8 +58,8 @@ class BazarVM: BaseVM {
             self.dataSource = HaikuManager.shared.haikus.filter({ (haiku) -> Bool in
                 
                 let isHaikuIncompleted: Bool = haiku.fields.count < 3
-                let isUserParticipant: Bool = haiku.participants.contains(where: { (user) -> Bool in
-                    return user.id == 1 //-- Mocked
+                let isUserParticipant: Bool = haiku.players.contains(where: { (user) -> Bool in
+                    return user.id == HaikuManager.shared.currentUser.id
                 })
                 
                 return isUserParticipant && isHaikuIncompleted
@@ -69,9 +69,9 @@ class BazarVM: BaseVM {
             
             self.dataSource = HaikuManager.shared.haikus.filter({ (haiku) -> Bool in
                 
-                let isUserCreator = haiku.creator?.id == 1 //-- Mocked
-                let isUserActiveParticipant = haiku.activeParticipants.contains(where: { (user) -> Bool in
-                    return user.id == 1 //-- Mocked
+                let isUserCreator = haiku.creator?.id == HaikuManager.shared.currentUser.id
+                let isUserActiveParticipant = haiku.activePlayers.contains(where: { (user) -> Bool in
+                    return user.id == HaikuManager.shared.currentUser.id
                 })
                 
                 return isUserCreator && isUserActiveParticipant && haiku.isCompleted

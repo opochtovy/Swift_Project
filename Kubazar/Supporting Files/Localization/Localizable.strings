@@ -105,3 +105,9 @@
 /**/"CompletePhoneVerificationVC_errorDuringSignInAlertTitle" = "Error during Sign In";
 /**/"CompletePhoneVerificationVC_errorDuringSignInAlertMessage" = "There was an error during sign in via phone.";
 
+/*FriendsVC*/
+/**/ "Friends_choose_one" = "Choose One Friend";
+/**/ "Friends_choose" = "Choose Friends";
+
+
+

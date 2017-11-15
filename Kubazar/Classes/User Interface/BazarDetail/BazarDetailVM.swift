@@ -78,7 +78,7 @@ class BazarDetailVM: BaseVM {
         
         self.userViewVMs = []
         
-        for user in Set(self.haiku.participants) {
+        for user in Set(self.haiku.players) {
             self.userViewVMs.append(UserViewVM(withUser: user))
         }
     }
@@ -87,13 +87,14 @@ class BazarDetailVM: BaseVM {
         
         //mode choosing
         
-        let isUserParticipant = self.haiku.participants.contains { (user) -> Bool in
-            user.id == 1
+        let isUserParticipant = self.haiku.players.contains { (user) -> Bool in
+            user.id == HaikuManager.shared.currentUser.id
         }
         
-        let isUserAuthor = self.haiku.creator?.id == 1
+        let isUserAuthor = self.haiku.creator?.id == HaikuManager.shared.currentUser.id
         
-        let isUserSoloWritten = Set(self.haiku.participants).count == 1 && self.haiku.participants[0].id == 1 //-- Mocked userID
+        let isUserSoloWritten = Set(self.haiku.players).count == 1 &&
+                                self.haiku.players[0].id == HaikuManager.shared.currentUser.id
         
         if isUserSoloWritten {
             

@@ -24,17 +24,13 @@ class Haiku {
     public var color: HaikuColorStyle = .black
     public var published: Bool = false
     public var liked: Bool = false
+    public var players : [User] = []
 }
 
 extension Haiku {
     
-    public var participants: [User] {
-        
-        return self.fields.flatMap{$0.owner}
-    }
-    
-    public var activeParticipants: [User] {
-        
+    public var activePlayers: [User] {
+
         return self.fields.filter({$0.isActive}).flatMap({$0.owner})
     }
     

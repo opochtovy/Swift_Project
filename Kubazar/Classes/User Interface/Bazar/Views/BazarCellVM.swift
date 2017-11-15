@@ -64,7 +64,7 @@ class BazarCellVM {
         
         creatorName = creator.fullName
         
-        var haikuParticipants: Set<User> = Set(haiku.participants)
+        var haikuParticipants: Set<User> = Set(haiku.players)
         haikuParticipants.remove(creator)
         
         let friendNames = haikuParticipants.flatMap({$0.fullName}).joined(separator: ", ")
