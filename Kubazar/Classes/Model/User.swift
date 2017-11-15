@@ -25,3 +25,10 @@ extension User: Equatable {
         return  lhs.id == rhs.id
     }
 }
+
+extension User: Hashable {
+    
+    var hashValue: Int {
+        return self.id
+    }
+}

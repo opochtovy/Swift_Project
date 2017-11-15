@@ -10,30 +10,66 @@ import Foundation
 
 class BazarCellVM {
     
-    private(set) var authorName: String = ""
+    enum ActionType {
+        
+        case like
+        case publish
+    }
+    
+    private(set) var creatorName: String = ""
     private(set) var participants: String = ""
     private(set) var dateInfo: String = ""
     private(set) var authorPictureURL: URL?
-    private(set) var haikuPictureURL: URL?
     
     private(set) var btnText: String = ""
     private(set) var isSingle: Bool = false
+    private(set) var isLiked: Bool = false
 
-    private(set) var field1: String?
-    private(set) var field2: String?
-    private(set) var field3: String?
-    private(set) var textColor: HaikuTextColor = .white
+    private(set) var textColor: HaikuColorStyle = .white
+    private(set) var actionType: ActionType = .like
+    
+    private let haiku: Haiku
     
     init(haiku: Haiku) {
         
-        guard let author = haiku.author else { return }
+        self.haiku = haiku
+        self.prepareModel()
+    }
+    
+    //MARK: - Public functions
+    
+    public func getPreviewVM() -> HaikuPreviewVM {
         
-        authorName = author.fullName
+        return HaikuPreviewVM(withHaiku: self.haiku)
+    }
+    
+    public func performAction() {
         
-        var friends: [User] = haiku.participants
-        friends.remove(object: author)
-        let friendNames = friends.flatMap({$0.fullName}).joined(separator: ", ")
-        isSingle = friends.count == 0
+        if self.actionType == .like {
+            
+            HaikuManager.shared.like(toLike: !self.haiku.liked, haiku: self.haiku)
+            self.prepareLikes()
+        }
+        else if actionType == .publish {
+            
+            HaikuManager.shared.publish(toPublish: true, haiku: self.haiku)
+        }
+    }
+    
+    //MARK: - Private functions
+    
+    private func prepareModel() {
+        
+        guard let creator = haiku.creator else { return }
+        
+        creatorName = creator.fullName
+        
+        var haikuParticipants: Set<User> = Set(haiku.participants)
+        haikuParticipants.remove(creator)
+        
+        let friendNames = haikuParticipants.flatMap({$0.fullName}).joined(separator: ", ")
+        
+        isSingle = haikuParticipants.count == 0
         
         let andString = self.isSingle ? "" : NSLocalizedString("Bazar_and", comment: "")
         participants = "\(andString) \(friendNames)"
@@ -41,16 +77,32 @@ class BazarCellVM {
         //TODO: udpate dates info with ago cases
         dateInfo = "23 min ago".uppercased()
         
-        self.field1 = haiku.fields[safe: 0]
-        self.field2 = haiku.fields[safe: 1]
-        self.field3 = haiku.fields[safe: 2]
+        authorPictureURL = URL(string: creator.avatarURL ?? "")
         
-        self.textColor = haiku.color
+        self.actionType = haiku.isCompleted == true ? .like : .publish
         
-        authorPictureURL = URL(string: author.avatarURL ?? "")
-        haikuPictureURL = URL(string: haiku.pictureURL ?? "")
+        if haiku.isCompleted == true {
+            
+            self.prepareLikes()
+        }
+        else {
+            
+            btnText = NSLocalizedString("Bazar_publish", comment: "")
+        }
+    }
+    
+    private func prepareLikes() {
         
-        btnText = "\(haiku.likesCount) \(NSLocalizedString("Bazar_likes", comment: ""))"
+        isLiked = haiku.liked
+        
+        if haiku.likesCount > 0 {
+            
+            btnText = "\(haiku.likesCount) \(NSLocalizedString("Bazar_likes", comment: ""))"
+        }
+        else {
+            
+            btnText = ""
+        }
     }
 
 }

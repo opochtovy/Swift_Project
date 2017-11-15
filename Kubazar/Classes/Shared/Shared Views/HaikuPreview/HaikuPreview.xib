@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HaikuPreview" customModule="Kubazar" customModuleProvider="target">
+            <connections>
+                <outlet property="ivHaiku" destination="ZZK-Jj-hbo" id="CHx-cr-nRK"/>
+                <outlet property="lbField1" destination="Er8-eC-1vf" id="die-jS-bkY"/>
+                <outlet property="lbField2" destination="sjh-8T-z3K" id="Nat-fm-CkM"/>
+                <outlet property="lbField3" destination="Cyn-ed-Ci8" id="ebd-aS-Dam"/>
+                <outlet property="view" destination="RDV-cp-U0Z" id="V73-dG-6Fe"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="RDV-cp-U0Z">
+            <rect key="frame" x="0.0" y="0.0" width="387" height="396"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testHaikuIMage" translatesAutoresizingMaskIntoConstraints="NO" id="ZZK-Jj-hbo">
+                    <rect key="frame" x="0.0" y="-0.5" width="387" height="396.5"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Er8-eC-1vf">
+                    <rect key="frame" x="30" y="90" width="327" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sjh-8T-z3K">
+                    <rect key="frame" x="30" y="125.5" width="327" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cyn-ed-Ci8">
+                    <rect key="frame" x="30" y="161" width="327" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="ZZK-Jj-hbo" secondAttribute="trailing" id="6fV-MZ-jdp"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Cyn-ed-Ci8" secondAttribute="bottom" constant="50" id="G2W-T9-ghq"/>
+                <constraint firstItem="sjh-8T-z3K" firstAttribute="leading" secondItem="Er8-eC-1vf" secondAttribute="leading" id="IcF-qE-9CK"/>
+                <constraint firstItem="Er8-eC-1vf" firstAttribute="leading" secondItem="RDV-cp-U0Z" secondAttribute="leading" constant="30" id="PAq-3N-MRo"/>
+                <constraint firstItem="Er8-eC-1vf" firstAttribute="top" secondItem="RDV-cp-U0Z" secondAttribute="top" constant="90" id="WrA-Vw-47H"/>
+                <constraint firstItem="sjh-8T-z3K" firstAttribute="top" secondItem="Er8-eC-1vf" secondAttribute="bottom" constant="15" id="XXw-sl-alt"/>
+                <constraint firstItem="Cyn-ed-Ci8" firstAttribute="centerX" secondItem="RDV-cp-U0Z" secondAttribute="centerX" id="Yan-1v-VKk"/>
+                <constraint firstItem="Cyn-ed-Ci8" firstAttribute="top" secondItem="sjh-8T-z3K" secondAttribute="bottom" constant="15" id="h0e-jA-TZW"/>
+                <constraint firstItem="Cyn-ed-Ci8" firstAttribute="leading" secondItem="sjh-8T-z3K" secondAttribute="leading" id="n42-y2-lu4"/>
+                <constraint firstItem="ZZK-Jj-hbo" firstAttribute="leading" secondItem="RDV-cp-U0Z" secondAttribute="leading" id="oFQ-Q2-NeJ"/>
+                <constraint firstAttribute="bottom" secondItem="ZZK-Jj-hbo" secondAttribute="bottom" id="s67-XE-Zw5"/>
+                <constraint firstItem="Er8-eC-1vf" firstAttribute="centerX" secondItem="RDV-cp-U0Z" secondAttribute="centerX" id="tB2-YU-kbH"/>
+                <constraint firstItem="ZZK-Jj-hbo" firstAttribute="top" secondItem="RDV-cp-U0Z" secondAttribute="top" id="vOJ-mv-gs8"/>
+                <constraint firstItem="sjh-8T-z3K" firstAttribute="centerX" secondItem="RDV-cp-U0Z" secondAttribute="centerX" id="z51-qj-zhU"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="5I9-or-JBS"/>
+            <point key="canvasLocation" x="29.5" y="429"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="testHaikuIMage" width="343" height="343"/>
+    </resources>
+</document>

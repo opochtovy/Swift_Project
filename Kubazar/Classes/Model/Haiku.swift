@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum HaikuTextColor {
+enum HaikuColorStyle {
     case black
     case white
 }
@@ -19,9 +19,36 @@ class Haiku {
     public var date: Date?
     public var pictureURL: String?
     public var likesCount: Int = 0
-    public var author: User?
-    public var participants: [User] = []
-    public var fields: [String] = []
-    public var color: HaikuTextColor = .black
+    public var creator: User?
+    public var fields: [Field] = []
+    public var color: HaikuColorStyle = .black
+    public var published: Bool = false
+    public var liked: Bool = false
+}
+
+extension Haiku {
+    
+    public var participants: [User] {
+        
+        return self.fields.flatMap{$0.owner}
+    }
+    
+    public var activeParticipants: [User] {
+        
+        return self.fields.filter({$0.isActive}).flatMap({$0.owner})
+    }
+    
+    public var isCompleted: Bool {
+        
+        return self.fields.count == 3
+    }
+}
+
+extension Haiku: Equatable {
+    
+    public static func ==(lhs: Haiku, rhs: Haiku) -> Bool {
+        
+        return  lhs.id == rhs.id
+    }
 }
 

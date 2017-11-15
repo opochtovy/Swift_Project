@@ -10,7 +10,7 @@ import UIKit
 
 class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
     
-    @IBOutlet private var tblView: UITableView?
+    @IBOutlet private var tblView: UITableView!
     private var scFilter: UISegmentedControl!
     
     private let viewModel: BazarVM
@@ -34,10 +34,9 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
         self.scFilter.addTarget(self, action: #selector(BazarVC.didSelectSegment), for: .valueChanged)
         self.scFilter.selectedSegmentIndex = self.viewModel.filter.rawValue
         self.navigationItem.titleView = self.scFilter
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "iconSort"), style: .plain, target: self, action: #selector(BazarVC.didPressSortButton))
         
-        self.tblView?.register(UINib.init(nibName: "BazarCell", bundle: nil), forCellReuseIdentifier: BazarCell.reuseID)
-        
-        self.updateContent()
+        self.tblView.register(UINib.init(nibName: "BazarCell", bundle: nil), forCellReuseIdentifier: BazarCell.reuseID)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,6 +44,8 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
         self.setStatusBarAppearance()
         self.tabBarController?.tabBar.isHidden = false
         self.navigationController?.navigationBar.backgroundColor = #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)
+        
+        self.updateContent()
     }
     
     private func setStatusBarAppearance() {
@@ -56,34 +57,42 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
     
     //MARK: - Private functions
     private func updateContent() {
-    
-        self.tblView?.reloadData()
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "iconSort"), style: .plain, target: self, action: #selector(BazarVC.didPressSortButton))
+        self.viewModel.refreshData()
+        self.tblView.reloadData()
     }
     
     //MARK: - Actions
     @objc private func didPressSortButton(_ sender: UIBarButtonItem) {
-        //TODO: set sort rule to viewModel
+        
+        let alertCtrl = UIAlertController(title: NSLocalizedString("Bazar_sort_title", comment: ""), message: "", preferredStyle: .actionSheet)
+
+        let action1 = UIAlertAction(title: NSLocalizedString("Bazar_sort_bylike", comment: ""), style: .default){ (_) in
+            
+            self.viewModel.sort = .likes
+        }
+        
+        let action2 = UIAlertAction(title: NSLocalizedString("Bazar_sort_bydate", comment: ""), style: .default){ (_) in
+            
+            self.viewModel.sort = .date
+        }
+        
+        let action3 = UIAlertAction(title: NSLocalizedString("BazarDetail_alert_cancel", comment: ""), style: .cancel, handler: nil)
+        
+        alertCtrl.addAction(action1)
+        alertCtrl.addAction(action2)
+        alertCtrl.addAction(action3)
+        
+        self.present(alertCtrl, animated: true, completion: nil)
     }
     
     @objc private func didSelectSegment(_ sender: UISegmentedControl) {
         
         if let value = BazarVM.BazarFilter(rawValue: sender.selectedSegmentIndex) {
             
-           self.viewModel.filter = value
-        }
-    }
-    
-    @objc private func didPressLikeButton (_ sender: UIButton) {
-        
-        switch self.viewModel.filter {
-        case .all:
-            print("like")
-        case .mine:
-            print("like")
-        case .active:
-            print("publish")
+            self.viewModel.filter = value
+            self.updateContent()
+            self.tblView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
         }
     }
     
@@ -97,7 +106,6 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: BazarCell.reuseID, for: indexPath) as! BazarCell
         cell.viewModel = self.viewModel.getCellVM(forIndexPath: indexPath)
-        cell.btnLike.addTarget(self, action: #selector(BazarVC.didPressLikeButton(_:)), for: .touchUpInside)
         
         return cell
     }
@@ -107,14 +115,19 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         
-        let ctrl = BazarDetailVC(client: self.client, viewModel: self.viewModel.getDetailVM(forIndexPath: indexPath))
-        self.navigationController?.pushViewController(ctrl, animated: true)
+        switch self.viewModel.filter {
+            
+        case .all, .mine:
+            
+            let ctrl = BazarDetailVC(client: self.client, viewModel: self.viewModel.getDetailVM(forIndexPath: indexPath))
+            self.navigationController?.pushViewController(ctrl, animated: true)
+            
+        case .active: break
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         return UITableViewAutomaticDimension
     }
-
-
 }
