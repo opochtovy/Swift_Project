@@ -10,7 +10,22 @@ import Foundation
 
 class StartPhoneVerificationVM: BaseVM {
     
+    private var codeName: String = ""
+    private var numberToSend: String = ""
+    
     override init(client: Client) {
         super.init(client: client)
+    }
+    
+    //MARK: - Public functions
+    
+    public func setCountryCode(code: String) {
+        
+        self.codeName = code
+    }
+    
+    public func getCountryCode() -> String {
+        
+        return self.codeName
     }
 }

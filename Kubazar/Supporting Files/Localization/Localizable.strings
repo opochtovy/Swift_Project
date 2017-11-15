@@ -18,6 +18,8 @@
 /**/"ForgotPasswordTitles_headerLabel" = "Forgot Password?";
 /**/"ForgotPasswordTitles_descriptionLabel" = "We will send you an email with a new password";
 /**/"ForgotPasswordTitles_sendButtonTitle" = "Send";
+/**/"ForgotPasswordVC_wrongResponseAlertTitle" = "Wrong Email";
+/**/"ForgotPasswordVC_wrongResponseAlertMessage" = "There is no user record corresponding to this email. The user or email may have been deleted.";
 
 /*ViewController*/
 /**/"ButtonTitles_backButtonTitle" = "Back";
@@ -26,6 +28,9 @@
 /**/"ButtonTitles_nextButtonTitle" = "Next";
 /**/"ButtonTitles_editButtonTitle" = "Edit";
 /**/"ButtonTitles_yesButtonTitle" = "Yes";
+
+/**/"CommonTitles_errorTitle" = "Error";
+/**/"CommonTitles_wrongResponseMessage" = "There was an error during your request.";
 
 /*TabbedController*/
 /**/"TabBarTitles_bazar" = "Bazar";
@@ -38,11 +43,25 @@
 /*StartEditProfileVC*/
 /**/"StartEditProfileTitles_title" = "Edit Profile";
 /**/"StartEditProfileTitles_descriptionLabel" = "Trusted email and password are used to verify your identity when signing in and to help recover you account if the lost phone to recover your account in case the phone is lost";
+/**/"StartEditProfileVC_wrongPasswordAlertTitle" = "Check Password";
+/**/"StartEditProfileVC_wrongPasswordAlertMessage" = "The password confirmation has not passed. Please confirm your password correctly.";
+/**/"StartEditProfileVC_shortPasswordAlertTitle" = "Short Password";
+/**/"StartEditProfileVC_shortPasswordAlertMessage" = "Your password is less than 4 symbols.";
+/**/"StartEditProfileVC_wrongEmailAlertTitle" = "Wrong Email";
+/**/"StartEditProfileVC_wrongEmailAlertMessage" = "Your email address is wrong. Please provide a valid email.";
 
 /*CompleteEditProfileVC*/
 /**/"CompleteEditProfileTitles_descriptionLabel" = "Enter your name and an optional profile picture";
 /**/"CompleteEditProfileTitles_usernameLabel" = "Your Name";
 /**/"CompleteEditProfileTitles_profileLabel" = "Add photo";
+/**/"CompleteEditProfileVC_shortUsernameAlertTitle" = "Short Username";
+/**/"CompleteEditProfileVC_shortUsernameAlertMessage" = "Your username is less than 3 symbols.";
+/**/"CompleteEditProfileVC_emptyPhotoAlertTitle" = "Empty Profile Photo";
+/**/"CompleteEditProfileVC_emptyPhotoAlertMessage" = "Please choose your profile photo.";
+/**/"CompleteEditProfileVC_unsuccessDisplayNameUpdateAlertTitle" = "Unsuccessful Update";
+/**/"CompleteEditProfileVC_unsuccessDisplayNameUpdateAlertMessage" = "There was an error during displayName setting for user profile.";
+/**/"CompleteEditProfileVC_unsuccessfulPhotoUploadAlertTitle" = "Unsuccessful Photo Upload";
+/**/"CompleteEditProfileVC_unsuccessfulPhotoUploadAlertMessage" = "There was an error during photo upload for user profile.";
 
 /*BazarVC*/
 /**/ "Bazar_all_haikus" = "All Haikus";
@@ -70,6 +89,11 @@
 /**/"StartPhoneVerificationVC_numberPlaceholder" = "Required";
 /**/"StartPhoneVerificationVC_confirmationAlertTitle" = "Number confirmation";
 /**/"StartPhoneVerificationVC_confirmationAlertMessage" = "\nIs your phone number above correct?";
+/**/"StartPhoneVerificationVC_emptyTextFieldsAlertTitle" = "Empty Country Code or Number";
+/**/"StartPhoneVerificationVC_emptyTextFieldsAlertMessage" = "Please fill all fields correctly.";
+
+/*CountryCodesVC*/
+/**/"CountryCodesVC_title" = "Select Country Code";
 
 /*CompletePhoneVerificationVC*/
 /**/"CompletePhoneVerificationVC_backButtonTitle" = "Edit number";

@@ -45,12 +45,8 @@ class WelcomeVC: ViewController {
             self.registerButton.semanticContentAttribute = .forceRightToLeft
         }
         self.wasLoadedBefore = true
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
         
-        super.viewWillDisappear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        self.setStatusBarAppearance()
     }
     
     //MARK: - Private functions
@@ -64,18 +60,20 @@ class WelcomeVC: ViewController {
         self.registerButton.setTitle(NSLocalizedString(WelcomeTitles.registerButtonTitle, comment: "registerButtonTitle") + " ", for: .normal)
     }
     
+    private func setStatusBarAppearance() {
+        
+        let statusBarView = UIApplication.shared.value(forKey: "statusBar") as? UIView
+        statusBarView?.backgroundColor = UIColor.clear
+        statusBarView?.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    }
+    
     //MARK: - Actions
     
     @IBAction private func actionRegister(_ sender: UIButton) {
         
-        // just for test
-        
-        let tabbedVC = TabbedController(client: self.viewModel.client)
-        self.present(tabbedVC, animated: true, completion: nil)
-        
-//        let phoneVerificationVC = StartPhoneVerificationVC(client: self.viewModel.client)
-//        let phoneVerificationNavViewController = UINavigationController(rootViewController: phoneVerificationVC)
-//        self.present(phoneVerificationNavViewController, animated: true, completion: nil)
+        let phoneVerificationVC = StartPhoneVerificationVC(client: self.viewModel.client)
+        let phoneVerificationNavViewController = UINavigationController(rootViewController: phoneVerificationVC)
+        self.present(phoneVerificationNavViewController, animated: true, completion: nil)
     }
     
     @IBAction private func actionLogin(_ sender: UIButton) {

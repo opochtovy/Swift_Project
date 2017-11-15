@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import MBProgressHUD
+import IQKeyboardManagerSwift
 
 class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate {
     
@@ -28,7 +29,6 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate {
     @IBOutlet weak var resendButton: UIButton!
     @IBOutlet var codeTextFields: [UITextField]!
     
-    var number: String = ""
     private var verificationCode: String = ""
     
     //MARK: - LyfeCycle
@@ -45,6 +45,8 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.edgesForExtendedLayout = []
         
         self.setNavigationBarAppearance()
         self.localizeTitles()
@@ -75,7 +77,7 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate {
     
     private func localizeTitles() {
         
-        self.title = self.number
+        self.title = self.viewModel.number
         
         self.descriptionLabel.text = NSLocalizedString(CompletePhoneVerificationVC.descriptionLabelText, comment: "Description on Complete Phone Verification")
         self.completionLabel.text = NSLocalizedString(CompletePhoneVerificationVC.completionLabelText, comment: "Completion Label title on Complete Phone Verification")
@@ -92,24 +94,16 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate {
     
     private func sendPhoneNumber() {
         
-        self.client.authenticator.sendPhoneNumber { success in
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        self.client.authenticator.sendPhoneNumber(phoneNumber: self.viewModel.number) { errorDescription, success in
             
-            print(success)
-        }
-/*
-        PhoneAuthProvider.provider().verifyPhoneNumber("+375297509711", uiDelegate: nil) { (verificationID, error) in
-            
-            if let error = error {
-                // TODO: show error
-                print("CompletePhoneVerification: error = ", error)
-                return
+            MBProgressHUD.hide(for: self.view, animated: true)
+            if !success {
+                
+                self.showWrongResponseAlert(message: errorDescription)
+                
             }
-            guard let verificationID = verificationID else { return }
-            print("verificationID =", verificationID)
-            UserDefaults.standard.set(verificationID, forKey: "authVerificationID")
-            UserDefaults.standard.synchronize()
         }
-*/
     }
     
     private func showWrongCodeAlert() {
@@ -150,6 +144,29 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate {
         self.present(alertController, animated: true, completion: nil)
     }
     
+    private func showWrongResponseAlert(message: String?) {
+        
+        let alertTitle = NSLocalizedString(CommonTitles.errorTitle, comment: "")
+        var alertMessage = NSLocalizedString(CommonTitles.wrongResponseMessage, comment: "")
+        if let message = message {
+            
+            alertMessage = message
+        }
+        
+        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: NSLocalizedString(ButtonTitles.doneButtonTitle, comment: ""), style: .default) { (_) in
+            
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        
+        alertController.addAction(okAction)
+        
+        alertController.view.tintColor = #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     private func allowOnlyOneDigitOnTextFields() {
         
         for textField in self.codeTextFields {
@@ -164,11 +181,6 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate {
         
         if string.count == 1, textField.text?.count == 0 {
             
-//            let aSet = NSCharacterSet(charactersIn:"0123456789").inverted
-//            let compSepByCharInSet = string.components(separatedBy: aSet)
-//            let numberFiltered = compSepByCharInSet.joined(separator: "")
-//            return string == numberFiltered
-            
             let allowedCharacters = CharacterSet.decimalDigits
             let characterSet = CharacterSet(charactersIn: string)
             return allowedCharacters.isSuperset(of: characterSet)
@@ -182,11 +194,10 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate {
             
             if textFieldIndex < self.codeTextFields.count - 1 {
                 
-                let nextTextField = self.codeTextFields[textFieldIndex + 1]
-                nextTextField.becomeFirstResponder()
+                IQKeyboardManager.sharedManager().goNext()
                 
             } else {
-                textField.resignFirstResponder()
+                self.actionDone()
             }
         }
         
@@ -196,10 +207,7 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate {
     //MARK: - Actions
     
     @objc private func actionDone() {
-        
-//        let editProfileViewController = StartEditProfileVC(client: self.client)
-//        self.navigationController?.pushViewController(editProfileViewController, animated: true)
-        
+
         self.verificationCode = ""
         for textField in self.codeTextFields {
             
@@ -209,9 +217,6 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate {
             }
         }
         
-        print("self.verificationCode =", self.verificationCode)
-        print("number of textFields =", self.codeTextFields.count)
-        
         if self.verificationCode.count < self.codeTextFields.count {
             
             self.showWrongCodeAlert()
@@ -219,33 +224,26 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate {
         }
         
         MBProgressHUD.showAdded(to: self.view, animated: true)
-        self.client.authenticator.signInWithPhoneNumber(verificationCode: self.verificationCode) { success in
+        self.client.authenticator.signInWithPhoneNumber(verificationCode: self.verificationCode) { errorDescription, success in
             
             MBProgressHUD.hide(for: self.view, animated: true)
             if !success {
                 
-                self.showErrorDuringSignInAlert()
-            }
-        }
-/*
-        let verificationID = UserDefaults.standard.value(forKey: "authVerificationID")
-        let credential = PhoneAuthProvider.provider().credential(withVerificationID: verificationID as! String, verificationCode: self.verificationCode)
-        
-        Auth.auth().signIn(with: credential) { (user, error) in
-            if error != nil {
-                // ...
-                return
-            }
-            
-            // User is signed in
-            if let user = user {
+                if errorDescription != nil {
+                    
+                    self.showWrongResponseAlert(message: errorDescription)
+                    
+                } else {
+                    
+                    self.showErrorDuringSignInAlert()
+                }
                 
-                print("Phone number: \(user.phoneNumber ?? "nil")")
-                let userInfo: Any? = user.providerData[0]
-                print(userInfo ?? "no user info")
+            } else {
+                
+                let editProfileViewController = StartEditProfileVC(client: self.client)
+                self.navigationController?.pushViewController(editProfileViewController, animated: true)
             }
         }
-*/
     }
     
     @objc func textFieldDidChange(textField: UITextField){
@@ -261,5 +259,10 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate {
                 textField.resignFirstResponder()
             }
         }
+    }
+    
+    @IBAction func actionResendCode(_ sender: UIButton) {
+        
+        self.sendPhoneNumber()
     }
 }

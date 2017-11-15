@@ -7,8 +7,18 @@
 //
 
 import UIKit
+import MBProgressHUD
 
-class CompleteEditProfileVC: ViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class CompleteEditProfileVC: ViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+    
+    static let shortUsernameAlertTitle = "CompleteEditProfileVC_shortUsernameAlertTitle"
+    static let shortUsernameAlertMessage = "CompleteEditProfileVC_shortUsernameAlertMessage"
+    static let emptyPhotoAlertTitle = "CompleteEditProfileVC_emptyPhotoAlertTitle"
+    static let emptyPhotoAlertMessage = "CompleteEditProfileVC_emptyPhotoAlertMessage"
+    static let unsuccessfulDisplayNameUpdateAlertTitle = "CompleteEditProfileVC_unsuccessDisplayNameUpdateAlertTitle"
+    static let unsuccessfulDisplayNameUpdateAlertMessage = "CompleteEditProfileVC_unsuccessDisplayNameUpdateAlertMessage"
+    static let unsuccessfulPhotoUploadAlertTitle = "CompleteEditProfileVC_unsuccessfulPhotoUploadAlertTitle"
+    static let unsuccessfulPhotoUploadAlertMessage = "CompleteEditProfileVC_unsuccessfulPhotoUploadAlertMessage"
     
     static let imagePickerMinSide: CGFloat = 200
     
@@ -44,12 +54,19 @@ class CompleteEditProfileVC: ViewController, UIImagePickerControllerDelegate, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.edgesForExtendedLayout = []
+        
         self.localizeTitles()
         self.setNavigationBarAppearance()
         self.usernameTextField.becomeFirstResponder()
         
         self.profileImageView.addCornerRadius(cornerRadius: self.profileImageView.frame.size.width / 2, borderWidth: 1, borderColor: #colorLiteral(red: 0.9215686275, green: 0.9215686275, blue: 0.9215686275, alpha: 1))
         self.profileImageView.clipsToBounds = true
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        self.view.endEditing(true)
     }
     
     //MARK: - Private functions
@@ -72,8 +89,161 @@ class CompleteEditProfileVC: ViewController, UIImagePickerControllerDelegate, UI
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString(ButtonTitles.doneButtonTitle, comment: "Done Button Title"), style: .plain, target: self, action: #selector(CompleteEditProfileVC.done))
     }
     
+    private func showShortUsernameAlert() {
+        
+        let alertTitle = NSLocalizedString(CompleteEditProfileVC.shortUsernameAlertTitle, comment: "Title for short username alert on Complete Edit Profile")
+        let alertMessage = NSLocalizedString(CompleteEditProfileVC.shortUsernameAlertMessage, comment: "Message for short username alert on Complete Edit Profile")
+        
+        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: NSLocalizedString(ButtonTitles.doneButtonTitle, comment: "Done Button Title on Complete Edit Profile"), style: .default) { (_) in
+            
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        
+        alertController.addAction(okAction)
+        
+        alertController.view.tintColor = #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    private func showEmptyPhotoAlert() {
+        
+        let alertTitle = NSLocalizedString(CompleteEditProfileVC.emptyPhotoAlertTitle, comment: "Title for empty photo alert on Complete Edit Profile")
+        let alertMessage = NSLocalizedString(CompleteEditProfileVC.emptyPhotoAlertMessage, comment: "Message for empty photo alert on Complete Edit Profile")
+        
+        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: NSLocalizedString(ButtonTitles.doneButtonTitle, comment: "Done Button Title on Complete Edit Profile"), style: .default) { (_) in
+            
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        
+        alertController.addAction(okAction)
+        
+        alertController.view.tintColor = #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    private func showUnsuccessfulDisplayNameUpdateAlert() {
+        
+        let alertTitle = NSLocalizedString(CompleteEditProfileVC.unsuccessfulDisplayNameUpdateAlertTitle, comment: "Title for unsuccessful displayName update alert on Complete Edit Profile")
+        let alertMessage = NSLocalizedString(CompleteEditProfileVC.unsuccessfulDisplayNameUpdateAlertMessage, comment: "Message for unsuccessful displayName update alert on Complete Edit Profile")
+        
+        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: NSLocalizedString(ButtonTitles.doneButtonTitle, comment: "Done Button Title on Complete Edit Profile"), style: .default) { (_) in
+            
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        
+        alertController.addAction(okAction)
+        
+        alertController.view.tintColor = #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    private func showUnsuccessfulPhotoUploadAlert() {
+        
+        let alertTitle = NSLocalizedString(CompleteEditProfileVC.unsuccessfulPhotoUploadAlertTitle, comment: "Title for unsuccessful photo upload alert on Complete Edit Profile")
+        let alertMessage = NSLocalizedString(CompleteEditProfileVC.unsuccessfulPhotoUploadAlertMessage, comment: "Message for unsuccessful photo upload alert on Complete Edit Profile")
+        
+        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: NSLocalizedString(ButtonTitles.doneButtonTitle, comment: "Done Button Title on Complete Edit Profile"), style: .default) { (_) in
+            
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        
+        alertController.addAction(okAction)
+        
+        alertController.view.tintColor = #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    private func updateUserProfile(displayName: String, photoURL: URL?) {
+        
+        self.client.authenticator.updateUserProfile(displayName: displayName, photoURL: photoURL, completionHandler: { errorDescription, success in
+            
+            MBProgressHUD.hide(for: self.view, animated: true)
+            if !success {
+                
+                self.showWrongResponseAlert(message: errorDescription)
+                
+            } else {
+                
+                self.client.authenticator.state = .authorized
+            }
+        })
+    }
+    
+    private func showWrongResponseAlert(message: String?) {
+        
+        let alertTitle = NSLocalizedString(CommonTitles.errorTitle, comment: "")
+        var alertMessage = NSLocalizedString(CommonTitles.wrongResponseMessage, comment: "")
+        if let message = message {
+            
+            alertMessage = message
+        }
+        
+        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: NSLocalizedString(ButtonTitles.doneButtonTitle, comment: ""), style: .default) { (_) in
+            
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        
+        alertController.addAction(okAction)
+        
+        alertController.view.tintColor = #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    //MARK: - Actions
+    
     @objc private func done() {
         
+        if let username = self.usernameTextField.text {
+            
+            if username.count < 3 {
+                
+                self.showShortUsernameAlert()
+                return
+                
+            }
+            
+            var photoData = Data()
+            if let photo = self.profileImageView.image {
+                
+                photoData = UIImageJPEGRepresentation(photo, 1.0)!
+            }
+            if photoData.count == 0 {
+                
+//                self.showEmptyPhotoAlert()
+                MBProgressHUD.showAdded(to: self.view, animated: true)
+                self.updateUserProfile(displayName: username, photoURL: nil)
+                return
+            }
+            
+            MBProgressHUD.showAdded(to: self.view, animated: true)
+            self.client.authenticator.uploadPhotoToUserProfile(displayName: username, photoData: photoData, completionHandler: { downloadURL, uploadSuccess in
+                
+                if !uploadSuccess {
+                    
+                    MBProgressHUD.hide(for: self.view, animated: true)
+                    self.showUnsuccessfulPhotoUploadAlert()
+                    
+                } else {
+                    
+                    self.updateUserProfile(displayName: username, photoURL: downloadURL)
+                }
+            })
+        }
     }
 
     //MARK: - UIImagePickerControllerDelegate
@@ -107,8 +277,16 @@ class CompleteEditProfileVC: ViewController, UIImagePickerControllerDelegate, UI
         
         self.dismiss(animated: true, completion: nil)
     }
+    
+    //MARK: - UITextFieldDelegate
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        return true
+    }
 
-    //MARK: - Actions
+    //MARK: - IBActions
     
     @IBAction private func actionAddPhoto(_ sender: UIButton) {
         

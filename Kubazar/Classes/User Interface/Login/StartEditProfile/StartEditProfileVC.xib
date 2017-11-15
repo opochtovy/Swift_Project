@@ -31,7 +31,7 @@
                         <constraint firstAttribute="height" constant="1" id="5VY-5s-z6W"/>
                     </constraints>
                 </view>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8kC-gg-g56">
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="8kC-gg-g56">
                     <rect key="frame" x="20" y="56" width="280" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="elE-oa-3ic"/>
@@ -50,7 +50,7 @@
                         <constraint firstAttribute="height" constant="1" id="HCC-0d-1gS"/>
                     </constraints>
                 </view>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dq2-XK-mzC">
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Dq2-XK-mzC">
                     <rect key="frame" x="20" y="107" width="280" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="SPR-K0-9aw"/>
@@ -69,14 +69,14 @@
                         <constraint firstAttribute="height" constant="1" id="shZ-pA-pbe"/>
                     </constraints>
                 </view>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cad-9T-nhc">
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="cad-9T-nhc">
                     <rect key="frame" x="20" y="158" width="280" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="Wa0-x6-bRA"/>
                     </constraints>
                     <color key="textColor" red="0.22352941176470587" green="0.22352941176470587" blue="0.22745098039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="go" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="GvF-BS-B4Z"/>
                     </connections>

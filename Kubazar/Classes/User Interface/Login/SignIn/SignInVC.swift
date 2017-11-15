@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import MBProgressHUD
+import IQKeyboardManagerSwift
 
-class SignInVC: ViewController {
+class SignInVC: ViewController, UITextFieldDelegate {
     
     static let loginButtonTitle = "SignInVC_loginButtonTitle"
     
@@ -19,6 +21,7 @@ class SignInVC: ViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var forgotPasswordButton: UIButton!
     @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
     
     private var wasLoadedBefore = false
 
@@ -37,7 +40,8 @@ class SignInVC: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.setNavigationBarAppearance()        
+        self.edgesForExtendedLayout = []
+        
         self.localizeTitles()
     }
     
@@ -50,16 +54,12 @@ class SignInVC: ViewController {
         self.wasLoadedBefore = true
     }
     
-    //MARK: - Private functions
-    
-    private func setNavigationBarAppearance() {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        UINavigationBar.appearance().shadowImage = UIImage()
-        UINavigationBar.appearance().tintColor = #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor : #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)]
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString(ButtonTitles.cancelButtonTitle, comment: "Back Button Title"), style: .plain, target: self, action: #selector(SignInVC.cancel))
+        self.view.endEditing(true)
     }
+    
+    //MARK: - Private functions
     
     private func localizeTitles() {
         
@@ -68,11 +68,85 @@ class SignInVC: ViewController {
         self.passwordTextField.placeholder = NSLocalizedString(SignInTitles.passwordPlaceholder, comment: "passwordPlaceholder")
         self.forgotPasswordButton.setTitle(NSLocalizedString(SignInTitles.forgotPasswordButtonTitle, comment: "forgotPasswordButtonTitle").uppercased(), for: .normal)
         self.loginButton.setTitle(NSLocalizedString(SignInVC.loginButtonTitle, comment: "registerButtonTitle") + " ", for: .normal)
+        self.cancelButton.setTitle(NSLocalizedString(ButtonTitles.cancelButtonTitle, comment: "Cancel Button Title"), for: .normal)
     }
     
-    //MARK: - Private functions
+    private func showShortPasswordAlert() {
+        
+        let alertTitle = NSLocalizedString(StartEditProfileVC.shortPasswordAlertTitle, comment: "Title for short password alert on Start Edit Profile")
+        let alertMessage = NSLocalizedString(StartEditProfileVC.shortPasswordAlertMessage, comment: "Message for short password alert on Start Edit Profile")
+        
+        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: NSLocalizedString(ButtonTitles.doneButtonTitle, comment: "Done Button Title on Start Edit Profile"), style: .default) { (_) in
+            
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        
+        alertController.addAction(okAction)
+        
+        alertController.view.tintColor = #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
     
-    @objc private func cancel() {
+    private func showWrongEmailAlert() {
+        
+        let alertTitle = NSLocalizedString(StartEditProfileVC.wrongEmailAlertTitle, comment: "Title for wrong email alert on Start Edit Profile")
+        let alertMessage = NSLocalizedString(StartEditProfileVC.wrongEmailAlertMessage, comment: "Message for wrong email alert on Start Edit Profile")
+        
+        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: NSLocalizedString(ButtonTitles.doneButtonTitle, comment: "Done Button Title on Start Edit Profile"), style: .default) { (_) in
+            
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        
+        alertController.addAction(okAction)
+        
+        alertController.view.tintColor = #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    private func showWrongResponseAlert(message: String?) {
+        
+        let alertTitle = NSLocalizedString(CommonTitles.errorTitle, comment: "Error Title")
+        var alertMessage = NSLocalizedString(ForgotPasswordVC.wrongResponseAlertMessage, comment: "Message for wrong respond alert on Start Edit Profile")
+        if let message = message {
+            
+            alertMessage = message
+        }
+        
+        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: NSLocalizedString(ButtonTitles.doneButtonTitle, comment: "Done Button Title on Forgot Password"), style: .default) { (_) in
+            
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        
+        alertController.addAction(okAction)
+        
+        alertController.view.tintColor = #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    //MARK: - UITextFieldDelegate
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        switch textField {
+        case self.emailTextField: IQKeyboardManager.sharedManager().goNext()
+        default: self.actionLogin(self.loginButton)
+        }
+        
+        return true
+    }
+    
+    //MARK: - Actions
+    
+    @IBAction func actionCancel(_ sender: UIButton) {
         
         if let navigationController = self.navigationController {
             
@@ -80,7 +154,6 @@ class SignInVC: ViewController {
         }
     }
     
-    //MARK: - Actions
     
     @IBAction private func actionForgotPassword(_ sender: UIButton) {
         
@@ -89,6 +162,51 @@ class SignInVC: ViewController {
     }
     
     @IBAction private func actionLogin(_ sender: UIButton) {
-        
+/*
+        if let email = self.emailTextField.text, let password = self.passwordTextField.text  {
+            
+            if email.count < 7 {
+                
+                self.showWrongEmailAlert()
+                return
+                
+            } else if password.count < 6 {
+                
+                self.showShortPasswordAlert()
+                return
+                
+            }
+            
+            MBProgressHUD.showAdded(to: self.view, animated: true)
+            self.client.authenticator.signInWithEmailPassword(email: email, password: password, completionHandler: { errorDescription, success in
+                
+                MBProgressHUD.hide(for: self.view, animated: true)
+                
+                if !success {
+                    
+                    self.showWrongResponseAlert(message: errorDescription)
+                    
+                } else {
+                    
+                    self.client.authenticator.state = .authorized
+                }
+            })
+        }
+*/
+        // test mode
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        self.client.authenticator.signInWithEmailPassword(email: "oleg.pochtovy@mobexs.com", password: "111111", completionHandler: { errorDescription, success in
+            
+            MBProgressHUD.hide(for: self.view, animated: true)
+            
+            if !success {
+                
+                self.showWrongResponseAlert(message: errorDescription)
+                
+            } else {
+                
+                self.client.authenticator.state = .authorized
+            }
+        })
     }
 }
