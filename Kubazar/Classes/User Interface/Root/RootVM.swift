@@ -27,7 +27,7 @@ class RootVM: BaseVM {
     
     private func allowToPassAuth() {
         
-        self.loginAccepted = UserDefaults.standard.bool(forKey: "isUserAuthorized")
+        self.loginAccepted = UserDefaults.standard.bool(forKey: StoreKeys.isUserAuthorized)
         
         NotificationCenter.default.addObserver(self, selector: #selector(userChanged), name: NSNotification.Name(rawValue: FirebaseServerClient.AuthenticatorStateDidChangeNotification), object: nil)
     }

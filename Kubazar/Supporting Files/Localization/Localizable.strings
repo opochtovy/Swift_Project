@@ -70,6 +70,15 @@
 /**/ "Bazar_likes" = "likes";
 /**/ "Bazar_publish" = "Publish";
 /**/ "Bazar_and" = "And";
+/**/ "Bazar_sort_bylike" = "Sort by Date";
+/**/ "Bazar_sort_bydate" = "Sort by Likes";
+/**/ "Bazar_sort_title" = "Choose sort for haiku list";
+
+/*BazarDetailVC*/
+/**/ "BazarDetail_alert_removing_title" = "Removing Haiku";
+/**/ "BazarDetail_alert_removing_message" = "The Haiku will be removed from your collection.";
+/**/ "BazarDetail_alert_removing_delete" = "Delete";
+/**/ "BazarDetail_alert_cancel" = "Cancel";
 
 /*StartPhoneVerificationVC*/
 /**/"StartPhoneVerificationVC_title" = "Verify phone number";

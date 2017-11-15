@@ -162,7 +162,7 @@ class SignInVC: ViewController, UITextFieldDelegate {
     }
     
     @IBAction private func actionLogin(_ sender: UIButton) {
-        
+/*
         if let email = self.emailTextField.text, let password = self.passwordTextField.text  {
             
             if email.count < 7 {
@@ -192,5 +192,21 @@ class SignInVC: ViewController, UITextFieldDelegate {
                 }
             })
         }
+*/
+        // test mode
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        self.client.authenticator.signInWithEmailPassword(email: "oleg.pochtovy@mobexs.com", password: "111111", completionHandler: { errorDescription, success in
+            
+            MBProgressHUD.hide(for: self.view, animated: true)
+            
+            if !success {
+                
+                self.showWrongResponseAlert(message: errorDescription)
+                
+            } else {
+                
+                self.client.authenticator.state = .authorized
+            }
+        })
     }
 }

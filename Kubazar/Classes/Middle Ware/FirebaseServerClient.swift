@@ -91,6 +91,9 @@ class FirebaseServerClient {
             try Auth.auth().signOut()
             self.state = .unauthorized
             
+            UserDefaults.standard.set(false, forKey: StoreKeys.isUserAuthorized)
+            UserDefaults.standard.synchronize()
+            
             completionHandler(nil, true)
             // in completion block -> self.client.sessionManager.adapter = nil
             
@@ -113,7 +116,6 @@ class FirebaseServerClient {
             guard let verificationID = verificationID else { return }
             
             UserDefaults.standard.set(verificationID, forKey: StoreKeys.authVerificationID)
-            UserDefaults.standard.set(true, forKey: StoreKeys.isUserAuthorized)
             UserDefaults.standard.synchronize()
             
             completionHandler(nil, true)
@@ -134,6 +136,9 @@ class FirebaseServerClient {
                     return
                 }
             }
+            
+            UserDefaults.standard.set(true, forKey: StoreKeys.isUserAuthorized)
+            UserDefaults.standard.synchronize()
             
             // User is signed in
             if let user = user {
@@ -159,6 +164,9 @@ class FirebaseServerClient {
                     return
                 }
             }
+            
+            UserDefaults.standard.set(true, forKey: StoreKeys.isUserAuthorized)
+            UserDefaults.standard.synchronize()
             
             completionHandler(nil, true)
         }
