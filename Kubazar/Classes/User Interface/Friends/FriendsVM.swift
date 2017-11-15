@@ -77,7 +77,7 @@ class FriendsVM: BaseVM {
             
             self.haiku.players.remove(object: friend)
         }
-        else {
+        else if (self.haiku.players.count - 1) < self.maxFriends {
             
            self.haiku.players.append(friend)
         }

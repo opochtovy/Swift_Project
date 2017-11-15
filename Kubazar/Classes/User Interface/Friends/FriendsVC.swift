@@ -46,9 +46,7 @@ class FriendsVC: ViewController, UITableViewDataSource, UITableViewDelegate {
     
     @objc private func didSelectUser(_ sender: UIButton) {
         
-        sender.isSelected = !sender.isSelected
-        self.viewModel.chooseFriend(row: sender.tag)
-        self.updateBarButton()
+       self.chooseFriend(row: sender.tag)
     }
     
     //MARK: - Private functions
@@ -61,6 +59,13 @@ class FriendsVC: ViewController, UITableViewDataSource, UITableViewDelegate {
     private func updateBarButton() {
         
         self.navigationItem.rightBarButtonItem?.isEnabled = self.viewModel.nextActionAllowed()
+    }
+    
+    private func chooseFriend(row: Int) {
+        
+        self.viewModel.chooseFriend(row: row)
+        self.tblView.reloadRows(at: [IndexPath(row: row, section: 0)], with: .none)
+        self.updateBarButton()
     }
     
     //MARK: - UITableViewDataSource
@@ -89,8 +94,6 @@ class FriendsVC: ViewController, UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: false)
-        self.viewModel.chooseFriend(row: indexPath.row)
-        self.tblView.reloadRows(at: [indexPath], with: .none)
-        self.updateBarButton()
+        self.chooseFriend(row: indexPath.row)
     }
 }
