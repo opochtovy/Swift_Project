@@ -42,6 +42,8 @@ class FriendsVC: ViewController, UITableViewDataSource, UITableViewDelegate {
     
     @objc private func didPressNextButton(_ sender: UIButton) {
         
+        let ctrl = PictureVC(client: self.client, viewModel: self.viewModel.getPictureVM())
+        self.navigationController?.pushViewController(ctrl, animated: true)
     }
     
     @objc private func didSelectUser(_ sender: UIButton) {

@@ -43,6 +43,17 @@
 		9E5E8E401FAE1E5500CCCBDA /* ForgotPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5E8E3E1FAE1E5500CCCBDA /* ForgotPasswordVC.swift */; };
 		9E5E8E411FAE1E5500CCCBDA /* ForgotPasswordVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E5E8E3F1FAE1E5500CCCBDA /* ForgotPasswordVC.xib */; };
 		9E5E8E431FAE1E6C00CCCBDA /* ForgotPasswordVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5E8E421FAE1E6C00CCCBDA /* ForgotPasswordVM.swift */; };
+		9E5FA3041FBD73870082F56F /* PictureVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5FA3021FBD73870082F56F /* PictureVC.swift */; };
+		9E5FA3051FBD73870082F56F /* PictureVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E5FA3031FBD73870082F56F /* PictureVC.xib */; };
+		9E5FA3071FBD739B0082F56F /* PictureVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5FA3061FBD739B0082F56F /* PictureVM.swift */; };
+		9E5FA3091FBD7AF40082F56F /* ChoosePictureButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5FA3081FBD7AF40082F56F /* ChoosePictureButton.swift */; };
+		9E5FA30B1FBD7B020082F56F /* ChoosePictureButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E5FA30A1FBD7B020082F56F /* ChoosePictureButton.xib */; };
+		9E5FA30E1FBD90DB0082F56F /* AccessAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5FA30D1FBD90DB0082F56F /* AccessAlertView.swift */; };
+		9E5FA3101FBD90E60082F56F /* AccessAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E5FA30F1FBD90E60082F56F /* AccessAlertView.xib */; };
+		9E5FA3121FBDA3640082F56F /* PhotoLibraryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5FA3111FBDA3640082F56F /* PhotoLibraryManager.swift */; };
+		9E5FA3191FBDB2050082F56F /* PictureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5FA3171FBDB2050082F56F /* PictureCell.swift */; };
+		9E5FA31A1FBDB2050082F56F /* PictureCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E5FA3181FBDB2050082F56F /* PictureCell.xib */; };
+		9E5FA31C1FBDB21D0082F56F /* PictureCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5FA31B1FBDB21D0082F56F /* PictureCellVM.swift */; };
 		9E6144411FB2F5D000067295 /* StartEditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E61443F1FB2F5D000067295 /* StartEditProfileVC.swift */; };
 		9E6144421FB2F5D000067295 /* StartEditProfileVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E6144401FB2F5D000067295 /* StartEditProfileVC.xib */; };
 		9E6144441FB2F5F100067295 /* StartEditProfileVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6144431FB2F5F100067295 /* StartEditProfileVM.swift */; };
@@ -131,6 +142,17 @@
 		9E5E8E3E1FAE1E5500CCCBDA /* ForgotPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordVC.swift; sourceTree = "<group>"; };
 		9E5E8E3F1FAE1E5500CCCBDA /* ForgotPasswordVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForgotPasswordVC.xib; sourceTree = "<group>"; };
 		9E5E8E421FAE1E6C00CCCBDA /* ForgotPasswordVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordVM.swift; sourceTree = "<group>"; };
+		9E5FA3021FBD73870082F56F /* PictureVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureVC.swift; sourceTree = "<group>"; };
+		9E5FA3031FBD73870082F56F /* PictureVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PictureVC.xib; sourceTree = "<group>"; };
+		9E5FA3061FBD739B0082F56F /* PictureVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureVM.swift; sourceTree = "<group>"; };
+		9E5FA3081FBD7AF40082F56F /* ChoosePictureButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoosePictureButton.swift; sourceTree = "<group>"; };
+		9E5FA30A1FBD7B020082F56F /* ChoosePictureButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChoosePictureButton.xib; sourceTree = "<group>"; };
+		9E5FA30D1FBD90DB0082F56F /* AccessAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessAlertView.swift; sourceTree = "<group>"; };
+		9E5FA30F1FBD90E60082F56F /* AccessAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccessAlertView.xib; sourceTree = "<group>"; };
+		9E5FA3111FBDA3640082F56F /* PhotoLibraryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibraryManager.swift; sourceTree = "<group>"; };
+		9E5FA3171FBDB2050082F56F /* PictureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureCell.swift; sourceTree = "<group>"; };
+		9E5FA3181FBDB2050082F56F /* PictureCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PictureCell.xib; sourceTree = "<group>"; };
+		9E5FA31B1FBDB21D0082F56F /* PictureCellVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureCellVM.swift; sourceTree = "<group>"; };
 		9E61443F1FB2F5D000067295 /* StartEditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartEditProfileVC.swift; sourceTree = "<group>"; };
 		9E6144401FB2F5D000067295 /* StartEditProfileVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StartEditProfileVC.xib; sourceTree = "<group>"; };
 		9E6144431FB2F5F100067295 /* StartEditProfileVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartEditProfileVM.swift; sourceTree = "<group>"; };
@@ -282,6 +304,7 @@
 				9EFB03601FB9800B00A78845 /* BazarDetail */,
 				9E2BFBE91FBC547F00860CA0 /* Friends */,
 				9E5E8E2A1FADD3BD00CCCBDA /* Login */,
+				9E5FA3011FBD73590082F56F /* PictureVC */,
 				9E5E8E131FADB68300CCCBDA /* Root */,
 				9EB170AB1FB065FE00A70A10 /* TabBar */,
 				9E455BC61FB07D9700BC9A11 /* TabBarItems */,
@@ -334,6 +357,7 @@
 				9EED066B1FB59D2800CCD82E /* Haiku.swift */,
 				9EED066D1FB59E5B00CCD82E /* User.swift */,
 				9E06A9C71FBAC91700FF74A5 /* HaikuManager.swift */,
+				9E5FA3111FBDA3640082F56F /* PhotoLibraryManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -451,6 +475,29 @@
 			path = StartEditProfile;
 			sourceTree = "<group>";
 		};
+		9E5FA3011FBD73590082F56F /* PictureVC */ = {
+			isa = PBXGroup;
+			children = (
+				9E5FA3021FBD73870082F56F /* PictureVC.swift */,
+				9E5FA3031FBD73870082F56F /* PictureVC.xib */,
+				9E5FA3061FBD739B0082F56F /* PictureVM.swift */,
+				9E5FA30C1FBD90B80082F56F /* Views */,
+			);
+			path = PictureVC;
+			sourceTree = "<group>";
+		};
+		9E5FA30C1FBD90B80082F56F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9E5FA30D1FBD90DB0082F56F /* AccessAlertView.swift */,
+				9E5FA30F1FBD90E60082F56F /* AccessAlertView.xib */,
+				9E5FA3171FBDB2050082F56F /* PictureCell.swift */,
+				9E5FA3181FBDB2050082F56F /* PictureCell.xib */,
+				9E5FA31B1FBDB21D0082F56F /* PictureCellVM.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		9E6B14961FB0A81000220942 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -544,6 +591,8 @@
 				9E9B4DBA1FB9D146001DB448 /* ActionButton.xib */,
 				9EFBEC0D1FB9F4E600A889BC /* TintMutableButton.swift */,
 				9E2BFBE71FBC360000860CA0 /* StartButton.swift */,
+				9E5FA3081FBD7AF40082F56F /* ChoosePictureButton.swift */,
+				9E5FA30A1FBD7B020082F56F /* ChoosePictureButton.xib */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -708,6 +757,7 @@
 				9E5E8E351FADD3F400CCCBDA /* WelcomeVC.xib in Resources */,
 				9E2BFBED1FBC54DC00860CA0 /* FriendsVC.xib in Resources */,
 				9EE16E981FB4A56500B4C5C5 /* StartPhoneVerificationVC.xib in Resources */,
+				9E5FA3051FBD73870082F56F /* PictureVC.xib in Resources */,
 				9EFB036F1FB997BC00A78845 /* countryCodes.json in Resources */,
 				9E5E8E411FAE1E5500CCCBDA /* ForgotPasswordVC.xib in Resources */,
 				9E15889C1FB452E40063C816 /* BazarCell.xib in Resources */,
@@ -718,9 +768,11 @@
 				9E5E8E111FADB54600CCCBDA /* Images.xcassets in Resources */,
 				9EE16E9E1FB4BF7C00B4C5C5 /* CompletePhoneVerificationVC.xib in Resources */,
 				9E6144421FB2F5D000067295 /* StartEditProfileVC.xib in Resources */,
+				9E5FA31A1FBDB2050082F56F /* PictureCell.xib in Resources */,
 				9E8964CE1FACA21D004FFDCD /* LaunchScreen.storyboard in Resources */,
 				9E6144481FB305E400067295 /* CompleteEditProfileVC.xib in Resources */,
 				9E72A9D11FB991FA009468DB /* HaikuPreview.xib in Resources */,
+				9E5FA3101FBD90E60082F56F /* AccessAlertView.xib in Resources */,
 				9E1588A31FB45DE10063C816 /* Media.xcassets in Resources */,
 				9E5E8E171FADB6CE00CCCBDA /* RootVC.xib in Resources */,
 				9E5E8E3B1FAE058900CCCBDA /* SignInVC.xib in Resources */,
@@ -729,6 +781,7 @@
 				9EFB037B1FB99A3800A78845 /* CountryCodeCell.xib in Resources */,
 				9EADF2041FBC2F3F00B69FFE /* UserView.xib in Resources */,
 				9E2BFBF31FBC5D3E00860CA0 /* FriendsCell.xib in Resources */,
+				9E5FA30B1FBD7B020082F56F /* ChoosePictureButton.xib in Resources */,
 				9EFB03751FB997F900A78845 /* CountryCodesVC.xib in Resources */,
 				9E8964CB1FACA21D004FFDCD /* Assets.xcassets in Resources */,
 			);
@@ -815,14 +868,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E5FA3121FBDA3640082F56F /* PhotoLibraryManager.swift in Sources */,
 				9E5E8E291FADC46C00CCCBDA /* RootVM.swift in Sources */,
 				9E72A9CF1FB991EC009468DB /* HaikuPreview.swift in Sources */,
 				9E1588941FB44D330063C816 /* BazarVC.swift in Sources */,
 				9E9B4DB91FB9BC4C001DB448 /* ActionButton.swift in Sources */,
+				9E5FA3191FBDB2050082F56F /* PictureCell.swift in Sources */,
 				9E3F9CF01FB5D6BF003BC12A /* FirebaseServerClient.swift in Sources */,
 				9E9B4DBD1FB9E0C8001DB448 /* Field.swift in Sources */,
 				9E5E8E371FADD42D00CCCBDA /* WelcomeVM.swift in Sources */,
 				9E455BCB1FB07DD500BC9A11 /* WriteMainMenuVC.swift in Sources */,
+				9E5FA3071FBD739B0082F56F /* PictureVM.swift in Sources */,
 				9E5E8E3A1FAE058900CCCBDA /* SignInVC.swift in Sources */,
 				9EE16E9D1FB4BF7C00B4C5C5 /* CompletePhoneVerificationVC.swift in Sources */,
 				9E5E8E401FAE1E5500CCCBDA /* ForgotPasswordVC.swift in Sources */,
@@ -831,6 +887,7 @@
 				9EBEBD441FBAFF4E00DE831F /* SessionTokenAdapter.swift in Sources */,
 				9EED066E1FB59E5B00CCD82E /* User.swift in Sources */,
 				9E5E8E271FADC41A00CCCBDA /* BaseVM.swift in Sources */,
+				9E5FA3091FBD7AF40082F56F /* ChoosePictureButton.swift in Sources */,
 				9EFB03741FB997F900A78845 /* CountryCodesVC.swift in Sources */,
 				9E455BCE1FB07DE600BC9A11 /* WriteMainMenuVM.swift in Sources */,
 				9E15889E1FB452F50063C816 /* BazarCellVM.swift in Sources */,
@@ -854,7 +911,9 @@
 				9E8964C41FACA21D004FFDCD /* AppDelegate.swift in Sources */,
 				9EED06721FB5DE3700CCD82E /* Collection+Extension.swift in Sources */,
 				9E06A9C81FBAC91700FF74A5 /* HaikuManager.swift in Sources */,
+				9E5FA30E1FBD90DB0082F56F /* AccessAlertView.swift in Sources */,
 				9EFBEC0E1FB9F4E600A889BC /* TintMutableButton.swift in Sources */,
+				9E5FA31C1FBDB21D0082F56F /* PictureCellVM.swift in Sources */,
 				9E2BFBF61FBC5D6500860CA0 /* FriendsCellVM.swift in Sources */,
 				9EFB03661FB9800B00A78845 /* BazarDetailVC.swift in Sources */,
 				9EBEBD4A1FBB091200DE831F /* KeychainPasswordItem.swift in Sources */,
@@ -872,6 +931,7 @@
 				9EB170AD1FB065FE00A70A10 /* TabbedController.swift in Sources */,
 				9E5E8E161FADB6CE00CCCBDA /* RootVC.swift in Sources */,
 				9E2BFBF21FBC5D3E00860CA0 /* FriendsCell.swift in Sources */,
+				9E5FA3041FBD73870082F56F /* PictureVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

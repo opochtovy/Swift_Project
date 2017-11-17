@@ -109,5 +109,11 @@
 /**/ "Friends_choose_one" = "Choose One Friend";
 /**/ "Friends_choose" = "Choose Friends";
 
+/*PictureVC*/
+/**/ "Picture_choose_photo" = "Choose Photo";
+/**/ "Picture_take_new_photo" = "Take a new photo";
+/**/ "Picture_get_random_photo" = "Get random photo";
+/**/ "Picture_surprise_me" = "SURPRISE ME!";
+
 
 

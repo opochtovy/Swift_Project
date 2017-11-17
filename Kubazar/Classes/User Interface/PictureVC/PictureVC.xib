@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PictureVC" customModule="Kubazar" customModuleProvider="target">
+            <connections>
+                <outlet property="btnRandomPhoto" destination="uMF-nE-L16" id="aay-hy-dGr"/>
+                <outlet property="btnTakePhoto" destination="Niw-XL-gMF" id="rse-Wl-TJt"/>
+                <outlet property="cvPictures" destination="IZV-5K-MXv" id="FZ3-9x-qwG"/>
+                <outlet property="vAccessAlert" destination="Zn9-H4-tBu" id="fwK-ab-TlW"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ePv-B2-nyF">
+                    <rect key="frame" x="16" y="16" width="138.5" height="22"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="22" id="4aN-ga-pxe"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10.5" maxY="0.0"/>
+                    <state key="normal" title="CAMERA ROLL" image="iconCameraRoll">
+                        <color key="titleColor" red="0.3529411764705882" green="0.3529411764705882" blue="0.37254901960784315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qCY-OS-yPA">
+                    <rect key="frame" x="255" y="12" width="49" height="30"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                    <state key="normal" title="See All">
+                        <color key="titleColor" red="0.40000000000000002" green="0.74901960784313726" blue="0.73333333333333328" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="didPressSeeAll:" destination="-1" eventType="touchUpInside" id="hFC-SA-dYZ"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zHn-oh-NVY">
+                    <rect key="frame" x="0.0" y="54" width="320" height="240"/>
+                    <subviews>
+                        <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="IZV-5K-MXv">
+                            <rect key="frame" x="16" y="0.0" width="288" height="240"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="6" minimumInteritemSpacing="6" id="kGW-pF-F3s">
+                                <size key="itemSize" width="117" height="117"/>
+                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            </collectionViewFlowLayout>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="atK-nn-bvL"/>
+                                <outlet property="delegate" destination="-1" id="PvJ-Zp-HmF"/>
+                            </connections>
+                        </collectionView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zn9-H4-tBu" customClass="AccessAlertView" customModule="Kubazar" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="240"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="Zn9-H4-tBu" firstAttribute="top" secondItem="zHn-oh-NVY" secondAttribute="top" id="EWb-M1-bh6"/>
+                        <constraint firstAttribute="bottom" secondItem="IZV-5K-MXv" secondAttribute="bottom" id="LPS-Km-wZB"/>
+                        <constraint firstItem="IZV-5K-MXv" firstAttribute="top" secondItem="zHn-oh-NVY" secondAttribute="top" id="OWl-WY-0l6"/>
+                        <constraint firstAttribute="bottom" secondItem="Zn9-H4-tBu" secondAttribute="bottom" id="SuQ-o1-zvA"/>
+                        <constraint firstItem="Zn9-H4-tBu" firstAttribute="leading" secondItem="zHn-oh-NVY" secondAttribute="leading" id="cn7-S9-7fC"/>
+                        <constraint firstAttribute="trailing" secondItem="Zn9-H4-tBu" secondAttribute="trailing" id="h7h-sj-wnf"/>
+                        <constraint firstAttribute="trailing" secondItem="IZV-5K-MXv" secondAttribute="trailing" constant="16" id="iEd-Ii-i0N"/>
+                        <constraint firstItem="IZV-5K-MXv" firstAttribute="leading" secondItem="zHn-oh-NVY" secondAttribute="leading" constant="16" id="nnI-aw-xj8"/>
+                        <constraint firstAttribute="height" constant="240" id="oj9-Gc-lod"/>
+                    </constraints>
+                </view>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="XiS-ET-yFG">
+                    <rect key="frame" x="16" y="339" width="288" height="140"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Niw-XL-gMF" customClass="ChoosePictureButton" customModule="Kubazar" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="140.5" height="140"/>
+                            <state key="normal" backgroundImage="backGradient1"/>
+                            <connections>
+                                <action selector="didPressTakeNewPhoto:" destination="-1" eventType="touchUpInside" id="SvT-hK-SVb"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uMF-nE-L16" customClass="ChoosePictureButton" customModule="Kubazar" customModuleProvider="target">
+                            <rect key="frame" x="147.5" y="0.0" width="140.5" height="140"/>
+                            <state key="normal" backgroundImage="backGradient2"/>
+                            <connections>
+                                <action selector="didPressSurpriseMe:" destination="-1" eventType="touchUpInside" id="Pa7-Yw-f3v"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" priority="900" constant="140" id="2d2-Zd-G68"/>
+                    </constraints>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="ePv-B2-nyF" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="0zq-6g-6y2"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="qCY-OS-yPA" secondAttribute="trailing" constant="16" id="MqC-Hy-BWB"/>
+                <constraint firstItem="zHn-oh-NVY" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="NTc-3g-Arf"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="XiS-ET-yFG" secondAttribute="bottom" constant="15" id="PDX-25-k8f"/>
+                <constraint firstItem="qCY-OS-yPA" firstAttribute="baseline" secondItem="ePv-B2-nyF" secondAttribute="baseline" id="XRq-Yk-SzG"/>
+                <constraint firstItem="XiS-ET-yFG" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="YHx-nx-rVV"/>
+                <constraint firstItem="uMF-nE-L16" firstAttribute="top" relation="greaterThanOrEqual" secondItem="zHn-oh-NVY" secondAttribute="bottom" constant="10" id="YPe-Rm-iG1"/>
+                <constraint firstItem="ePv-B2-nyF" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="dd4-ef-Gyu"/>
+                <constraint firstItem="XiS-ET-yFG" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="hAU-94-syA"/>
+                <constraint firstItem="zHn-oh-NVY" firstAttribute="top" secondItem="ePv-B2-nyF" secondAttribute="bottom" constant="16" id="rtr-sp-AI7"/>
+                <constraint firstItem="XiS-ET-yFG" firstAttribute="top" secondItem="zHn-oh-NVY" secondAttribute="bottom" priority="900" constant="45" id="wZm-hA-76o"/>
+                <constraint firstItem="zHn-oh-NVY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="yE4-R9-iBb"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="backGradient1" width="168" height="139"/>
+        <image name="backGradient2" width="168" height="140"/>
+        <image name="iconCameraRoll" width="25" height="22"/>
+    </resources>
+</document>

@@ -88,6 +88,11 @@ class FriendsVM: BaseVM {
         return (self.haiku.players.count - 1) == maxFriends
     }
     
+    public func getPictureVM() -> PictureVM {
+        
+        return PictureVM(client: self.client)
+    }
+    
     //MARK: Private functions
     private func prepareModel() {
         

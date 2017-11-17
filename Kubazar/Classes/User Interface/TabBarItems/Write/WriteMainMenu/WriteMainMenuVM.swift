@@ -19,4 +19,9 @@ class WriteMainMenuVM: BaseVM {
         
         return FriendsVM(client: self.client, maxFriends: players)
     }
+    
+    public func getPictureVM() -> PictureVM {
+        
+        return PictureVM(client: self.client)
+    }
 }

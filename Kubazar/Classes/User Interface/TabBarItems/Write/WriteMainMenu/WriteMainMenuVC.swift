@@ -36,7 +36,8 @@ class WriteMainMenuVC: ViewController {
     
     @IBAction func didPressOnePlayerStart(_ sender: UIButton) {
         
-        
+        let ctrl = PictureVC(client: self.client, viewModel: self.viewModel.getPictureVM())
+        self.navigationController?.pushViewController(ctrl, animated: true)
     }
     
     @IBAction func didPressTwoPlayerStart(_ sender: UIButton) {
