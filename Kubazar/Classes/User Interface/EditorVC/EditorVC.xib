@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EditorVC" customModule="Kubazar" customModuleProvider="target">
+            <connections>
+                <outlet property="actionBar" destination="VXz-Sr-c7s" id="eOI-e1-Ng9"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outletCollection property="barButtons" destination="Q2R-SQ-FUY" collectionClass="NSMutableArray" id="C3p-pY-bJP"/>
+                <outletCollection property="barButtons" destination="WQr-EC-7jJ" collectionClass="NSMutableArray" id="DBA-8S-vR1"/>
+                <outletCollection property="barButtons" destination="org-uI-T34" collectionClass="NSMutableArray" id="edK-rT-bPc"/>
+                <outletCollection property="barButtons" destination="KIN-jm-Pc0" collectionClass="NSMutableArray" id="o9t-PW-qgc"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VXz-Sr-c7s" customClass="KBBarView" customModule="Kubazar" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="559" width="375" height="44"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="YnC-bx-83G">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q2R-SQ-FUY">
+                                    <rect key="frame" x="0.0" y="0.0" width="94" height="44"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="tintColor" red="0.34509803919999998" green="0.74117647060000003" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <state key="normal" image="iconReset"/>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WQr-EC-7jJ">
+                                    <rect key="frame" x="94" y="0.0" width="93.5" height="44"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="tintColor" red="0.34509803919999998" green="0.74117647060000003" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <state key="normal" image="iconEffects"/>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="org-uI-T34">
+                                    <rect key="frame" x="187.5" y="0.0" width="94" height="44"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="tintColor" red="0.34509803919999998" green="0.74117647060000003" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <state key="normal" image="iconFonts"/>
+                                    <connections>
+                                        <action selector="didPressFontPickButton:" destination="-1" eventType="touchUpInside" id="ckF-x8-8fk"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KIN-jm-Pc0">
+                                    <rect key="frame" x="281.5" y="0.0" width="93.5" height="44"/>
+                                    <state key="normal" image="iconColorPicker"/>
+                                    <state key="selected" image="iconColorPickerSelected"/>
+                                    <state key="highlighted" image="iconColorPickerSelected"/>
+                                    <connections>
+                                        <action selector="didPressColorPickButton:" destination="-1" eventType="touchUpInside" id="JIP-5Z-Dcw"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="rPo-VS-rJk"/>
+                            </constraints>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="0.81999999999999995" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="3fI-o6-3M6"/>
+                        <constraint firstAttribute="bottom" secondItem="YnC-bx-83G" secondAttribute="bottom" id="TGU-q6-CJh"/>
+                        <constraint firstItem="YnC-bx-83G" firstAttribute="top" secondItem="VXz-Sr-c7s" secondAttribute="top" id="aL8-xD-aNJ"/>
+                        <constraint firstAttribute="trailing" secondItem="YnC-bx-83G" secondAttribute="trailing" id="d5q-b7-OgS"/>
+                        <constraint firstItem="YnC-bx-83G" firstAttribute="leading" secondItem="VXz-Sr-c7s" secondAttribute="leading" id="nH1-YX-uaw"/>
+                    </constraints>
+                </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testHaikuIMage" translatesAutoresizingMaskIntoConstraints="NO" id="PTg-AQ-laU" customClass="testHaikuIMage">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="559"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="PTg-AQ-laU" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="5aa-cy-Ga4"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="VXz-Sr-c7s" secondAttribute="trailing" id="9Pa-wl-PdF"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="VXz-Sr-c7s" secondAttribute="trailing" id="A2y-lq-3e1"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="VXz-Sr-c7s" secondAttribute="bottom" id="FGF-Xj-vnm"/>
+                <constraint firstItem="VXz-Sr-c7s" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="FLm-jg-dBJ"/>
+                <constraint firstItem="VXz-Sr-c7s" firstAttribute="top" secondItem="PTg-AQ-laU" secondAttribute="bottom" id="KJK-Ap-mrk"/>
+                <constraint firstItem="PTg-AQ-laU" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Qtu-wC-ngB"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="PTg-AQ-laU" secondAttribute="trailing" id="tUe-lV-Fde"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="33.5" y="119.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="iconColorPicker" width="24" height="24"/>
+        <image name="iconColorPickerSelected" width="24" height="24"/>
+        <image name="iconEffects" width="26" height="24"/>
+        <image name="iconFonts" width="24" height="24"/>
+        <image name="iconReset" width="24" height="24"/>
+        <image name="testHaikuIMage" width="343" height="343"/>
+    </resources>
+</document>

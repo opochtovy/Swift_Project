@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FontsVC" customModule="Kubazar" customModuleProvider="target">
+            <connections>
+                <outlet property="pvFonts" destination="n2F-WO-Asw" id="gl1-Nr-Puo"/>
+                <outlet property="slScaleSize" destination="X15-7M-wVS" id="ERL-OP-s0E"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="397" height="259"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" minimumValueImage="iconFontMin" maximumValueImage="iconFontMax" translatesAutoresizingMaskIntoConstraints="NO" id="X15-7M-wVS">
+                    <rect key="frame" x="8" y="219" width="381" height="31"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="0Wn-fm-CzW"/>
+                    </constraints>
+                    <color key="minimumTrackTintColor" red="0.38431372549019605" green="0.70980392156862748" blue="0.70588235294117641" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="maximumTrackTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="thumbTintColor" red="0.34509803919999998" green="0.74117647060000003" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </slider>
+                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n2F-WO-Asw">
+                    <rect key="frame" x="6" y="0.0" width="385" height="217"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="5aw-bW-Q20"/>
+                        <outlet property="delegate" destination="-1" id="a60-UX-NJB"/>
+                    </connections>
+                </pickerView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="n2F-WO-Asw" secondAttribute="trailing" constant="6" id="94D-1a-zvQ"/>
+                <constraint firstItem="n2F-WO-Asw" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Dho-hN-mSX"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="X15-7M-wVS" secondAttribute="trailing" constant="10" id="Krg-SC-NOk"/>
+                <constraint firstItem="X15-7M-wVS" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="SM2-wb-f0X"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="X15-7M-wVS" secondAttribute="bottom" constant="10" id="Vzc-Bb-Q0B"/>
+                <constraint firstItem="X15-7M-wVS" firstAttribute="top" secondItem="n2F-WO-Asw" secondAttribute="bottom" constant="2" id="sWQ-ad-glw"/>
+                <constraint firstItem="n2F-WO-Asw" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="6" id="yUx-8Q-T5D"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="-191.5" y="11.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="iconFontMax" width="20" height="17"/>
+        <image name="iconFontMin" width="13" height="11"/>
+    </resources>
+</document>

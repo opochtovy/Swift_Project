@@ -41,6 +41,11 @@ class PictureVC: ViewController, UICollectionViewDataSource, UICollectionViewDel
         self.cvPictures.register(UINib.init(nibName: "PictureCell", bundle: nil), forCellWithReuseIdentifier: PictureCell.reuseID)
         self.title = NSLocalizedString("Picture_choose_photo", comment: "")
 
+        //-- mock start
+        let barButtonContinue = UIBarButtonItem(title: "Continue", style: .plain, target: self, action: #selector(PictureVC.didPressContinueButton(_:)))
+        self.navigationItem.rightBarButtonItem = barButtonContinue
+        //-- mock end
+        
         self.btnTakePhoto.lbTitle.text = ""
         self.btnTakePhoto.ivButton.image = #imageLiteral(resourceName: "iconTakePhoto")
         self.btnTakePhoto.lbDetails.text = NSLocalizedString("Picture_take_new_photo", comment: "")
@@ -58,6 +63,17 @@ class PictureVC: ViewController, UICollectionViewDataSource, UICollectionViewDel
     }
     
     //MARK: - Actions
+    
+    //-- mock start
+    @IBAction private func didPressContinueButton(_ sender: UIButton) {
+        
+        self.tabBarController?.hidesBottomBarWhenPushed = true
+        //TODO: add check image
+        let ctrl = EditorVC(client: self.client, viewModel: EditorVM(client: client))
+        ctrl.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(ctrl, animated: true)
+    }
+    //-- mock end
     
     @IBAction private func didPressSeeAll(_ sender: UIButton) {
         
