@@ -54,17 +54,12 @@ class TabbedController: UITabBarController {
         bazarCtrl.tabBarItem = bazarBarItem
         let bazarNavCtrl = UINavigationController(rootViewController: bazarCtrl)
         
-        let welcomeViewController = WelcomeVC(client: self.viewModel.client)
-        let welcomeBarItem = UITabBarItem(title: NSLocalizedString(TabBarTitles.bazar, comment: "Bazar TabBar Item Title"), image: UIImage(named: TabBarImages.bazar), selectedImage: UIImage(named: TabBarImages.bazar))
-        welcomeViewController.tabBarItem = welcomeBarItem
-        let welcomeNavViewController = UINavigationController(rootViewController: welcomeViewController)
-        
         let writeViewController = WriteMainMenuVC(client: self.viewModel.client)
         let writeBarItem = UITabBarItem(title: NSLocalizedString(TabBarTitles.write, comment: "Write TabBar Item Title"), image: UIImage(named: TabBarImages.write), selectedImage: UIImage(named: TabBarImages.write))
         writeViewController.tabBarItem = writeBarItem
         let writeNavViewController = UINavigationController(rootViewController: writeViewController)
         
-        self.viewControllers = [bazarNavCtrl, welcomeNavViewController, writeNavViewController]
+        self.viewControllers = [bazarNavCtrl, writeNavViewController]
     }
     
     private func setNavigationBarAppearance() {

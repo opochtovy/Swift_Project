@@ -42,7 +42,6 @@
 		9E6144471FB305E400067295 /* CompleteEditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6144451FB305E400067295 /* CompleteEditProfileVC.swift */; };
 		9E6144481FB305E400067295 /* CompleteEditProfileVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E6144461FB305E400067295 /* CompleteEditProfileVC.xib */; };
 		9E61444A1FB305F900067295 /* CompleteEditProfileVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6144491FB305F900067295 /* CompleteEditProfileVM.swift */; };
-		9E62B69B1FB48AEC00AA814E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9E62B69A1FB48AEB00AA814E /* GoogleService-Info.plist */; };
 		9E6B14931FB0A42900220942 /* ParticipantsCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6B14921FB0A42900220942 /* ParticipantsCountView.swift */; };
 		9E6B14951FB0A43900220942 /* ParticipantsCountView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E6B14941FB0A43900220942 /* ParticipantsCountView.xib */; };
 		9E6B14A11FB0AC6200220942 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6B14A01FB0AC6200220942 /* UIView+Extension.swift */; };
@@ -58,6 +57,7 @@
 		9EADF2031FBC2F3F00B69FFE /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EADF2001FBC2F3E00B69FFE /* UserView.swift */; };
 		9EADF2041FBC2F3F00B69FFE /* UserView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EADF2011FBC2F3E00B69FFE /* UserView.xib */; };
 		9EADF2051FBC2F3F00B69FFE /* UserViewVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EADF2021FBC2F3E00B69FFE /* UserViewVM.swift */; };
+		9EADF20A1FBC725700B69FFE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9EADF2081FBC6B8E00B69FFE /* GoogleService-Info.plist */; };
 		9EB170AD1FB065FE00A70A10 /* TabbedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB170AC1FB065FE00A70A10 /* TabbedController.swift */; };
 		9EB170AF1FB0668500A70A10 /* TabbedControllerVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB170AE1FB0668500A70A10 /* TabbedControllerVM.swift */; };
 		9EBEBD441FBAFF4E00DE831F /* SessionTokenAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBEBD431FBAFF4E00DE831F /* SessionTokenAdapter.swift */; };
@@ -127,7 +127,6 @@
 		9E6144451FB305E400067295 /* CompleteEditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteEditProfileVC.swift; sourceTree = "<group>"; };
 		9E6144461FB305E400067295 /* CompleteEditProfileVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CompleteEditProfileVC.xib; sourceTree = "<group>"; };
 		9E6144491FB305F900067295 /* CompleteEditProfileVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteEditProfileVM.swift; sourceTree = "<group>"; };
-		9E62B69A1FB48AEB00AA814E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		9E62B69C1FB48DF900AA814E /* Kubazar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Kubazar.entitlements; sourceTree = "<group>"; };
 		9E6B14921FB0A42900220942 /* ParticipantsCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantsCountView.swift; sourceTree = "<group>"; };
 		9E6B14941FB0A43900220942 /* ParticipantsCountView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ParticipantsCountView.xib; sourceTree = "<group>"; };
@@ -145,6 +144,7 @@
 		9EADF2001FBC2F3E00B69FFE /* UserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
 		9EADF2011FBC2F3E00B69FFE /* UserView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserView.xib; sourceTree = "<group>"; };
 		9EADF2021FBC2F3E00B69FFE /* UserViewVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewVM.swift; sourceTree = "<group>"; };
+		9EADF2081FBC6B8E00B69FFE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		9EB170AC1FB065FE00A70A10 /* TabbedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbedController.swift; sourceTree = "<group>"; };
 		9EB170AE1FB0668500A70A10 /* TabbedControllerVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbedControllerVM.swift; sourceTree = "<group>"; };
 		9EBEBD431FBAFF4E00DE831F /* SessionTokenAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionTokenAdapter.swift; sourceTree = "<group>"; };
@@ -477,8 +477,8 @@
 		9E8964C21FACA21D004FFDCD /* Kubazar */ = {
 			isa = PBXGroup;
 			children = (
+				9EADF2081FBC6B8E00B69FFE /* GoogleService-Info.plist */,
 				9E62B69C1FB48DF900AA814E /* Kubazar.entitlements */,
-				9E62B69A1FB48AEB00AA814E /* GoogleService-Info.plist */,
 				9E8964D61FACA53B004FFDCD /* Classes */,
 				9E8964D71FACA53B004FFDCD /* Resources */,
 				9E8964D51FACA53B004FFDCD /* Supporting Files */,
@@ -696,12 +696,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9EADF20A1FBC725700B69FFE /* GoogleService-Info.plist in Resources */,
 				9E5E8E351FADD3F400CCCBDA /* WelcomeVC.xib in Resources */,
 				9EE16E981FB4A56500B4C5C5 /* StartPhoneVerificationVC.xib in Resources */,
 				9EFB036F1FB997BC00A78845 /* countryCodes.json in Resources */,
 				9E5E8E411FAE1E5500CCCBDA /* ForgotPasswordVC.xib in Resources */,
 				9E15889C1FB452E40063C816 /* BazarCell.xib in Resources */,
-				9E62B69B1FB48AEC00AA814E /* GoogleService-Info.plist in Resources */,
 				9E6B14951FB0A43900220942 /* ParticipantsCountView.xib in Resources */,
 				9EFB03641FB9800B00A78845 /* BazarDetailVC.xib in Resources */,
 				9E1588951FB44D330063C816 /* BazarVC.xib in Resources */,
