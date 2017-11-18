@@ -51,4 +51,33 @@ class ViewController: UIViewController {
         
         return [.portrait, .portraitUpsideDown, .landscapeLeft, .landscapeRight]
     }
+    
+    public func setBackButtonWithoutChevron(title: String) {
+        
+        let backButton = UIBarButtonItem(title: NSLocalizedString(title, comment: ""), style: .plain, target: self, action: #selector(ViewController.back))
+        
+        self.navigationItem.leftBarButtonItem = backButton
+    }
+    
+    public func setBackButton(title: String) {
+        
+        let image = UIImage(named:"backChevronWhite")
+        let button = UIButton(type: UIButtonType.custom)
+        button.addTarget(self, action: #selector(ViewController.back), for: UIControlEvents.touchUpInside)
+        button.setImage(image, for: UIControlState.normal)
+        button.setTitle(" " + NSLocalizedString(title, comment: ""), for: .normal)
+        button.sizeToFit()
+        let backButton = UIBarButtonItem(customView: button)
+        self.navigationItem.leftBarButtonItem  = backButton
+    }
+    
+    //MARK: - Private functions
+    
+    @objc private func back() {
+        
+        if let navigationController = self.navigationController {
+            
+            navigationController.popViewController(animated: true)
+        }
+    }
 }

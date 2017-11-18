@@ -47,6 +47,7 @@ class StartPhoneVerificationVC: ViewController, CountryCodesVCDelegate, UITextFi
         
         self.edgesForExtendedLayout = []
         
+        self.setBackButton(title: ButtonTitles.backButtonTitle)
         self.setNavigationBarAppearance()
         self.setStatusBarAppearance()
         self.localizeTitles()
@@ -67,8 +68,6 @@ class StartPhoneVerificationVC: ViewController, CountryCodesVCDelegate, UITextFi
     
     private func setNavigationBarAppearance() {
         
-        self.navigationItem.leftBarButtonItem?.title = "Test"
-         //NSLocalizedString(ButtonTitles.backButtonTitle, comment: "")
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString(ButtonTitles.nextButtonTitle, comment: ""), style: .plain, target: self, action: #selector(StartPhoneVerificationVC.actionNext))
     }
     

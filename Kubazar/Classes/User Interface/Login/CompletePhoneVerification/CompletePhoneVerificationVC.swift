@@ -48,6 +48,7 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate {
         
         self.edgesForExtendedLayout = []
         
+        self.setBackButton(title: CompletePhoneVerificationVC.backButtonTitle)
         self.setNavigationBarAppearance()
         self.localizeTitles()
         
@@ -71,7 +72,6 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate {
     
     private func setNavigationBarAppearance() {
         
-        self.navigationItem.leftBarButtonItem?.title = "Test" // NSLocalizedString(ButtonTitles.doneButtonTitle, comment: "")
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString(ButtonTitles.doneButtonTitle, comment: ""), style: .plain, target: self, action: #selector(CompletePhoneVerificationVC.actionDone))
     }
     
