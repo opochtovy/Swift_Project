@@ -67,7 +67,8 @@ class StartPhoneVerificationVC: ViewController, CountryCodesVCDelegate, UITextFi
     
     private func setNavigationBarAppearance() {
         
-        self.navigationItem.leftBarButtonItem?.title = NSLocalizedString(ButtonTitles.backButtonTitle, comment: "")
+        self.navigationItem.leftBarButtonItem?.title = "Test"
+         //NSLocalizedString(ButtonTitles.backButtonTitle, comment: "")
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString(ButtonTitles.nextButtonTitle, comment: ""), style: .plain, target: self, action: #selector(StartPhoneVerificationVC.actionNext))
     }
     

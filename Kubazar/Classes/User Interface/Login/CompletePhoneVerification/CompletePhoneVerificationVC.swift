@@ -51,7 +51,7 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate {
         self.setNavigationBarAppearance()
         self.localizeTitles()
         
-        self.sendPhoneNumber()
+//        self.sendPhoneNumber()
         
         self.allowOnlyOneDigitOnTextFields()
     }
@@ -71,8 +71,8 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate {
     
     private func setNavigationBarAppearance() {
         
-        self.navigationItem.leftBarButtonItem?.title = NSLocalizedString(CompletePhoneVerificationVC.backButtonTitle, comment: "Title for Phone Complete Verification")
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString(ButtonTitles.doneButtonTitle, comment: "Done Button Title"), style: .plain, target: self, action: #selector(CompletePhoneVerificationVC.actionDone))
+        self.navigationItem.leftBarButtonItem?.title = "Test" // NSLocalizedString(ButtonTitles.doneButtonTitle, comment: "")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString(ButtonTitles.doneButtonTitle, comment: ""), style: .plain, target: self, action: #selector(CompletePhoneVerificationVC.actionDone))
     }
     
     private func localizeTitles() {
@@ -208,6 +208,9 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate {
     
     @objc private func actionDone() {
 
+        let editProfileViewController = StartEditProfileVC(client: self.client)
+        self.navigationController?.pushViewController(editProfileViewController, animated: true)
+/*
         self.verificationCode = ""
         for textField in self.codeTextFields {
             
@@ -244,6 +247,7 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate {
                 self.navigationController?.pushViewController(editProfileViewController, animated: true)
             }
         }
+*/
     }
     
     @objc func textFieldDidChange(textField: UITextField){

@@ -43,6 +43,10 @@ class ViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         
         return [.portrait, .portraitUpsideDown, .landscapeLeft, .landscapeRight]

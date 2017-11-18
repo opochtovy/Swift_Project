@@ -48,12 +48,6 @@ class StartEditProfileVC: ViewController, UITextFieldDelegate {
         self.localizeTitles()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        self.setStatusBarAppearance()
-    }
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         self.view.endEditing(true)
@@ -69,24 +63,9 @@ class StartEditProfileVC: ViewController, UITextFieldDelegate {
     
     private func setNavigationBarAppearance() {
         
-        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        UINavigationBar.appearance().shadowImage = UIImage()
-        UINavigationBar.appearance().backgroundColor = #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)
-        UINavigationBar.appearance().tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor : #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)]
-        
-        UIApplication.shared.statusBarStyle = .lightContent
-        
         self.navigationItem.setHidesBackButton(true, animated:true)
         self.navigationItem.leftBarButtonItem = nil
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString(ButtonTitles.doneButtonTitle, comment: "Done Button Title"), style: .plain, target: self, action: #selector(StartEditProfileVC.done))
-    }
-    
-    private func setStatusBarAppearance() {
-        
-        let statusBarView = UIApplication.shared.value(forKey: "statusBar") as? UIView
-        statusBarView?.backgroundColor = #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)
-        statusBarView?.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     }
     
     private func localizeTitles() {
@@ -196,7 +175,10 @@ class StartEditProfileVC: ViewController, UITextFieldDelegate {
     //MARK: - Actions
     
     @objc private func done() {
-        
+
+        let completeEditProfileViewController = CompleteEditProfileVC(client: self.client)
+        self.navigationController?.pushViewController(completeEditProfileViewController, animated: true)
+/*
         if let email = self.emailTextField.text, let password = self.passwordTextField.text, let confirmPassword = self.confirmPasswordTextField.text  {
             
             if email.count < 7 {
@@ -233,5 +215,6 @@ class StartEditProfileVC: ViewController, UITextFieldDelegate {
                 print(success)
             })
         }
+*/
     }
 }
