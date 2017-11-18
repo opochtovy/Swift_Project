@@ -48,13 +48,14 @@ class StartPhoneVerificationVC: ViewController, CountryCodesVCDelegate, UITextFi
         self.edgesForExtendedLayout = []
         
         self.setNavigationBarAppearance()
+        self.setStatusBarAppearance()
         self.localizeTitles()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        self.setStatusBarAppearance()
+        self.navigationController?.isNavigationBarHidden = false
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -66,15 +67,8 @@ class StartPhoneVerificationVC: ViewController, CountryCodesVCDelegate, UITextFi
     
     private func setNavigationBarAppearance() {
         
-        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        UINavigationBar.appearance().shadowImage = UIImage()
-        UINavigationBar.appearance().backgroundColor = #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)
-        UINavigationBar.appearance().tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor : #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)]
-        
-        UIApplication.shared.statusBarStyle = .lightContent
-        
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString(ButtonTitles.nextButtonTitle, comment: "Next Button Title"), style: .plain, target: self, action: #selector(StartPhoneVerificationVC.actionNext))
+        self.navigationItem.leftBarButtonItem?.title = NSLocalizedString(ButtonTitles.backButtonTitle, comment: "")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString(ButtonTitles.nextButtonTitle, comment: ""), style: .plain, target: self, action: #selector(StartPhoneVerificationVC.actionNext))
     }
     
     private func setStatusBarAppearance() {
@@ -82,18 +76,20 @@ class StartPhoneVerificationVC: ViewController, CountryCodesVCDelegate, UITextFi
         let statusBarView = UIApplication.shared.value(forKey: "statusBar") as? UIView
         statusBarView?.backgroundColor = #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)
         statusBarView?.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        
+        UIApplication.shared.statusBarStyle = .lightContent
     }
     
     private func localizeTitles() {
         
-        self.title = NSLocalizedString(StartPhoneVerificationVC.titleText, comment: "Title for Phone Verification")
+        self.title = NSLocalizedString(StartPhoneVerificationVC.titleText, comment: "")
         
-        self.descriptionLabel.text = NSLocalizedString(StartPhoneVerificationVC.descriptionLabelText, comment: "Description on Phone Verification")
-        self.countryLabel.text = NSLocalizedString(StartPhoneVerificationVC.countryLabelText, comment: "Country Label on Phone Verification")
+        self.descriptionLabel.text = NSLocalizedString(StartPhoneVerificationVC.descriptionLabelText, comment: "")
+        self.countryLabel.text = NSLocalizedString(StartPhoneVerificationVC.countryLabelText, comment: "")
         self.countryValueLabel.text = NSLocalizedString(StartPhoneVerificationVC.numberPlaceholder, comment: "")
-        self.numberLabel.text = NSLocalizedString(StartPhoneVerificationVC.numberLabelText, comment: "Number Label on Phone Verification")
-        self.confirmNumberLabel.text = NSLocalizedString(StartPhoneVerificationVC.confirmNumberLabelText, comment: "Confirm Number Label on Phone Verification")
-        self.numberTextField.placeholder = NSLocalizedString(StartPhoneVerificationVC.numberPlaceholder, comment: "Placelholder for Number TextField")
+        self.numberLabel.text = NSLocalizedString(StartPhoneVerificationVC.numberLabelText, comment: "")
+        self.confirmNumberLabel.text = NSLocalizedString(StartPhoneVerificationVC.confirmNumberLabelText, comment: "")
+        self.numberTextField.placeholder = NSLocalizedString(StartPhoneVerificationVC.numberPlaceholder, comment: "")
     }
     
     private func showConfirmationAlert() {
@@ -118,16 +114,16 @@ class StartPhoneVerificationVC: ViewController, CountryCodesVCDelegate, UITextFi
         let wholeNumberForMessage = self.viewModel.getCountryCode() + " " + number
         let wholeNumberToSend = "+375297509711"
         // end for testing
-        let message = wholeNumberForMessage + NSLocalizedString(StartPhoneVerificationVC.confirmationAlertMessage, comment: "Description on Phone Verification")
+        let message = wholeNumberForMessage + NSLocalizedString(StartPhoneVerificationVC.confirmationAlertMessage, comment: "")
         
-        let alertController = UIAlertController(title: NSLocalizedString(StartPhoneVerificationVC.confirmationAlertTitle, comment: "Title for Confirmation alert on Phone Verification"), message: message, preferredStyle: .alert)
+        let alertController = UIAlertController(title: NSLocalizedString(StartPhoneVerificationVC.confirmationAlertTitle, comment: ""), message: message, preferredStyle: .alert)
         
-        let cancelAction = UIAlertAction(title: NSLocalizedString(ButtonTitles.editButtonTitle, comment: "Edit Button Title on Phone Verification"), style: .cancel) { (_) in
+        let cancelAction = UIAlertAction(title: NSLocalizedString(ButtonTitles.editButtonTitle, comment: ""), style: .cancel) { (_) in
             
             alertController.dismiss(animated: true, completion: nil)
         }
         
-        let okAction = UIAlertAction(title: NSLocalizedString(ButtonTitles.yesButtonTitle, comment: "Yes Button Title on Phone Verification"), style: .default) { (_) in
+        let okAction = UIAlertAction(title: NSLocalizedString(ButtonTitles.yesButtonTitle, comment: ""), style: .default) { (_) in
             
             let completePhoneVerificationViewController = CompletePhoneVerificationVC(client: self.client)
             completePhoneVerificationViewController.viewModel.number = wholeNumberToSend

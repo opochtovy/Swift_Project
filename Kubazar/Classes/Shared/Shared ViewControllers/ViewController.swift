@@ -43,36 +43,8 @@ class ViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        if let navigationController = self.navigationController, navigationController.viewControllers.count > 1 {
-            
-            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString(ButtonTitles.backButtonTitle, comment: "Back Button Title"), style: .plain, target: self, action: #selector(ViewController.back))
-        }
-    }
-    
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         
         return [.portrait, .portraitUpsideDown, .landscapeLeft, .landscapeRight]
-    }
-    
-    //MARK: - Public functions
-    
-    public func overrideBackButton() {
-        
-        let backItem = UIBarButtonItem()
-        backItem.title = ""
-        navigationItem.backBarButtonItem = backItem
-    }
-    
-    //MARK: - Private functions
-    
-    @objc private func back() {
-        
-        if let navigationController = self.navigationController {
-            
-            navigationController.popViewController(animated: true)
-        }
     }
 }

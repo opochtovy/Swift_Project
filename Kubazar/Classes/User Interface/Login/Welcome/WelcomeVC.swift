@@ -35,6 +35,7 @@ class WelcomeVC: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.setNavigationBarAppearance()
         self.localizeTitles()
     }
     
@@ -46,6 +47,7 @@ class WelcomeVC: ViewController {
         }
         self.wasLoadedBefore = true
         
+        self.hideNavigationBar()
         self.setStatusBarAppearance()
     }
     
@@ -65,6 +67,22 @@ class WelcomeVC: ViewController {
         let statusBarView = UIApplication.shared.value(forKey: "statusBar") as? UIView
         statusBarView?.backgroundColor = UIColor.clear
         statusBarView?.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        
+        UIApplication.shared.statusBarStyle = .default
+    }
+    
+    private func setNavigationBarAppearance() {
+        
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        UINavigationBar.appearance().shadowImage = UIImage()
+        UINavigationBar.appearance().backgroundColor = #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)
+        UINavigationBar.appearance().tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor : #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)]
+    }
+    
+    private func hideNavigationBar() {
+        
+        self.navigationController?.isNavigationBarHidden = true
     }
     
     //MARK: - Actions
@@ -72,8 +90,7 @@ class WelcomeVC: ViewController {
     @IBAction private func actionRegister(_ sender: UIButton) {
         
         let phoneVerificationVC = StartPhoneVerificationVC(client: self.viewModel.client)
-        let phoneVerificationNavViewController = UINavigationController(rootViewController: phoneVerificationVC)
-        self.present(phoneVerificationNavViewController, animated: true, completion: nil)
+        self.navigationController?.pushViewController(phoneVerificationVC, animated: true)
     }
     
     @IBAction private func actionLogin(_ sender: UIButton) {
