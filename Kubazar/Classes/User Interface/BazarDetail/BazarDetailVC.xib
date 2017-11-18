@@ -40,19 +40,19 @@
                     <color key="textColor" red="0.54000000000000004" green="0.54000000000000004" blue="0.54000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="JWJ-Ow-i8f">
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="JWJ-Ow-i8f">
                     <rect key="frame" x="16" y="489" width="343" height="35"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BLF-fZ-k0O" customClass="UserView" customModule="Kubazar" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="103.5" height="35"/>
+                            <rect key="frame" x="0.0" y="0.0" width="107.5" height="35"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tXd-y0-40M" customClass="UserView" customModule="Kubazar" customModuleProvider="target">
-                            <rect key="frame" x="119.5" y="0.0" width="104" height="35"/>
+                            <rect key="frame" x="117.5" y="0.0" width="108" height="35"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8iX-0p-7ix" customClass="UserView" customModule="Kubazar" customModuleProvider="target">
-                            <rect key="frame" x="239.5" y="0.0" width="103.5" height="35"/>
+                            <rect key="frame" x="235.5" y="0.0" width="107.5" height="35"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                     </subviews>

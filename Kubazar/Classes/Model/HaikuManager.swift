@@ -11,10 +11,19 @@
 class HaikuManager {
 
     public static let shared: HaikuManager = HaikuManager()
-    
+    public var currentUser: User
     private(set) var haikus: [Haiku] = []
     
     init() {
+        
+        //--Mock
+        let user = User()
+        user.id = 1
+        user.firstName = "Serge"
+        user.lastName = "Rylko"
+        user.avatarURL = "https://vignette.wikia.nocookie.net/animal-jam-clans-1/images/0/0d/Shiba-inu-puppy-2.jpg"
+        self.currentUser = user
+        
         self.prepareData()
     }
     
@@ -118,18 +127,6 @@ class HaikuManager {
         let field23 = Field(user: user1, text: "Solo1 happens test")
         let field24 = Field(user: user1, text: "Solo2 happens at 11")
         
-//        let field25 = Field(user: user4, text: "Nothing happens")
-//        let field26 = Field(user: user1, text: "Solo1 happens")
-//        let field27 = Field(user: user1, text: "Solo2 happens")
-//        
-//        let field28 = Field(user: user4, text: "Nothing happens")
-//        let field29 = Field(user: user1, text: "Solo1 happens")
-//        let field30 = Field(user: user1, text: "Solo2 happens")
-//        
-//        let field31 = Field(user: user4, text: "Nothing happens")
-//        let field32 = Field(user: user1, text: "Solo1 happens")
-//        let field33 = Field(user: user1, text: "Solo2 happens")
-        
         ////-- haikus
         let h1 = Haiku()
         h1.id = 2
@@ -140,6 +137,7 @@ class HaikuManager {
         h1.color = .white
         h1.published = false
         h1.liked = true
+        h1.players = [h1.creator!, user2, user3]
         
         let h2 = Haiku()
         h2.id = 6
@@ -150,6 +148,7 @@ class HaikuManager {
         h2.color = .black
         h2.published = true
         h2.liked = true
+        h2.players = [user3, user4, user1]
         
         let h3 = Haiku()
         h3.id = 3
@@ -160,6 +159,7 @@ class HaikuManager {
         h3.color = .white
         h3.published = true
         h3.liked = false
+        h3.players = [user2, user3, h3.creator!]
         
         let h4 = Haiku()
         h4.id = 4
@@ -170,6 +170,7 @@ class HaikuManager {
         h4.color = .white
         h4.published = true
         h4.liked = false
+        h4.players = [user4, h4.creator!, user2]
         
         let h5 = Haiku()
         h5.id = 5
@@ -180,6 +181,7 @@ class HaikuManager {
         h5.color = .black
         h5.published = false
         h5.liked = true
+        h5.players = [user4, h5.creator!]
         
         let h6 = Haiku()
         h6.id = 6
@@ -190,6 +192,7 @@ class HaikuManager {
         h6.color = .white
         h6.published = true
         h6.liked = true
+        h6.players = [user4, h6.creator!, user2]
         
         let h7 = Haiku()
         h7.id = 7
@@ -200,6 +203,7 @@ class HaikuManager {
         h7.color = .white
         h7.published = true
         h7.liked = false
+        h7.players = [h7.creator!, user1, user2]
         
         let h8 = Haiku()
         h8.id = 8
@@ -210,6 +214,7 @@ class HaikuManager {
         h8.color = .white
         h8.published = false
         h8.liked = true
+        h8.players = [h8.creator!]
         
         self.haikus = [h1, h2, h3, h4, h5, h6, h7, h8]
     }

@@ -59,7 +59,7 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
     private func updateContent() {
         
         self.viewModel.refreshData()
-        self.tblView.reloadData()
+        self.tblView.reloadSections(IndexSet.init(integer: 0), with: .fade)
     }
     
     //MARK: - Actions

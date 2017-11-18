@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AccessAlertView" customModule="Kubazar" customModuleProvider="target">
+            <connections>
+                <outlet property="btnAskAccess" destination="AaR-in-WX2" id="dQ2-NF-GIl"/>
+                <outlet property="view" destination="iN0-l3-epB" id="76B-EF-3rK"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="491" height="258"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backBlur" translatesAutoresizingMaskIntoConstraints="NO" id="6tb-d7-2I4">
+                    <rect key="frame" x="0.0" y="0.0" width="491" height="258"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please allow access to your photos" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gAo-Tu-YcN">
+                    <rect key="frame" x="171.5" y="65" width="148" height="36"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="148" id="MjB-r3-GiB"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This allow Kubazar to use photos from your library and share them" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ldf-Lt-XRw">
+                    <rect key="frame" x="163" y="106" width="165" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="165" id="Cje-EI-L1f"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AaR-in-WX2">
+                    <rect key="frame" x="164.5" y="146" width="162" height="33"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="Enable library access">
+                        <color key="titleColor" red="0.34509803921568627" green="0.74117647058823533" blue="0.73333333333333328" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="Ldf-Lt-XRw" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="2cA-tq-Usz"/>
+                <constraint firstItem="AaR-in-WX2" firstAttribute="top" secondItem="Ldf-Lt-XRw" secondAttribute="bottom" constant="16" id="2mM-2q-hS7"/>
+                <constraint firstItem="6tb-d7-2I4" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="5bo-XU-kB9"/>
+                <constraint firstItem="Ldf-Lt-XRw" firstAttribute="top" secondItem="gAo-Tu-YcN" secondAttribute="bottom" constant="5" id="CVc-D9-Bj8"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="6tb-d7-2I4" secondAttribute="trailing" id="W2J-CM-NE7"/>
+                <constraint firstItem="AaR-in-WX2" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="dz1-F6-P6G"/>
+                <constraint firstItem="gAo-Tu-YcN" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="g2U-s5-gkr"/>
+                <constraint firstItem="gAo-Tu-YcN" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="65" id="qtV-eD-K3G"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="6tb-d7-2I4" secondAttribute="bottom" id="v5L-uC-ogV"/>
+                <constraint firstItem="6tb-d7-2I4" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="yJa-lm-5gV"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="112.5" y="-127"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="backBlur" width="375" height="270"/>
+    </resources>
+</document>
