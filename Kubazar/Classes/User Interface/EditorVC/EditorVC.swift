@@ -35,7 +35,7 @@ class EditorVC: ViewController, DecoratorDelegate, UITextFieldDelegate {
         
         self.title = NSLocalizedString("TabBarTitles_write", comment: "")
         
-        let barButton = UIBarButtonItem(title: "Continue", style: .plain, target: self, action: #selector(EditorVC.didPressContinueButton(_:)))
+        let barButton = UIBarButtonItem(title:NSLocalizedString("Picture_continue", comment: ""), style: .plain, target: self, action: #selector(EditorVC.didPressContinueButton(_:)))
         self.navigationItem.setRightBarButton(barButton, animated: true)
         
         self.updateContent()

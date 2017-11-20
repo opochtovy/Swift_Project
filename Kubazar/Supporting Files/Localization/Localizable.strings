@@ -116,6 +116,7 @@
 /**/ "Picture_surprise_me" = "SURPRISE ME!";
 /**/ "Picture_see_all" = "See all";
 /**/ "Picture_collapse" = "Collapse";
+/**/ "Picture_continue" = "Continue";
 
 /*EditorVC*/
 /**/
