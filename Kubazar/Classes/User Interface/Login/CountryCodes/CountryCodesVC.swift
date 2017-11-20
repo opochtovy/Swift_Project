@@ -38,7 +38,7 @@ class CountryCodesVC: ViewController, UITableViewDelegate, UITableViewDataSource
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.setNavigationBarAppearance()
+        self.setBackButton(title: ButtonTitles.backButtonTitle, action: #selector(CountryCodesVC.cancel))
         self.localizeTitles()
         
         if let path = Bundle.main.path(forResource: "countryCodes", ofType: "json") {
@@ -51,11 +51,6 @@ class CountryCodesVC: ViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     //MARK: - Private functions
-    
-    private func setNavigationBarAppearance() {
-        
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString(ButtonTitles.backButtonTitle, comment: ""), style: .plain, target: self, action: #selector(CountryCodesVC.cancel))
-    }
     
     private func localizeTitles() {
         

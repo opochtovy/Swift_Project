@@ -63,9 +63,14 @@ class ViewController: UIViewController {
     
     public func setBackButton(title: String) {
         
+        self.setBackButton(title: title, action: #selector(ViewController.back))
+    }
+    
+    public func setBackButton(title: String, action: Selector) {
+        
         let image = UIImage(named:"backChevronWhite")
         let button = UIButton(type: UIButtonType.custom)
-        button.addTarget(self, action: #selector(ViewController.back), for: UIControlEvents.touchUpInside)
+        button.addTarget(self, action: action, for: UIControlEvents.touchUpInside)
         button.setImage(image, for: UIControlState.normal)
         button.setTitle(" " + NSLocalizedString(title, comment: ""), for: .normal)
         button.sizeToFit()
