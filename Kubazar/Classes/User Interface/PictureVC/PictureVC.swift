@@ -95,7 +95,7 @@ class PictureVC: ViewController, UICollectionViewDataSource, UICollectionViewDel
     
     @IBAction private func didPressTakeNewPhoto(_ sender: UIButton) {
         
-        guard UIImagePickerController.isSourceTypeAvailable(.photoLibrary) else { return }
+        guard UIImagePickerController.isSourceTypeAvailable(.camera) else { return }
         
         self.present(self.imagePicker, animated: true) {
          
