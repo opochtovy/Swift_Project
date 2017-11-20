@@ -11,17 +11,42 @@ import Foundation
 
 class FontsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
+    
     @IBOutlet private weak var pvFonts: UIPickerView!
     @IBOutlet private weak var slScaleSize: UISlider!
     
-    public var delegate: StyleEditorDelegate?
+    public var delegate: DecoratorDelegate?
     
-    private var dataSource : [String] = []
+    private lazy var dataSource : [String] = {
+        
+        var fontNames = UIFont.familyNames
+        fontNames.insert(Decorator.defaults.familyName, at: 0)
+        
+        return fontNames
+    }()
+    
+    private let decorator : Decorator
+    
+    //MARK: - Lifecycle
+    
+    init(withDecorator decorator: Decorator) {
+        self.decorator = decorator
+        super.init(nibName: "FontsVC", bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.slScaleSize.setThumbImage(#imageLiteral(resourceName: "iconSliderThumb"), for: .normal)
-        self.dataSource = UIFont.familyNames
+        self.slScaleSize.setThumbImage(#imageLiteral(resourceName: "iconSliderThumb"), for: .highlighted)
+        
+        self.slScaleSize.minimumValue = Float(Decorator.defaults.minFontSize)
+        self.slScaleSize.maximumValue = Float(Decorator.defaults.maxFontSize)
+        
+        self.updateContent()        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -29,6 +54,34 @@ class FontsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
         self.view.layer.cornerRadius = 0
         self.view.superview?.layer.cornerRadius = 4.0
     }
+    
+    //MARK: -  Private functions
+    
+    private func updateContent() {
+        
+        self.slScaleSize.value = Float(self.decorator.fontSize)
+        
+        if let fontFamilyIndex = self.dataSource.index(of: self.decorator.fontFamily) {
+            
+            self.pvFonts.selectRow(fontFamilyIndex, inComponent: 0, animated: true)
+        }        
+    }
+    
+    private func sendDecoratorChanges() {
+        
+        if let delegate = self.delegate {
+            
+            delegate.didUpdateDecorator(viewController: self)
+        }
+    }
+    
+    //MARK: - Actions
+    @IBAction func didChangeScaleSizeValue(_ sender: UISlider) {
+        
+        self.decorator.fontSize = CGFloat(sender.value)
+        self.sendDecoratorChanges()
+    }
+    
     
     //MARK: -  UIPickerViewDataSource,
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -56,5 +109,18 @@ class FontsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
         pickerLabel?.text = familyName
         
         return pickerLabel!;
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        if UIFont.init(name: self.dataSource[row], size: CGFloat(self.slScaleSize.value)) != nil {
+            
+            self.decorator.fontFamily = self.dataSource[row]
+            self.sendDecoratorChanges()
+        }
+        else {
+            
+            print("-- Decorator error")
+        }
     }
 }

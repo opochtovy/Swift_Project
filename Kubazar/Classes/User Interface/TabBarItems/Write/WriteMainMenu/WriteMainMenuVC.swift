@@ -28,8 +28,14 @@ class WriteMainMenuVC: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.edgesForExtendedLayout = [] //iOS 10 and erlier.
         
         self.updateContent()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.setStatusBarAppearance()
     }
     
     //MARK: - Actions
@@ -59,6 +65,13 @@ class WriteMainMenuVC: ViewController {
         
         self.title = NSLocalizedString("WriteMainMenuTitles_title", comment: "")
         self.headerLabel.text = NSLocalizedString("WriteMainMenuTitles_headerLabel", comment: "").uppercased()
+    }
+    
+    private func setStatusBarAppearance() {
+        
+        let statusBarView = UIApplication.shared.value(forKey: "statusBar") as? UIView
+        statusBarView?.backgroundColor = #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)
+        statusBarView?.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     }
 
 

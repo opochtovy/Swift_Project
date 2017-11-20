@@ -22,7 +22,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7wc-RP-rlS">
-                    <rect key="frame" x="16" y="-20" width="343" height="579"/>
+                    <rect key="frame" x="16" y="0.0" width="343" height="559"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <inset key="scrollIndicatorInsets" minX="0.0" minY="23" maxX="-10" maxY="0.0"/>
                     <connections>
@@ -34,7 +34,7 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="7wc-RP-rlS" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="RNG-sD-mgJ"/>
-                <constraint firstItem="7wc-RP-rlS" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="-20" id="Y1e-51-2r0"/>
+                <constraint firstItem="7wc-RP-rlS" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Y1e-51-2r0"/>
                 <constraint firstItem="7wc-RP-rlS" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="fJM-9e-UPC"/>
                 <constraint firstItem="7wc-RP-rlS" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="xVp-S7-y3L"/>
             </constraints>

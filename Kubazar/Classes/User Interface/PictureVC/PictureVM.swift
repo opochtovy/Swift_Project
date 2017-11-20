@@ -18,12 +18,26 @@ class PictureVM: BaseVM {
     }
     
     public var chosenImageData: Data?
+    public var isCollectionExpanded: Bool = false
     
     //MARK: - Public functions
     public func prepareModel() {
         
         guard self.accessAllowed == true else { return }
         self.assets = PhotoLibraryManager.shared.getAllPhotos()
+        self.assets.append(contentsOf: PhotoLibraryManager.shared.getAllPhotos())
+        self.assets.append(contentsOf: PhotoLibraryManager.shared.getAllPhotos())
+        self.assets.append(contentsOf: PhotoLibraryManager.shared.getAllPhotos())
+    }
+    
+    public func getEditorVM() -> EditorVM {
+        
+        let haiku = Haiku()
+        haiku.id = 25 // TODO
+        haiku.creator = HaikuManager.shared.currentUser
+        
+        
+        return EditorVM(client: self.client, haiku: haiku)
     }
     
     public func getPictureCellVM(forIndexPath indexPath: IndexPath) -> PictureCellVM? {

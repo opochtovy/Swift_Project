@@ -8,12 +8,22 @@
 
 import UIKit
 
-class PictureVC: ViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class PictureVC: ViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-    @IBOutlet private weak var cvPictures: UICollectionView!    
+    private enum Constants {
+        
+        static let numberOfItemsInRow : CGFloat = 3
+        static let numberOfItemsInSection : CGFloat = 2
+    }
+    
+    @IBOutlet private weak var cvPictures: UICollectionView!
+    @IBOutlet private weak var btnSeeAll: UIButton!
     @IBOutlet private weak var btnTakePhoto: ChoosePictureButton!
     @IBOutlet private weak var btnRandomPhoto: ChoosePictureButton!
     @IBOutlet private weak var vAccessAlert: AccessAlertView!
+    @IBOutlet weak var cnstrLeftToPictures: NSLayoutConstraint!
+    @IBOutlet weak var cnstrCollectionContainerHeight: NSLayoutConstraint!
+    @IBOutlet weak var cnstrCollectionContainerToBottom: NSLayoutConstraint!
     
     private lazy var imagePicker: UIImagePickerController = {
         
@@ -38,6 +48,7 @@ class PictureVC: ViewController, UICollectionViewDataSource, UICollectionViewDel
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.edgesForExtendedLayout = []
         self.cvPictures.register(UINib.init(nibName: "PictureCell", bundle: nil), forCellWithReuseIdentifier: PictureCell.reuseID)
         self.title = NSLocalizedString("Picture_choose_photo", comment: "")
 
@@ -69,7 +80,7 @@ class PictureVC: ViewController, UICollectionViewDataSource, UICollectionViewDel
         
         self.tabBarController?.hidesBottomBarWhenPushed = true
         //TODO: add check image
-        let ctrl = EditorVC(client: self.client, viewModel: EditorVM(client: client))
+        let ctrl = EditorVC(client: self.client, viewModel: self.viewModel.getEditorVM())
         ctrl.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(ctrl, animated: true)
     }
@@ -77,6 +88,9 @@ class PictureVC: ViewController, UICollectionViewDataSource, UICollectionViewDel
     
     @IBAction private func didPressSeeAll(_ sender: UIButton) {
         
+        self.viewModel.isCollectionExpanded = !self.viewModel.isCollectionExpanded
+        
+        self.updateCollectionViewSize()
     }
     
     @IBAction private func didPressTakeNewPhoto(_ sender: UIButton) {
@@ -123,6 +137,39 @@ class PictureVC: ViewController, UICollectionViewDataSource, UICollectionViewDel
             self.vAccessAlert.isHidden = false
             self.cvPictures.isHidden = true
         }
+        
+        self.updateCollectionViewSize()
+    }
+    
+    private func updateCollectionViewSize() {
+
+        if self.viewModel.isCollectionExpanded == false {
+            
+            let layout = self.cvPictures.collectionViewLayout as! UICollectionViewFlowLayout
+            let cellHeight = self.collectionView(self.cvPictures, layout: layout, sizeForItemAt: IndexPath(row: 0, section: 0)).height
+                
+            self.cnstrCollectionContainerHeight.constant = cellHeight * Constants.numberOfItemsInSection + layout.minimumInteritemSpacing * (Constants.numberOfItemsInSection - 1)
+            self.cnstrCollectionContainerHeight.priority = UILayoutPriority(900.0)
+            self.cnstrCollectionContainerToBottom.priority = UILayoutPriority(500.0)
+            
+            self.cvPictures.isScrollEnabled = false
+            self.btnTakePhoto.isHidden = false
+            self.btnRandomPhoto.isHidden = false
+            
+            self.btnSeeAll.setTitle(NSLocalizedString("Picture_see_all", comment: ""), for: .normal)
+            self.cvPictures.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        }
+        else {
+   
+            self.cnstrCollectionContainerHeight.priority = UILayoutPriority(500.0)
+            self.cnstrCollectionContainerToBottom.priority = UILayoutPriority(900.0)
+            
+            self.cvPictures.isScrollEnabled = true
+            self.btnTakePhoto.isHidden = true
+            self.btnRandomPhoto.isHidden = true
+            
+            self.btnSeeAll.setTitle(NSLocalizedString("Picture_collapse", comment: ""), for: .normal)
+        }
     }
     
     //MARK: - UICollectionViewDataSource
@@ -139,6 +186,19 @@ class PictureVC: ViewController, UICollectionViewDataSource, UICollectionViewDel
         return cell
     }
     
+    //MARK: - UICollectionViewDelegate
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        self.viewModel.chooseImage(atIndexPath: indexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let interItemSpacing = (collectionViewLayout as! UICollectionViewFlowLayout).minimumInteritemSpacing
+        let side: CGFloat = (UIScreen.main.bounds.width - interItemSpacing * (Constants.numberOfItemsInRow - 1) - self.cnstrLeftToPictures.constant * 2) / Constants.numberOfItemsInRow
+        return CGSize(width: side, height: side)
+    }
+    
     //MARK: - UICollectionViewDataSource
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
@@ -149,13 +209,6 @@ class PictureVC: ViewController, UICollectionViewDataSource, UICollectionViewDel
         
         picker.dismiss(animated: true, completion: nil)
     }
-    
-    //MARK: - UICollectionViewDelegate
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        self.viewModel.chooseImage(atIndexPath: indexPath)
-    }
-    
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         
