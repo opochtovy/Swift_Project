@@ -52,7 +52,7 @@ class FriendsVM: BaseVM {
         user4.lastName = "Owlman"
         user4.avatarURL = URL(string: "https://cdn.pixabay.com/photo/2017/03/06/15/44/bird-2121811_960_720.jpg")
         
-        self.friends = [user1, user2, user3, user4]
+        self.friends = [user2, user3, user4]
         
         completion(true, nil)
     }

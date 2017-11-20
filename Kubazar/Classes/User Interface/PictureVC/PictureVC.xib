@@ -13,7 +13,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PictureVC" customModule="Kubazar" customModuleProvider="target">
             <connections>
                 <outlet property="btnRandomPhoto" destination="uMF-nE-L16" id="aay-hy-dGr"/>
+                <outlet property="btnSeeAll" destination="qCY-OS-yPA" id="m4g-wr-KdD"/>
                 <outlet property="btnTakePhoto" destination="Niw-XL-gMF" id="rse-Wl-TJt"/>
+                <outlet property="cnstrCollectionContainerHeight" destination="oj9-Gc-lod" id="hMM-1c-LIg"/>
+                <outlet property="cnstrCollectionContainerToBottom" destination="Sth-VI-eYa" id="EFZ-kB-f3E"/>
+                <outlet property="cnstrLeftToPictures" destination="nnI-aw-xj8" id="ACd-Vq-RK0"/>
                 <outlet property="cvPictures" destination="IZV-5K-MXv" id="FZ3-9x-qwG"/>
                 <outlet property="vAccessAlert" destination="Zn9-H4-tBu" id="fwK-ab-TlW"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -48,10 +52,10 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zHn-oh-NVY">
                     <rect key="frame" x="0.0" y="54" width="320" height="240"/>
                     <subviews>
-                        <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="IZV-5K-MXv">
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="IZV-5K-MXv">
                             <rect key="frame" x="16" y="0.0" width="288" height="240"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="6" minimumInteritemSpacing="6" id="kGW-pF-F3s">
+                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="6" minimumInteritemSpacing="6" id="kGW-pF-F3s">
                                 <size key="itemSize" width="117" height="117"/>
                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                 <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -69,13 +73,13 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstItem="IZV-5K-MXv" firstAttribute="centerX" secondItem="zHn-oh-NVY" secondAttribute="centerX" id="CQD-Ic-rOK"/>
                         <constraint firstItem="Zn9-H4-tBu" firstAttribute="top" secondItem="zHn-oh-NVY" secondAttribute="top" id="EWb-M1-bh6"/>
                         <constraint firstAttribute="bottom" secondItem="IZV-5K-MXv" secondAttribute="bottom" id="LPS-Km-wZB"/>
                         <constraint firstItem="IZV-5K-MXv" firstAttribute="top" secondItem="zHn-oh-NVY" secondAttribute="top" id="OWl-WY-0l6"/>
                         <constraint firstAttribute="bottom" secondItem="Zn9-H4-tBu" secondAttribute="bottom" id="SuQ-o1-zvA"/>
                         <constraint firstItem="Zn9-H4-tBu" firstAttribute="leading" secondItem="zHn-oh-NVY" secondAttribute="leading" id="cn7-S9-7fC"/>
                         <constraint firstAttribute="trailing" secondItem="Zn9-H4-tBu" secondAttribute="trailing" id="h7h-sj-wnf"/>
-                        <constraint firstAttribute="trailing" secondItem="IZV-5K-MXv" secondAttribute="trailing" constant="16" id="iEd-Ii-i0N"/>
                         <constraint firstItem="IZV-5K-MXv" firstAttribute="leading" secondItem="zHn-oh-NVY" secondAttribute="leading" constant="16" id="nnI-aw-xj8"/>
                         <constraint firstAttribute="height" constant="240" id="oj9-Gc-lod"/>
                     </constraints>
@@ -109,13 +113,14 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="qCY-OS-yPA" secondAttribute="trailing" constant="16" id="MqC-Hy-BWB"/>
                 <constraint firstItem="zHn-oh-NVY" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="NTc-3g-Arf"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="XiS-ET-yFG" secondAttribute="bottom" constant="15" id="PDX-25-k8f"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="zHn-oh-NVY" secondAttribute="bottom" priority="500" constant="25" id="Sth-VI-eYa"/>
                 <constraint firstItem="qCY-OS-yPA" firstAttribute="baseline" secondItem="ePv-B2-nyF" secondAttribute="baseline" id="XRq-Yk-SzG"/>
                 <constraint firstItem="XiS-ET-yFG" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="YHx-nx-rVV"/>
-                <constraint firstItem="uMF-nE-L16" firstAttribute="top" relation="greaterThanOrEqual" secondItem="zHn-oh-NVY" secondAttribute="bottom" constant="10" id="YPe-Rm-iG1"/>
+                <constraint firstItem="XiS-ET-yFG" firstAttribute="top" relation="greaterThanOrEqual" secondItem="zHn-oh-NVY" secondAttribute="bottom" priority="450" constant="10" id="YVN-vz-vdR"/>
                 <constraint firstItem="ePv-B2-nyF" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="dd4-ef-Gyu"/>
                 <constraint firstItem="XiS-ET-yFG" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="hAU-94-syA"/>
                 <constraint firstItem="zHn-oh-NVY" firstAttribute="top" secondItem="ePv-B2-nyF" secondAttribute="bottom" constant="16" id="rtr-sp-AI7"/>
-                <constraint firstItem="XiS-ET-yFG" firstAttribute="top" secondItem="zHn-oh-NVY" secondAttribute="bottom" priority="900" constant="45" id="wZm-hA-76o"/>
+                <constraint firstItem="XiS-ET-yFG" firstAttribute="top" secondItem="zHn-oh-NVY" secondAttribute="bottom" priority="400" constant="45" id="wZm-hA-76o"/>
                 <constraint firstItem="zHn-oh-NVY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="yE4-R9-iBb"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>

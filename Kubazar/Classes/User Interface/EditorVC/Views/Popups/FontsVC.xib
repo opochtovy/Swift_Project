@@ -22,7 +22,7 @@
             <rect key="frame" x="0.0" y="0.0" width="397" height="259"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" minimumValueImage="iconFontMin" maximumValueImage="iconFontMax" translatesAutoresizingMaskIntoConstraints="NO" id="X15-7M-wVS">
+                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="17" minValue="11" maxValue="25" minimumValueImage="iconFontMin" maximumValueImage="iconFontMax" translatesAutoresizingMaskIntoConstraints="NO" id="X15-7M-wVS">
                     <rect key="frame" x="8" y="219" width="381" height="31"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -31,6 +31,9 @@
                     <color key="minimumTrackTintColor" red="0.38431372549019605" green="0.70980392156862748" blue="0.70588235294117641" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="maximumTrackTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="thumbTintColor" red="0.34509803919999998" green="0.74117647060000003" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <connections>
+                        <action selector="didChangeScaleSizeValue:" destination="-1" eventType="valueChanged" id="sGk-MT-hXE"/>
+                    </connections>
                 </slider>
                 <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n2F-WO-Asw">
                     <rect key="frame" x="6" y="0.0" width="385" height="217"/>

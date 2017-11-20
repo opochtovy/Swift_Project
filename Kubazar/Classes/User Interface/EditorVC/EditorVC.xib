@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,42 +19,46 @@
                 <outletCollection property="barButtons" destination="WQr-EC-7jJ" collectionClass="NSMutableArray" id="DBA-8S-vR1"/>
                 <outletCollection property="barButtons" destination="org-uI-T34" collectionClass="NSMutableArray" id="edK-rT-bPc"/>
                 <outletCollection property="barButtons" destination="KIN-jm-Pc0" collectionClass="NSMutableArray" id="o9t-PW-qgc"/>
+                <outletCollection property="fields" destination="zWb-O8-VXm" collectionClass="NSMutableArray" id="fTE-UC-SYt"/>
+                <outletCollection property="fields" destination="bbB-qz-Opf" collectionClass="NSMutableArray" id="zRY-8k-5MX"/>
+                <outletCollection property="fields" destination="kbc-QV-vb6" collectionClass="NSMutableArray" id="hDP-cE-8b5"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VXz-Sr-c7s" customClass="KBBarView" customModule="Kubazar" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="559" width="375" height="44"/>
+                    <rect key="frame" x="0.0" y="460" width="320" height="44"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="YnC-bx-83G">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q2R-SQ-FUY">
-                                    <rect key="frame" x="0.0" y="0.0" width="94" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="80" height="44"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="tintColor" red="0.34509803919999998" green="0.74117647060000003" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <state key="normal" image="iconReset"/>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WQr-EC-7jJ">
-                                    <rect key="frame" x="94" y="0.0" width="93.5" height="44"/>
+                                    <rect key="frame" x="80" y="0.0" width="80" height="44"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="tintColor" red="0.34509803919999998" green="0.74117647060000003" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <state key="normal" image="iconEffects"/>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="org-uI-T34">
-                                    <rect key="frame" x="187.5" y="0.0" width="94" height="44"/>
+                                    <rect key="frame" x="160" y="0.0" width="80" height="44"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="tintColor" red="0.34509803919999998" green="0.74117647060000003" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <state key="normal" image="iconFonts"/>
+                                    <state key="selected" image="iconFontsSel"/>
                                     <connections>
                                         <action selector="didPressFontPickButton:" destination="-1" eventType="touchUpInside" id="ckF-x8-8fk"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KIN-jm-Pc0">
-                                    <rect key="frame" x="281.5" y="0.0" width="93.5" height="44"/>
+                                    <rect key="frame" x="240" y="0.0" width="80" height="44"/>
                                     <state key="normal" image="iconColorPicker"/>
                                     <state key="selected" image="iconColorPickerSelected"/>
                                     <state key="highlighted" image="iconColorPickerSelected"/>
@@ -77,18 +82,62 @@
                     </constraints>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testHaikuIMage" translatesAutoresizingMaskIntoConstraints="NO" id="PTg-AQ-laU" customClass="testHaikuIMage">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="559"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                 </imageView>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="tph-YM-ee1">
+                    <rect key="frame" x="41" y="161" width="238" height="132"/>
+                    <subviews>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Write first line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zWb-O8-VXm" customClass="EditTextField" customModule="Kubazar" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="238" height="42"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="42" id="Aje-Lk-TQC"/>
+                            </constraints>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="x7A-bc-NvO"/>
+                            </connections>
+                        </textField>
+                        <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Write second line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bbB-qz-Opf" customClass="EditTextField" customModule="Kubazar" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="45" width="238" height="42"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="42" id="KiN-S0-ZBB"/>
+                            </constraints>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="cIl-1q-7aW"/>
+                            </connections>
+                        </textField>
+                        <textField opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Write third line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kbc-QV-vb6" customClass="EditTextField" customModule="Kubazar" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="90" width="238" height="42"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="42" id="a63-Oz-Dwl"/>
+                            </constraints>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="4gf-bI-JI7"/>
+                            </connections>
+                        </textField>
+                    </subviews>
+                </stackView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="PTg-AQ-laU" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="5aa-cy-Ga4"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="VXz-Sr-c7s" secondAttribute="trailing" id="9Pa-wl-PdF"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="VXz-Sr-c7s" secondAttribute="trailing" id="A2y-lq-3e1"/>
+                <constraint firstItem="tph-YM-ee1" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="41" id="BtH-od-mN7"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="VXz-Sr-c7s" secondAttribute="bottom" id="FGF-Xj-vnm"/>
                 <constraint firstItem="VXz-Sr-c7s" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="FLm-jg-dBJ"/>
                 <constraint firstItem="VXz-Sr-c7s" firstAttribute="top" secondItem="PTg-AQ-laU" secondAttribute="bottom" id="KJK-Ap-mrk"/>
+                <constraint firstItem="tph-YM-ee1" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="NRW-vx-7mD"/>
                 <constraint firstItem="PTg-AQ-laU" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Qtu-wC-ngB"/>
+                <constraint firstItem="tph-YM-ee1" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" multiplier="0.9" id="f5y-Gk-N5o"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="PTg-AQ-laU" secondAttribute="trailing" id="tUe-lV-Fde"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
@@ -101,6 +150,7 @@
         <image name="iconColorPickerSelected" width="24" height="24"/>
         <image name="iconEffects" width="26" height="24"/>
         <image name="iconFonts" width="24" height="24"/>
+        <image name="iconFontsSel" width="24" height="24"/>
         <image name="iconReset" width="24" height="24"/>
         <image name="testHaikuIMage" width="343" height="343"/>
     </resources>

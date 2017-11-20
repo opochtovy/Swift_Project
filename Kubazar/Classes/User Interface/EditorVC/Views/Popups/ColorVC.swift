@@ -11,7 +11,17 @@ import UIKit
 class ColorVC: UIViewController {
     
     @IBOutlet private weak var vContent: UIView!
-    public var delegate: StyleEditorDelegate?
+    public var delegate: DecoratorDelegate?
+    public var decorator: Decorator
+    
+    init(withDecorator decorator: Decorator) {
+        self.decorator = decorator
+        super.init(nibName: "ColorVC", bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,5 +35,21 @@ class ColorVC: UIViewController {
         
         self.view.layer.cornerRadius = 4.0
         self.view.superview?.layer.cornerRadius = 4.0
+    }
+    
+    @IBAction private func didPressColorButton(_ sender: UIButton) {
+        
+        switch sender.tag {
+        case 0: self.decorator.fontColor = UIColor.black
+        case 1: self.decorator.fontColor = UIColor.white
+        default: break
+        }
+        
+        if let delegate = self.delegate {
+            
+          delegate.didUpdateDecorator(viewController: self)
+        }
+        
+        self.dismiss(animated: true, completion: nil)
     }
 }

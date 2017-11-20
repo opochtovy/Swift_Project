@@ -26,6 +26,7 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //self.edgesForExtendedLayout = []
         
         self.scFilter = UISegmentedControl(items: [NSLocalizedString("Bazar_all_haikus", comment: ""),
                                                    NSLocalizedString("My Haikus", comment: ""),
@@ -120,6 +121,7 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
         case .all, .mine:
             
             let ctrl = BazarDetailVC(client: self.client, viewModel: self.viewModel.getDetailVM(forIndexPath: indexPath))
+            ctrl.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(ctrl, animated: true)
             
         case .active: break

@@ -9,6 +9,11 @@
 import UIKit
 
 class BazarDetailVC: ViewController {
+    
+    private enum BackColors {
+        
+        static let black = UIColor(red: 22/255.0, green: 22/255.0, blue: 22/255.0, alpha: 1.0)
+    }
 
     let viewModel: BazarDetailVM
     
@@ -42,10 +47,11 @@ class BazarDetailVC: ViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.setStatusBarAppearance()
         self.tabBarController?.tabBar.isHidden = true
+        self.setStatusBarAppearance()
         
-        self.navigationController?.navigationBar.backgroundColor = UIColor.clear
+        
+        self.navigationController?.navigationBar.backgroundColor = BackColors.black
         let back = UIBarButtonItem(image: #imageLiteral(resourceName: "iconClose"), style: .plain, target: self, action: #selector(BazarDetailVC.didPressCloseButton(_:)))
         self.navigationItem.leftBarButtonItem = back
     }
@@ -183,7 +189,7 @@ class BazarDetailVC: ViewController {
     private func setStatusBarAppearance() {
         
         let statusBarView = UIApplication.shared.value(forKey: "statusBar") as? UIView
-        statusBarView?.backgroundColor = UIColor.clear
+        statusBarView?.backgroundColor = BackColors.black
         statusBarView?.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     }
 }
