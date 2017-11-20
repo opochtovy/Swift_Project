@@ -44,7 +44,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4wL-Vu-7Ax">
                     <rect key="frame" x="69" y="156" width="182" height="30"/>
                     <subviews>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PDs-Bg-DvH">
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PDs-Bg-DvH" customClass="SMSCodeTextField" customModule="Kubazar" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="22" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="22" id="ctj-mz-WCO"/>
@@ -52,12 +52,12 @@
                             </constraints>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad" returnKeyType="next" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" returnKeyType="next" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="HZh-a8-NZo"/>
                             </connections>
                         </textField>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="brM-lq-eH1">
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="brM-lq-eH1" customClass="SMSCodeTextField" customModule="Kubazar" customModuleProvider="target">
                             <rect key="frame" x="32" y="0.0" width="22" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="Rii-wR-uwG"/>
@@ -70,7 +70,7 @@
                                 <outlet property="delegate" destination="-1" id="2eJ-gI-TGI"/>
                             </connections>
                         </textField>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bkq-9J-p14">
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bkq-9J-p14" customClass="SMSCodeTextField" customModule="Kubazar" customModuleProvider="target">
                             <rect key="frame" x="64" y="0.0" width="22" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="22" id="GIy-hS-Qsk"/>
@@ -78,12 +78,12 @@
                             </constraints>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="ASCIICapableNumberPad" returnKeyType="next" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" returnKeyType="next" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="ehC-lL-g7P"/>
                             </connections>
                         </textField>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="F6q-cK-BO1">
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="F6q-cK-BO1" customClass="SMSCodeTextField" customModule="Kubazar" customModuleProvider="target">
                             <rect key="frame" x="96" y="0.0" width="22" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="5gF-M9-8nG"/>
@@ -91,12 +91,12 @@
                             </constraints>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" returnKeyType="go" enablesReturnKeyAutomatically="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" returnKeyType="next" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="NRx-fp-3DE"/>
                             </connections>
                         </textField>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yBA-Nb-Srd">
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yBA-Nb-Srd" customClass="SMSCodeTextField" customModule="Kubazar" customModuleProvider="target">
                             <rect key="frame" x="128" y="0.0" width="22" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="iRp-mt-Hp1"/>
@@ -109,7 +109,7 @@
                                 <outlet property="delegate" destination="-1" id="mqo-hg-TLL"/>
                             </connections>
                         </textField>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LKL-T9-EI2">
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LKL-T9-EI2" customClass="SMSCodeTextField" customModule="Kubazar" customModuleProvider="target">
                             <rect key="frame" x="160" y="0.0" width="22" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="22" id="ETo-ZJ-6eV"/>

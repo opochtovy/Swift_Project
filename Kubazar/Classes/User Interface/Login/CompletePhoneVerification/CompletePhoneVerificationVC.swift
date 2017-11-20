@@ -11,7 +11,7 @@ import Firebase
 import MBProgressHUD
 import IQKeyboardManagerSwift
 
-class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate {
+class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate, SMSCodeTextFieldDelegate {
     
     static let backButtonTitle = "CompletePhoneVerificationVC_backButtonTitle"
     static let descriptionLabelText = "CompletePhoneVerificationVC_descriptionLabel"
@@ -27,9 +27,10 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var completionLabel: UILabel!
     @IBOutlet weak var resendButton: UIButton!
-    @IBOutlet var codeTextFields: [UITextField]!
+    @IBOutlet var codeTextFields: [SMSCodeTextField]!
     
     private var verificationCode: String = ""
+    private var wasClearedCurrentTextField = false
     
     //MARK: - LyfeCycle
     
@@ -55,6 +56,7 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate {
 //        self.sendPhoneNumber()
         
         self.allowOnlyOneDigitOnTextFields()
+        self.setSmsCodeDelegates()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -89,6 +91,14 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate {
         for code in self.codeTextFields {
             
             code.addBottomBorderWithColor(color: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), width: 1)
+        }
+    }
+    
+    private func setSmsCodeDelegates() {
+        
+        for code in self.codeTextFields {
+            
+            code.smsCodeDelegate = self
         }
     }
     
@@ -184,13 +194,20 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate {
             let allowedCharacters = CharacterSet.decimalDigits
             let characterSet = CharacterSet(charactersIn: string)
             return allowedCharacters.isSuperset(of: characterSet)
+            
+        } else if let text = textField.text, text.count == 1, string.count == 0 {
+
+            self.wasClearedCurrentTextField = true
+            return true
         }
         return false
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
-        if let textFieldIndex = self.codeTextFields.index(of: textField) {
+        let smsCodeTextField = textField as! SMSCodeTextField
+        
+        if let textFieldIndex = self.codeTextFields.index(of: smsCodeTextField) {
             
             if textFieldIndex < self.codeTextFields.count - 1 {
                 
@@ -202,6 +219,24 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate {
         }
         
         return true
+    }
+    
+    func backwardButtonWasPressed(textField: SMSCodeTextField) {
+        
+        if !self.wasClearedCurrentTextField, textField.text?.utf16.count == 0, let textFieldIndex = self.codeTextFields.index(of: textField) {
+            
+            if textFieldIndex > 0 {
+                
+                let previousTextField = self.codeTextFields[textFieldIndex - 1]
+                previousTextField.becomeFirstResponder()
+                if let text = previousTextField.text, text.count > 0 {
+                    previousTextField.text = ""
+                }
+                
+            }
+        }
+        
+        self.wasClearedCurrentTextField = false
     }
     
     //MARK: - Actions
@@ -250,7 +285,7 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate {
 */
     }
     
-    @objc func textFieldDidChange(textField: UITextField){
+    @objc func textFieldDidChange(textField: SMSCodeTextField){
         
         if textField.text?.utf16.count == 1, let textFieldIndex = self.codeTextFields.index(of: textField) {
             

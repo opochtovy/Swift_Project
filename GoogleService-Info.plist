@@ -7,21 +7,21 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>14235692030-lr272rf7c0jr05kqsmce1dtk0vubs1cj.apps.googleusercontent.com</string>
+	<string>541377800378-j207929jaklprjvan5ask60h1ln1b92l.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.14235692030-lr272rf7c0jr05kqsmce1dtk0vubs1cj</string>
+	<string>com.googleusercontent.apps.541377800378-j207929jaklprjvan5ask60h1ln1b92l</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDUuVYGNdh3r4TnP0t2m7JMpug8rZ59pRk</string>
+	<string>AIzaSyB7dLhn2ILRq8bTKN1dprOwpc6U7qVzZ-A</string>
 	<key>GCM_SENDER_ID</key>
-	<string>14235692030</string>
+	<string>541377800378</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.mobexs.Kubazar</string>
 	<key>PROJECT_ID</key>
-	<string>kubazar-minsk</string>
+	<string>testkubazar-2</string>
 	<key>STORAGE_BUCKET</key>
-	<string>kubazar-minsk.appspot.com</string>
+	<string>testkubazar-2.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<true></true>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -33,8 +33,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:14235692030:ios:529e7bd44222087d</string>
+	<string>1:541377800378:ios:529e7bd44222087d</string>
 	<key>DATABASE_URL</key>
-	<string>https://kubazar-minsk.firebaseio.com</string>
+	<string>https://testkubazar-2.firebaseio.com</string>
 </dict>
 </plist>

@@ -176,9 +176,9 @@ class StartEditProfileVC: ViewController, UITextFieldDelegate {
     
     @objc private func done() {
 
-        let completeEditProfileViewController = CompleteEditProfileVC(client: self.client)
-        self.navigationController?.pushViewController(completeEditProfileViewController, animated: true)
-/*
+//        let completeEditProfileViewController = CompleteEditProfileVC(client: self.client)
+//        self.navigationController?.pushViewController(completeEditProfileViewController, animated: true)
+
         if let email = self.emailTextField.text, let password = self.passwordTextField.text, let confirmPassword = self.confirmPasswordTextField.text  {
             
             if email.count < 7 {
@@ -215,6 +215,6 @@ class StartEditProfileVC: ViewController, UITextFieldDelegate {
                 print(success)
             })
         }
-*/
+
     }
 }

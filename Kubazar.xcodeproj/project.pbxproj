@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E04A4E11FC2C030005D3559 /* SMSCodeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E04A4E01FC2C030005D3559 /* SMSCodeTextField.swift */; };
 		9E06A9C81FBAC91700FF74A5 /* HaikuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E06A9C71FBAC91700FF74A5 /* HaikuManager.swift */; };
 		9E09ECD21FBED6A400BB3BBF /* EditorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E09ECD01FBED6A400BB3BBF /* EditorVC.swift */; };
 		9E09ECD31FBED6A400BB3BBF /* EditorVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E09ECD11FBED6A400BB3BBF /* EditorVC.xib */; };
@@ -112,6 +113,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9E04A4E01FC2C030005D3559 /* SMSCodeTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSCodeTextField.swift; sourceTree = "<group>"; };
 		9E06A9C71FBAC91700FF74A5 /* HaikuManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaikuManager.swift; sourceTree = "<group>"; };
 		9E09ECD01FBED6A400BB3BBF /* EditorVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorVC.swift; sourceTree = "<group>"; };
 		9E09ECD11FBED6A400BB3BBF /* EditorVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditorVC.xib; sourceTree = "<group>"; };
@@ -645,6 +647,7 @@
 				9E9B4DB81FB9BC4C001DB448 /* ActionButton.swift */,
 				9E9B4DBA1FB9D146001DB448 /* ActionButton.xib */,
 				9EFBEC0D1FB9F4E600A889BC /* TintMutableButton.swift */,
+				9E04A4E01FC2C030005D3559 /* SMSCodeTextField.swift */,
 				9E2BFBE71FBC360000860CA0 /* StartButton.swift */,
 				9E5FA3081FBD7AF40082F56F /* ChoosePictureButton.swift */,
 				9E5FA30A1FBD7B020082F56F /* ChoosePictureButton.xib */,
@@ -945,6 +948,7 @@
 				9EBEBD441FBAFF4E00DE831F /* SessionTokenAdapter.swift in Sources */,
 				9EED066E1FB59E5B00CCD82E /* User.swift in Sources */,
 				9E5E8E271FADC41A00CCCBDA /* BaseVM.swift in Sources */,
+				9E04A4E11FC2C030005D3559 /* SMSCodeTextField.swift in Sources */,
 				9E5FA3091FBD7AF40082F56F /* ChoosePictureButton.swift in Sources */,
 				9EFB03741FB997F900A78845 /* CountryCodesVC.swift in Sources */,
 				9E455BCE1FB07DE600BC9A11 /* WriteMainMenuVM.swift in Sources */,
