@@ -17,6 +17,6 @@ class UserViewVM {
     init(withUser user: User) {
         self.firstName = user.firstName
         self.lastName = user.lastName
-        self.userImageURL = URL(string: user.avatarURL ?? "")
+        self.userImageURL = user.avatarURL
     }
 }

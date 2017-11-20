@@ -209,6 +209,8 @@ class StartEditProfileVC: ViewController, UITextFieldDelegate {
                 
                 } else {
                     
+                    print("linkEmailPasswordToAccount was successful")
+                    
                     let completeEditProfileViewController = CompleteEditProfileVC(client: self.client)
                     self.navigationController?.pushViewController(completeEditProfileViewController, animated: true)
                 }

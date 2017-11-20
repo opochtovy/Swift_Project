@@ -87,6 +87,7 @@
 		9EBEBD441FBAFF4E00DE831F /* SessionTokenAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBEBD431FBAFF4E00DE831F /* SessionTokenAdapter.swift */; };
 		9EBEBD471FBAFFE600DE831F /* AuthenticationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBEBD461FBAFFE600DE831F /* AuthenticationRouter.swift */; };
 		9EBEBD4A1FBB091200DE831F /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBEBD491FBB091200DE831F /* KeychainPasswordItem.swift */; };
+		9EC2BF931FC2FA73005A6619 /* BazarDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EFB03611FB9800B00A78845 /* BazarDetailVC.xib */; };
 		9EE16E941FB49F4700B4C5C5 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE16E931FB49F4700B4C5C5 /* UIImage+Extensions.swift */; };
 		9EE16E971FB4A56500B4C5C5 /* StartPhoneVerificationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE16E951FB4A56500B4C5C5 /* StartPhoneVerificationVC.swift */; };
 		9EE16E981FB4A56500B4C5C5 /* StartPhoneVerificationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EE16E961FB4A56500B4C5C5 /* StartPhoneVerificationVC.xib */; };
@@ -825,6 +826,7 @@
 				9E5E8E231FADC1C000CCCBDA /* Localizable.strings in Resources */,
 				9E5E8E111FADB54600CCCBDA /* Images.xcassets in Resources */,
 				9EE16E9E1FB4BF7C00B4C5C5 /* CompletePhoneVerificationVC.xib in Resources */,
+				9EC2BF931FC2FA73005A6619 /* BazarDetailVC.xib in Resources */,
 				9E6144421FB2F5D000067295 /* StartEditProfileVC.xib in Resources */,
 				9E5FA31A1FBDB2050082F56F /* PictureCell.xib in Resources */,
 				9E8964CE1FACA21D004FFDCD /* LaunchScreen.storyboard in Resources */,

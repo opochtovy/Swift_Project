@@ -93,7 +93,7 @@ class StartPhoneVerificationVC: ViewController, CountryCodesVCDelegate, UITextFi
     }
     
     private func showConfirmationAlert() {
-/*
+
         guard let number = self.numberTextField.text else {
             
             self.showEmptyTextFieldsAlert()
@@ -108,12 +108,13 @@ class StartPhoneVerificationVC: ViewController, CountryCodesVCDelegate, UITextFi
          
          let wholeNumberForMessage = self.viewModel.getCountryCode() + " " + number
          let wholeNumberToSend = self.viewModel.getCountryCode() + number
-*/
+/*
         // for testing
         let number = ""
         let wholeNumberForMessage = self.viewModel.getCountryCode() + " " + number
         let wholeNumberToSend = "+375297509711"
         // end for testing
+*/
         let message = wholeNumberForMessage + NSLocalizedString(StartPhoneVerificationVC.confirmationAlertMessage, comment: "")
         
         let alertController = UIAlertController(title: NSLocalizedString(StartPhoneVerificationVC.confirmationAlertTitle, comment: ""), message: message, preferredStyle: .alert)

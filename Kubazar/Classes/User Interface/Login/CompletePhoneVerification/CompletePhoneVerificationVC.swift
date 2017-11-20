@@ -53,7 +53,7 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate, SMSCodeT
         self.setNavigationBarAppearance()
         self.localizeTitles()
         
-//        self.sendPhoneNumber()
+        self.sendPhoneNumber()
         
         self.allowOnlyOneDigitOnTextFields()
         self.setSmsCodeDelegates()
@@ -99,6 +99,14 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate, SMSCodeT
         for code in self.codeTextFields {
             
             code.smsCodeDelegate = self
+        }
+    }
+    
+    private func nullifyCodeTextFields() {
+        
+        for code in self.codeTextFields {
+            
+            code.text = ""
         }
     }
     
@@ -242,10 +250,12 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate, SMSCodeT
     //MARK: - Actions
     
     @objc private func actionDone() {
-
-        let editProfileViewController = StartEditProfileVC(client: self.client)
-        self.navigationController?.pushViewController(editProfileViewController, animated: true)
-/*
+        
+        // test
+//        let editProfileViewController = StartEditProfileVC(client: self.client)
+//        self.navigationController?.pushViewController(editProfileViewController, animated: true)
+        // end of test
+        
         self.verificationCode = ""
         for textField in self.codeTextFields {
             
@@ -278,11 +288,30 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate, SMSCodeT
                 
             } else {
                 
-                let editProfileViewController = StartEditProfileVC(client: self.client)
-                self.navigationController?.pushViewController(editProfileViewController, animated: true)
+                print("signInWithPhoneNumber was successful")
+                
+                self.client.authenticator.getToken(completionHandler: { (errorDescription, success) in
+                    
+                    MBProgressHUD.hide(for: self.view, animated: true)
+                    if !success {
+                        
+                        self.showWrongResponseAlert(message: errorDescription)
+                        
+                    } else {
+                        
+                        if let authToken = self.client.authenticator.authToken {
+                            
+                            print("signInWithPhoneNumber : authToken =", authToken)
+                            self.client.sessionManager.adapter = SessionTokenAdapter(sessionToken: authToken)
+                        }
+                        
+                        let editProfileViewController = StartEditProfileVC(client: self.client)
+                        self.navigationController?.pushViewController(editProfileViewController, animated: true)
+                    }
+                })
             }
         }
-*/
+
     }
     
     @objc func textFieldDidChange(textField: SMSCodeTextField){
@@ -302,6 +331,7 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate, SMSCodeT
     
     @IBAction func actionResendCode(_ sender: UIButton) {
         
+        self.nullifyCodeTextFields()
         self.sendPhoneNumber()
     }
 }

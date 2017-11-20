@@ -62,7 +62,7 @@ class BazarDetailVM: BaseVM {
     public func delete() {
         
         let user = User()
-        user.id = 1
+        user.id = "1"
         HaikuManager.shared.delete(haiku: self.haiku, user: user)
     }
     

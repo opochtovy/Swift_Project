@@ -45,6 +45,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.edgesForExtendedLayout = []
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {

@@ -18,7 +18,7 @@ class FriendsCellVM {
     init(user: User, isChosen: Bool) {
         
         self.name = user.fullName
-        self.iconUrl = URL(string: user.avatarURL ?? "")
+        self.iconUrl = user.avatarURL
         self.isChosen = isChosen
     }
 }
