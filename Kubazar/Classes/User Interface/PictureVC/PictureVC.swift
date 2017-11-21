@@ -10,7 +10,7 @@ import UIKit
 
 class PictureVC: ViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-    private enum Constants {
+    private enum CVSettings {
         
         static let numberOfItemsInRow : CGFloat = 3
         static let numberOfItemsInSection : CGFloat = 2
@@ -21,9 +21,9 @@ class PictureVC: ViewController, UICollectionViewDataSource, UICollectionViewDel
     @IBOutlet private weak var btnTakePhoto: ChoosePictureButton!
     @IBOutlet private weak var btnRandomPhoto: ChoosePictureButton!
     @IBOutlet private weak var vAccessAlert: AccessAlertView!
-    @IBOutlet weak var cnstrLeftToPictures: NSLayoutConstraint!
-    @IBOutlet weak var cnstrCollectionContainerHeight: NSLayoutConstraint!
-    @IBOutlet weak var cnstrCollectionContainerToBottom: NSLayoutConstraint!
+    @IBOutlet private weak var cnstrLeftToPictures: NSLayoutConstraint!
+    @IBOutlet private weak var cnstrCollectionContainerHeight: NSLayoutConstraint!
+    @IBOutlet private weak var cnstrCollectionContainerToBottom: NSLayoutConstraint!
     
     private lazy var imagePicker: UIImagePickerController = {
         
@@ -148,7 +148,7 @@ class PictureVC: ViewController, UICollectionViewDataSource, UICollectionViewDel
             let layout = self.cvPictures.collectionViewLayout as! UICollectionViewFlowLayout
             let cellHeight = self.collectionView(self.cvPictures, layout: layout, sizeForItemAt: IndexPath(row: 0, section: 0)).height
                 
-            self.cnstrCollectionContainerHeight.constant = cellHeight * Constants.numberOfItemsInSection + layout.minimumInteritemSpacing * (Constants.numberOfItemsInSection - 1)
+            self.cnstrCollectionContainerHeight.constant = cellHeight * CVSettings.numberOfItemsInSection + layout.minimumInteritemSpacing * (CVSettings.numberOfItemsInSection - 1)
             self.cnstrCollectionContainerHeight.priority = UILayoutPriority(900.0)
             self.cnstrCollectionContainerToBottom.priority = UILayoutPriority(500.0)
             
@@ -195,7 +195,7 @@ class PictureVC: ViewController, UICollectionViewDataSource, UICollectionViewDel
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let interItemSpacing = (collectionViewLayout as! UICollectionViewFlowLayout).minimumInteritemSpacing
-        let side: CGFloat = (UIScreen.main.bounds.width - interItemSpacing * (Constants.numberOfItemsInRow - 1) - self.cnstrLeftToPictures.constant * 2) / Constants.numberOfItemsInRow
+        let side: CGFloat = (UIScreen.main.bounds.width - interItemSpacing * (CVSettings.numberOfItemsInRow - 1) - self.cnstrLeftToPictures.constant * 2) / CVSettings.numberOfItemsInRow
         return CGSize(width: side, height: side)
     }
     

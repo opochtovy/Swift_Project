@@ -13,6 +13,8 @@ class Field {
     public var id: Int = 0
     public var text: String = ""
     public var owner: User
+    
+    /** false if user delete haiku from collection*/
     public var isActive: Bool = true
     
     init(user: User, text: String) {

@@ -18,6 +18,13 @@ class EditorVM: BaseVM {
         case playerInput
     }
     
+    enum Tips {
+        
+        static let firstLane = "Enter first line of haiku: 5 syllables"
+        static let secondLane = "Enter second line of haiku: 7 syllables"
+        static let thirdLane = "Enter third line of haiku: 5 syllables"
+    }
+    
     var fields: [String] = []
     public var scope: EditingScope = .creatorSetup
     private let haiku: Haiku
@@ -46,7 +53,7 @@ class EditorVM: BaseVM {
             self.haiku.fields.append(Field(user: HaikuManager.shared.currentUser, text: text))
             print("-- Field appended")
         }
-        else if self.haiku.fields.count < index + 1 {
+        else if self.haiku.fields.count == index + 1 {
             
             self.haiku.fields[index].text = text
             print("-- Field updated")
@@ -61,7 +68,7 @@ class EditorVM: BaseVM {
         
         var result = false
         
-        if self.fields.count == 0 {
+        if self.fields.count == 0 && index == 0{
             
             result = true
         }
@@ -75,6 +82,21 @@ class EditorVM: BaseVM {
     public func isTextFieldHidden(forIndex index: Int) -> Bool {
         
         return self.haiku.fields[safe: index] != nil
+    }
+    
+    public func getTipText(forIndexPath index: Int) -> String {
+        
+        var result: String = ""
+        
+        switch index {
+            
+        case 0:     result = Tips.firstLane
+        case 1:     result = Tips.secondLane
+        case 2:     result = Tips.thirdLane
+        default:    break
+        }
+        
+        return result
     }
     
     

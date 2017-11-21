@@ -87,7 +87,7 @@
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="tph-YM-ee1">
                     <rect key="frame" x="41" y="161" width="238" height="132"/>
                     <subviews>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Write first line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zWb-O8-VXm" customClass="EditTextField" customModule="Kubazar" customModuleProvider="target">
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Write first line" textAlignment="center" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="zWb-O8-VXm" customClass="EditTextField" customModule="Kubazar" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="238" height="42"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="42" id="Aje-Lk-TQC"/>
@@ -99,7 +99,7 @@
                                 <outlet property="delegate" destination="-1" id="x7A-bc-NvO"/>
                             </connections>
                         </textField>
-                        <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Write second line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bbB-qz-Opf" customClass="EditTextField" customModule="Kubazar" customModuleProvider="target">
+                        <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Write second line" textAlignment="center" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="bbB-qz-Opf" customClass="EditTextField" customModule="Kubazar" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="45" width="238" height="42"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="42" id="KiN-S0-ZBB"/>
@@ -111,7 +111,7 @@
                                 <outlet property="delegate" destination="-1" id="cIl-1q-7aW"/>
                             </connections>
                         </textField>
-                        <textField opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Write third line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kbc-QV-vb6" customClass="EditTextField" customModule="Kubazar" customModuleProvider="target">
+                        <textField opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Write third line" textAlignment="center" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="kbc-QV-vb6" customClass="EditTextField" customModule="Kubazar" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="90" width="238" height="42"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="42" id="a63-Oz-Dwl"/>
@@ -142,7 +142,7 @@
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <point key="canvasLocation" x="33.5" y="119.5"/>
+            <point key="canvasLocation" x="33" y="119"/>
         </view>
     </objects>
     <resources>

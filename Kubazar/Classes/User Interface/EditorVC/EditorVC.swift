@@ -36,7 +36,7 @@ class EditorVC: ViewController, DecoratorDelegate, UITextFieldDelegate {
         self.title = NSLocalizedString("TabBarTitles_write", comment: "")
         
         let barButton = UIBarButtonItem(title:NSLocalizedString("Picture_continue", comment: ""), style: .plain, target: self, action: #selector(EditorVC.didPressContinueButton(_:)))
-        self.navigationItem.setRightBarButton(barButton, animated: true)
+        self.navigationItem.setRightBarButton(barButton, animated: true)        
         
         self.updateContent()
     }
@@ -132,11 +132,26 @@ class EditorVC: ViewController, DecoratorDelegate, UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         
         self.viewModel.inputText(forIndex: textField.tag, text: textField.text ?? "")
+        TipView.hideTip(fromView: textField)
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         
-        return self.viewModel.isEditingEnabled(forIndex: textField.tag)
+        let result = self.viewModel.isEditingEnabled(forIndex: textField.tag)
+        
+        if result == true {
+            
+            let position: TipPosition = textField.tag == 0 ? .top : .bottom
+            let tipText = self.viewModel.getTipText(forIndexPath: textField.tag)
+            TipView.showTip(fromView: textField, position: position, title: tipText)
+        }
+        return result
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        return true
     }
 }
 
@@ -153,5 +168,4 @@ extension EditorVC: UIPopoverPresentationControllerDelegate {
             button.isSelected = false
         }
     }
-    
 }
