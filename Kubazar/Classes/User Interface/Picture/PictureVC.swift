@@ -51,11 +51,6 @@ class PictureVC: ViewController, UICollectionViewDataSource, UICollectionViewDel
         self.edgesForExtendedLayout = []
         self.cvPictures.register(UINib.init(nibName: "PictureCell", bundle: nil), forCellWithReuseIdentifier: PictureCell.reuseID)
         self.title = NSLocalizedString("Picture_choose_photo", comment: "")
-
-        //-- mock start
-        let barButtonContinue = UIBarButtonItem(title: "Continue", style: .plain, target: self, action: #selector(PictureVC.didPressContinueButton(_:)))
-        self.navigationItem.rightBarButtonItem = barButtonContinue
-        //-- mock end
         
         self.btnTakePhoto.lbTitle.text = ""
         self.btnTakePhoto.ivButton.image = #imageLiteral(resourceName: "iconTakePhoto")
@@ -74,17 +69,6 @@ class PictureVC: ViewController, UICollectionViewDataSource, UICollectionViewDel
     }
     
     //MARK: - Actions
-    
-    //-- mock start
-    @IBAction private func didPressContinueButton(_ sender: UIButton) {
-        
-        self.tabBarController?.hidesBottomBarWhenPushed = true
-        //TODO: add check image
-        let ctrl = EditorVC(client: self.client, viewModel: self.viewModel.getEditorVM())
-        ctrl.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(ctrl, animated: true)
-    }
-    //-- mock end
     
     @IBAction private func didPressSeeAll(_ sender: UIButton) {
         
@@ -105,7 +89,9 @@ class PictureVC: ViewController, UICollectionViewDataSource, UICollectionViewDel
     
     @IBAction private func didPressSurpriseMe(_ sender: UIButton) {
         
-        self.viewModel.chooseRandomImage() //may be completion needed?
+        self.viewModel.chooseRandomImage()
+        self.navigateToClipperController()
+        
     }
     
     @IBAction private func didPressEnableLibraryAccess(_ sender: UIButton) {
@@ -157,7 +143,11 @@ class PictureVC: ViewController, UICollectionViewDataSource, UICollectionViewDel
             self.btnRandomPhoto.isHidden = false
             
             self.btnSeeAll.setTitle(NSLocalizedString("Picture_see_all", comment: ""), for: .normal)
-            self.cvPictures.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+            
+            if self.viewModel.numberOfItems() > 0 {
+                
+                self.cvPictures.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+            }
         }
         else {
    
@@ -170,6 +160,15 @@ class PictureVC: ViewController, UICollectionViewDataSource, UICollectionViewDel
             
             self.btnSeeAll.setTitle(NSLocalizedString("Picture_collapse", comment: ""), for: .normal)
         }
+    }
+    
+    private func navigateToClipperController() {
+        
+        guard let vm = self.viewModel.getClipperVM() else { return }
+        
+        let ctrl = ClipperVC(client: self.client, viewModel: vm)
+        ctrl.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(ctrl, animated: true)
     }
     
     //MARK: - UICollectionViewDataSource
@@ -189,7 +188,10 @@ class PictureVC: ViewController, UICollectionViewDataSource, UICollectionViewDel
     //MARK: - UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        collectionView.deselectItem(at: indexPath, animated: false)
+        
         self.viewModel.chooseImage(atIndexPath: indexPath)
+        self.navigateToClipperController()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -204,7 +206,9 @@ class PictureVC: ViewController, UICollectionViewDataSource, UICollectionViewDel
         
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             
-            self.viewModel.chosenImageData = UIImageJPEGRepresentation(image, 1.0)
+            let imageData = UIImageJPEGRepresentation(image, 1.0)
+            self.viewModel.chooseImage(withData: imageData)
+            self.navigateToClipperController()
         }
         
         picker.dismiss(animated: true, completion: nil)

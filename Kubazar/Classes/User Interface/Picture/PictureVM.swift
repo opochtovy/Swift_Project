@@ -17,7 +17,7 @@ class PictureVM: BaseVM {
         return PhotoLibraryManager.shared.isLibraryAccessAllowed
     }
     
-    public var chosenImageData: Data?
+    private var chosenImageData: Data?
     public var isCollectionExpanded: Bool = false
     
     //MARK: - Public functions
@@ -26,18 +26,18 @@ class PictureVM: BaseVM {
         guard self.accessAllowed == true else { return }
         self.assets = PhotoLibraryManager.shared.getAllPhotos()
         self.assets.append(contentsOf: PhotoLibraryManager.shared.getAllPhotos())
-        self.assets.append(contentsOf: PhotoLibraryManager.shared.getAllPhotos())
-        self.assets.append(contentsOf: PhotoLibraryManager.shared.getAllPhotos())
     }
     
-    public func getEditorVM() -> EditorVM {
+    public func getClipperVM() -> ClipperVM? {
+        
+        guard let imageData = self.chosenImageData else { return nil }
         
         let haiku = Haiku()
         haiku.id = 25 // TODO
         haiku.creator = HaikuManager.shared.currentUser
         
-        
-        return EditorVM(client: self.client, haiku: haiku)
+        let vm = ClipperVM(client: self.client, haiku: haiku, imageData: imageData)
+        return vm
     }
     
     public func getPictureCellVM(forIndexPath indexPath: IndexPath) -> PictureCellVM? {
@@ -65,6 +65,11 @@ class PictureVM: BaseVM {
         self.chooseImage(asset: asset)
     }
     
+    public func chooseImage(withData imageData: Data?) {
+        
+        self.chosenImageData = imageData
+    }
+    
     //MARK: - Private functions
 
     private func chooseImage(asset: PHAsset) {
@@ -73,7 +78,7 @@ class PictureVM: BaseVM {
             
             if success == true && data != nil {
                 
-                self.chosenImageData = data
+                self.chooseImage(withData: data)
             }
         }
     }
