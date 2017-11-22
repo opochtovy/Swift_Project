@@ -35,6 +35,7 @@
 /*TabbedController*/
 /**/"TabBarTitles_bazar" = "Bazar";
 /**/"TabBarTitles_write" = "Write";
+/**/"TabBarTitles_profile" = "Profile";
 
 /*WriteMainMenuVC*/
 /**/"WriteMainMenuTitles_title" = "Write";
@@ -117,6 +118,17 @@
 /**/ "Picture_see_all" = "See all";
 /**/ "Picture_collapse" = "Collapse";
 /**/ "Picture_continue" = "Continue";
+
+/*ProfileVC*/
+/**/"ProfileVC_profileSegmentTitle" = "Profile";
+/**/"ProfileVC_infoSegmentTitle" = "Info";
+/**/"ProfileVM_nameHeaderTitle" = "Name";
+/**/"ProfileVM_infoHeaderTitle" = "Contact Info";
+/**/"ProfileVM_changePasswordTitle" = "Change Password";
+/**/"ProfileVM_infoHeaderButtonTitle" = "Edit";
+/**/"ProfileVC_descriptionLabelText" = "Create short stories, in secret (for yourself) or together with one or two friends. Have a nice picture that made you think of someone or that simply shouldn't be forgotten? Pick one and make it into an unforgettable haiku.";
+/**/"ProfileVC_thankYouLabelText" = "Thank you for trying out Kubazar!";
+/**/"ProfileVC_termsOfServiceButtonTitle" = "Terms of Service & Privacy Policy";
 
 /*EditorVC*/
 /**/

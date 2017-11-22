@@ -89,10 +89,10 @@ class ForgotPasswordVC: ViewController, UITextFieldDelegate {
         self.present(alertController, animated: true, completion: nil)
     }
     
-    private func showWrongResponseAlert(message: String?) {
+    override func showWrongResponseAlert(message: String?) {
         
-        let alertTitle = NSLocalizedString(ForgotPasswordVC.wrongResponseAlertTitle, comment: "Title for wrong respond alert on Start Edit Profile")
-        var alertMessage = NSLocalizedString(ForgotPasswordVC.wrongResponseAlertMessage, comment: "Message for wrong respond alert on Start Edit Profile")
+        let alertTitle = NSLocalizedString(ForgotPasswordVC.wrongResponseAlertTitle, comment: "")
+        var alertMessage = NSLocalizedString(ForgotPasswordVC.wrongResponseAlertMessage, comment: "")
         if let message = message {
             
             alertMessage = message
@@ -100,7 +100,7 @@ class ForgotPasswordVC: ViewController, UITextFieldDelegate {
         
         let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
         
-        let okAction = UIAlertAction(title: NSLocalizedString(ButtonTitles.doneButtonTitle, comment: "Done Button Title on Forgot Password"), style: .default) { (_) in
+        let okAction = UIAlertAction(title: NSLocalizedString(ButtonTitles.doneButtonTitle, comment: ""), style: .default) { (_) in
             
             alertController.dismiss(animated: true, completion: nil)
         }

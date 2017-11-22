@@ -157,7 +157,11 @@ class PictureVC: ViewController, UICollectionViewDataSource, UICollectionViewDel
             self.btnRandomPhoto.isHidden = false
             
             self.btnSeeAll.setTitle(NSLocalizedString("Picture_see_all", comment: ""), for: .normal)
-            self.cvPictures.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+            
+            if self.viewModel.numberOfItems() > 0 {
+                
+                self.cvPictures.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+            }
         }
         else {
    

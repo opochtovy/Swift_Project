@@ -38,9 +38,7 @@ class BazarDetailVC: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.edgesForExtendedLayout = UIRectEdge.all
-
+        self.edgesForExtendedLayout = []
         self.updateContent()        
     }
     

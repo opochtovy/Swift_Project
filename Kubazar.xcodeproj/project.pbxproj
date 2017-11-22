@@ -25,6 +25,9 @@
 		9E2BFBF21FBC5D3E00860CA0 /* FriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2BFBF01FBC5D3E00860CA0 /* FriendsCell.swift */; };
 		9E2BFBF31FBC5D3E00860CA0 /* FriendsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E2BFBF11FBC5D3E00860CA0 /* FriendsCell.xib */; };
 		9E2BFBF61FBC5D6500860CA0 /* FriendsCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2BFBF51FBC5D6500860CA0 /* FriendsCellVM.swift */; };
+		9E3F15051FC4581400BC7C21 /* ProfileHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3F15031FC4581400BC7C21 /* ProfileHeaderCell.swift */; };
+		9E3F15061FC4581400BC7C21 /* ProfileHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E3F15041FC4581400BC7C21 /* ProfileHeaderCell.xib */; };
+		9E3F15081FC4582200BC7C21 /* ProfileHeaderCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3F15071FC4582200BC7C21 /* ProfileHeaderCellVM.swift */; };
 		9E3F9CF01FB5D6BF003BC12A /* FirebaseServerClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3F9CEF1FB5D6BF003BC12A /* FirebaseServerClient.swift */; };
 		9E455BCB1FB07DD500BC9A11 /* WriteMainMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E455BC91FB07DD500BC9A11 /* WriteMainMenuVC.swift */; };
 		9E455BCC1FB07DD500BC9A11 /* WriteMainMenuVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E455BCA1FB07DD500BC9A11 /* WriteMainMenuVC.xib */; };
@@ -66,6 +69,9 @@
 		9E6144481FB305E400067295 /* CompleteEditProfileVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E6144461FB305E400067295 /* CompleteEditProfileVC.xib */; };
 		9E61444A1FB305F900067295 /* CompleteEditProfileVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6144491FB305F900067295 /* CompleteEditProfileVM.swift */; };
 		9E6B14A11FB0AC6200220942 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6B14A01FB0AC6200220942 /* UIView+Extension.swift */; };
+		9E6BB8861FC4677500CB0933 /* ProfileInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6BB8841FC4677500CB0933 /* ProfileInfoCell.swift */; };
+		9E6BB8871FC4677500CB0933 /* ProfileInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E6BB8851FC4677500CB0933 /* ProfileInfoCell.xib */; };
+		9E6BB8891FC4678000CB0933 /* ProfileInfoCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6BB8881FC4678000CB0933 /* ProfileInfoCellVM.swift */; };
 		9E72A9CF1FB991EC009468DB /* HaikuPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E72A9CE1FB991EC009468DB /* HaikuPreview.swift */; };
 		9E72A9D11FB991FA009468DB /* HaikuPreview.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E72A9D01FB991FA009468DB /* HaikuPreview.xib */; };
 		9E72A9D31FB997BF009468DB /* HaikuPreviewVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E72A9D21FB997BF009468DB /* HaikuPreviewVM.swift */; };
@@ -90,6 +96,9 @@
 		9EBEBD471FBAFFE600DE831F /* AuthenticationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBEBD461FBAFFE600DE831F /* AuthenticationRouter.swift */; };
 		9EBEBD4A1FBB091200DE831F /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBEBD491FBB091200DE831F /* KeychainPasswordItem.swift */; };
 		9EC2BF931FC2FA73005A6619 /* BazarDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EFB03611FB9800B00A78845 /* BazarDetailVC.xib */; };
+		9EDF46C01FC41F7300993134 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDF46BE1FC41F7300993134 /* ProfileVC.swift */; };
+		9EDF46C11FC41F7300993134 /* ProfileVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EDF46BF1FC41F7300993134 /* ProfileVC.xib */; };
+		9EDF46C31FC41F8C00993134 /* ProfileVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDF46C21FC41F8C00993134 /* ProfileVM.swift */; };
 		9EE16E941FB49F4700B4C5C5 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE16E931FB49F4700B4C5C5 /* UIImage+Extensions.swift */; };
 		9EE16E971FB4A56500B4C5C5 /* StartPhoneVerificationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE16E951FB4A56500B4C5C5 /* StartPhoneVerificationVC.swift */; };
 		9EE16E981FB4A56500B4C5C5 /* StartPhoneVerificationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EE16E961FB4A56500B4C5C5 /* StartPhoneVerificationVC.xib */; };
@@ -135,6 +144,9 @@
 		9E2BFBF01FBC5D3E00860CA0 /* FriendsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCell.swift; sourceTree = "<group>"; };
 		9E2BFBF11FBC5D3E00860CA0 /* FriendsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendsCell.xib; sourceTree = "<group>"; };
 		9E2BFBF51FBC5D6500860CA0 /* FriendsCellVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCellVM.swift; sourceTree = "<group>"; };
+		9E3F15031FC4581400BC7C21 /* ProfileHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderCell.swift; sourceTree = "<group>"; };
+		9E3F15041FC4581400BC7C21 /* ProfileHeaderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileHeaderCell.xib; sourceTree = "<group>"; };
+		9E3F15071FC4582200BC7C21 /* ProfileHeaderCellVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderCellVM.swift; sourceTree = "<group>"; };
 		9E3F9CEF1FB5D6BF003BC12A /* FirebaseServerClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseServerClient.swift; sourceTree = "<group>"; };
 		9E455BC91FB07DD500BC9A11 /* WriteMainMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteMainMenuVC.swift; sourceTree = "<group>"; };
 		9E455BCA1FB07DD500BC9A11 /* WriteMainMenuVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WriteMainMenuVC.xib; sourceTree = "<group>"; };
@@ -177,6 +189,9 @@
 		9E6144491FB305F900067295 /* CompleteEditProfileVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteEditProfileVM.swift; sourceTree = "<group>"; };
 		9E62B69C1FB48DF900AA814E /* Kubazar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Kubazar.entitlements; sourceTree = "<group>"; };
 		9E6B14A01FB0AC6200220942 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		9E6BB8841FC4677500CB0933 /* ProfileInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfoCell.swift; sourceTree = "<group>"; };
+		9E6BB8851FC4677500CB0933 /* ProfileInfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileInfoCell.xib; sourceTree = "<group>"; };
+		9E6BB8881FC4678000CB0933 /* ProfileInfoCellVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfoCellVM.swift; sourceTree = "<group>"; };
 		9E72A9CE1FB991EC009468DB /* HaikuPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaikuPreview.swift; sourceTree = "<group>"; };
 		9E72A9D01FB991FA009468DB /* HaikuPreview.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HaikuPreview.xib; sourceTree = "<group>"; };
 		9E72A9D21FB997BF009468DB /* HaikuPreviewVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaikuPreviewVM.swift; sourceTree = "<group>"; };
@@ -201,6 +216,9 @@
 		9EBEBD431FBAFF4E00DE831F /* SessionTokenAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionTokenAdapter.swift; sourceTree = "<group>"; };
 		9EBEBD461FBAFFE600DE831F /* AuthenticationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationRouter.swift; sourceTree = "<group>"; };
 		9EBEBD491FBB091200DE831F /* KeychainPasswordItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainPasswordItem.swift; sourceTree = "<group>"; };
+		9EDF46BE1FC41F7300993134 /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
+		9EDF46BF1FC41F7300993134 /* ProfileVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileVC.xib; sourceTree = "<group>"; };
+		9EDF46C21FC41F8C00993134 /* ProfileVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVM.swift; sourceTree = "<group>"; };
 		9EE16E931FB49F4700B4C5C5 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		9EE16E951FB4A56500B4C5C5 /* StartPhoneVerificationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartPhoneVerificationVC.swift; sourceTree = "<group>"; };
 		9EE16E961FB4A56500B4C5C5 /* StartPhoneVerificationVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StartPhoneVerificationVC.xib; sourceTree = "<group>"; };
@@ -312,6 +330,33 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		9E3F15001FC457C500BC7C21 /* HeaderCell */ = {
+			isa = PBXGroup;
+			children = (
+				9E3F15031FC4581400BC7C21 /* ProfileHeaderCell.swift */,
+				9E3F15041FC4581400BC7C21 /* ProfileHeaderCell.xib */,
+				9E3F15071FC4582200BC7C21 /* ProfileHeaderCellVM.swift */,
+			);
+			path = HeaderCell;
+			sourceTree = "<group>";
+		};
+		9E3F15011FC457C600BC7C21 /* ChangePasswordCell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ChangePasswordCell;
+			sourceTree = "<group>";
+		};
+		9E3F15021FC457C600BC7C21 /* InfoCell */ = {
+			isa = PBXGroup;
+			children = (
+				9E6BB8841FC4677500CB0933 /* ProfileInfoCell.swift */,
+				9E6BB8851FC4677500CB0933 /* ProfileInfoCell.xib */,
+				9E6BB8881FC4678000CB0933 /* ProfileInfoCellVM.swift */,
+			);
+			path = InfoCell;
+			sourceTree = "<group>";
+		};
 		9E455BC61FB07D9700BC9A11 /* TabBarItems */ = {
 			isa = PBXGroup;
 			children = (
@@ -347,6 +392,7 @@
 				9E2BFBE91FBC547F00860CA0 /* Friends */,
 				9E5E8E2A1FADD3BD00CCCBDA /* Login */,
 				9E5FA3011FBD73590082F56F /* PictureVC */,
+				9EDF46BB1FC41F0F00993134 /* Profile */,
 				9E5E8E131FADB68300CCCBDA /* Root */,
 				9EB170AB1FB065FE00A70A10 /* TabBar */,
 				9E455BC61FB07D9700BC9A11 /* TabBarItems */,
@@ -437,14 +483,14 @@
 		9E5E8E2A1FADD3BD00CCCBDA /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				9E5E8E301FADD3BD00CCCBDA /* CompleteEditProfile */,
+				9E5E8E2E1FADD3BD00CCCBDA /* CompletePhoneVerification */,
 				9EFB03701FB997F900A78845 /* CountryCodes */,
 				9E5E8E2B1FADD3BD00CCCBDA /* ForgotPassword */,
 				9E5E8E2C1FADD3BD00CCCBDA /* StartPhoneVerification */,
-				9E5E8E2D1FADD3BD00CCCBDA /* Welcome */,
-				9E5E8E2E1FADD3BD00CCCBDA /* CompletePhoneVerification */,
 				9E5E8E2F1FADD3BD00CCCBDA /* SignIn */,
-				9E5E8E301FADD3BD00CCCBDA /* CompleteEditProfile */,
 				9E5E8E311FADD3BD00CCCBDA /* StartEditProfile */,
+				9E5E8E2D1FADD3BD00CCCBDA /* Welcome */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -706,6 +752,19 @@
 			path = "Generic Keychain";
 			sourceTree = "<group>";
 		};
+		9EDF46BB1FC41F0F00993134 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				9E3F15011FC457C600BC7C21 /* ChangePasswordCell */,
+				9E3F15001FC457C500BC7C21 /* HeaderCell */,
+				9E3F15021FC457C600BC7C21 /* InfoCell */,
+				9EDF46BE1FC41F7300993134 /* ProfileVC.swift */,
+				9EDF46BF1FC41F7300993134 /* ProfileVC.xib */,
+				9EDF46C21FC41F8C00993134 /* ProfileVM.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		9EFB03601FB9800B00A78845 /* BazarDetail */ = {
 			isa = PBXGroup;
 			children = (
@@ -821,6 +880,8 @@
 			files = (
 				9EADF20A1FBC725700B69FFE /* GoogleService-Info.plist in Resources */,
 				9E5E8E351FADD3F400CCCBDA /* WelcomeVC.xib in Resources */,
+				9EDF46C11FC41F7300993134 /* ProfileVC.xib in Resources */,
+				9E3F15061FC4581400BC7C21 /* ProfileHeaderCell.xib in Resources */,
 				9E2BFBED1FBC54DC00860CA0 /* FriendsVC.xib in Resources */,
 				9EE16E981FB4A56500B4C5C5 /* StartPhoneVerificationVC.xib in Resources */,
 				9E5FA3051FBD73870082F56F /* PictureVC.xib in Resources */,
@@ -846,6 +907,7 @@
 				9E9B4DBB1FB9D146001DB448 /* ActionButton.xib in Resources */,
 				9E455BCC1FB07DD500BC9A11 /* WriteMainMenuVC.xib in Resources */,
 				9EFB037B1FB99A3800A78845 /* CountryCodeCell.xib in Resources */,
+				9E6BB8871FC4677500CB0933 /* ProfileInfoCell.xib in Resources */,
 				9EADF2041FBC2F3F00B69FFE /* UserView.xib in Resources */,
 				9E09ECD31FBED6A400BB3BBF /* EditorVC.xib in Resources */,
 				9E2BFBF31FBC5D3E00860CA0 /* FriendsCell.xib in Resources */,
@@ -941,10 +1003,12 @@
 				9E72A9CF1FB991EC009468DB /* HaikuPreview.swift in Sources */,
 				9E1588941FB44D330063C816 /* BazarVC.swift in Sources */,
 				9E9B4DB91FB9BC4C001DB448 /* ActionButton.swift in Sources */,
+				9E6BB8861FC4677500CB0933 /* ProfileInfoCell.swift in Sources */,
 				9E5FA3191FBDB2050082F56F /* PictureCell.swift in Sources */,
 				9E3F9CF01FB5D6BF003BC12A /* FirebaseServerClient.swift in Sources */,
 				9E4AE9101FC2C3BA00E437AA /* Decorator.swift in Sources */,
 				9E9B4DBD1FB9E0C8001DB448 /* Field.swift in Sources */,
+				9E3F15081FC4582200BC7C21 /* ProfileHeaderCellVM.swift in Sources */,
 				9E5E8E371FADD42D00CCCBDA /* WelcomeVM.swift in Sources */,
 				9E09ECD21FBED6A400BB3BBF /* EditorVC.swift in Sources */,
 				9E455BCB1FB07DD500BC9A11 /* WriteMainMenuVC.swift in Sources */,
@@ -994,17 +1058,21 @@
 				9EBEBD4A1FBB091200DE831F /* KeychainPasswordItem.swift in Sources */,
 				9E5E8E1F1FADBC9E00CCCBDA /* Client.swift in Sources */,
 				9E5E8E341FADD3F400CCCBDA /* WelcomeVC.swift in Sources */,
+				9EDF46C31FC41F8C00993134 /* ProfileVM.swift in Sources */,
 				9EFB03651FB9800B00A78845 /* BazarDetailVM.swift in Sources */,
 				9EE16E971FB4A56500B4C5C5 /* StartPhoneVerificationVC.swift in Sources */,
 				9EFB037D1FB99A5200A78845 /* CountryCodeCellVM.swift in Sources */,
+				9E6BB8891FC4678000CB0933 /* ProfileInfoCellVM.swift in Sources */,
 				9E2BFBE81FBC360000860CA0 /* StartButton.swift in Sources */,
 				9EE16E9A1FB4A57500B4C5C5 /* StartPhoneVerificationVM.swift in Sources */,
 				9EF34D3B1FC0256500BCA63C /* FriendsVM.swift in Sources */,
 				9EE16EA01FB4BF8700B4C5C5 /* CompletePhoneVerificationVM.swift in Sources */,
+				9E3F15051FC4581400BC7C21 /* ProfileHeaderCell.swift in Sources */,
 				9EBEBD471FBAFFE600DE831F /* AuthenticationRouter.swift in Sources */,
 				9E61444A1FB305F900067295 /* CompleteEditProfileVM.swift in Sources */,
 				9E6144411FB2F5D000067295 /* StartEditProfileVC.swift in Sources */,
 				9EB170AD1FB065FE00A70A10 /* TabbedController.swift in Sources */,
+				9EDF46C01FC41F7300993134 /* ProfileVC.swift in Sources */,
 				9E5E8E161FADB6CE00CCCBDA /* RootVC.swift in Sources */,
 				9E2BFBF21FBC5D3E00860CA0 /* FriendsCell.swift in Sources */,
 				9E5FA3041FBD73870082F56F /* PictureVC.swift in Sources */,
@@ -1141,6 +1209,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Kubazar/Kubazar.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y2V6NG4VN2;
 				INFOPLIST_FILE = "Kubazar/Supporting Files/Info.plist";
@@ -1148,6 +1217,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobexs.Kubazar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1161,6 +1232,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Kubazar/Kubazar.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y2V6NG4VN2;
 				INFOPLIST_FILE = "Kubazar/Supporting Files/Info.plist";
@@ -1168,6 +1240,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobexs.Kubazar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

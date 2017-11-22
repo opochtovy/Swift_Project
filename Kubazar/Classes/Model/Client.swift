@@ -11,12 +11,10 @@ import Alamofire
 
 class Client {
     
-    let sessionManager: SessionManager
     let authenticator: FirebaseServerClient
     
     init() {
         
-        self.sessionManager = SessionManager()
         self.authenticator = FirebaseServerClient()
     }
 }

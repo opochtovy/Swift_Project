@@ -57,7 +57,12 @@ class TabbedController: UITabBarController {
         writeViewController.tabBarItem = writeBarItem
         let writeNavViewController = UINavigationController(rootViewController: writeViewController)
         
-        self.viewControllers = [bazarNavCtrl, writeNavViewController]
+        let profileViewController = ProfileVC(client: self.viewModel.client)
+        let profileBarItem = UITabBarItem(title: NSLocalizedString(TabBarTitles.profile, comment: ""), image: UIImage(named: TabBarImages.profile), selectedImage: UIImage(named: TabBarImages.profile))
+        profileViewController.tabBarItem = profileBarItem
+        let profileNavViewController = UINavigationController(rootViewController: profileViewController)
+        
+        self.viewControllers = [bazarNavCtrl, writeNavViewController, profileNavViewController]
     }
 
     private func setStatusBarAppearance() {

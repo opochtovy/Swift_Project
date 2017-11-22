@@ -9,6 +9,7 @@
 import Foundation
 import Firebase
 import FirebaseStorage
+import Alamofire
 
 enum AuthenticatorState {
     
@@ -26,6 +27,8 @@ enum StoreKeys {
 class FirebaseServerClient {
     
     static let AuthenticatorStateDidChangeNotification = "AuthenticatorStateDidChangeNotification"
+    
+    var sessionManager: SessionManager
     
     public var state : AuthenticatorState? {
         
@@ -70,7 +73,18 @@ class FirebaseServerClient {
         }
     }
     
-    //MARK: - Public functions
+    //MARK: - LyfeCycle
+    
+    init() {
+        sessionManager = SessionManager()
+    }
+    
+    //MARK: - Private functions
+    
+    private func setState() {
+        
+        self.state = UserDefaults.standard.bool(forKey: StoreKeys.isUserAuthorized) ? .authorized : .unauthorized
+    }
     
     public func setStateOfCurrentUser() {
     
@@ -84,6 +98,67 @@ class FirebaseServerClient {
             print("user.displayName =", user.displayName ?? "no displayName")
         }
     }
+    
+    public func downloadProfileImage(completionHandler:@escaping (Data?, Bool) -> ()) {
+        
+        if self.state == .authorized, let user = Auth.auth().currentUser {
+            
+            print("user.uid =", user.uid)
+            print("user.email =", user.email ?? "no email")
+            print("user.photoURL =", user.photoURL ?? "no photoURL")
+            print("user.displayName =", user.displayName ?? "no displayName")
+        }
+        
+        // https://firebasestorage.googleapis.com/v0/b/testkubazar.appspot.com/o/profileImages%2Fopochtovy_photo.jpg?alt=media&token=d529a107-e133-4220-a710-6bca734607a6
+/*
+        Alamofire.request(.GET, "https://robohash.org/123.png").response { (request, response, data, error) in
+            self.myImageView.image = UIImage(data: data, scale:1)
+        }
+*/
+        let request = AuthenticationRouter.downloadProfileImage()
+        self.sessionManager.request(request).validate().response { (response) in
+            
+            if response.error != nil {
+                
+                completionHandler(nil, false)
+                return
+            }
+            let data = response.data
+            completionHandler(data, true)
+        }
+    }
+    
+    public func getUserDisplayName() -> String {
+        
+        if let user = Auth.auth().currentUser, let displayName = user.displayName {
+            
+            return displayName
+        }
+        
+        return "no displayName"
+    }
+    
+    public func getUserEmail() -> String {
+        
+        if let email = Auth.auth().currentUser?.email {
+            
+            return email
+        }
+        
+        return "no email"
+    }
+    
+    public func getUserPhone() -> String {
+        
+        if let phone = Auth.auth().currentUser?.phoneNumber {
+            
+            return phone
+        }
+        
+        return "no phone number"
+    }
+    
+    //MARK: - Firebase
     
     public func signOut(completionHandler:@escaping (String?, Bool) -> ()) {
         
@@ -214,7 +289,7 @@ class FirebaseServerClient {
         }
     }
     
-    public func updateUserProfile(displayName: String, photoURL: URL?, completionHandler:@escaping (String?, Bool) -> ()) {
+    public func createProfileChangeRequest(displayName: String, photoURL: URL?, completionHandler:@escaping (String?, Bool) -> ()) {
         
         let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
         changeRequest?.displayName = displayName
@@ -232,6 +307,39 @@ class FirebaseServerClient {
             }
             
             completionHandler(nil, true)
+        }
+    }
+    
+    public func updateUserProfile(displayName: String, email: String, completionHandler:@escaping (String?, Bool) -> ()) {
+        
+        let user = Auth.auth().currentUser
+        let changeRequest = user?.createProfileChangeRequest()
+        changeRequest?.displayName = displayName
+        
+        changeRequest?.commitChanges { (error) in
+            
+            if error != nil {
+                
+                if let error = error {
+                    
+                    completionHandler(error.localizedDescription, false)
+                    return
+                }
+            }
+            
+            user?.updateEmail(to: email, completion: { (error) in
+                
+                if error != nil {
+                    
+                    if let error = error {
+                        
+                        completionHandler(error.localizedDescription, false)
+                        return
+                    }
+                }
+                
+                completionHandler(nil, true)
+            })
         }
     }
     
@@ -306,10 +414,5 @@ class FirebaseServerClient {
         }
     }
     
-    //MARK: - Private functions
-
-    private func setState() {
-        
-        self.state = UserDefaults.standard.bool(forKey: StoreKeys.isUserAuthorized) ? .authorized : .unauthorized
-    }
+    //MARK: - Alamofire
 }

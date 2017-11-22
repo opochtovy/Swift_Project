@@ -162,29 +162,6 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate, SMSCodeT
         self.present(alertController, animated: true, completion: nil)
     }
     
-    private func showWrongResponseAlert(message: String?) {
-        
-        let alertTitle = NSLocalizedString(CommonTitles.errorTitle, comment: "")
-        var alertMessage = NSLocalizedString(CommonTitles.wrongResponseMessage, comment: "")
-        if let message = message {
-            
-            alertMessage = message
-        }
-        
-        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
-        
-        let okAction = UIAlertAction(title: NSLocalizedString(ButtonTitles.doneButtonTitle, comment: ""), style: .default) { (_) in
-            
-            alertController.dismiss(animated: true, completion: nil)
-        }
-        
-        alertController.addAction(okAction)
-        
-        alertController.view.tintColor = #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)
-        
-        self.present(alertController, animated: true, completion: nil)
-    }
-    
     private func allowOnlyOneDigitOnTextFields() {
         
         for textField in self.codeTextFields {
@@ -302,7 +279,7 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate, SMSCodeT
                         if let authToken = self.client.authenticator.authToken {
                             
                             print("signInWithPhoneNumber : authToken =", authToken)
-                            self.client.sessionManager.adapter = SessionTokenAdapter(sessionToken: authToken)
+                            self.client.authenticator.sessionManager.adapter = SessionTokenAdapter(sessionToken: authToken)
                         }
                         
                         let editProfileViewController = StartEditProfileVC(client: self.client)

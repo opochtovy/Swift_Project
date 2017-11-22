@@ -40,8 +40,6 @@ class SignInVC: ViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.edgesForExtendedLayout = []
-        
         self.localizeTitles()
     }
     
@@ -109,10 +107,10 @@ class SignInVC: ViewController, UITextFieldDelegate {
         self.present(alertController, animated: true, completion: nil)
     }
     
-    private func showWrongResponseAlert(message: String?) {
+    override func showWrongResponseAlert(message: String?) {
         
-        let alertTitle = NSLocalizedString(CommonTitles.errorTitle, comment: "Error Title")
-        var alertMessage = NSLocalizedString(ForgotPasswordVC.wrongResponseAlertMessage, comment: "Message for wrong respond alert on Start Edit Profile")
+        let alertTitle = NSLocalizedString(CommonTitles.errorTitle, comment: "")
+        var alertMessage = NSLocalizedString(ForgotPasswordVC.wrongResponseAlertMessage, comment: "")
         if let message = message {
             
             alertMessage = message
@@ -120,7 +118,7 @@ class SignInVC: ViewController, UITextFieldDelegate {
         
         let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
         
-        let okAction = UIAlertAction(title: NSLocalizedString(ButtonTitles.doneButtonTitle, comment: "Done Button Title on Forgot Password"), style: .default) { (_) in
+        let okAction = UIAlertAction(title: NSLocalizedString(ButtonTitles.doneButtonTitle, comment: ""), style: .default) { (_) in
             
             alertController.dismiss(animated: true, completion: nil)
         }
@@ -217,11 +215,12 @@ class SignInVC: ViewController, UITextFieldDelegate {
                         if let authToken = self.client.authenticator.authToken {
                             
                             print("authToken =", authToken)
-                            self.client.sessionManager.adapter = SessionTokenAdapter(sessionToken: authToken)
+                            self.client.authenticator.sessionManager.adapter = SessionTokenAdapter(sessionToken: authToken)
                         }
                     }
                 })
             }
         })
+
     }
 }

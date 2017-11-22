@@ -11,25 +11,19 @@ import Alamofire
 
 enum AuthenticationRouter: URLRequestConvertible {
     
-    case login(authParameters: Parameters)
+    case downloadProfileImage()
     
     var method: HTTPMethod {
         
         switch self {
-        case .login:    return .get
+        case .downloadProfileImage:    return .get
         }
     }
     
     var path: String {
         
         switch self {
-        case .login:    return "/..."
-        }
-    }
-    
-    var url: URL {
-        switch self {
-        case .login: return URL(string: "")!
+        case .downloadProfileImage:    return "https://firebasestorage.googleapis.com/v0/b/testkubazar.appspot.com/o/profileImages%2Fopochtovy_photo.jpg?alt=media&token=d529a107-e133-4220-a710-6bca734607a6" // test
         }
     }
     
@@ -37,16 +31,14 @@ enum AuthenticationRouter: URLRequestConvertible {
     
     func asURLRequest() throws -> URLRequest {
         
-        var urlRequest = URLRequest(url: self.url.appendingPathComponent(path))
-        urlRequest.httpMethod = method.rawValue
-        
-        switch self {
+        var urlRequest = URLRequest(url: URL(string: "https://firebasestorage.googleapis.com/")!)
+        if let url = URL(string: self.path) {
             
-        case .login(let parameters):
-            
-            urlRequest.addValue(parameters["Authorization"] as! String, forHTTPHeaderField: "Authorization")
+            urlRequest = URLRequest(url: url)
+            urlRequest.httpMethod = method.rawValue
+            urlRequest.httpShouldHandleCookies = false
+            urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
         }
-        urlRequest.httpShouldHandleCookies = false
         
         return urlRequest
     }

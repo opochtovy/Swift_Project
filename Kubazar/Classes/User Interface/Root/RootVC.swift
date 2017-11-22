@@ -38,7 +38,7 @@ class RootVC: ViewController {
         
         self.client.authenticator.signOut { (errorDescription, success) in
             
-            self.client.sessionManager.adapter = nil
+            self.client.authenticator.sessionManager.adapter = nil
         }
     }
     

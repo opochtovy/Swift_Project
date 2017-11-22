@@ -165,9 +165,9 @@ class CompleteEditProfileVC: ViewController, UIImagePickerControllerDelegate, UI
         self.present(alertController, animated: true, completion: nil)
     }
     
-    private func updateUserProfile(displayName: String, photoURL: URL?) {
+    private func createProfileChangeRequest(displayName: String, photoURL: URL?) {
         
-        self.client.authenticator.updateUserProfile(displayName: displayName, photoURL: photoURL, completionHandler: { errorDescription, success in
+        self.client.authenticator.createProfileChangeRequest(displayName: displayName, photoURL: photoURL, completionHandler: { errorDescription, success in
             
             MBProgressHUD.hide(for: self.view, animated: true)
             if !success {
@@ -179,29 +179,6 @@ class CompleteEditProfileVC: ViewController, UIImagePickerControllerDelegate, UI
                 self.client.authenticator.state = .authorized
             }
         })
-    }
-    
-    private func showWrongResponseAlert(message: String?) {
-        
-        let alertTitle = NSLocalizedString(CommonTitles.errorTitle, comment: "")
-        var alertMessage = NSLocalizedString(CommonTitles.wrongResponseMessage, comment: "")
-        if let message = message {
-            
-            alertMessage = message
-        }
-        
-        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
-        
-        let okAction = UIAlertAction(title: NSLocalizedString(ButtonTitles.doneButtonTitle, comment: ""), style: .default) { (_) in
-            
-            alertController.dismiss(animated: true, completion: nil)
-        }
-        
-        alertController.addAction(okAction)
-        
-        alertController.view.tintColor = #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)
-        
-        self.present(alertController, animated: true, completion: nil)
     }
     
     //MARK: - Actions
@@ -226,7 +203,7 @@ class CompleteEditProfileVC: ViewController, UIImagePickerControllerDelegate, UI
                 
 //                self.showEmptyPhotoAlert()
                 MBProgressHUD.showAdded(to: self.view, animated: true)
-                self.updateUserProfile(displayName: username, photoURL: nil)
+                self.createProfileChangeRequest(displayName: username, photoURL: nil)
                 return
             }
             
@@ -240,7 +217,7 @@ class CompleteEditProfileVC: ViewController, UIImagePickerControllerDelegate, UI
                     
                 } else {
                     
-                    self.updateUserProfile(displayName: username, photoURL: downloadURL)
+                    self.createProfileChangeRequest(displayName: username, photoURL: downloadURL)
                 }
             })
         }
