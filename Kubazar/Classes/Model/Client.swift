@@ -13,10 +13,17 @@ class Client {
     
     let sessionManager: SessionManager
     let authenticator: FirebaseServerClient
+    let reachabilityManager: NetworkReachabilityManager?
     
     init() {
         
         self.sessionManager = SessionManager()
         self.authenticator = FirebaseServerClient()
+        self.reachabilityManager = NetworkReachabilityManager()
+        
+        if let reachabilityManager = self.reachabilityManager {
+            
+            reachabilityManager.startListening()
+        }
     }
 }

@@ -12,6 +12,7 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet private var tblView: UITableView!
     private var scFilter: UISegmentedControl!
+    private var vReachabilityAlert: ReachabilityAlertView?
     
     private let viewModel: BazarVM
     
@@ -26,7 +27,19 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.edgesForExtendedLayout = []
+        
+        self.client.reachabilityManager?.listener = { status in
+            
+            switch status {
+            case .reachable(.ethernetOrWiFi):
+                print("-- reachable")
+                self.hideReachabilityAlert()
+            case .notReachable:
+                print("-- not  reachable")
+                self.showReachabilityAlert()
+            default: break
+            }
+        }
         
         self.scFilter = UISegmentedControl(items: [NSLocalizedString("Bazar_all_haikus", comment: ""),
                                                    NSLocalizedString("My Haikus", comment: ""),
@@ -63,6 +76,24 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
         self.tblView.reloadSections(IndexSet.init(integer: 0), with: .fade)
     }
     
+    private func showReachabilityAlert() {
+        
+        self.vReachabilityAlert = ReachabilityAlertView(frame: self.view.frame)
+        self.vReachabilityAlert?.btnRefresh.addTarget(self, action: #selector(BazarVC.didPressRefreshButton(_:)), for: .touchUpInside)
+        self.view.addSubview(self.vReachabilityAlert!)
+    }
+    
+    private func hideReachabilityAlert() {
+        
+        for subView in self.view.subviews {
+            
+            if subView.isKind(of: ReachabilityAlertView.self) {
+                
+                subView.removeFromSuperview()
+            }
+        }
+    }
+    
     //MARK: - Actions
     @objc private func didPressSortButton(_ sender: UIBarButtonItem) {
         
@@ -95,6 +126,10 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
             self.updateContent()
             self.tblView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
         }
+    }
+    
+    @IBAction private func didPressRefreshButton(_ sender: UIButton) {
+        
     }
     
     //MARK: - UITableViewDataSource

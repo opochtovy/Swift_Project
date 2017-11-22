@@ -23,7 +23,6 @@ class HaikuPreviewVM {
         self.field3 = haiku.fields[safe: 2]?.text
         
         self.fontTextColor = haiku.decorator.fontHexColor
-        print(haiku.decorator.fontHexColor)
         self.haikuPictureURL = URL(string: haiku.pictureURL ?? "")
     }    
 }

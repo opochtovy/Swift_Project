@@ -100,6 +100,8 @@
 		9EC68A2C1FC59F0700A7F793 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC68A2B1FC59F0700A7F793 /* UIColor+Extension.swift */; };
 		9EC68A2E1FC5A1AB00A7F793 /* ColorVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC68A2D1FC5A1AB00A7F793 /* ColorVM.swift */; };
 		9EC68A301FC5A29300A7F793 /* FontsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC68A2F1FC5A29300A7F793 /* FontsVM.swift */; };
+		9EC68A321FC5B40D00A7F793 /* ReachabilityAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC68A311FC5B40D00A7F793 /* ReachabilityAlertView.swift */; };
+		9EC68A341FC5B42A00A7F793 /* ReachabilityAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EC68A331FC5B42900A7F793 /* ReachabilityAlertView.xib */; };
 		9EE16E941FB49F4700B4C5C5 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE16E931FB49F4700B4C5C5 /* UIImage+Extensions.swift */; };
 		9EE16E971FB4A56500B4C5C5 /* StartPhoneVerificationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE16E951FB4A56500B4C5C5 /* StartPhoneVerificationVC.swift */; };
 		9EE16E981FB4A56500B4C5C5 /* StartPhoneVerificationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EE16E961FB4A56500B4C5C5 /* StartPhoneVerificationVC.xib */; };
@@ -222,6 +224,8 @@
 		9EC68A2B1FC59F0700A7F793 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		9EC68A2D1FC5A1AB00A7F793 /* ColorVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorVM.swift; sourceTree = "<group>"; };
 		9EC68A2F1FC5A29300A7F793 /* FontsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsVM.swift; sourceTree = "<group>"; };
+		9EC68A311FC5B40D00A7F793 /* ReachabilityAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityAlertView.swift; sourceTree = "<group>"; };
+		9EC68A331FC5B42900A7F793 /* ReachabilityAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReachabilityAlertView.xib; sourceTree = "<group>"; };
 		9EE16E931FB49F4700B4C5C5 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		9EE16E951FB4A56500B4C5C5 /* StartPhoneVerificationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartPhoneVerificationVC.swift; sourceTree = "<group>"; };
 		9EE16E961FB4A56500B4C5C5 /* StartPhoneVerificationVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StartPhoneVerificationVC.xib; sourceTree = "<group>"; };
@@ -308,6 +312,8 @@
 				9E1588991FB452E40063C816 /* BazarCell.swift */,
 				9E15889A1FB452E40063C816 /* BazarCell.xib */,
 				9E15889D1FB452F50063C816 /* BazarCellVM.swift */,
+				9EC68A311FC5B40D00A7F793 /* ReachabilityAlertView.swift */,
+				9EC68A331FC5B42900A7F793 /* ReachabilityAlertView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -878,6 +884,7 @@
 				9EE16E981FB4A56500B4C5C5 /* StartPhoneVerificationVC.xib in Resources */,
 				9EB6BBA21FC422420085EA5F /* PlayerCell.xib in Resources */,
 				9E5FA3051FBD73870082F56F /* PictureVC.xib in Resources */,
+				9EC68A341FC5B42A00A7F793 /* ReachabilityAlertView.xib in Resources */,
 				9EFB036F1FB997BC00A78845 /* countryCodes.json in Resources */,
 				9E7C53BF1FBF04EA0082E7EC /* ColorVC.xib in Resources */,
 				9E5E8E411FAE1E5500CCCBDA /* ForgotPasswordVC.xib in Resources */,
@@ -1019,6 +1026,7 @@
 				9EED066E1FB59E5B00CCD82E /* User.swift in Sources */,
 				9E5E8E271FADC41A00CCCBDA /* BaseVM.swift in Sources */,
 				9E5FA3091FBD7AF40082F56F /* ChoosePictureButton.swift in Sources */,
+				9EC68A321FC5B40D00A7F793 /* ReachabilityAlertView.swift in Sources */,
 				9EFB03741FB997F900A78845 /* CountryCodesVC.swift in Sources */,
 				9E455BCE1FB07DE600BC9A11 /* WriteMainMenuVM.swift in Sources */,
 				9E15889E1FB452F50063C816 /* BazarCellVM.swift in Sources */,
