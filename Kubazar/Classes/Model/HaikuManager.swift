@@ -27,7 +27,7 @@ class HaikuManager {
         self.prepareData()
     }
     
-    //Public functions
+    //MARK: - Public functions
     
     public func like(toLike: Bool,haiku: Haiku) {
         
@@ -65,8 +65,18 @@ class HaikuManager {
             }
         }
     }
+   
+    public func createNewHaiku() -> Haiku{
+        
+        let haiku = Haiku()
+        haiku.creator = self.currentUser
+        haiku.players = [self.currentUser]
+        haiku.id = 25 //
+        
+        return haiku
+    }
     
-    //Private functions
+    //MARK: - Private functions
     
     private func prepareData() {
         //MOCKED data

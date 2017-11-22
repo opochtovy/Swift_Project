@@ -27,6 +27,10 @@ class EditorVM: BaseVM {
     
     var fields: [String] = []
     public var scope: EditingScope = .creatorSetup
+    public var fontSize: Float = Decorator.defaults.fontSize
+    public var fontHexColor: String = Decorator.defaults.fontColor
+    public var fontFamilyName: String = Decorator.defaults.familyName
+    
     private let haiku: Haiku
     
     public var nextActionEnabled: Bool = false //TODO: add condition
@@ -42,9 +46,17 @@ class EditorVM: BaseVM {
     private func prepareModel() {
         
         self.fields = self.haiku.fields.flatMap({$0.text})
+        self.prepareDecorator()
     }
     
     //MARK: - Public functions
+    
+    public func prepareDecorator() {
+        
+        self.fontHexColor = self.haiku.decorator.fontHexColor
+        self.fontSize = self.haiku.decorator.fontSize
+        self.fontFamilyName = self.haiku.decorator.fontFamily
+    }
     
     public func inputText(forIndex index: Int, text: String) {
         
@@ -99,6 +111,13 @@ class EditorVM: BaseVM {
         return result
     }
     
+    public func getColorVM() -> ColorVM {
+        
+        return ColorVM(withDecorator: self.haiku.decorator)
+    }
     
-    
+    public func getFontVM() -> FontVM {
+        
+        return FontVM(withDecorator: self.haiku.decorator)
+    }
 }

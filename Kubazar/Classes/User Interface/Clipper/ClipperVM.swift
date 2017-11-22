@@ -20,4 +20,11 @@ class ClipperVM: BaseVM {
         self.imageData = imageData
         super.init(client: client)
     }
+    
+    //MARK: - Public functions
+    
+    public func getEditorVM() -> EditorVM{
+        
+        return EditorVM(client: self.client, haiku: self.haiku)
+    }
 }

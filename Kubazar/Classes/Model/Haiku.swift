@@ -25,6 +25,7 @@ class Haiku {
     public var published: Bool = false
     public var liked: Bool = false
     public var players : [User] = []
+    public var decorator: Decorator = Decorator()
 }
 
 extension Haiku {

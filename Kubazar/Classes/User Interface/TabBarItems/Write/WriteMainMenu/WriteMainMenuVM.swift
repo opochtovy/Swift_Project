@@ -17,11 +17,13 @@ class WriteMainMenuVM: BaseVM {
     //MAKR: - public functions
     public func getFriendsVM(players: Int) -> FriendsVM {
         
-        return FriendsVM(client: self.client, maxFriends: players)
+        let haiku = HaikuManager.shared.createNewHaiku()
+        return FriendsVM(client: self.client, maxFriends: players, haiku: haiku)
     }
     
     public func getPictureVM() -> PictureVM {
         
-        return PictureVM(client: self.client)
+        let haiku = HaikuManager.shared.createNewHaiku()
+        return PictureVM(client: self.client, haiku: haiku)
     }
 }

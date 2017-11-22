@@ -101,9 +101,7 @@ class ClipperVC: ViewController {
         }
     }
     
-    //MARK: - Actions
-    
-    @IBAction private func didPressCropImage(_ sender: Any) {
+    private func cropImage() {
         
         guard let image = imageView.image else { return }
         
@@ -112,19 +110,25 @@ class ClipperVC: ViewController {
         let verticalInset = self.scrollView.contentInset.top
         
         let cropOrigin = CGPoint(x: self.scrollView.contentOffset.x * scaleMultiplier,
-                                    y: (self.scrollView.contentOffset.y + verticalInset) * scaleMultiplier)
+                                 y: (self.scrollView.contentOffset.y + verticalInset) * scaleMultiplier)
         
         let cropRect = CGRect(origin: cropOrigin,
-                                size: CGSize(width: clipViewRect.width * scaleMultiplier,
-                                             height: clipViewRect.height * scaleMultiplier))
-
+                              size: CGSize(width: clipViewRect.width * scaleMultiplier,
+                                           height: clipViewRect.height * scaleMultiplier))
+        
         if let cropedImafeRef = image.cgImage?.cropping(to: cropRect) {
-
+            
             let resultImage: UIImage = UIImage.init(cgImage: cropedImafeRef)
-
+            
             self.ivCroped.image = resultImage
         }
+    }
+    
+    //MARK: - Actions
+    
+    @IBAction private func didPressCropImage(_ sender: Any) {
         
+        self.cropImage()
         self.updateContent()
     }
     
@@ -136,6 +140,8 @@ class ClipperVC: ViewController {
     
     @IBAction private func didPressContinueButton(_ sender: Any) {
         
+        let ctrl = EditorVC(client: self.client, viewModel: self.viewModel.getEditorVM())
+        self.navigationController?.pushViewController(ctrl, animated: true)
     }
 }
 

@@ -17,9 +17,9 @@ class EditorVC: ViewController, DecoratorDelegate, UITextFieldDelegate {
     
     let viewModel: EditorVM
     @IBOutlet private weak var actionBar: UIView!
+    @IBOutlet fileprivate var btnColor: UIButton!
     @IBOutlet fileprivate var barButtons: [UIButton]!
-    @IBOutlet private var fields: [EditTextField]!
-    private var decorator: Decorator = Decorator()
+    @IBOutlet private var fields: [EditTextField]!    
     
     init(client: Client, viewModel: EditorVM) {
         self.viewModel = viewModel
@@ -51,7 +51,7 @@ class EditorVC: ViewController, DecoratorDelegate, UITextFieldDelegate {
        
         sender.isSelected = true
         
-        let ctrl = ColorVC(withDecorator: self.decorator)
+        let ctrl = ColorVC(withViewModel: self.viewModel.getColorVM())
         ctrl.delegate = self
         ctrl.preferredContentSize = CGSize(width: 98.0, height: 82.0)
         ctrl.modalPresentationStyle = .popover        
@@ -70,7 +70,7 @@ class EditorVC: ViewController, DecoratorDelegate, UITextFieldDelegate {
     
         sender.isSelected = true
         
-        let ctrl = FontsVC(withDecorator: self.decorator)
+        let ctrl = FontsVC(withViewModel: self.viewModel.getFontVM())
         ctrl.delegate = self
         ctrl.preferredContentSize = CGSize(width: UIScreen.main.bounds.width, height: 257.0)
         ctrl.modalPresentationStyle = .popover
@@ -106,14 +106,16 @@ class EditorVC: ViewController, DecoratorDelegate, UITextFieldDelegate {
     
     private func updateDecoreContent() {
         
-        guard let font = self.decorator.font else { return }
+        guard let font = UIFont.init(name: self.viewModel.fontFamilyName, size: CGFloat(self.viewModel.fontSize)) else { return }
         
         for field in self.fields {
             
             field.font = font
-            field.textColor = self.decorator.fontColor
+            field.textColor = UIColor(hex: self.viewModel.fontHexColor)
             field.text = field.text // iOS 8.2 bug. need set text after color change
         }
+        
+        self.btnColor.tintColor = UIColor(hex: self.viewModel.fontHexColor) //TODO: resetImage to tempalte state
     }
     
     private func updateRightBarButton() {
@@ -124,6 +126,7 @@ class EditorVC: ViewController, DecoratorDelegate, UITextFieldDelegate {
     //MARK: - DecoratorDelegate
     func didUpdateDecorator(viewController: UIViewController) {
         
+        self.viewModel.prepareDecorator()
         self.updateDecoreContent()
     }
     

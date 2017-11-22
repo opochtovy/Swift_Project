@@ -9,17 +9,15 @@ import Foundation
 
 class FriendsVM: BaseVM {
 
-    public var maxFriends = 1
+    public let maxFriends: Int
     private(set) var title = ""
     private let haiku : Haiku
     private var friends: [User] = []
     
-    init(client: Client, maxFriends: Int) {
-        self.maxFriends = maxFriends
-        self.haiku = Haiku()
-        self.haiku.creator = HaikuManager.shared.currentUser
-        self.haiku.players = [HaikuManager.shared.currentUser]
+    init(client: Client, maxFriends: Int, haiku: Haiku) {
         
+        self.maxFriends = maxFriends
+        self.haiku = haiku
         super.init(client: client)
         
         self.prepareModel()
@@ -84,7 +82,7 @@ class FriendsVM: BaseVM {
     
     public func getPictureVM() -> PictureVM {
         
-        return PictureVM(client: self.client)
+        return PictureVM(client: self.client, haiku: self.haiku)
     }
     
     //MARK: Private functions

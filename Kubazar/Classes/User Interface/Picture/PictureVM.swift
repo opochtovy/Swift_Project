@@ -17,6 +17,7 @@ enum PhotoError: Error {
 
 class PictureVM: BaseVM {
 
+    private let haiku: Haiku
     private var assets: [PHAsset] = [] 
     public var accessAllowed : Bool {
     
@@ -25,6 +26,11 @@ class PictureVM: BaseVM {
     
     private var chosenImageData: Data?
     public var isCollectionExpanded: Bool = false
+    
+    init(client: Client, haiku: Haiku) {
+        self.haiku = haiku
+        super.init(client: client)
+    }
     
     //MARK: - Public functions
     public func prepareModel() {

@@ -14,9 +14,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EditorVC" customModule="Kubazar" customModuleProvider="target">
             <connections>
                 <outlet property="actionBar" destination="VXz-Sr-c7s" id="eOI-e1-Ng9"/>
+                <outlet property="btnColor" destination="KIN-jm-Pc0" id="2hu-bY-7Fg"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outletCollection property="barButtons" destination="Q2R-SQ-FUY" collectionClass="NSMutableArray" id="C3p-pY-bJP"/>
-                <outletCollection property="barButtons" destination="WQr-EC-7jJ" collectionClass="NSMutableArray" id="DBA-8S-vR1"/>
                 <outletCollection property="barButtons" destination="org-uI-T34" collectionClass="NSMutableArray" id="edK-rT-bPc"/>
                 <outletCollection property="barButtons" destination="KIN-jm-Pc0" collectionClass="NSMutableArray" id="o9t-PW-qgc"/>
                 <outletCollection property="fields" destination="zWb-O8-VXm" collectionClass="NSMutableArray" id="fTE-UC-SYt"/>
@@ -36,19 +36,13 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q2R-SQ-FUY">
-                                    <rect key="frame" x="0.0" y="0.0" width="80" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="106.5" height="44"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="tintColor" red="0.34509803919999998" green="0.74117647060000003" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <state key="normal" image="iconReset"/>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WQr-EC-7jJ">
-                                    <rect key="frame" x="80" y="0.0" width="80" height="44"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <color key="tintColor" red="0.34509803919999998" green="0.74117647060000003" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <state key="normal" image="iconEffects"/>
-                                </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="org-uI-T34">
-                                    <rect key="frame" x="160" y="0.0" width="80" height="44"/>
+                                    <rect key="frame" x="106.5" y="0.0" width="107" height="44"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="tintColor" red="0.34509803919999998" green="0.74117647060000003" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <state key="normal" image="iconFonts"/>
@@ -58,7 +52,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KIN-jm-Pc0">
-                                    <rect key="frame" x="240" y="0.0" width="80" height="44"/>
+                                    <rect key="frame" x="213.5" y="0.0" width="106.5" height="44"/>
                                     <state key="normal" image="iconColorPicker"/>
                                     <state key="selected" image="iconColorPickerSelected"/>
                                     <state key="highlighted" image="iconColorPickerSelected"/>
@@ -148,7 +142,6 @@
     <resources>
         <image name="iconColorPicker" width="24" height="24"/>
         <image name="iconColorPickerSelected" width="24" height="24"/>
-        <image name="iconEffects" width="26" height="24"/>
         <image name="iconFonts" width="24" height="24"/>
         <image name="iconFontsSel" width="24" height="24"/>
         <image name="iconReset" width="24" height="24"/>
