@@ -8,11 +8,6 @@
 
 import Foundation
 
-enum HaikuColorStyle {
-    case black
-    case white
-}
-
 class Haiku {
     
     public var id : Int = 0
@@ -20,8 +15,7 @@ class Haiku {
     public var pictureURL: String?
     public var likesCount: Int = 0
     public var creator: User?
-    public var fields: [Field] = []
-    public var color: HaikuColorStyle = .black
+    public var fields: [Field] = []    
     public var published: Bool = false
     public var liked: Bool = false
     public var players : [User] = []

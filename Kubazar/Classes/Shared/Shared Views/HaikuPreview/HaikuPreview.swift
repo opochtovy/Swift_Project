@@ -22,14 +22,14 @@ class HaikuPreview: UIView {
     public var viewModel: HaikuPreviewVM! {
         didSet {
             
-            self.lbField1.text = viewModel.field1
-            self.lbField2.text = viewModel.field2
-            self.lbField3.text = viewModel.field3
-            
-            let color : UIColor = viewModel.textColor == .black ? UIColor.black : UIColor.white
+            let color : UIColor = UIColor(hex: viewModel.fontTextColor)
             self.lbField1.textColor = color
             self.lbField2.textColor = color
             self.lbField3.textColor = color
+            
+            self.lbField1.text = viewModel.field1
+            self.lbField2.text = viewModel.field2
+            self.lbField3.text = viewModel.field3
             
             self.ivHaiku.image = nil
             

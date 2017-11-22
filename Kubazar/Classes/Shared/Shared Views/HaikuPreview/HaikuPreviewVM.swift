@@ -14,7 +14,7 @@ class HaikuPreviewVM {
     private(set) var field1: String?
     private(set) var field2: String?
     private(set) var field3: String?
-    private(set) var textColor: HaikuColorStyle = .white
+    private(set) var fontTextColor: String = Decorator.defaults.fontColor
     
     init(withHaiku haiku: Haiku) {
         
@@ -22,8 +22,8 @@ class HaikuPreviewVM {
         self.field2 = haiku.fields[safe: 1]?.text
         self.field3 = haiku.fields[safe: 2]?.text
         
-        self.textColor = haiku.color
-        
+        self.fontTextColor = haiku.decorator.fontHexColor
+        print(haiku.decorator.fontHexColor)
         self.haikuPictureURL = URL(string: haiku.pictureURL ?? "")
     }    
 }
