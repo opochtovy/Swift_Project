@@ -9,6 +9,12 @@
 import Foundation
 import Photos
 
+enum PhotoError: Error {
+    
+    case nilImageData
+    case accessDeclined
+}
+
 class PictureVM: BaseVM {
 
     private var assets: [PHAsset] = [] 
@@ -51,18 +57,19 @@ class PictureVM: BaseVM {
         return self.assets.count
     }
     
-    public func chooseRandomImage() {
+    public func chooseRandomImage(completion: @escaping BaseCompletion) {
         
-        guard self.accessAllowed == true else { return }
+        guard self.accessAllowed == true else { completion(false, PhotoError.accessDeclined); return }
+        
         let randomNumber = Int(arc4random_uniform(UInt32(self.assets.count)))
         let asset = self.assets[randomNumber]
-        self.chooseImage(asset: asset)
+        self.chooseImage(asset: asset, completion: completion)
     }
     
-    public func chooseImage(atIndexPath indexPath: IndexPath) {
+    public func chooseImage(atIndexPath indexPath: IndexPath, completion: @escaping BaseCompletion) {
         
         let asset = self.assets[indexPath.row]
-        self.chooseImage(asset: asset)
+        self.chooseImage(asset: asset, completion: completion)
     }
     
     public func chooseImage(withData imageData: Data?) {
@@ -72,13 +79,16 @@ class PictureVM: BaseVM {
     
     //MARK: - Private functions
 
-    private func chooseImage(asset: PHAsset) {
+    private func chooseImage(asset: PHAsset, completion: @escaping BaseCompletion) {
         
         PhotoLibraryManager.shared.getImageFullData(fromAsset: asset) { (success, data) in
             
             if success == true && data != nil {
                 
                 self.chooseImage(withData: data)
+                completion(true, nil)
+            } else {
+                completion(false, PhotoError.nilImageData)
             }
         }
     }

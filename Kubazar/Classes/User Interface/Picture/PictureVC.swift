@@ -89,9 +89,13 @@ class PictureVC: ViewController, UICollectionViewDataSource, UICollectionViewDel
     
     @IBAction private func didPressSurpriseMe(_ sender: UIButton) {
         
-        self.viewModel.chooseRandomImage()
-        self.navigateToClipperController()
-        
+        self.viewModel.chooseRandomImage { (success, error) in
+            
+            if success {
+                
+                self.navigateToClipperController()
+            }
+        }
     }
     
     @IBAction private func didPressEnableLibraryAccess(_ sender: UIButton) {
@@ -190,8 +194,13 @@ class PictureVC: ViewController, UICollectionViewDataSource, UICollectionViewDel
         
         collectionView.deselectItem(at: indexPath, animated: false)
         
-        self.viewModel.chooseImage(atIndexPath: indexPath)
-        self.navigateToClipperController()
+        self.viewModel.chooseImage(atIndexPath: indexPath) { (success, error) in
+            
+            if success {
+                
+                self.navigateToClipperController()
+            }
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

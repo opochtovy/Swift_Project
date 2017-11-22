@@ -122,4 +122,9 @@
 /**/
 
 
+/*ClipperVC*/
+/**/ "Clipper_crop" = "Crop";
+/**/ "Clipper_reset" = "Reset";
+
+
 

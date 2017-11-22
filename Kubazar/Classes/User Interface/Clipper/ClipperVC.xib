@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,7 +14,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ClipperVC" customModule="Kubazar" customModuleProvider="target">
             <connections>
                 <outlet property="imageView" destination="1ch-kF-nKH" id="FSM-l1-kBU"/>
+                <outlet property="ivCroped" destination="pWX-he-Laj" id="5bL-GT-g7a"/>
                 <outlet property="scrollView" destination="VfI-Nb-wsZ" id="MzJ-J0-Xkb"/>
+                <outlet property="vClipFrame" destination="Eob-wI-rvI" id="Bid-dV-FRo"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -29,7 +32,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="343" height="343"/>
                         </imageView>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="1ch-kF-nKH" secondAttribute="trailing" id="BAX-6t-vKj"/>
                         <constraint firstItem="1ch-kF-nKH" firstAttribute="top" secondItem="VfI-Nb-wsZ" secondAttribute="top" id="LqR-t9-Vco"/>
@@ -40,14 +43,49 @@
                         <outlet property="delegate" destination="-1" id="IQl-ba-k7R"/>
                     </connections>
                 </scrollView>
+                <view userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Lq-ic-mj4">
+                    <rect key="frame" x="0.0" y="20" width="375" height="125.5"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                </view>
+                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eob-wI-rvI">
+                    <rect key="frame" x="0.0" y="145.5" width="375" height="375"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pWX-he-Laj">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="pWX-he-Laj" firstAttribute="leading" secondItem="Eob-wI-rvI" secondAttribute="leading" id="JrD-Xb-lPB"/>
+                        <constraint firstAttribute="trailing" secondItem="pWX-he-Laj" secondAttribute="trailing" id="S7g-cU-Hzm"/>
+                        <constraint firstAttribute="bottom" secondItem="pWX-he-Laj" secondAttribute="bottom" id="gv6-HN-LYh"/>
+                        <constraint firstItem="pWX-he-Laj" firstAttribute="top" secondItem="Eob-wI-rvI" secondAttribute="top" id="kZS-UL-OoO"/>
+                        <constraint firstAttribute="width" secondItem="Eob-wI-rvI" secondAttribute="height" multiplier="1:1" id="vBA-Zp-nZi"/>
+                    </constraints>
+                </view>
+                <view userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TdX-B9-d8u">
+                    <rect key="frame" x="0.0" y="520.5" width="375" height="146.5"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                </view>
             </subviews>
-            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="TdX-B9-d8u" firstAttribute="leading" secondItem="NwW-6A-2VG" secondAttribute="leading" id="13s-gc-2cQ"/>
                 <constraint firstItem="VfI-Nb-wsZ" firstAttribute="trailing" secondItem="NwW-6A-2VG" secondAttribute="trailing" id="50u-Vx-JdL"/>
                 <constraint firstItem="VfI-Nb-wsZ" firstAttribute="leading" secondItem="NwW-6A-2VG" secondAttribute="leading" id="7og-ib-tzf"/>
                 <constraint firstItem="VfI-Nb-wsZ" firstAttribute="top" secondItem="NwW-6A-2VG" secondAttribute="top" id="8jS-MB-J9O"/>
+                <constraint firstItem="Eob-wI-rvI" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="CO3-3s-lti"/>
+                <constraint firstItem="TdX-B9-d8u" firstAttribute="top" secondItem="Eob-wI-rvI" secondAttribute="bottom" id="EzU-NF-tpE"/>
+                <constraint firstItem="5Lq-ic-mj4" firstAttribute="leading" secondItem="NwW-6A-2VG" secondAttribute="leading" id="Hfi-yP-MGG"/>
+                <constraint firstItem="Eob-wI-rvI" firstAttribute="top" secondItem="5Lq-ic-mj4" secondAttribute="bottom" id="Ow9-FJ-n9P"/>
+                <constraint firstItem="5Lq-ic-mj4" firstAttribute="top" secondItem="NwW-6A-2VG" secondAttribute="top" id="XVd-sZ-8or"/>
                 <constraint firstItem="VfI-Nb-wsZ" firstAttribute="trailing" secondItem="NwW-6A-2VG" secondAttribute="trailing" id="fYK-Zx-eKx"/>
                 <constraint firstItem="VfI-Nb-wsZ" firstAttribute="leading" secondItem="NwW-6A-2VG" secondAttribute="leading" id="fg2-aM-AFa"/>
+                <constraint firstItem="5Lq-ic-mj4" firstAttribute="trailing" secondItem="NwW-6A-2VG" secondAttribute="trailing" id="iEW-a2-Ft9"/>
+                <constraint firstItem="NwW-6A-2VG" firstAttribute="bottom" secondItem="TdX-B9-d8u" secondAttribute="bottom" id="mJb-hf-0Iq"/>
+                <constraint firstItem="Eob-wI-rvI" firstAttribute="leading" secondItem="NwW-6A-2VG" secondAttribute="leading" id="pxN-Na-Are"/>
+                <constraint firstItem="NwW-6A-2VG" firstAttribute="trailing" secondItem="TdX-B9-d8u" secondAttribute="trailing" id="tS7-RB-ZNE"/>
+                <constraint firstItem="NwW-6A-2VG" firstAttribute="trailing" secondItem="Eob-wI-rvI" secondAttribute="trailing" id="uc9-AX-z5z"/>
                 <constraint firstItem="NwW-6A-2VG" firstAttribute="bottom" secondItem="VfI-Nb-wsZ" secondAttribute="bottom" id="yu4-CO-utc"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="NwW-6A-2VG"/>
