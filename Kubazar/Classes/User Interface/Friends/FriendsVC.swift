@@ -43,6 +43,7 @@ class FriendsVC: ViewController, UITableViewDataSource, UITableViewDelegate {
     @objc private func didPressNextButton(_ sender: UIButton) {
         
         let ctrl = PictureVC(client: self.client, viewModel: self.viewModel.getPictureVM())
+        ctrl.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(ctrl, animated: true)
     }
     

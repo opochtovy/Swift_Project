@@ -128,5 +128,11 @@
 /**/ "Clipper_crop" = "Crop";
 /**/ "Clipper_reset" = "Reset";
 
+/*PlayerCellVM/*
+/**/ "PlayerCell_writes" = "writes";
+/**/ "PlayerCell_wrote" = "wrote";
+/**/ "PlayerCell_write" = "write";
+/**/ "PlayerCell_syllables"= "syllabels";
+
 
 

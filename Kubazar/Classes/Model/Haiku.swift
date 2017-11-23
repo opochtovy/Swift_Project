@@ -13,10 +13,10 @@ class Haiku {
     public var id : Int = 0
     public var date: Date?
     public var pictureURL: String?
-    public var likesCount: Int = 0
     public var creator: User?
     public var fields: [Field] = []    
     public var published: Bool = false
+    public var likesCount: Int = 0
     public var liked: Bool = false
     public var players : [User] = []
     public var decorator: Decorator = Decorator()
@@ -31,7 +31,12 @@ extension Haiku {
     
     public var isCompleted: Bool {
         
-        return self.fields.count == 3
+        return self.finishedFieldsCount == 3
+    }
+    
+    public var finishedFieldsCount: Int {
+    
+        return self.fields.flatMap({$0.isFinished}).count
     }
 }
 

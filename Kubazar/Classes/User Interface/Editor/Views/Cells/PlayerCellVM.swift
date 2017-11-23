@@ -8,38 +8,36 @@
 
 import Foundation
 
-class PlayerCellVM {
+enum PlayerStatus {
     
-    enum Status {
+    case waiting
+    case done
+    case inProgress
+    
+    var writeText: String {
         
-        case waiting
-        case done
-        case inProgress
-        
-        var writeText: String {
-            
-            switch self {
-            case .waiting:      return "writes"
-            case .done:         return "wrote"
-            case .inProgress:   return "write"
-            }
+        switch self {
+        case .waiting:      return NSLocalizedString("PlayerCell_writes", comment: "")
+        case .done:         return NSLocalizedString("PlayerCell_wrote", comment: "")
+        case .inProgress:   return NSLocalizedString("PlayerCell_write", comment: "")
         }
     }
+}
+
+class PlayerCellVM {
     
-    public var status: Status = .waiting
+    public var status: PlayerStatus = .waiting
     public var userURL: URL?
     public var statusText = ""
     
-    init(withField field: Field) {
+    init(withPlayer player: User, status: PlayerStatus, syllablesCount: Int) {
         
-        if let url: URL = URL(string: field.owner.avatarURL ?? "") {
+        if let url: URL = URL(string: player.avatarURL ?? "") {
             
             self.userURL = url
         }
         
-        self.status = .waiting
-        
-        let statusText = "\(field.owner.firstName) \(self.status.writeText)"
-        
+        self.status = status
+        self.statusText = "\(player.firstName) \(self.status.writeText) \(syllablesCount) \(NSLocalizedString("PlayerCell_syllables", comment: ""))"        
     }
 }

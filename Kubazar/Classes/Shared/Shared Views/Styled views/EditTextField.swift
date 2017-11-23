@@ -22,6 +22,7 @@ class EditTextField: UITextField {
             super.textColor = textColor
             let placeHolderTextColor = textColor?.withAlphaComponent(0.6)
             self.attributedPlaceholder = NSAttributedString(string: self.placeholder ?? "", attributes: [NSAttributedStringKey.foregroundColor : placeHolderTextColor as Any])
+            self.layer.borderColor = textColor?.cgColor
         }
     }
 

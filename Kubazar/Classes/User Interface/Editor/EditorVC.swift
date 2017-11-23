@@ -13,7 +13,7 @@ protocol DecoratorDelegate {
     func didUpdateDecorator(viewController: UIViewController)
 }
 
-class EditorVC: ViewController, DecoratorDelegate, UITextFieldDelegate {
+class EditorVC: ViewController, DecoratorDelegate, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
     
     private enum PopoverSettings {
         
@@ -39,9 +39,11 @@ class EditorVC: ViewController, DecoratorDelegate, UITextFieldDelegate {
     let viewModel: EditorVM
     @IBOutlet private weak var actionBar: UIView!
     @IBOutlet private weak var ivHaikuBack: UIImageView!
-    @IBOutlet fileprivate var btnColor: UIButton!
+    @IBOutlet fileprivate weak var btnColor: UIButton!
+    @IBOutlet fileprivate weak var tblPlayers: UITableView!
     @IBOutlet fileprivate var barButtons: [UIButton]!
-    @IBOutlet private var fields: [EditTextField]!    
+    @IBOutlet private var fields: [EditTextField]!
+    @IBOutlet private weak var cstrTableHeight: NSLayoutConstraint!
     
     init(client: Client, viewModel: EditorVM) {
         self.viewModel = viewModel
@@ -55,10 +57,13 @@ class EditorVC: ViewController, DecoratorDelegate, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.ivHaikuBack.dropShadow(color: UIColor.black, offSet: CGSize(width: 0, height: 5))
         self.title = NSLocalizedString("TabBarTitles_write", comment: "")
         
         let barButton = UIBarButtonItem(title:NSLocalizedString("Picture_continue", comment: ""), style: .plain, target: self, action: #selector(EditorVC.didPressContinueButton(_:)))
         self.navigationItem.setRightBarButton(barButton, animated: true)
+        
+        self.tblPlayers.register(UINib.init(nibName: "PlayerCell", bundle: nil), forCellReuseIdentifier: PlayerCell.reuseID)
         
         self.updateContent()
     }
@@ -115,16 +120,16 @@ class EditorVC: ViewController, DecoratorDelegate, UITextFieldDelegate {
     
     //MARK: - Private functions
     
-    private func updateContent() {
-        
-        self.fields[0].isSelected = true
-        
+    private func updateContent() {        
+  
         self.actionBar.isHidden = self.viewModel.scope != .creatorSetup
-        
-        var i = 0
-        for field in self.viewModel.fields
-        {
-            self.fields[i].text = field
+ 
+        var i: Int = 0
+        for textField in self.fields {
+            
+            textField.isHidden = self.viewModel.isTextFieldHidden(forIndex: i)
+            textField.isSelected = self.viewModel.isEditingEnabled(forIndex: i)
+            textField.text = self.viewModel.fields[safe: i]
             i += 1
         }
         
@@ -135,6 +140,15 @@ class EditorVC: ViewController, DecoratorDelegate, UITextFieldDelegate {
         else if let url = self.viewModel.haikuBackURL {
             
             self.ivHaikuBack.af_setImage(withURL: url)
+        }
+        
+        if self.viewModel.numberOfItems() > 0 {
+            
+            self.cstrTableHeight.constant = CGFloat(self.viewModel.numberOfItems()) * self.tableView(self.tblPlayers, heightForRowAt: IndexPath(row: 0, section: 0))
+        }
+        else {
+            
+            self.cstrTableHeight.constant = 0
         }
         
         self.updateRightBarButton()
@@ -159,6 +173,13 @@ class EditorVC: ViewController, DecoratorDelegate, UITextFieldDelegate {
         
         self.navigationItem.rightBarButtonItem?.isEnabled = self.viewModel.nextActionEnabled
     }
+    
+    private func updateTableHeight() {
+        
+        //
+    }
+    
+    
     
     //MARK: - DecoratorDelegate
     func didUpdateDecorator(viewController: UIViewController) {
@@ -192,6 +213,28 @@ class EditorVC: ViewController, DecoratorDelegate, UITextFieldDelegate {
         
         textField.resignFirstResponder()
         return true
+    }
+    
+     //MARK: - UITableViewDataSource
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {        
+        
+        return self.viewModel.numberOfItems()
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: PlayerCell.reuseID, for: indexPath) as! PlayerCell
+        cell.viewModel = self.viewModel.getPlayerCellVM(forIndexPath: indexPath)
+        
+        return cell
+    }
+    
+    
+    //MARK: - UITableViewDelegate
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50.0
     }
 }
 

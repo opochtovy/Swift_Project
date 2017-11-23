@@ -10,11 +10,9 @@ import Foundation
 
 class EditorVM: BaseVM {
 
-    enum EditingScope {
-        /** Creator setup fonts, colors etc. Input first field is available*/
+    enum Mode {
+       
         case creatorSetup
-        
-        /** Player input field */
         case playerInput
     }
     
@@ -26,7 +24,7 @@ class EditorVM: BaseVM {
     }
     
     var fields: [String] = []
-    public var scope: EditingScope = .creatorSetup
+    public var scope: Mode = .creatorSetup
     public var fontSize: Float = Decorator.defaults.fontSize
     public var fontHexColor: String = Decorator.defaults.fontColor
     public var fontFamilyName: String = Decorator.defaults.familyName
@@ -66,7 +64,7 @@ class EditorVM: BaseVM {
         
         if self.haiku.fields.count < index + 1 {
             
-            self.haiku.fields.append(Field(user: HaikuManager.shared.currentUser, text: text))
+            self.haiku.fields.append(Field(user: HaikuManager.shared.currentUser, text: text, finished: false))
             print("-- Field appended")
         }
         else if self.haiku.fields.count == index + 1 {
@@ -75,7 +73,6 @@ class EditorVM: BaseVM {
             print("-- Field updated")
         }
         else {
-            
              print("-- Field update failed")
         }
     }
@@ -84,20 +81,39 @@ class EditorVM: BaseVM {
         
         var result = false
         
-        if self.fields.count == 0 && index == 0{
+        // is user solo
+        if self.haiku.players.count == 1 && self.haiku.players.contains(HaikuManager.shared.currentUser) {
             
             result = true
         }
-        else if self.fields.count > 0 {
+        else {
+            //is user turn
             
+            let finishedfields = self.haiku.finishedFieldsCount
+            let playersCount = self.haiku.players.count
+            let indexOfPlayer = playersCount % (finishedfields + 1)
+            let player = self.haiku.players[safe: index]
+            
+            result = player == HaikuManager.shared.currentUser
         }
-        
+        print("is editing selecting \(index) - \(result)")
         return result
     }
     
     public func isTextFieldHidden(forIndex index: Int) -> Bool {
         
-        return self.haiku.fields[safe: index] != nil
+        var result = true
+        
+        if self.haiku.players.count == 1 &&  self.haiku.players.contains(HaikuManager.shared.currentUser) {
+            
+            result = false
+        }
+        else if self.haiku.finishedFieldsCount >= index {
+            
+            result = false
+        }
+        print("is hidden \(index) - \(result)")
+        return result
     }
     
     public func getTipText(forIndexPath index: Int) -> String {
@@ -123,6 +139,18 @@ class EditorVM: BaseVM {
     public func getFontVM() -> FontVM {
         
         return FontVM(withDecorator: self.haiku.decorator)
+    }
+    
+    public func getPlayerCellVM(forIndexPath indexPath: IndexPath) -> PlayerCellVM {
+        
+        let status : PlayerStatus = PlayerStatus.done // TODO: add status logic
+        let syllablesCount : Int = 7 // MOcked
+        return PlayerCellVM(withPlayer: self.haiku.players[indexPath.row], status: status, syllablesCount: syllablesCount)
+    }
+    
+    public func numberOfItems() -> Int {
+        
+        return self.haiku.players.count
     }
     
     public func resetDecorator() {

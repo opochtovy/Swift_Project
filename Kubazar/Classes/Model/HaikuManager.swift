@@ -122,7 +122,7 @@ class HaikuManager {
         let field12 = Field(user: user2, text: "Solo2 happens")
         
         let field13 = Field(user: user4, text: "Nothing happens")
-        let field14 = Field(user: user1, text: "Solo1 happens")
+        let field14 = Field(user: user1, text: "Solo1 happens", finished: false)
 //        let field15 = Field(user: user1, text: "Solo2 happens")
         
         let field16 = Field(user: user4, text: "Nothing happens")
@@ -136,6 +136,9 @@ class HaikuManager {
         let field22 = Field(user: user1, text: "Nothing happens")
         let field23 = Field(user: user1, text: "Solo1 happens test")
         let field24 = Field(user: user1, text: "Solo2 happens at 11")
+        
+        let field25 = Field(user: user1, text: "2 players haiku")
+        let field26 = Field(user: user2, text: "Next string")
         
         ////-- haikus
         let h1 = Haiku()
@@ -162,14 +165,14 @@ class HaikuManager {
         
         let h3 = Haiku()
         h3.id = 3
-        h3.creator = user1
+        h3.creator = user2
         h3.likesCount = 366
-        h3.fields = [field7, field8, field9]
+        h3.fields = [field7, field8]
         h3.pictureURL = "https://upload.wikimedia.org/wikipedia/commons/a/a5/LightningVolt_Deep_Blue_Sea.jpg"
         h3.decorator.fontHexColor = "ffffff"
-        h3.published = true
+        h3.published = false
         h3.liked = false
-        h3.players = [user2, user3, h3.creator!]
+        h3.players = [user2, user3, user1]
         
         let h4 = Haiku()
         h4.id = 4
@@ -226,6 +229,17 @@ class HaikuManager {
         h8.liked = true
         h8.players = [h8.creator!]
         
-        self.haikus = [h1, h2, h3, h4, h5, h6, h7, h8]
+        let h9 = Haiku()
+        h9.id = 8
+        h9.creator = user1
+        h9.likesCount = 777
+        h9.fields = [field25, field26]
+        h9.pictureURL = "https://i.pinimg.com/736x/e5/b9/73/e5b97314faf43866131f3c86b85733fd--wallpaper-desktop-jungle.jpg"
+        h9.decorator.fontHexColor = "ffffff"
+        h9.published = false
+        h9.liked = true
+        h9.players = [user1, user2]
+        
+        self.haikus = [h1, h2, h3, h4, h5, h6, h7, h8, h9]
     }
 }

@@ -42,12 +42,7 @@ class PictureVM: BaseVM {
     
     public func getClipperVM() -> ClipperVM? {
         
-        guard let imageData = self.chosenImageData else { return nil }
-        
-        let haiku = Haiku()
-        haiku.id = 25 // TODO
-        haiku.creator = HaikuManager.shared.currentUser
-        
+        guard let imageData = self.chosenImageData else { return nil } 
         let vm = ClipperVM(client: self.client, haiku: haiku, imageData: imageData)
         return vm
     }

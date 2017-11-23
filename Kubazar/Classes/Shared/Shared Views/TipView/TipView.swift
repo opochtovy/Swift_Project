@@ -29,8 +29,8 @@ class TipView: UIView {
         TipView.hideTip(fromView: view)
         
         let height = view.bounds.height + 14
-        let originY = position == .top ? view.frame.origin.y - height : view.frame.maxY + height
-        let tipFrame = CGRect(x: view.frame.origin.x, y: originY, width: view.bounds.width, height: height)
+        let originY = position == .top ? view.bounds.origin.y - height : view.bounds.maxY
+        let tipFrame = CGRect(x: view.bounds.origin.x, y: originY, width: view.bounds.width, height: height)
         
         let tipView = TipView(frame: tipFrame, position: position)
         tipView.lbTitle.text = title        
