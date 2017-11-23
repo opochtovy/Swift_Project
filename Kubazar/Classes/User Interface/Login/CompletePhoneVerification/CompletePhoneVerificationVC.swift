@@ -254,38 +254,18 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate, SMSCodeT
             MBProgressHUD.hide(for: self.view, animated: true)
             if !success {
                 
-                if errorDescription != nil {
-                    
-                    self.showWrongResponseAlert(message: errorDescription)
-                    
-                } else {
-                    
-                    self.showErrorDuringSignInAlert()
-                }
+                self.showWrongResponseAlert(message: errorDescription)
                 
             } else {
                 
-                print("signInWithPhoneNumber was successful")
-                
-                self.client.authenticator.getToken(completionHandler: { (errorDescription, success) in
+                if let authToken = self.client.authenticator.authToken {
                     
-                    MBProgressHUD.hide(for: self.view, animated: true)
-                    if !success {
-                        
-                        self.showWrongResponseAlert(message: errorDescription)
-                        
-                    } else {
-                        
-                        if let authToken = self.client.authenticator.authToken {
-                            
-                            print("signInWithPhoneNumber : authToken =", authToken)
-                            self.client.authenticator.sessionManager.adapter = SessionTokenAdapter(sessionToken: authToken)
-                        }
-                        
-                        let editProfileViewController = StartEditProfileVC(client: self.client)
-                        self.navigationController?.pushViewController(editProfileViewController, animated: true)
-                    }
-                })
+                    print("signInWithPhoneNumber : authToken =", authToken)
+                    self.client.authenticator.sessionManager.adapter = SessionTokenAdapter(sessionToken: authToken)
+                }
+                
+                let editProfileViewController = StartEditProfileVC(client: self.client)
+                self.navigationController?.pushViewController(editProfileViewController, animated: true)
             }
         }
 

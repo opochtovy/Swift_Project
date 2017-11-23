@@ -11,6 +11,7 @@ import Alamofire
 
 class Client {
     
+    static let BaseURL = Bundle.getBaseURL()
     let authenticator: FirebaseServerClient
     
     init() {

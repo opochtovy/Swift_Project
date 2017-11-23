@@ -195,30 +195,18 @@ class SignInVC: ViewController, UITextFieldDelegate {
         MBProgressHUD.showAdded(to: self.view, animated: true)
         self.client.authenticator.signInWithEmailPassword(email: "oleg.pochtovy@mobexs.com", password: "111111", completionHandler: { errorDescription, success in
             
+            MBProgressHUD.hide(for: self.view, animated: true)
             if !success {
                 
-                MBProgressHUD.hide(for: self.view, animated: true)
                 self.showWrongResponseAlert(message: errorDescription)
                 
             } else {
                 
-                self.client.authenticator.state = .authorized
-                self.client.authenticator.getToken(completionHandler: { (errorDescription, success) in
+                if let authToken = self.client.authenticator.authToken {
                     
-                    MBProgressHUD.hide(for: self.view, animated: true)
-                    if !success {
-                        
-                        self.showWrongResponseAlert(message: errorDescription)
-                        
-                    } else {
-                        
-                        if let authToken = self.client.authenticator.authToken {
-                            
-                            print("authToken =", authToken)
-                            self.client.authenticator.sessionManager.adapter = SessionTokenAdapter(sessionToken: authToken)
-                        }
-                    }
-                })
+                    print("authToken =", authToken)
+                    self.client.authenticator.sessionManager.adapter = SessionTokenAdapter(sessionToken: authToken)
+                }
             }
         })
 

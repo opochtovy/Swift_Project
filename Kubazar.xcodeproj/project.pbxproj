@@ -106,6 +106,7 @@
 		9EE16E9D1FB4BF7C00B4C5C5 /* CompletePhoneVerificationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE16E9B1FB4BF7C00B4C5C5 /* CompletePhoneVerificationVC.swift */; };
 		9EE16E9E1FB4BF7C00B4C5C5 /* CompletePhoneVerificationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EE16E9C1FB4BF7C00B4C5C5 /* CompletePhoneVerificationVC.xib */; };
 		9EE16EA01FB4BF8700B4C5C5 /* CompletePhoneVerificationVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE16E9F1FB4BF8700B4C5C5 /* CompletePhoneVerificationVM.swift */; };
+		9EE666261FC5B7BA00609DD1 /* Bundle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE666251FC5B7BA00609DD1 /* Bundle+Extensions.swift */; };
 		9EED066C1FB59D2900CCD82E /* Haiku.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED066B1FB59D2800CCD82E /* Haiku.swift */; };
 		9EED066E1FB59E5B00CCD82E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED066D1FB59E5B00CCD82E /* User.swift */; };
 		9EED06701FB5A2D300CCD82E /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED066F1FB5A2D300CCD82E /* Array+Extension.swift */; };
@@ -226,6 +227,7 @@
 		9EE16E9B1FB4BF7C00B4C5C5 /* CompletePhoneVerificationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletePhoneVerificationVC.swift; sourceTree = "<group>"; };
 		9EE16E9C1FB4BF7C00B4C5C5 /* CompletePhoneVerificationVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CompletePhoneVerificationVC.xib; sourceTree = "<group>"; };
 		9EE16E9F1FB4BF8700B4C5C5 /* CompletePhoneVerificationVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletePhoneVerificationVM.swift; sourceTree = "<group>"; };
+		9EE666251FC5B7BA00609DD1 /* Bundle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extensions.swift"; sourceTree = "<group>"; };
 		9EED066B1FB59D2800CCD82E /* Haiku.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haiku.swift; sourceTree = "<group>"; };
 		9EED066D1FB59E5B00CCD82E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9EED066F1FB5A2D300CCD82E /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
@@ -591,10 +593,11 @@
 		9E6B14961FB0A81000220942 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				9EED066F1FB5A2D300CCD82E /* Array+Extension.swift */,
+				9EE666251FC5B7BA00609DD1 /* Bundle+Extensions.swift */,
+				9EED06711FB5DE3700CCD82E /* Collection+Extension.swift */,
 				9EE16E931FB49F4700B4C5C5 /* UIImage+Extensions.swift */,
 				9E6B14A01FB0AC6200220942 /* UIView+Extension.swift */,
-				9EED066F1FB5A2D300CCD82E /* Array+Extension.swift */,
-				9EED06711FB5DE3700CCD82E /* Collection+Extension.swift */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -1061,6 +1064,7 @@
 				9EDF46C31FC41F8C00993134 /* ProfileVM.swift in Sources */,
 				9EFB03651FB9800B00A78845 /* BazarDetailVM.swift in Sources */,
 				9EE16E971FB4A56500B4C5C5 /* StartPhoneVerificationVC.swift in Sources */,
+				9EE666261FC5B7BA00609DD1 /* Bundle+Extensions.swift in Sources */,
 				9EFB037D1FB99A5200A78845 /* CountryCodeCellVM.swift in Sources */,
 				9E6BB8891FC4678000CB0933 /* ProfileInfoCellVM.swift in Sources */,
 				9E2BFBE81FBC360000860CA0 /* StartButton.swift in Sources */,

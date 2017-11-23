@@ -78,6 +78,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         
+        self.client.authenticator.deviceToken = deviceToken
+        print("deviceToken =", deviceToken.base64EncodedString())
+        
         // Pass device token to auth.
         
         //At development time we use .sandbox

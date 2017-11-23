@@ -15,13 +15,13 @@ class SessionTokenAdapter: RequestAdapter {
     
     init(sessionToken: String) {
         
-        self.sessionToken = sessionToken
+        self.sessionToken = "Bearer " + sessionToken
     }
     
     func adapt(_ urlRequest: URLRequest) throws -> URLRequest {
         
         var urlRequest = urlRequest
-        urlRequest.setValue(self.sessionToken, forHTTPHeaderField: "Token")
+        urlRequest.setValue(self.sessionToken, forHTTPHeaderField: "Authorization")
         urlRequest.httpShouldHandleCookies = false
         
         return urlRequest

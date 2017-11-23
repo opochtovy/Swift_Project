@@ -11,19 +11,19 @@ import Alamofire
 
 enum AuthenticationRouter: URLRequestConvertible {
     
-    case downloadProfileImage()
+    case addDeviceToken(bodyParameters: [String: String])
     
     var method: HTTPMethod {
         
         switch self {
-        case .downloadProfileImage:    return .get
+        case .addDeviceToken:    return .put
         }
     }
     
     var path: String {
         
         switch self {
-        case .downloadProfileImage:    return "https://firebasestorage.googleapis.com/v0/b/testkubazar.appspot.com/o/profileImages%2Fopochtovy_photo.jpg?alt=media&token=d529a107-e133-4220-a710-6bca734607a6" // test
+        case .addDeviceToken(_): return "/v1/user/device"
         }
     }
     
@@ -31,13 +31,15 @@ enum AuthenticationRouter: URLRequestConvertible {
     
     func asURLRequest() throws -> URLRequest {
         
-        var urlRequest = URLRequest(url: URL(string: "https://firebasestorage.googleapis.com/")!)
-        if let url = URL(string: self.path) {
+        let url = try Client.BaseURL.asURL()
+        var urlRequest = URLRequest(url: url.appendingPathComponent(path))
+        urlRequest.httpMethod = self.method.rawValue
+        
+        switch self {
             
-            urlRequest = URLRequest(url: url)
-            urlRequest.httpMethod = method.rawValue
-            urlRequest.httpShouldHandleCookies = false
-            urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        case .addDeviceToken(let bodyParameters):
+            let jsonData = try JSONSerialization.data(withJSONObject: bodyParameters, options: .prettyPrinted)
+            urlRequest.httpBody = jsonData
         }
         
         return urlRequest

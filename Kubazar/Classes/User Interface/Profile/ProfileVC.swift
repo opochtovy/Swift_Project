@@ -60,16 +60,7 @@ class ProfileVC: ViewController, UITableViewDelegate, UITableViewDataSource {
     
     private func downloadProfileImage() {
         
-        MBProgressHUD.showAdded(to: self.view, animated: true)
-        self.viewModel.client.authenticator.downloadProfileImage { (imageData, success) in
-            
-            MBProgressHUD.hide(for: self.view, animated: true)
-            if let imageData = imageData {
-                self.profileImageView.image = UIImage(data: imageData)
-            } else {
-                self.profileImageView.image = UIImage(named:"testProfileImage")
-            }
-        }
+        self.profileImageView.image = UIImage(named:"testProfileImage")
     }
     
     private func setNavigationBarAppearance() {

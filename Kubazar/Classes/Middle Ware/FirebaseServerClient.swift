@@ -10,6 +10,7 @@ import Foundation
 import Firebase
 import FirebaseStorage
 import Alamofire
+import PromiseKit
 
 enum AuthenticatorState {
     
@@ -29,6 +30,7 @@ class FirebaseServerClient {
     static let AuthenticatorStateDidChangeNotification = "AuthenticatorStateDidChangeNotification"
     
     var sessionManager: SessionManager
+    var deviceToken: Data = Data()
     
     public var state : AuthenticatorState? {
         
@@ -96,35 +98,6 @@ class FirebaseServerClient {
             print("user.email =", user.email ?? "no email")
             print("user.photoURL =", user.photoURL ?? "no photoURL")
             print("user.displayName =", user.displayName ?? "no displayName")
-        }
-    }
-    
-    public func downloadProfileImage(completionHandler:@escaping (Data?, Bool) -> ()) {
-        
-        if self.state == .authorized, let user = Auth.auth().currentUser {
-            
-            print("user.uid =", user.uid)
-            print("user.email =", user.email ?? "no email")
-            print("user.photoURL =", user.photoURL ?? "no photoURL")
-            print("user.displayName =", user.displayName ?? "no displayName")
-        }
-        
-        // https://firebasestorage.googleapis.com/v0/b/testkubazar.appspot.com/o/profileImages%2Fopochtovy_photo.jpg?alt=media&token=d529a107-e133-4220-a710-6bca734607a6
-/*
-        Alamofire.request(.GET, "https://robohash.org/123.png").response { (request, response, data, error) in
-            self.myImageView.image = UIImage(data: data, scale:1)
-        }
-*/
-        let request = AuthenticationRouter.downloadProfileImage()
-        self.sessionManager.request(request).validate().response { (response) in
-            
-            if response.error != nil {
-                
-                completionHandler(nil, false)
-                return
-            }
-            let data = response.data
-            completionHandler(data, true)
         }
     }
     
@@ -199,51 +172,85 @@ class FirebaseServerClient {
     
     public func signInWithPhoneNumber(verificationCode: String, completionHandler:@escaping (String?, Bool) -> ()) {
         
-        let verificationID = UserDefaults.standard.value(forKey: StoreKeys.authVerificationID)
-        let credential = PhoneAuthProvider.provider().credential(withVerificationID: verificationID as! String, verificationCode: verificationCode)
-        
-        Auth.auth().signIn(with: credential) { (user, error) in
-            if error != nil {
-                
-                if let error = error {
-                    
-                    completionHandler(error.localizedDescription, false)
-                    return
-                }
-            }
+        self.signInWithPhoneAuthProvider(verificationCode: verificationCode).then { (_) -> Promise<Void> in
             
-            UserDefaults.standard.set(true, forKey: StoreKeys.isUserAuthorized)
-            UserDefaults.standard.synchronize()
+            return self.getToken()
             
-            // User is signed in
-            if let user = user {
+            }.then { (_) -> Void in
                 
-                print("Phone number: \(user.phoneNumber ?? "nil")")
-                let userInfo: Any? = user.providerData[0]
-                print(userInfo ?? "no user info")
                 completionHandler(nil, true)
+                
+            }.catch { error in
+                
+                completionHandler(error.localizedDescription, false)
+        }
+    }
+    
+    private func signInWithPhoneAuthProvider(verificationCode: String) -> Promise<Void> {
+        
+        return Promise { fulfill, reject in
+            
+            let verificationID = UserDefaults.standard.value(forKey: StoreKeys.authVerificationID)
+            let credential = PhoneAuthProvider.provider().credential(withVerificationID: verificationID as! String, verificationCode: verificationCode)
+            
+            Auth.auth().signIn(with: credential) { (user, error) in
+                if error != nil {
+                    
+                    if let error = error {
+                        
+                        reject(error)
+                    }
+                }
+                
+                UserDefaults.standard.set(true, forKey: StoreKeys.isUserAuthorized)
+                UserDefaults.standard.synchronize()
+                
+                // User is signed in
+                if let user = user {
+                    
+                    print("Phone number: \(user.phoneNumber ?? "nil")")
+                    let userInfo: Any? = user.providerData[0]
+                    print(userInfo ?? "no user info")
+                }
+                fulfill(())
             }
         }
     }
     
     public func signInWithEmailPassword(email: String, password: String, completionHandler:@escaping (String?, Bool) -> ()) {
         
-        let credential = EmailAuthProvider.credential(withEmail: email, password: password)
-        
-        Auth.auth().signIn(with: credential) { (user, error) in
-            if error != nil {
+        self.signInWithEmailAuthProvider(email: email, password: password).then { (_) -> Promise<Void> in
+            
+            self.state = .authorized
+            return self.getToken()
+            
+            }.then { (_) -> Void in
                 
-                if let error = error {
+                completionHandler(nil, true)
+                
+            }.catch { error in
+                
+                completionHandler(error.localizedDescription, false)
+        }
+    }
+    
+    private func signInWithEmailAuthProvider(email: String, password: String) -> Promise<Void> {
+        
+        return Promise { fulfill, reject in
+            
+            let credential = EmailAuthProvider.credential(withEmail: email, password: password)
+            
+            Auth.auth().signIn(with: credential) { (user, error) in
+                if error != nil, let error = error {
                     
-                    completionHandler(error.localizedDescription, false)
-                    return
+                    reject(error)
                 }
+                
+                UserDefaults.standard.set(true, forKey: StoreKeys.isUserAuthorized)
+                UserDefaults.standard.synchronize()
+                
+                fulfill(())
             }
-            
-            UserDefaults.standard.set(true, forKey: StoreKeys.isUserAuthorized)
-            UserDefaults.standard.synchronize()
-            
-            completionHandler(nil, true)
         }
     }
     
@@ -394,25 +401,61 @@ class FirebaseServerClient {
         }
     }
     
-    public func getToken(completionHandler:@escaping (String?, Bool) -> ()) {
+    private func getToken() -> Promise<Void> {
         
-        let user = Auth.auth().currentUser
-        if let user = user {
+        return Promise { fulfill, reject in
             
-            user.getIDTokenForcingRefresh(true, completion: { (idToken, error) in
+            let user = Auth.auth().currentUser
+            if let user = user {
                 
-                if let error = error {
+                user.getIDTokenForcingRefresh(true, completion: { (idToken, error) in
                     
-                    completionHandler(error.localizedDescription, false)
-                    return
-                }
-                
-                self.authToken = idToken
-                // in completion block -> self.client.sessionManager.adapter = SessionTokenAdapter(sessionToken: idToken)
-                completionHandler(nil, true)
-            })
+                    if let idToken = idToken {
+                        
+                        self.authToken = idToken
+                        fulfill(())
+                        
+                    } else if let error = error {
+                        
+                        reject(error)
+                    }
+                })
+            }
         }
     }
     
     //MARK: - Alamofire
+    
+    public func addDeviceToken(completionHandler:@escaping (String?, Bool) -> ()) {
+        
+        let bodyParameters: [String: String] = ["token": self.deviceToken.base64EncodedString()]
+        self.putDeviceToken(bodyParameters: bodyParameters).then { (_) -> Void in
+            
+            completionHandler(nil, true)
+            
+            }.catch { error in
+                
+                completionHandler(error.localizedDescription, false)
+        }
+    }
+    
+    private func putDeviceToken(bodyParameters: [String: String]) -> Promise<Void> {
+        
+        return Promise { fulfill, reject in
+            
+            let request = AuthenticationRouter.addDeviceToken(bodyParameters: bodyParameters)
+            
+            self.sessionManager.request(request).response(completionHandler: { dataResponse in
+                
+                if let error = dataResponse.error {
+                    
+                    reject(error)
+                
+                } else {
+                    
+                    fulfill(())
+                }
+            })
+        }
+    }
 }
