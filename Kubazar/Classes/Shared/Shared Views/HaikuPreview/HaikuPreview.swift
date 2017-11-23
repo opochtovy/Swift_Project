@@ -22,7 +22,9 @@ class HaikuPreview: UIView {
     public var viewModel: HaikuPreviewVM! {
         didSet {
             
-            let color : UIColor = UIColor(hex: viewModel.fontTextColor)
+            let color : UIColor = UIColor(hex: viewModel.fontHexColor)
+            let font = UIFont(name: self.viewModel.fontfamilyName, size: CGFloat(self.viewModel.fontSize))
+
             self.lbField1.textColor = color
             self.lbField2.textColor = color
             self.lbField3.textColor = color
@@ -30,6 +32,10 @@ class HaikuPreview: UIView {
             self.lbField1.text = viewModel.field1
             self.lbField2.text = viewModel.field2
             self.lbField3.text = viewModel.field3
+            
+            self.lbField1.font = font
+            self.lbField2.font = font
+            self.lbField3.font = font
             
             self.ivHaiku.image = nil
             

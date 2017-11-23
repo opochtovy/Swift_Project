@@ -159,7 +159,12 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
             ctrl.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(ctrl, animated: true)
             
-        case .active: break
+        case .active:
+            
+            let vm = self.viewModel.getEditorVM(forIndexPath: indexPath)
+            let ctrl = EditorVC(client: self.client, viewModel: vm)
+            ctrl.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(ctrl, animated: true)
         }
     }
     

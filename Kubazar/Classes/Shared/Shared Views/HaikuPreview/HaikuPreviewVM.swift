@@ -14,7 +14,10 @@ class HaikuPreviewVM {
     private(set) var field1: String?
     private(set) var field2: String?
     private(set) var field3: String?
-    private(set) var fontTextColor: String = Decorator.defaults.fontColor
+    
+    private(set) var fontHexColor: String = Decorator.defaults.fontColor
+    private(set) var fontSize: Float = Decorator.defaults.fontSize
+    private(set) var fontfamilyName: String = Decorator.defaults.familyName
     
     init(withHaiku haiku: Haiku) {
         
@@ -22,7 +25,12 @@ class HaikuPreviewVM {
         self.field2 = haiku.fields[safe: 1]?.text
         self.field3 = haiku.fields[safe: 2]?.text
         
-        self.fontTextColor = haiku.decorator.fontHexColor
+        
+        let decorator = haiku.decorator
+        self.fontHexColor = decorator.fontHexColor
+        self.fontSize = decorator.fontSize
+        self.fontfamilyName = decorator.fontFamily
+        
         self.haikuPictureURL = URL(string: haiku.pictureURL ?? "")
     }    
 }
