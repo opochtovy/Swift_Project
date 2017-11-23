@@ -18,11 +18,8 @@ class FontsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     public var delegate: DecoratorDelegate?
     
     private lazy var dataSource : [String] = {
-        
-        var fontNames = UIFont.familyNames
-        fontNames.insert(Decorator.defaults.familyName, at: 0)
-        
-        return fontNames
+
+        return UIFont.familyNames
     }()
     
     private let viewModel : FontVM

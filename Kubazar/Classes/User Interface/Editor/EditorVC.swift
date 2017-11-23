@@ -17,6 +17,7 @@ class EditorVC: ViewController, DecoratorDelegate, UITextFieldDelegate {
     
     let viewModel: EditorVM
     @IBOutlet private weak var actionBar: UIView!
+    @IBOutlet private weak var ivHaikuBack: UIImageView!
     @IBOutlet fileprivate var btnColor: UIButton!
     @IBOutlet fileprivate var barButtons: [UIButton]!
     @IBOutlet private var fields: [EditTextField]!    
@@ -85,6 +86,12 @@ class EditorVC: ViewController, DecoratorDelegate, UITextFieldDelegate {
         self.present(ctrl, animated: true)
     }
     
+    @IBAction private func didPressResetButton(_ sender: UIButton) {
+        
+        self.viewModel.resetDecorator()
+        self.updateContent()
+    }
+    
     //MARK: - Private functions
     
     private func updateContent() {
@@ -98,6 +105,15 @@ class EditorVC: ViewController, DecoratorDelegate, UITextFieldDelegate {
         {
             self.fields[i].text = field
             i += 1
+        }
+        
+        if let imageData = self.viewModel.imageData, let image = UIImage(data: imageData) {
+            
+            self.ivHaikuBack.image = image
+        }
+        else if let url = self.viewModel.haikuBackURL {
+            
+            self.ivHaikuBack.af_setImage(withURL: url)
         }
         
         self.updateRightBarButton()
@@ -115,7 +131,7 @@ class EditorVC: ViewController, DecoratorDelegate, UITextFieldDelegate {
             field.text = field.text // iOS 8.2 bug. need set text after color change
         }
         
-        self.btnColor.tintColor = UIColor(hex: self.viewModel.fontHexColor) //TODO: resetImage to tempalte state
+        self.btnColor.tintColor = UIColor(hex: self.viewModel.fontHexColor)
     }
     
     private func updateRightBarButton() {

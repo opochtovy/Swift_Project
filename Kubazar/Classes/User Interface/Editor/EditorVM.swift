@@ -32,11 +32,14 @@ class EditorVM: BaseVM {
     public var fontFamilyName: String = Decorator.defaults.familyName
     
     private let haiku: Haiku
+    public var imageData: Data?
+    public var haikuBackURL: URL?
     
     public var nextActionEnabled: Bool = false //TODO: add condition
     
-    init(client: Client, haiku: Haiku) {
+    init(client: Client, haiku: Haiku, imageData: Data? = nil) {
         self.haiku = haiku
+        self.imageData = imageData
         super.init(client: client)
         self.prepareModel()
     }
@@ -45,6 +48,7 @@ class EditorVM: BaseVM {
     
     private func prepareModel() {
         
+        self.haikuBackURL = URL(string: self.haiku.pictureURL ?? "")
         self.fields = self.haiku.fields.flatMap({$0.text})
         self.prepareDecorator()
     }
@@ -119,5 +123,11 @@ class EditorVM: BaseVM {
     public func getFontVM() -> FontVM {
         
         return FontVM(withDecorator: self.haiku.decorator)
+    }
+    
+    public func resetDecorator() {
+        
+        self.haiku.decorator = Decorator()
+        self.prepareDecorator()
     }
 }

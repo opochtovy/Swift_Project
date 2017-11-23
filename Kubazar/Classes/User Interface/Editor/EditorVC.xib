@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -15,6 +16,7 @@
             <connections>
                 <outlet property="actionBar" destination="VXz-Sr-c7s" id="eOI-e1-Ng9"/>
                 <outlet property="btnColor" destination="KIN-jm-Pc0" id="2hu-bY-7Fg"/>
+                <outlet property="ivHaikuBack" destination="PTg-AQ-laU" id="EiU-G6-bgS"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outletCollection property="barButtons" destination="Q2R-SQ-FUY" collectionClass="NSMutableArray" id="C3p-pY-bJP"/>
                 <outletCollection property="barButtons" destination="org-uI-T34" collectionClass="NSMutableArray" id="edK-rT-bPc"/>
@@ -40,22 +42,22 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="tintColor" red="0.34509803919999998" green="0.74117647060000003" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <state key="normal" image="iconReset"/>
+                                    <connections>
+                                        <action selector="didPressResetButton:" destination="-1" eventType="touchUpInside" id="elw-vJ-V4Y"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="org-uI-T34">
                                     <rect key="frame" x="106.5" y="0.0" width="107" height="44"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="tintColor" red="0.34509803919999998" green="0.74117647060000003" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <state key="normal" image="iconFonts"/>
-                                    <state key="selected" image="iconFontsSel"/>
+                                    <state key="selected" image="iconFontsSelected"/>
                                     <connections>
                                         <action selector="didPressFontPickButton:" destination="-1" eventType="touchUpInside" id="ckF-x8-8fk"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KIN-jm-Pc0">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KIN-jm-Pc0" customClass="PickFontButton" customModule="Kubazar" customModuleProvider="target">
                                     <rect key="frame" x="213.5" y="0.0" width="106.5" height="44"/>
-                                    <state key="normal" image="iconColorPicker"/>
-                                    <state key="selected" image="iconColorPickerSelected"/>
-                                    <state key="highlighted" image="iconColorPickerSelected"/>
                                     <connections>
                                         <action selector="didPressColorPickButton:" destination="-1" eventType="touchUpInside" id="JIP-5Z-Dcw"/>
                                     </connections>
@@ -76,12 +78,15 @@
                     </constraints>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testHaikuIMage" translatesAutoresizingMaskIntoConstraints="NO" id="PTg-AQ-laU" customClass="testHaikuIMage">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                    <rect key="frame" x="0.0" y="92" width="320" height="320"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="PTg-AQ-laU" secondAttribute="height" multiplier="1:1" id="YcW-hK-N2M"/>
+                    </constraints>
                 </imageView>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="tph-YM-ee1">
                     <rect key="frame" x="41" y="161" width="238" height="132"/>
                     <subviews>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Write first line" textAlignment="center" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="zWb-O8-VXm" customClass="EditTextField" customModule="Kubazar" customModuleProvider="target">
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Write first line" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="zWb-O8-VXm" customClass="EditTextField" customModule="Kubazar" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="238" height="42"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="42" id="Aje-Lk-TQC"/>
@@ -93,7 +98,7 @@
                                 <outlet property="delegate" destination="-1" id="x7A-bc-NvO"/>
                             </connections>
                         </textField>
-                        <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Write second line" textAlignment="center" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="bbB-qz-Opf" customClass="EditTextField" customModule="Kubazar" customModuleProvider="target">
+                        <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Write second line" textAlignment="center" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="bbB-qz-Opf" customClass="EditTextField" customModule="Kubazar" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="45" width="238" height="42"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="42" id="KiN-S0-ZBB"/>
@@ -105,7 +110,7 @@
                                 <outlet property="delegate" destination="-1" id="cIl-1q-7aW"/>
                             </connections>
                         </textField>
-                        <textField opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Write third line" textAlignment="center" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="kbc-QV-vb6" customClass="EditTextField" customModule="Kubazar" customModuleProvider="target">
+                        <textField opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Write third line" textAlignment="center" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="kbc-QV-vb6" customClass="EditTextField" customModule="Kubazar" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="90" width="238" height="42"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="42" id="a63-Oz-Dwl"/>
@@ -120,17 +125,16 @@
                     </subviews>
                 </stackView>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" red="0.79607843137254897" green="0.79607843137254897" blue="0.79607843137254897" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstItem="PTg-AQ-laU" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="0DI-Fl-tlJ"/>
                 <constraint firstItem="PTg-AQ-laU" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="5aa-cy-Ga4"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="VXz-Sr-c7s" secondAttribute="trailing" id="9Pa-wl-PdF"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="VXz-Sr-c7s" secondAttribute="trailing" id="A2y-lq-3e1"/>
                 <constraint firstItem="tph-YM-ee1" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="41" id="BtH-od-mN7"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="VXz-Sr-c7s" secondAttribute="bottom" id="FGF-Xj-vnm"/>
                 <constraint firstItem="VXz-Sr-c7s" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="FLm-jg-dBJ"/>
-                <constraint firstItem="VXz-Sr-c7s" firstAttribute="top" secondItem="PTg-AQ-laU" secondAttribute="bottom" id="KJK-Ap-mrk"/>
                 <constraint firstItem="tph-YM-ee1" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="NRW-vx-7mD"/>
-                <constraint firstItem="PTg-AQ-laU" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Qtu-wC-ngB"/>
                 <constraint firstItem="tph-YM-ee1" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" multiplier="0.9" id="f5y-Gk-N5o"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="PTg-AQ-laU" secondAttribute="trailing" id="tUe-lV-Fde"/>
             </constraints>
@@ -140,10 +144,8 @@
         </view>
     </objects>
     <resources>
-        <image name="iconColorPicker" width="24" height="24"/>
-        <image name="iconColorPickerSelected" width="24" height="24"/>
         <image name="iconFonts" width="24" height="24"/>
-        <image name="iconFontsSel" width="24" height="24"/>
+        <image name="iconFontsSelected" width="24" height="24"/>
         <image name="iconReset" width="24" height="24"/>
         <image name="testHaikuIMage" width="343" height="343"/>
     </resources>

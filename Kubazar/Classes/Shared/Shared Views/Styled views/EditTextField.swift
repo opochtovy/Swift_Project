@@ -16,6 +16,14 @@ class EditTextField: UITextField {
             self.layer.borderWidth = isSelected ? 0.5 : 0.0
         }
     }
+    
+    override var textColor: UIColor? {
+        didSet {
+            super.textColor = textColor
+            let placeHolderTextColor = textColor?.withAlphaComponent(0.6)
+            self.attributedPlaceholder = NSAttributedString(string: self.placeholder ?? "", attributes: [NSAttributedStringKey.foregroundColor : placeHolderTextColor as Any])
+        }
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,5 +35,6 @@ class EditTextField: UITextField {
         
         self.layer.borderColor = UIColor.black.cgColor
         self.contentVerticalAlignment = .center
+        
     }
 }

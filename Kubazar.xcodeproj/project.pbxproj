@@ -27,6 +27,8 @@
 		9E2BFBF61FBC5D6500860CA0 /* FriendsCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2BFBF51FBC5D6500860CA0 /* FriendsCellVM.swift */; };
 		9E2CA5781FC401D500069FFD /* TipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2CA5771FC401D500069FFD /* TipView.swift */; };
 		9E2CA57A1FC4023800069FFD /* TipView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E2CA5791FC4023800069FFD /* TipView.xib */; };
+		9E3212251FC6B69D00F10333 /* PickFontButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3212241FC6B69D00F10333 /* PickFontButton.swift */; };
+		9E3212271FC6B6C200F10333 /* PickFontButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E3212261FC6B6C200F10333 /* PickFontButton.xib */; };
 		9E3F9CF01FB5D6BF003BC12A /* FirebaseServerClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3F9CEF1FB5D6BF003BC12A /* FirebaseServerClient.swift */; };
 		9E455BCB1FB07DD500BC9A11 /* WriteMainMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E455BC91FB07DD500BC9A11 /* WriteMainMenuVC.swift */; };
 		9E455BCC1FB07DD500BC9A11 /* WriteMainMenuVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E455BCA1FB07DD500BC9A11 /* WriteMainMenuVC.xib */; };
@@ -149,6 +151,8 @@
 		9E2BFBF51FBC5D6500860CA0 /* FriendsCellVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCellVM.swift; sourceTree = "<group>"; };
 		9E2CA5771FC401D500069FFD /* TipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipView.swift; sourceTree = "<group>"; };
 		9E2CA5791FC4023800069FFD /* TipView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TipView.xib; sourceTree = "<group>"; };
+		9E3212241FC6B69D00F10333 /* PickFontButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickFontButton.swift; sourceTree = "<group>"; };
+		9E3212261FC6B6C200F10333 /* PickFontButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PickFontButton.xib; sourceTree = "<group>"; };
 		9E3F9CEF1FB5D6BF003BC12A /* FirebaseServerClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseServerClient.swift; sourceTree = "<group>"; };
 		9E455BC91FB07DD500BC9A11 /* WriteMainMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteMainMenuVC.swift; sourceTree = "<group>"; };
 		9E455BCA1FB07DD500BC9A11 /* WriteMainMenuVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WriteMainMenuVC.xib; sourceTree = "<group>"; };
@@ -698,6 +702,8 @@
 				9E2BFBE71FBC360000860CA0 /* StartButton.swift */,
 				9E5FA3081FBD7AF40082F56F /* ChoosePictureButton.swift */,
 				9E5FA30A1FBD7B020082F56F /* ChoosePictureButton.xib */,
+				9E3212241FC6B69D00F10333 /* PickFontButton.swift */,
+				9E3212261FC6B6C200F10333 /* PickFontButton.xib */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -886,6 +892,7 @@
 				9E5FA3051FBD73870082F56F /* PictureVC.xib in Resources */,
 				9EC68A341FC5B42A00A7F793 /* ReachabilityAlertView.xib in Resources */,
 				9EFB036F1FB997BC00A78845 /* countryCodes.json in Resources */,
+				9E3212271FC6B6C200F10333 /* PickFontButton.xib in Resources */,
 				9E7C53BF1FBF04EA0082E7EC /* ColorVC.xib in Resources */,
 				9E5E8E411FAE1E5500CCCBDA /* ForgotPasswordVC.xib in Resources */,
 				9E15889C1FB452E40063C816 /* BazarCell.xib in Resources */,
@@ -1024,6 +1031,7 @@
 				9E5E8E431FAE1E6C00CCCBDA /* ForgotPasswordVM.swift in Sources */,
 				9EBEBD441FBAFF4E00DE831F /* SessionTokenAdapter.swift in Sources */,
 				9EED066E1FB59E5B00CCD82E /* User.swift in Sources */,
+				9E3212251FC6B69D00F10333 /* PickFontButton.swift in Sources */,
 				9E5E8E271FADC41A00CCCBDA /* BaseVM.swift in Sources */,
 				9E5FA3091FBD7AF40082F56F /* ChoosePictureButton.swift in Sources */,
 				9EC68A321FC5B40D00A7F793 /* ReachabilityAlertView.swift in Sources */,

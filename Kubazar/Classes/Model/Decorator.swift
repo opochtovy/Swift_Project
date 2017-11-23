@@ -15,7 +15,7 @@ class Decorator {
         static let minFontSize: Float = 11.0
         static let maxFontSize: Float = 25.0
         
-        static let familyName : String = ".SFUIDisplay"
+        static let familyName : String = "Helvetica"
         static let fontColor : String = "000000"
         static let fontSize : Float = 17.0
     }

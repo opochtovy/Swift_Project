@@ -11,6 +11,7 @@ import Foundation
 class ClipperVM: BaseVM {
     
     public var imageData : Data
+    public var cropedImageData: Data?
     
     private let haiku: Haiku
     
@@ -25,6 +26,6 @@ class ClipperVM: BaseVM {
     
     public func getEditorVM() -> EditorVM{
         
-        return EditorVM(client: self.client, haiku: self.haiku)
+        return EditorVM(client: self.client, haiku: self.haiku, imageData: self.cropedImageData)
     }
 }

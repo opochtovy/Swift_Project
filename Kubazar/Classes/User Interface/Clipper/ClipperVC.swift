@@ -140,8 +140,12 @@ class ClipperVC: ViewController {
     
     @IBAction private func didPressContinueButton(_ sender: Any) {
         
-        let ctrl = EditorVC(client: self.client, viewModel: self.viewModel.getEditorVM())
-        self.navigationController?.pushViewController(ctrl, animated: true)
+        if let image = self.ivCroped.image, let cropedImageData = UIImageJPEGRepresentation(image, 1.0) {
+            
+            self.viewModel.cropedImageData = cropedImageData
+            let ctrl = EditorVC(client: self.client, viewModel: self.viewModel.getEditorVM())
+            self.navigationController?.pushViewController(ctrl, animated: true)
+        }
     }
 }
 

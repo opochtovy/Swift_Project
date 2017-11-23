@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "iconFontsSel.png",
+      "filename" : "iconFontsSelected.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "iconFontsSel@2x.png",
+      "filename" : "iconFontsSelected@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "iconFontsSel@3x.png",
+      "filename" : "iconFontsSelected@3x.png",
       "scale" : "3x"
     }
   ],
