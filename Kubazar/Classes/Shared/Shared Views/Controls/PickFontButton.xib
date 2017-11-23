@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,11 +23,11 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KkC-TR-QdZ">
-                    <rect key="frame" x="82" y="37" width="22" height="22"/>
-                    <color key="backgroundColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.80578210851648346" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <rect key="frame" x="81" y="36" width="24" height="24"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="22" id="X0g-Jg-xXH"/>
-                        <constraint firstAttribute="width" constant="22" id="x21-lQ-mem"/>
+                        <constraint firstAttribute="width" secondItem="KkC-TR-QdZ" secondAttribute="height" multiplier="1:1" id="UXs-5X-k3l"/>
+                        <constraint firstAttribute="height" constant="24" id="X0g-Jg-xXH"/>
                     </constraints>
                 </view>
             </subviews>

@@ -6,7 +6,7 @@
 //  Copyright © 2017 Mobexs. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 class EditorVM: BaseVM {
 
@@ -18,11 +18,11 @@ class EditorVM: BaseVM {
         case playerInput
     }
     
-    enum Tips {
+    private enum Tips {
         
-        static let firstLane = "Enter first line of haiku: 5 syllables"
-        static let secondLane = "Enter second line of haiku: 7 syllables"
-        static let thirdLane = "Enter third line of haiku: 5 syllables"
+        static let firstLane = NSLocalizedString("Editor_tip_firstLine", comment: "")
+        static let secondLane = NSLocalizedString("Editor_tip_secondLine", comment: "")
+        static let thirdLane = NSLocalizedString("Editor_tip_thirdLine", comment: "")
     }
     
     var fields: [String] = []

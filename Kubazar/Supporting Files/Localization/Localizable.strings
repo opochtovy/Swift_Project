@@ -119,7 +119,9 @@
 /**/ "Picture_continue" = "Continue";
 
 /*EditorVC*/
-/**/
+/**/ "Editor_tip_firstLine" = "Enter first line of haiku: 5 syllables";
+/**/ "Editor_tip_secondLine" = "Enter second line of haiku: 7 syllables";
+/**/ "Editor_tip_thirdLine" = "Enter third line of haiku: 5 syllables";
 
 
 /*ClipperVC*/
