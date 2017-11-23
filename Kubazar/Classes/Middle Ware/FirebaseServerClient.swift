@@ -176,6 +176,10 @@ class FirebaseServerClient {
             
             return self.getToken()
             
+            }.then { (_) -> Promise<Void> in
+                
+                return self.putDeviceToken()
+                
             }.then { (_) -> Void in
                 
                 completionHandler(nil, true)
@@ -224,6 +228,10 @@ class FirebaseServerClient {
             self.state = .authorized
             return self.getToken()
             
+            }.then { (_) -> Promise<Void> in
+                
+                return self.putDeviceToken()
+                
             }.then { (_) -> Void in
                 
                 completionHandler(nil, true)
@@ -428,8 +436,7 @@ class FirebaseServerClient {
     
     public func addDeviceToken(completionHandler:@escaping (String?, Bool) -> ()) {
         
-        let bodyParameters: [String: String] = ["token": self.deviceToken.base64EncodedString()]
-        self.putDeviceToken(bodyParameters: bodyParameters).then { (_) -> Void in
+        self.putDeviceToken().then { (_) -> Void in
             
             completionHandler(nil, true)
             
@@ -439,10 +446,11 @@ class FirebaseServerClient {
         }
     }
     
-    private func putDeviceToken(bodyParameters: [String: String]) -> Promise<Void> {
+    private func putDeviceToken() -> Promise<Void> {
         
         return Promise { fulfill, reject in
             
+            let bodyParameters: [String: String] = ["token": self.deviceToken.base64EncodedString()]
             let request = AuthenticationRouter.addDeviceToken(bodyParameters: bodyParameters)
             
             self.sessionManager.request(request).response(completionHandler: { dataResponse in
