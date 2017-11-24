@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GridView" customModule="Kubazar" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="iN0-l3-epB" id="FQR-tr-TSR"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="303" height="303"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J21-6R-0dh">
+                    <rect key="frame" x="100" y="0.0" width="1" height="303"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <view alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oxD-tR-6UG">
+                    <rect key="frame" x="202" y="0.0" width="1" height="303"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <view alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Fn-Xc-Wzb">
+                    <rect key="frame" x="0.0" y="100" width="303" height="1"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <view alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2HE-ir-3FP">
+                    <rect key="frame" x="0.0" y="202" width="303" height="1"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cornerTL" translatesAutoresizingMaskIntoConstraints="NO" id="0FU-E7-FW1">
+                    <rect key="frame" x="-2" y="-2" width="35" height="35"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="35" id="39O-Vr-2H9"/>
+                        <constraint firstAttribute="height" constant="35" id="AAZ-Uf-vVa"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cornerTR" translatesAutoresizingMaskIntoConstraints="NO" id="ho8-pU-8ka">
+                    <rect key="frame" x="270" y="-2" width="35" height="35"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="0Bk-dW-VjO"/>
+                        <constraint firstAttribute="width" constant="35" id="px0-fE-gL7"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cornerBL" translatesAutoresizingMaskIntoConstraints="NO" id="l4Q-Aw-w9O">
+                    <rect key="frame" x="-2" y="270" width="35" height="35"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="k7a-E0-VZ1"/>
+                        <constraint firstAttribute="width" constant="35" id="svN-KD-2nb"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cornerBR" translatesAutoresizingMaskIntoConstraints="NO" id="Woy-Tu-GQd">
+                    <rect key="frame" x="270" y="270" width="35" height="35"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="ipV-8j-bEO"/>
+                        <constraint firstAttribute="width" constant="35" id="lTS-yR-KbK"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="ho8-pU-8ka" secondAttribute="trailing" constant="-2" id="3Qv-dY-Obh"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Woy-Tu-GQd" secondAttribute="trailing" constant="-2" id="Dfn-Sy-7PN"/>
+                <constraint firstItem="ho8-pU-8ka" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="-2" id="DpN-Z8-7nK"/>
+                <constraint firstItem="0FU-E7-FW1" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="-2" id="YS9-4g-Uue"/>
+                <constraint firstItem="l4Q-Aw-w9O" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="-2" id="auV-89-0xU"/>
+                <constraint firstItem="0FU-E7-FW1" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="-2" id="nUd-d4-xA8"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="l4Q-Aw-w9O" secondAttribute="bottom" constant="-2" id="nxB-Zx-7zk"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Woy-Tu-GQd" secondAttribute="bottom" constant="-2" id="zSK-K4-dhU"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="-22.5" y="-137.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="cornerBL" width="36" height="36"/>
+        <image name="cornerBR" width="36" height="36"/>
+        <image name="cornerTL" width="36" height="36"/>
+        <image name="cornerTR" width="36" height="36"/>
+    </resources>
+</document>

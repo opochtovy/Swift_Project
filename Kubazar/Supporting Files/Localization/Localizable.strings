@@ -141,6 +141,7 @@
 /*ClipperVC*/
 /**/ "Clipper_crop" = "Crop";
 /**/ "Clipper_reset" = "Reset";
+/**/ "Clipper_edit_photo" = "Edit Photo";
 
 /*PlayerCellVM/*
 /**/ "PlayerCell_writes" = "writes";

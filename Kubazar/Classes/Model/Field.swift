@@ -23,5 +23,6 @@ class Field {
     init(user: User, text: String, finished: Bool = true) {
         self.owner = user
         self.text = text
+        self.isFinished = finished
     }
 }
