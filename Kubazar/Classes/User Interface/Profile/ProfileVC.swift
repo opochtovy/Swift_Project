@@ -9,13 +9,15 @@
 import UIKit
 import MBProgressHUD
 
-class ProfileVC: ViewController, UITableViewDelegate, UITableViewDataSource {
+class ProfileVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     static let profileSegmentTitle = "ProfileVC_profileSegmentTitle"
     static let infoSegmentTitle = "ProfileVC_infoSegmentTitle"
     static let descriptionLabelText = "ProfileVC_descriptionLabelText"
     static let thankYouLabelText = "ProfileVC_thankYouLabelText"
     static let termsOfServiceButtonTitle = "ProfileVC_termsOfServiceButtonTitle"
+    
+    static let imagePickerMinSide: CGFloat = 800
 
     @IBOutlet weak var profileContentView: UIView!
     @IBOutlet weak var profileImageView: UIImageView!
@@ -24,11 +26,21 @@ class ProfileVC: ViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var thankYouLabel: UILabel!
     @IBOutlet weak var termsOfServiceButton: UIButton!
+    @IBOutlet weak var progressView: UIProgressView!
     
     private var scFilter: UISegmentedControl!
     
     private let viewModel: ProfileVM
     private var isTblViewEditable: Bool = false
+    
+    lazy private var imagePicker: UIImagePickerController = {
+        
+        let picker = UIImagePickerController()
+        picker.allowsEditing = false
+        picker.delegate = self
+        
+        return picker
+    }()
     
     //MARK: - LyfeCycle
     
@@ -54,6 +66,7 @@ class ProfileVC: ViewController, UITableViewDelegate, UITableViewDataSource {
         self.tblView.separatorStyle = .none
         
         self.downloadProfileImage()
+        self.hideProgressView()
     }
     
     //MARK: - Private functions
@@ -98,6 +111,40 @@ class ProfileVC: ViewController, UITableViewDelegate, UITableViewDataSource {
     private func customizeEditImageButton() {
         
         self.editImageButton.layer.cornerRadius = 4.0
+    }
+    
+    private func hideProgressView() {
+        
+        self.progressView.isHidden = true
+    }
+    
+    private func showProgressView() {
+        
+        self.progressView.progress = 0.2
+        self.progressView.isHidden = false
+    }
+    
+    private func uploadUserAtatar(imageData: Data) {
+        
+        self.showProgressView()
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        self.client.authenticator.setUserAvatar(imageData: imageData, progressCompletion: { [weak self] percent in
+            
+            guard let weakSelf = self else { return }
+            weakSelf.progressView.setProgress(percent, animated: true)
+            
+            }, completionHandler: { [weak self](downloadURL, uploadSuccess) in
+                
+                guard let weakSelf = self else { return }
+                
+                weakSelf.hideProgressView()
+                
+                MBProgressHUD.hide(for: weakSelf.view, animated: true)
+                if !uploadSuccess {
+                    
+                    weakSelf.showWrongResponseAlert(message: "")
+                }
+        })
     }
     
     //MARK: - UITableViewDataSource
@@ -156,6 +203,41 @@ class ProfileVC: ViewController, UITableViewDelegate, UITableViewDataSource {
         self.tblView.deselectRow(at: indexPath, animated: false)
     }
     
+    //MARK: - UIImagePickerControllerDelegate
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        self.profileImageView.image = nil
+        
+        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+
+            let size = pickedImage.size
+            let minSide = min(size.width, size.height)
+            var scale: CGFloat = 1
+            while minSide / scale > CompleteEditProfileVC.imagePickerMinSide {
+
+                scale = scale + 0.2
+            }
+
+            if let editedImage = UIImage().resizePhoto(image: pickedImage, scale: scale), let data = UIImageJPEGRepresentation(editedImage, 1.0) {
+
+//                DispatchQueue.main.async(){
+//                    self.profileImageView.image = editedImage
+//                }
+
+                self.profileImageView.image = editedImage
+                self.uploadUserAtatar(imageData: data)
+            }
+        }
+        
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    internal func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     //MARK: - Actions
     
     @objc func pressRightButton(button: UIButton) {
@@ -211,6 +293,7 @@ class ProfileVC: ViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBAction func actionEditImage(_ sender: UIButton) {
         
-        print("edit image button was pressed")
+        self.imagePicker.sourceType = .photoLibrary
+        self.present(self.imagePicker, animated: true, completion: nil)
     }
 }

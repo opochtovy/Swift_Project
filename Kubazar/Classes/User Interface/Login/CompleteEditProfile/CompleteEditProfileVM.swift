@@ -19,4 +19,6 @@ class CompleteEditProfileVM: BaseVM {
     override init(client: Client) {
         super.init(client: client)
     }
+    
+    public var pickedImageData: Data = Data()
 }

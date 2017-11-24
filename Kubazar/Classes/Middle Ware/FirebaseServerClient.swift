@@ -27,6 +27,8 @@ enum StoreKeys {
 
 class FirebaseServerClient {
     
+    typealias BaseCompletion = (_ success: Bool, _ error: Error?) -> Void
+    
     static let AuthenticatorStateDidChangeNotification = "AuthenticatorStateDidChangeNotification"
     
     var sessionManager: SessionManager
@@ -129,6 +131,32 @@ class FirebaseServerClient {
         }
         
         return "no phone number"
+    }
+    
+    private func getProfileImageName(displayName: String) -> String {
+        
+        let user = Auth.auth().currentUser
+        var emailPart = ""
+        if let user = user {
+            
+            emailPart = displayName
+            
+            if emailPart.count == 0, let userEmail = user.email {
+                
+                let emailComponents = userEmail.components(separatedBy: "@")
+                if let emailComponent = emailComponents.first {
+                    
+                    emailPart = emailComponent
+                }
+            }
+        }
+        if emailPart.count == 0 {
+            
+            emailPart = "username"
+        }
+        emailPart = emailPart.appending("_photo.jpg")
+        
+        return emailPart
     }
     
     //MARK: - Firebase
@@ -360,26 +388,7 @@ class FirebaseServerClient {
     
     public func uploadPhotoToUserProfile(displayName: String, photoData: Data, completionHandler:@escaping (URL?, Bool) -> ()) {
         
-        let user = Auth.auth().currentUser
-        var emailPart = ""
-        if let user = user {
-            
-            emailPart = displayName
-            
-            if emailPart.count == 0, let userEmail = user.email {
-                
-                let emailComponents = userEmail.components(separatedBy: "@")
-                if let emailComponent = emailComponents.first {
-                    
-                    emailPart = emailComponent
-                }
-            }
-        }
-        if emailPart.count == 0 {
-            
-            emailPart = "username"
-        }
-        emailPart = emailPart.appending("_photo.jpg")
+        let emailPart = self.getUserDisplayName()
         let photoPathName = "profileImages/" + emailPart
         
         let storageRef = Storage.storage().reference()
@@ -463,6 +472,63 @@ class FirebaseServerClient {
                     
                     fulfill(())
                 }
+            })
+        }
+    }
+    
+    public func setUserAvatar(imageData: Data, progressCompletion: @escaping (_ percent: Float) -> Void, completionHandler:@escaping (URL?, Bool) -> ()) {
+        
+        self.uploadUserAvatar(imageData: imageData, progressCompletion: progressCompletion).then { downloadURL -> Void in
+            
+            completionHandler(downloadURL, true)
+            
+            }.catch { error in
+                
+                completionHandler(nil, false)
+        }
+    }
+    
+    public func uploadUserAvatar(imageData: Data, progressCompletion: @escaping (_ percent: Float) -> Void) -> Promise<URL?> {
+        
+        return Promise { fulfill, reject in
+            
+            let imageName = self.getUserDisplayName()
+            let multipartFormData = MultipartFormData()
+            multipartFormData.append(imageData, withName: imageName, fileName: imageName, mimeType: "image/jpeg")
+            
+            guard let data = try? multipartFormData.encode() else {
+                print("Fail")
+                reject(NSError(domain:"", code:1001, userInfo:nil))
+                return
+            }
+            
+            let request = AuthenticationRouter.uploadUserAvatar(contentType: multipartFormData.contentType, multipartFormData: data)
+            self.sessionManager.request(request).responseJSON(completionHandler: { (response) in
+                
+                guard response.result.isSuccess else {
+                    
+                    reject(NSError(domain:"", code:1001, userInfo:nil))
+                    return
+                }
+                
+                let dict = response.result.value as? Dictionary<String, Any>
+                if let dict = dict {
+                    let imgDict = dict["img"] as? Dictionary<String, String>
+                    if let imgDict: Dictionary<String, String> = imgDict {
+                        
+                        let url = imgDict["url"]
+                        if let url = url {
+                            
+                            let downloadURL = URL.init(string: url)
+                            print("result url =", url)
+                            fulfill(downloadURL)
+                            return
+                        }
+                    }
+                }
+                
+                print("SUCCESS")
+                fulfill(nil)
             })
         }
     }

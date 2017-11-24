@@ -20,7 +20,7 @@ class CompleteEditProfileVC: ViewController, UIImagePickerControllerDelegate, UI
     static let unsuccessfulPhotoUploadAlertTitle = "CompleteEditProfileVC_unsuccessfulPhotoUploadAlertTitle"
     static let unsuccessfulPhotoUploadAlertMessage = "CompleteEditProfileVC_unsuccessfulPhotoUploadAlertMessage"
     
-    static let imagePickerMinSide: CGFloat = 200
+    static let imagePickerMinSide: CGFloat = 800
     
     var viewModel: CompleteEditProfileVM
     
@@ -29,6 +29,7 @@ class CompleteEditProfileVC: ViewController, UIImagePickerControllerDelegate, UI
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var profileLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var progressView: UIProgressView!
     
     lazy private var imagePicker: UIImagePickerController = {
 
@@ -62,6 +63,8 @@ class CompleteEditProfileVC: ViewController, UIImagePickerControllerDelegate, UI
         
         self.profileImageView.addCornerRadius(cornerRadius: self.profileImageView.frame.size.width / 2, borderWidth: 1, borderColor: #colorLiteral(red: 0.9215686275, green: 0.9215686275, blue: 0.9215686275, alpha: 1))
         self.profileImageView.clipsToBounds = true
+        
+        self.progressView.isHidden = true
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -181,6 +184,17 @@ class CompleteEditProfileVC: ViewController, UIImagePickerControllerDelegate, UI
         })
     }
     
+    private func hideProgressView() {
+        
+        self.progressView.isHidden = true
+    }
+    
+    private func showProgressView() {
+        
+        self.progressView.progress = 0.0
+        self.progressView.isHidden = false
+    }
+    
     //MARK: - Actions
     
     @objc private func done() {
@@ -207,18 +221,24 @@ class CompleteEditProfileVC: ViewController, UIImagePickerControllerDelegate, UI
                 return
             }
             
+            self.showProgressView()
             MBProgressHUD.showAdded(to: self.view, animated: true)
-            self.client.authenticator.uploadPhotoToUserProfile(displayName: username, photoData: photoData, completionHandler: { downloadURL, uploadSuccess in
+            self.client.authenticator.setUserAvatar(imageData: self.viewModel.pickedImageData, progressCompletion: { [unowned self] percent in
                 
-                if !uploadSuccess {
+                self.progressView.setProgress(percent, animated: true)
+                
+                }, completionHandler: { [weak self](downloadURL, uploadSuccess) in
                     
-                    MBProgressHUD.hide(for: self.view, animated: true)
-                    self.showUnsuccessfulPhotoUploadAlert()
+                    guard let weakSelf = self else { return }
                     
-                } else {
+                    weakSelf.hideProgressView()
                     
-                    self.createProfileChangeRequest(displayName: username, photoURL: downloadURL)
-                }
+                    if !uploadSuccess {
+                        
+                        weakSelf.showUnsuccessfulPhotoUploadAlert()
+                        
+                    }
+                    weakSelf.createProfileChangeRequest(displayName: username, photoURL: downloadURL)
             })
         }
     }
@@ -237,9 +257,11 @@ class CompleteEditProfileVC: ViewController, UIImagePickerControllerDelegate, UI
                 scale = scale + 0.2
             }
             
-            if let editedImage = UIImage().resizePhoto(image: pickedImage, scale: scale) {
+            if let editedImage = UIImage().resizePhoto(image: pickedImage, scale: scale), let data = UIImageJPEGRepresentation(editedImage, 1.0) {
                 
                 self.profileImageView.image = editedImage
+                self.viewModel.pickedImageData = data
+                
             }
         }
         

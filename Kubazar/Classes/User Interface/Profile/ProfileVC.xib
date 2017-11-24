@@ -16,7 +16,8 @@
                 <outlet property="descriptionLabel" destination="NJp-Fw-gG0" id="fL0-vG-QoJ"/>
                 <outlet property="editImageButton" destination="rQv-N4-erR" id="st3-Pd-R53"/>
                 <outlet property="profileContentView" destination="ORx-Ak-k8A" id="Cva-O7-vQP"/>
-                <outlet property="profileImageView" destination="za9-cC-fBI" id="D2q-TH-mDb"/>
+                <outlet property="profileImageView" destination="za9-cC-fBI" id="mxq-pE-uxu"/>
+                <outlet property="progressView" destination="Cla-Oy-WxU" id="Byv-Gu-tIg"/>
                 <outlet property="tblView" destination="ymc-sd-RtT" id="68b-Xw-nyl"/>
                 <outlet property="termsOfServiceButton" destination="7Zq-LG-Ee3" id="I3Y-yI-tKD"/>
                 <outlet property="thankYouLabel" destination="NLk-YH-vjm" id="Yxu-Bf-lFA"/>
@@ -85,6 +86,12 @@
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="za9-cC-fBI">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="181"/>
                         </imageView>
+                        <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Cla-Oy-WxU">
+                            <rect key="frame" x="20" y="89" width="280" height="2"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="2" id="x4y-pj-Ayh"/>
+                            </constraints>
+                        </progressView>
                         <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rQv-N4-erR">
                             <rect key="frame" x="240" y="16" width="64" height="34"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -111,7 +118,9 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstItem="Cla-Oy-WxU" firstAttribute="leading" secondItem="ORx-Ak-k8A" secondAttribute="leading" constant="20" id="1vM-oE-gXB"/>
                         <constraint firstItem="rQv-N4-erR" firstAttribute="top" secondItem="ORx-Ak-k8A" secondAttribute="top" constant="16" id="4FJ-S4-IsK"/>
+                        <constraint firstAttribute="trailing" secondItem="Cla-Oy-WxU" secondAttribute="trailing" constant="20" id="OFg-95-cgG"/>
                         <constraint firstAttribute="trailing" secondItem="rQv-N4-erR" secondAttribute="trailing" constant="16" id="QlW-4d-oBm"/>
                         <constraint firstItem="ymc-sd-RtT" firstAttribute="top" secondItem="za9-cC-fBI" secondAttribute="bottom" id="bre-Pz-VWg"/>
                         <constraint firstAttribute="bottom" secondItem="ymc-sd-RtT" secondAttribute="bottom" id="egT-il-JOF"/>
@@ -119,6 +128,7 @@
                         <constraint firstAttribute="trailing" secondItem="za9-cC-fBI" secondAttribute="trailing" id="fK5-mL-pv1"/>
                         <constraint firstItem="za9-cC-fBI" firstAttribute="leading" secondItem="ORx-Ak-k8A" secondAttribute="leading" id="fag-wQ-xxJ"/>
                         <constraint firstItem="za9-cC-fBI" firstAttribute="top" secondItem="ORx-Ak-k8A" secondAttribute="top" id="pw0-8O-cpb"/>
+                        <constraint firstItem="Cla-Oy-WxU" firstAttribute="centerY" secondItem="za9-cC-fBI" secondAttribute="centerY" id="sR0-Me-0ks"/>
                         <constraint firstAttribute="trailing" secondItem="ymc-sd-RtT" secondAttribute="trailing" id="y4x-KA-qxL"/>
                     </constraints>
                 </view>

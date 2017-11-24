@@ -12,11 +12,13 @@ import Alamofire
 enum AuthenticationRouter: URLRequestConvertible {
     
     case addDeviceToken(bodyParameters: [String: String])
+    case uploadUserAvatar(contentType: String, multipartFormData: Data)
     
     var method: HTTPMethod {
         
         switch self {
         case .addDeviceToken:    return .put
+        case .uploadUserAvatar:    return .put
         }
     }
     
@@ -24,6 +26,7 @@ enum AuthenticationRouter: URLRequestConvertible {
         
         switch self {
         case .addDeviceToken(_): return "/v1/user/device"
+        case .uploadUserAvatar(_): return "/user/avatar"
         }
     }
     
@@ -40,6 +43,10 @@ enum AuthenticationRouter: URLRequestConvertible {
         case .addDeviceToken(let bodyParameters):
             let jsonData = try JSONSerialization.data(withJSONObject: bodyParameters, options: .prettyPrinted)
             urlRequest.httpBody = jsonData
+            
+        case .uploadUserAvatar(let contentType, let multipartFormData):
+            urlRequest.addValue(contentType, forHTTPHeaderField: "Content-Type")
+            urlRequest.httpBody = multipartFormData
         }
         
         return urlRequest
