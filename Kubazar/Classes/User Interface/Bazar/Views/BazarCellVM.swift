@@ -76,7 +76,7 @@ class BazarCellVM {
         //TODO: udpate dates info with ago cases
         dateInfo = "23 min ago".uppercased()
         
-        authorPictureURL = creator.avatarURL
+        authorPictureURL = URL(string: creator.avatarURL ?? "")
         
         self.actionType = haiku.isCompleted == true ? .like : .publish
         

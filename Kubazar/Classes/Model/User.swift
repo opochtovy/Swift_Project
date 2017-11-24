@@ -13,7 +13,7 @@ class User {
     public var id : String = ""
     public var displayName: String?
     public var email: String?
-    public var avatarURL: URL?
+    public var avatarURL: String?
     
     public var firstName: String = ""
     public var lastName: String = ""
@@ -26,7 +26,7 @@ class User {
         id = firebaseUser.uid
         displayName = firebaseUser.displayName
         email = firebaseUser.email
-        avatarURL = firebaseUser.photoURL
+        avatarURL = firebaseUser.photoURL?.absoluteString
         
         return self
     }
