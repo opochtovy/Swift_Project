@@ -20,7 +20,7 @@ class EditorVC: ViewController, DecoratorDelegate, UITextFieldDelegate, UITableV
         case fontPicker
         case colorPicker
         
-        var popoverSize: CGSize {
+        var contentSize: CGSize {
             switch self {
             case .fontPicker:   return CGSize(width: UIScreen.main.bounds.width, height: 257.0)
             case .colorPicker:  return CGSize(width: 98.0, height: 82.0)
@@ -80,7 +80,7 @@ class EditorVC: ViewController, DecoratorDelegate, UITextFieldDelegate, UITableV
         
         let ctrl = ColorVC(withViewModel: self.viewModel.getColorVM())
         ctrl.delegate = self
-        ctrl.preferredContentSize = PopoverSettings.colorPicker.popoverSize
+        ctrl.preferredContentSize = PopoverSettings.colorPicker.contentSize
         ctrl.modalPresentationStyle = .popover        
         
         let popover = ctrl.popoverPresentationController
@@ -99,7 +99,7 @@ class EditorVC: ViewController, DecoratorDelegate, UITextFieldDelegate, UITableV
         
         let ctrl = FontsVC(withViewModel: self.viewModel.getFontVM())
         ctrl.delegate = self
-        ctrl.preferredContentSize = PopoverSettings.fontPicker.popoverSize
+        ctrl.preferredContentSize = PopoverSettings.fontPicker.contentSize
         ctrl.modalPresentationStyle = .popover
         
         let popover = ctrl.popoverPresentationController
@@ -122,7 +122,19 @@ class EditorVC: ViewController, DecoratorDelegate, UITextFieldDelegate, UITableV
     
     private func updateContent() {        
   
-        self.actionBar.isHidden = self.viewModel.scope != .creatorSetup
+        if self.viewModel.scope == .creator {
+            
+            self.actionBar.isHidden = false
+            self.tblPlayers.isHidden = true
+            self.cstrTableHeight.constant = 0
+        }
+        else {
+            
+            self.actionBar.isHidden = true
+            self.tblPlayers.isHidden = false
+            self.cstrTableHeight.constant = CGFloat(self.viewModel.numberOfItems()) * self.tableView(self.tblPlayers, heightForRowAt: IndexPath(row: 0, section: 0))
+        }
+        
  
         var i: Int = 0
         for textField in self.fields {
@@ -140,15 +152,6 @@ class EditorVC: ViewController, DecoratorDelegate, UITextFieldDelegate, UITableV
         else if let url = self.viewModel.haikuBackURL {
             
             self.ivHaikuBack.af_setImage(withURL: url)
-        }
-        
-        if self.viewModel.numberOfItems() > 0 {
-            
-            self.cstrTableHeight.constant = CGFloat(self.viewModel.numberOfItems()) * self.tableView(self.tblPlayers, heightForRowAt: IndexPath(row: 0, section: 0))
-        }
-        else {
-            
-            self.cstrTableHeight.constant = 0
         }
         
         self.updateRightBarButton()
@@ -174,12 +177,20 @@ class EditorVC: ViewController, DecoratorDelegate, UITextFieldDelegate, UITableV
         self.navigationItem.rightBarButtonItem?.isEnabled = self.viewModel.nextActionEnabled
     }
     
-    private func updateTableHeight() {
+    private func showCongratsAlert() {
         
-        //
+        let messageTitle = NSLocalizedString("Editor_congrats_alert_title", comment: "")
+        let message = ""
+        let alertCtrl = UIAlertController(title: messageTitle, message: message, preferredStyle: .alert)
+        
+        let action1 = UIAlertAction(title: NSLocalizedString("Editor_congrats_alert_ok", comment: ""), style: .default) { (_) in
+            // Ok action
+        }
+        
+        alertCtrl.addAction(action1)
+        
+        self.present(alertCtrl, animated: true, completion: nil)
     }
-    
-    
     
     //MARK: - DecoratorDelegate
     func didUpdateDecorator(viewController: UIViewController) {

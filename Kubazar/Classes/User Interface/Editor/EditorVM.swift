@@ -10,10 +10,10 @@ import Foundation
 
 class EditorVM: BaseVM {
 
-    enum Mode {
+    enum EditScope {
        
-        case creatorSetup
-        case playerInput
+        case creator
+        case player
     }
     
     private enum Tips {
@@ -24,7 +24,7 @@ class EditorVM: BaseVM {
     }
     
     var fields: [String] = []
-    public var scope: Mode = .creatorSetup
+    public var scope: EditScope = .creator
     public var fontSize: Float = Decorator.defaults.fontSize
     public var fontHexColor: String = Decorator.defaults.fontColor
     public var fontFamilyName: String = Decorator.defaults.familyName
@@ -48,6 +48,7 @@ class EditorVM: BaseVM {
         
         self.haikuBackURL = URL(string: self.haiku.pictureURL ?? "")
         self.fields = self.haiku.fields.flatMap({$0.text})
+        self.scope = self.haiku.finishedFieldsCount == 0 ? .creator : .player
         self.prepareDecorator()
     }
     
@@ -150,6 +151,7 @@ class EditorVM: BaseVM {
     
     public func numberOfItems() -> Int {
         
+        guard self.scope == .player else { return 0 }
         return self.haiku.players.count
     }
     
