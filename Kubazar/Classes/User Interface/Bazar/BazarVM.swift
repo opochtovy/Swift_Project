@@ -42,7 +42,12 @@ class BazarVM: BaseVM {
     public func getDetailVM(forIndexPath indexPath: IndexPath) -> BazarDetailVM {
         
         return BazarDetailVM(client: self.client, haiku: self.dataSource[indexPath.row])
-    }    
+    }
+    
+    public func getEditorVM(forIndexPath indexPath: IndexPath) -> EditorVM {
+     
+        return EditorVM(client: self.client, haiku: self.dataSource[indexPath.row])
+    }
 
     public func refreshData() {
         

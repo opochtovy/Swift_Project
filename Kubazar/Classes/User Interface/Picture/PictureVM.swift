@@ -9,16 +9,28 @@
 import Foundation
 import Photos
 
+enum PhotoError: Error {
+    
+    case nilImageData
+    case accessDeclined
+}
+
 class PictureVM: BaseVM {
 
+    private let haiku: Haiku
     private var assets: [PHAsset] = [] 
     public var accessAllowed : Bool {
     
         return PhotoLibraryManager.shared.isLibraryAccessAllowed
     }
     
-    public var chosenImageData: Data?
+    private var chosenImageData: Data?
     public var isCollectionExpanded: Bool = false
+    
+    init(client: Client, haiku: Haiku) {
+        self.haiku = haiku
+        super.init(client: client)
+    }
     
     //MARK: - Public functions
     public func prepareModel() {
@@ -26,18 +38,13 @@ class PictureVM: BaseVM {
         guard self.accessAllowed == true else { return }
         self.assets = PhotoLibraryManager.shared.getAllPhotos()
         self.assets.append(contentsOf: PhotoLibraryManager.shared.getAllPhotos())
-        self.assets.append(contentsOf: PhotoLibraryManager.shared.getAllPhotos())
-        self.assets.append(contentsOf: PhotoLibraryManager.shared.getAllPhotos())
     }
     
-    public func getEditorVM() -> EditorVM {
+    public func getClipperVM() -> ClipperVM? {
         
-        let haiku = Haiku()
-        haiku.id = 25 // TODO
-        haiku.creator = HaikuManager.shared.currentUser
-        
-        
-        return EditorVM(client: self.client, haiku: haiku)
+        guard let imageData = self.chosenImageData else { return nil } 
+        let vm = ClipperVM(client: self.client, haiku: haiku, imageData: imageData)
+        return vm
     }
     
     public func getPictureCellVM(forIndexPath indexPath: IndexPath) -> PictureCellVM? {
@@ -51,29 +58,38 @@ class PictureVM: BaseVM {
         return self.assets.count
     }
     
-    public func chooseRandomImage() {
+    public func chooseRandomImage(completion: @escaping BaseCompletion) {
         
-        guard self.accessAllowed == true else { return }
+        guard self.accessAllowed == true else { completion(false, PhotoError.accessDeclined); return }
+        
         let randomNumber = Int(arc4random_uniform(UInt32(self.assets.count)))
         let asset = self.assets[randomNumber]
-        self.chooseImage(asset: asset)
+        self.chooseImage(asset: asset, completion: completion)
     }
     
-    public func chooseImage(atIndexPath indexPath: IndexPath) {
+    public func chooseImage(atIndexPath indexPath: IndexPath, completion: @escaping BaseCompletion) {
         
         let asset = self.assets[indexPath.row]
-        self.chooseImage(asset: asset)
+        self.chooseImage(asset: asset, completion: completion)
+    }
+    
+    public func chooseImage(withData imageData: Data?) {
+        
+        self.chosenImageData = imageData
     }
     
     //MARK: - Private functions
 
-    private func chooseImage(asset: PHAsset) {
+    private func chooseImage(asset: PHAsset, completion: @escaping BaseCompletion) {
         
         PhotoLibraryManager.shared.getImageFullData(fromAsset: asset) { (success, data) in
             
             if success == true && data != nil {
                 
-                self.chosenImageData = data
+                self.chooseImage(withData: data)
+                completion(true, nil)
+            } else {
+                completion(false, PhotoError.nilImageData)
             }
         }
     }

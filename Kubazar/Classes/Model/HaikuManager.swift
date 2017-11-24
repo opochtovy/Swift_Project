@@ -27,7 +27,7 @@ class HaikuManager {
         self.prepareData()
     }
     
-    //Public functions
+    //MARK: - Public functions
     
     public func like(toLike: Bool,haiku: Haiku) {
         
@@ -65,8 +65,18 @@ class HaikuManager {
             }
         }
     }
+   
+    public func createNewHaiku() -> Haiku{
+        
+        let haiku = Haiku()
+        haiku.creator = self.currentUser
+        haiku.players = [self.currentUser]
+        haiku.id = 25 //
+        
+        return haiku
+    }
     
-    //Private functions
+    //MARK: - Private functions
     
     private func prepareData() {
         //MOCKED data
@@ -112,7 +122,7 @@ class HaikuManager {
         let field12 = Field(user: user2, text: "Solo2 happens")
         
         let field13 = Field(user: user4, text: "Nothing happens")
-        let field14 = Field(user: user1, text: "Solo1 happens")
+        let field14 = Field(user: user1, text: "Solo1 happens", finished: false)
 //        let field15 = Field(user: user1, text: "Solo2 happens")
         
         let field16 = Field(user: user4, text: "Nothing happens")
@@ -127,6 +137,9 @@ class HaikuManager {
         let field23 = Field(user: user1, text: "Solo1 happens test")
         let field24 = Field(user: user1, text: "Solo2 happens at 11")
         
+        let field25 = Field(user: user1, text: "2 players haiku")
+        let field26 = Field(user: user2, text: "Next string")
+        
         ////-- haikus
         let h1 = Haiku()
         h1.id = 2
@@ -134,7 +147,7 @@ class HaikuManager {
         h1.likesCount = 10
         h1.fields = [field1, field2, field3]
         h1.pictureURL = "https://www.nature.org/cs/groups/webcontent/@photopublic/documents/media/nags-head-canoe-537x448.jpg"
-        h1.color = .white
+        h1.decorator.fontHexColor = "ffffff"
         h1.published = false
         h1.liked = true
         h1.players = [h1.creator!, user2, user3]
@@ -145,21 +158,21 @@ class HaikuManager {
         h2.likesCount = 10
         h2.fields = [field4, field5, field6]
         h2.pictureURL = "https://www.nature.org/cs/groups/webcontent/@web/@montana/documents/media/mt-freshwater-homepage-thumb.jpg"
-        h2.color = .black
+        h2.decorator.fontHexColor = "000000"
         h2.published = true
         h2.liked = true
         h2.players = [user3, user4, user1]
         
         let h3 = Haiku()
         h3.id = 3
-        h3.creator = user1
+        h3.creator = user2
         h3.likesCount = 366
-        h3.fields = [field7, field8, field9]
+        h3.fields = [field7, field8]
         h3.pictureURL = "https://upload.wikimedia.org/wikipedia/commons/a/a5/LightningVolt_Deep_Blue_Sea.jpg"
-        h3.color = .white
-        h3.published = true
+        h3.decorator.fontHexColor = "ffffff"
+        h3.published = false
         h3.liked = false
-        h3.players = [user2, user3, h3.creator!]
+        h3.players = [user2, user3, user1]
         
         let h4 = Haiku()
         h4.id = 4
@@ -167,7 +180,7 @@ class HaikuManager {
         h4.likesCount = 0
         h4.fields = [field10, field11, field12]
         h4.pictureURL = "https://pbs.twimg.com/media/DOELEPpUQAAhGfq.jpg"
-        h4.color = .white
+        h4.decorator.fontHexColor = "ffffff"
         h4.published = true
         h4.liked = false
         h4.players = [user4, h4.creator!, user2]
@@ -178,7 +191,7 @@ class HaikuManager {
         h5.likesCount = 12
         h5.fields = [field13, field14]
         h5.pictureURL = "https://i.pinimg.com/736x/b9/35/e2/b935e2f758a9add5374bfb9196922630--aspen-trees-nature-trees.jpg"
-        h5.color = .black
+        h5.decorator.fontHexColor = "000000"
         h5.published = false
         h5.liked = true
         h5.players = [user4, h5.creator!]
@@ -189,7 +202,7 @@ class HaikuManager {
         h6.likesCount = 5
         h6.fields = [field16, field17, field18]
         h6.pictureURL = "https://i.pinimg.com/736x/0d/82/81/0d82811565290a4711119ea19b3df8db--green-nature-into-the-woods.jpg"
-        h6.color = .white
+        h6.decorator.fontHexColor = "ffffff"
         h6.published = true
         h6.liked = true
         h6.players = [user4, h6.creator!, user2]
@@ -200,7 +213,7 @@ class HaikuManager {
         h7.likesCount = 1500
         h7.fields = [field19, field20, field21]
         h7.pictureURL = "https://upload.wikimedia.org/wikipedia/commons/4/42/Ruins_in_jungles.JPG"
-        h7.color = .white
+        h7.decorator.fontHexColor = "ffffff"
         h7.published = true
         h7.liked = false
         h7.players = [h7.creator!, user1, user2]
@@ -211,11 +224,22 @@ class HaikuManager {
         h8.likesCount = 1500
         h8.fields = [field22, field23, field24]
         h8.pictureURL = "https://i.pinimg.com/736x/e5/b9/73/e5b97314faf43866131f3c86b85733fd--wallpaper-desktop-jungle.jpg"
-        h8.color = .white
+        h8.decorator.fontHexColor = "ffffff"
         h8.published = false
         h8.liked = true
         h8.players = [h8.creator!]
         
-        self.haikus = [h1, h2, h3, h4, h5, h6, h7, h8]
+        let h9 = Haiku()
+        h9.id = 8
+        h9.creator = user1
+        h9.likesCount = 777
+        h9.fields = [field25, field26]
+        h9.pictureURL = "https://i.pinimg.com/736x/e5/b9/73/e5b97314faf43866131f3c86b85733fd--wallpaper-desktop-jungle.jpg"
+        h9.decorator.fontHexColor = "ffffff"
+        h9.published = false
+        h9.liked = true
+        h9.players = [user1, user2]
+        
+        self.haikus = [h1, h2, h3, h4, h5, h6, h7, h8, h9]
     }
 }

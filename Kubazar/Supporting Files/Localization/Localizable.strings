@@ -131,7 +131,22 @@
 /**/"ProfileVC_termsOfServiceButtonTitle" = "Terms of Service & Privacy Policy";
 
 /*EditorVC*/
-/**/
+/**/ "Editor_tip_firstLine" = "Enter first line of haiku: 5 syllables";
+/**/ "Editor_tip_secondLine" = "Enter second line of haiku: 7 syllables";
+/**/ "Editor_tip_thirdLine" = "Enter third line of haiku: 5 syllables";
+/**/ "Editor_congrats_alert_title" = "Congrats";
+/**/ "Editor_congrats_alert_ok" = "OK";
+
+
+/*ClipperVC*/
+/**/ "Clipper_crop" = "Crop";
+/**/ "Clipper_reset" = "Reset";
+
+/*PlayerCellVM/*
+/**/ "PlayerCell_writes" = "writes";
+/**/ "PlayerCell_wrote" = "wrote";
+/**/ "PlayerCell_write" = "write";
+/**/ "PlayerCell_syllables"= "syllabels";
 
 
 

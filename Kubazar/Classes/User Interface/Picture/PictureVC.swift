@@ -10,7 +10,7 @@ import UIKit
 
 class PictureVC: ViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-    private enum Constants {
+    private enum CVSettings {
         
         static let numberOfItemsInRow : CGFloat = 3
         static let numberOfItemsInSection : CGFloat = 2
@@ -21,9 +21,9 @@ class PictureVC: ViewController, UICollectionViewDataSource, UICollectionViewDel
     @IBOutlet private weak var btnTakePhoto: ChoosePictureButton!
     @IBOutlet private weak var btnRandomPhoto: ChoosePictureButton!
     @IBOutlet private weak var vAccessAlert: AccessAlertView!
-    @IBOutlet weak var cnstrLeftToPictures: NSLayoutConstraint!
-    @IBOutlet weak var cnstrCollectionContainerHeight: NSLayoutConstraint!
-    @IBOutlet weak var cnstrCollectionContainerToBottom: NSLayoutConstraint!
+    @IBOutlet private weak var cnstrLeftToPictures: NSLayoutConstraint!
+    @IBOutlet private weak var cnstrCollectionContainerHeight: NSLayoutConstraint!
+    @IBOutlet private weak var cnstrCollectionContainerToBottom: NSLayoutConstraint!
     
     private lazy var imagePicker: UIImagePickerController = {
         
@@ -51,11 +51,6 @@ class PictureVC: ViewController, UICollectionViewDataSource, UICollectionViewDel
         self.edgesForExtendedLayout = []
         self.cvPictures.register(UINib.init(nibName: "PictureCell", bundle: nil), forCellWithReuseIdentifier: PictureCell.reuseID)
         self.title = NSLocalizedString("Picture_choose_photo", comment: "")
-
-        //-- mock start
-        let barButtonContinue = UIBarButtonItem(title: "Continue", style: .plain, target: self, action: #selector(PictureVC.didPressContinueButton(_:)))
-        self.navigationItem.rightBarButtonItem = barButtonContinue
-        //-- mock end
         
         self.btnTakePhoto.lbTitle.text = ""
         self.btnTakePhoto.ivButton.image = #imageLiteral(resourceName: "iconTakePhoto")
@@ -74,17 +69,6 @@ class PictureVC: ViewController, UICollectionViewDataSource, UICollectionViewDel
     }
     
     //MARK: - Actions
-    
-    //-- mock start
-    @IBAction private func didPressContinueButton(_ sender: UIButton) {
-        
-        self.tabBarController?.hidesBottomBarWhenPushed = true
-        //TODO: add check image
-        let ctrl = EditorVC(client: self.client, viewModel: self.viewModel.getEditorVM())
-        ctrl.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(ctrl, animated: true)
-    }
-    //-- mock end
     
     @IBAction private func didPressSeeAll(_ sender: UIButton) {
         
@@ -105,7 +89,13 @@ class PictureVC: ViewController, UICollectionViewDataSource, UICollectionViewDel
     
     @IBAction private func didPressSurpriseMe(_ sender: UIButton) {
         
-        self.viewModel.chooseRandomImage() //may be completion needed?
+        self.viewModel.chooseRandomImage { (success, error) in
+            
+            if success {
+                
+                self.navigateToClipperController()
+            }
+        }
     }
     
     @IBAction private func didPressEnableLibraryAccess(_ sender: UIButton) {
@@ -148,7 +138,7 @@ class PictureVC: ViewController, UICollectionViewDataSource, UICollectionViewDel
             let layout = self.cvPictures.collectionViewLayout as! UICollectionViewFlowLayout
             let cellHeight = self.collectionView(self.cvPictures, layout: layout, sizeForItemAt: IndexPath(row: 0, section: 0)).height
                 
-            self.cnstrCollectionContainerHeight.constant = cellHeight * Constants.numberOfItemsInSection + layout.minimumInteritemSpacing * (Constants.numberOfItemsInSection - 1)
+            self.cnstrCollectionContainerHeight.constant = cellHeight * CVSettings.numberOfItemsInSection + layout.minimumInteritemSpacing * (CVSettings.numberOfItemsInSection - 1)
             self.cnstrCollectionContainerHeight.priority = UILayoutPriority(900.0)
             self.cnstrCollectionContainerToBottom.priority = UILayoutPriority(500.0)
             
@@ -176,6 +166,15 @@ class PictureVC: ViewController, UICollectionViewDataSource, UICollectionViewDel
         }
     }
     
+    private func navigateToClipperController() {
+        
+        guard let vm = self.viewModel.getClipperVM() else { return }
+        
+        let ctrl = ClipperVC(client: self.client, viewModel: vm)
+        ctrl.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(ctrl, animated: true)
+    }
+    
     //MARK: - UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
@@ -193,13 +192,21 @@ class PictureVC: ViewController, UICollectionViewDataSource, UICollectionViewDel
     //MARK: - UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        self.viewModel.chooseImage(atIndexPath: indexPath)
+        collectionView.deselectItem(at: indexPath, animated: false)
+        
+        self.viewModel.chooseImage(atIndexPath: indexPath) { (success, error) in
+            
+            if success {
+                
+                self.navigateToClipperController()
+            }
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let interItemSpacing = (collectionViewLayout as! UICollectionViewFlowLayout).minimumInteritemSpacing
-        let side: CGFloat = (UIScreen.main.bounds.width - interItemSpacing * (Constants.numberOfItemsInRow - 1) - self.cnstrLeftToPictures.constant * 2) / Constants.numberOfItemsInRow
+        let side: CGFloat = (UIScreen.main.bounds.width - interItemSpacing * (CVSettings.numberOfItemsInRow - 1) - self.cnstrLeftToPictures.constant * 2) / CVSettings.numberOfItemsInRow
         return CGSize(width: side, height: side)
     }
     
@@ -208,7 +215,9 @@ class PictureVC: ViewController, UICollectionViewDataSource, UICollectionViewDel
         
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             
-            self.viewModel.chosenImageData = UIImageJPEGRepresentation(image, 1.0)
+            let imageData = UIImageJPEGRepresentation(image, 1.0)
+            self.viewModel.chooseImage(withData: imageData)
+            self.navigateToClipperController()
         }
         
         picker.dismiss(animated: true, completion: nil)

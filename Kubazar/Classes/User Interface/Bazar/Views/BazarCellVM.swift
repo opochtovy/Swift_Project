@@ -25,7 +25,6 @@ class BazarCellVM {
     private(set) var isSingle: Bool = false
     private(set) var isLiked: Bool = false
 
-    private(set) var textColor: HaikuColorStyle = .white
     private(set) var actionType: ActionType = .like
     
     private let haiku: Haiku

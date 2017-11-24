@@ -13,9 +13,16 @@ class Client {
     
     static let BaseURL = Bundle.getBaseURL()
     let authenticator: FirebaseServerClient
+    let reachabilityManager: NetworkReachabilityManager?
     
     init() {
         
         self.authenticator = FirebaseServerClient()
+        self.reachabilityManager = NetworkReachabilityManager()
+        
+        if let reachabilityManager = self.reachabilityManager {
+            
+            reachabilityManager.startListening()
+        }
     }
 }

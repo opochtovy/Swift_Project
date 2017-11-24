@@ -18,19 +18,16 @@ class FontsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     public var delegate: DecoratorDelegate?
     
     private lazy var dataSource : [String] = {
-        
-        var fontNames = UIFont.familyNames
-        fontNames.insert(Decorator.defaults.familyName, at: 0)
-        
-        return fontNames
+
+        return UIFont.familyNames
     }()
     
-    private let decorator : Decorator
+    private let viewModel : FontVM
     
     //MARK: - Lifecycle
     
-    init(withDecorator decorator: Decorator) {
-        self.decorator = decorator
+    init(withViewModel viewModel: FontVM) {
+        self.viewModel = viewModel
         super.init(nibName: "FontsVC", bundle: nil)
     }
     
@@ -59,9 +56,9 @@ class FontsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
     private func updateContent() {
         
-        self.slScaleSize.value = Float(self.decorator.fontSize)
+        self.slScaleSize.value = Float(self.viewModel.fontSize)
         
-        if let fontFamilyIndex = self.dataSource.index(of: self.decorator.fontFamily) {
+        if let fontFamilyIndex = self.dataSource.index(of: self.viewModel.fontFamilyName) {
             
             self.pvFonts.selectRow(fontFamilyIndex, inComponent: 0, animated: true)
         }        
@@ -78,7 +75,7 @@ class FontsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     //MARK: - Actions
     @IBAction func didChangeScaleSizeValue(_ sender: UISlider) {
         
-        self.decorator.fontSize = CGFloat(sender.value)
+        self.viewModel.updateDecoratorFontSize(value: sender.value)
         self.sendDecoratorChanges()
     }
     
@@ -115,7 +112,7 @@ class FontsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
         
         if UIFont.init(name: self.dataSource[row], size: CGFloat(self.slScaleSize.value)) != nil {
             
-            self.decorator.fontFamily = self.dataSource[row]
+            self.viewModel.updateDecoratorFontFamily(fontFamilyName: self.dataSource[row])
             self.sendDecoratorChanges()
         }
         else {
