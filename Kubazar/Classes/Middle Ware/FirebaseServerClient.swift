@@ -353,6 +353,28 @@ class FirebaseServerClient {
         }
     }
     
+    public func updatePhotoURL(photoURL: URL?) -> Promise<URL?> {
+        
+        return Promise { fulfill, reject in
+            
+            let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+            changeRequest?.photoURL = photoURL
+            
+            changeRequest?.commitChanges { (error) in
+                
+                if error != nil {
+                    
+                    if let error = error {
+                        
+                        reject(error)
+                    }
+                }
+                
+                fulfill(photoURL)
+            }
+        }
+    }
+    
     public func updateUserProfile(displayName: String, email: String, completionHandler:@escaping (String?, Bool) -> ()) {
         
         let user = Auth.auth().currentUser
@@ -478,10 +500,14 @@ class FirebaseServerClient {
     
     public func setUserAvatar(imageData: Data, progressCompletion: @escaping (_ percent: Float) -> Void, completionHandler:@escaping (URL?, Bool) -> ()) {
         
-        self.uploadUserAvatar(imageData: imageData, progressCompletion: progressCompletion).then { downloadURL -> Void in
+        self.uploadUserAvatar(imageData: imageData, progressCompletion: progressCompletion).then { downloadURL -> Promise<URL?> in
             
-            completionHandler(downloadURL, true)
+            self.updatePhotoURL(photoURL: downloadURL)
             
+            }.then { downloadURL -> Void in
+                
+                completionHandler(downloadURL, true)
+                
             }.catch { error in
                 
                 completionHandler(nil, false)
