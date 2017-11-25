@@ -492,7 +492,12 @@ class FirebaseServerClient {
         
         return Promise { fulfill, reject in
             
-            let imageName = self.getUserDisplayName()
+            var imageName = self.getUserDisplayName()
+            let user = Auth.auth().currentUser
+            if let userDisplayName = user?.displayName {
+                
+                imageName = self.getProfileImageName(displayName: userDisplayName)
+            }
             let multipartFormData = MultipartFormData()
             multipartFormData.append(imageData, withName: imageName, fileName: imageName, mimeType: "image/jpeg")
             
@@ -532,4 +537,80 @@ class FirebaseServerClient {
             })
         }
     }
+    
+    // responseData
+    
+    public func getUserAvatar(completionHandler:@escaping (Data?, Bool) -> ()) {
+        
+        self.downloadUserAvatar().then { imageData -> Void in
+            
+            completionHandler(imageData, true)
+            
+            }.catch { error in
+                
+                completionHandler(nil, false)
+        }
+    }
+    
+    public func downloadUserAvatar() -> Promise<Data?> {
+        
+        return Promise { fulfill, reject in
+            
+            if self.state == .authorized, let user = Auth.auth().currentUser, let userPhotoURL = user.photoURL {
+                
+                let request = AuthenticationRouter.downloadProfileImage(url: userPhotoURL)
+                self.sessionManager.request(request).responseData(completionHandler: { (response) in
+                    
+                    if let error = response.error {
+                        
+                        reject(error)
+                    }
+                    print("user.photoURL =", user.photoURL ?? "no photoURL")
+                    print("response.result.description.count =", response.result.description.count)
+                    print("response.data?.count =", response.data?.count)
+                    fulfill(response.data)
+                })
+            }
+        }
+    }
+    
+    // responseImage
+/*
+    public func getUserAvatar(completionHandler:@escaping (UIImage?, Bool) -> ()) {
+        
+        self.downloadUserAvatar().then { image -> Void in
+            
+            completionHandler(image, true)
+            
+            }.catch { error in
+                
+                completionHandler(nil, false)
+        }
+    }
+    
+    public func downloadUserAvatar() -> Promise<UIImage?> {
+        
+        return Promise { fulfill, reject in
+            
+            if self.state == .authorized, let user = Auth.auth().currentUser, let userPhotoURL = user.photoURL {
+                
+                print("user.photoURL =", user.photoURL ?? "no photoURL")
+                
+                let request = AuthenticationRouter.downloadProfileImage(url: userPhotoURL)
+                self.sessionManager.request(request).responseImage(completionHandler: { (response) in
+                    
+                    guard let image = response.result.value else {
+                        
+                        if let error = response.error {
+                            
+                            reject(error)
+                        }
+                        return
+                    }
+                    fulfill(image)
+                })
+            }
+        }
+    }
+*/
 }

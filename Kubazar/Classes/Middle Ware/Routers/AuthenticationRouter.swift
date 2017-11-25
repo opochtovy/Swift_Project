@@ -13,12 +13,14 @@ enum AuthenticationRouter: URLRequestConvertible {
     
     case addDeviceToken(bodyParameters: [String: String])
     case uploadUserAvatar(contentType: String, multipartFormData: Data)
+    case downloadProfileImage(url: URL)
     
     var method: HTTPMethod {
         
         switch self {
-        case .addDeviceToken:    return .put
-        case .uploadUserAvatar:    return .put
+        case .addDeviceToken: return .put
+        case .uploadUserAvatar: return .put
+        case .downloadProfileImage: return .get
         }
     }
     
@@ -27,6 +29,7 @@ enum AuthenticationRouter: URLRequestConvertible {
         switch self {
         case .addDeviceToken(_): return "/v1/user/device"
         case .uploadUserAvatar(_): return "/user/avatar"
+        case .downloadProfileImage(_): return ""
         }
     }
     
@@ -47,6 +50,12 @@ enum AuthenticationRouter: URLRequestConvertible {
         case .uploadUserAvatar(let contentType, let multipartFormData):
             urlRequest.addValue(contentType, forHTTPHeaderField: "Content-Type")
             urlRequest.httpBody = multipartFormData
+            
+        case .downloadProfileImage(let url):
+            urlRequest = URLRequest(url: url)
+            urlRequest.httpMethod = method.rawValue
+            urlRequest.httpShouldHandleCookies = false
+            urlRequest.addValue("image/jpeg", forHTTPHeaderField: "Content-Type")
         }
         
         return urlRequest

@@ -27,6 +27,8 @@ class ProfileVC: ViewController, UITableViewDelegate, UITableViewDataSource, UII
     @IBOutlet weak var thankYouLabel: UILabel!
     @IBOutlet weak var termsOfServiceButton: UIButton!
     @IBOutlet weak var progressView: UIProgressView!
+    @IBOutlet weak var contentViewForProgressView: UIView!
+    @IBOutlet weak var contentViewForProfileImageView: UIView!
     
     private var scFilter: UISegmentedControl!
     
@@ -37,6 +39,7 @@ class ProfileVC: ViewController, UITableViewDelegate, UITableViewDataSource, UII
         
         let picker = UIImagePickerController()
         picker.allowsEditing = false
+        picker.modalPresentationStyle = .overCurrentContext
         picker.delegate = self
         
         return picker
@@ -66,14 +69,47 @@ class ProfileVC: ViewController, UITableViewDelegate, UITableViewDataSource, UII
         self.tblView.separatorStyle = .none
         
         self.downloadProfileImage()
-        self.hideProgressView()
     }
     
     //MARK: - Private functions
     
     private func downloadProfileImage() {
         
-        self.profileImageView.image = UIImage(named:"testProfileImage")
+        self.view.bringSubview(toFront: self.contentViewForProgressView)
+        self.showProgressView()
+        MBProgressHUD.showAdded(to: self.contentViewForProgressView, animated: true)
+        self.client.authenticator.getUserAvatar(completionHandler:  { [weak self](imageData, uploadSuccess) in
+            
+            guard let weakSelf = self else { return }
+            
+            weakSelf.view.bringSubview(toFront: weakSelf.contentViewForProfileImageView)
+            MBProgressHUD.hide(for: weakSelf.contentViewForProgressView, animated: true)
+            weakSelf.hideProgressView()
+            
+            // responseData
+            
+            if !uploadSuccess {
+                
+//                weakSelf.showUnsuccessfulPhotoUploadAlert()
+                
+            } else if let imageData = imageData {
+                
+                let downloadedImage:UIImage? = UIImage(data:imageData, scale:1.0)
+                weakSelf.profileImageView.image = downloadedImage == nil ? UIImage(named:"testProfileImage") : UIImage(data:imageData, scale:1.0)
+            }
+            
+            // resonseImage
+/*
+            if !uploadSuccess {
+                
+//                weakSelf.showUnsuccessfulPhotoUploadAlert()
+                
+            } else {
+                
+                weakSelf.profileImageView.image = image == nil ? UIImage(named:"testProfileImage") : image
+            }
+*/
+        })
     }
     
     private func setNavigationBarAppearance() {
@@ -207,8 +243,6 @@ class ProfileVC: ViewController, UITableViewDelegate, UITableViewDataSource, UII
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
-        self.profileImageView.image = nil
-        
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
 
             let size = pickedImage.size
@@ -220,10 +254,6 @@ class ProfileVC: ViewController, UITableViewDelegate, UITableViewDataSource, UII
             }
 
             if let editedImage = UIImage().resizePhoto(image: pickedImage, scale: scale), let data = UIImageJPEGRepresentation(editedImage, 1.0) {
-
-//                DispatchQueue.main.async(){
-//                    self.profileImageView.image = editedImage
-//                }
 
                 self.profileImageView.image = editedImage
                 self.uploadUserAtatar(imageData: data)
@@ -242,7 +272,6 @@ class ProfileVC: ViewController, UITableViewDelegate, UITableViewDataSource, UII
     
     @objc func pressRightButton(button: UIButton) {
         
-        print("right button was pressed")
         let title = self.isTblViewEditable ? NSLocalizedString(ProfileVM.infoHeaderButtonTitle, comment: "") : NSLocalizedString(ButtonTitles.doneButtonTitle, comment: "")
         button.setTitle(title, for: .normal)
         self.isTblViewEditable = !self.isTblViewEditable
