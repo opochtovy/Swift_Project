@@ -18,7 +18,7 @@ enum ContactsError: Error {
 class ContactsManager {
     
     typealias ContactsAccessCompletion = (_ success: Bool, _ error: Error?) -> Void
-    typealias ContactsRequestCompletion = (_ success: Bool, _ error: Error?, _ contacts: [CNContact]) -> Void
+    typealias ContactsRequestCompletion = (_ success: Bool, _ error: Error?, _ contacts: [ContactUser]) -> Void
     
     public static let shared: ContactsManager = ContactsManager()
     private var store = CNContactStore()
@@ -38,15 +38,14 @@ class ContactsManager {
         }
     }
     
-    public func getAllContacts(completion: ContactsRequestCompletion) {
-        
-//        let containerID = self.store.defaultContainerIdentifier()
-        
+    public func getAllContacts(completion: @escaping ContactsRequestCompletion) {
+   
         let keysToFetch = [
             CNContactFormatter.descriptorForRequiredKeys(for: .fullName),
             CNContactEmailAddressesKey,
             CNContactPhoneNumbersKey,
             CNContactImageDataAvailableKey,
+            CNContactImageDataKey,
             CNContactThumbnailImageDataKey] as! [CNKeyDescriptor]
 
         var allContainers: [CNContainer] = []
@@ -67,13 +66,32 @@ class ContactsManager {
             do {
                 let containerResults = try self.store.unifiedContacts(matching: fetchPredicate, keysToFetch: keysToFetch)
                 results.append(contentsOf: containerResults)
+                let filteredContacts = self.filterContactsByPhoneNumber(contacts: results)
                 
-                completion(true, nil, results)
+                let contactUsers = filteredContacts.map({ (contact) -> ContactUser in
+                    ContactUser(withContact: contact)
+                })
+                
+                DispatchQueue.main.async {
+                    completion(true, nil, contactUsers)
+                }
             }
             catch {
-                
-                completion(false, ContactsError.fetchException, [])
+                DispatchQueue.main.async {
+                    completion(false, ContactsError.fetchException, [])
+                }
             }
         }
+    }
+    
+    /** filter contacts. Cantacts without phone number excluded */
+    private func filterContactsByPhoneNumber(contacts: [CNContact]) ->  [CNContact] {
+        
+        let result = contacts.filter { (contact) -> Bool in
+            
+            contact.phoneNumbers.count > 0
+        }
+        
+        return result
     }
 }

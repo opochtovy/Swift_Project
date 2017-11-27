@@ -51,6 +51,7 @@
 		9E4AE90E1FC2BB6800E437AA /* EditTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4AE90D1FC2BB6800E437AA /* EditTextField.swift */; };
 		9E4AE9101FC2C3BA00E437AA /* Decorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4AE90F1FC2C3BA00E437AA /* Decorator.swift */; };
 		9E4FA18F1FCBEEE80061C87C /* ContactsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4FA18E1FCBEEE80061C87C /* ContactsManager.swift */; };
+		9E4FA1911FCC08160061C87C /* ContactUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4FA1901FCC08160061C87C /* ContactUser.swift */; };
 		9E5E8E111FADB54600CCCBDA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E5E8E101FADB54600CCCBDA /* Images.xcassets */; };
 		9E5E8E161FADB6CE00CCCBDA /* RootVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5E8E141FADB6CE00CCCBDA /* RootVC.swift */; };
 		9E5E8E171FADB6CE00CCCBDA /* RootVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E5E8E151FADB6CE00CCCBDA /* RootVC.xib */; };
@@ -199,6 +200,7 @@
 		9E4AE90D1FC2BB6800E437AA /* EditTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTextField.swift; sourceTree = "<group>"; };
 		9E4AE90F1FC2C3BA00E437AA /* Decorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decorator.swift; sourceTree = "<group>"; };
 		9E4FA18E1FCBEEE80061C87C /* ContactsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsManager.swift; sourceTree = "<group>"; };
+		9E4FA1901FCC08160061C87C /* ContactUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUser.swift; sourceTree = "<group>"; };
 		9E5E8E101FADB54600CCCBDA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9E5E8E141FADB6CE00CCCBDA /* RootVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootVC.swift; sourceTree = "<group>"; };
 		9E5E8E151FADB6CE00CCCBDA /* RootVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RootVC.xib; sourceTree = "<group>"; };
@@ -490,11 +492,11 @@
 		9E5E8E121FADB63E00CCCBDA /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
-				9E2C69401FC81F57000A5594 /* FriendList */,
 				9E1588911FB44CDD0063C816 /* Bazar */,
 				9EFB03601FB9800B00A78845 /* BazarDetail */,
 				9EB6BBA51FC44AB50085EA5F /* Clipper */,
 				9E09ECCF1FBED68100BB3BBF /* Editor */,
+				9E2C69401FC81F57000A5594 /* FriendList */,
 				9E2BFBE91FBC547F00860CA0 /* Friends */,
 				9E5E8E2A1FADD3BD00CCCBDA /* Login */,
 				9E5FA3011FBD73590082F56F /* Picture */,
@@ -553,6 +555,7 @@
 				9E9B4DBC1FB9E0C8001DB448 /* Field.swift */,
 				9EED066B1FB59D2800CCD82E /* Haiku.swift */,
 				9EED066D1FB59E5B00CCD82E /* User.swift */,
+				9E4FA1901FCC08160061C87C /* ContactUser.swift */,
 				9E06A9C71FBAC91700FF74A5 /* HaikuManager.swift */,
 				9E5FA3111FBDA3640082F56F /* PhotoLibraryManager.swift */,
 				9E4FA18E1FCBEEE80061C87C /* ContactsManager.swift */,
@@ -1160,6 +1163,7 @@
 				9E3F15081FC4582200BC7C21 /* ProfileHeaderCellVM.swift in Sources */,
 				9E5E8E371FADD42D00CCCBDA /* WelcomeVM.swift in Sources */,
 				9E09ECD21FBED6A400BB3BBF /* EditorVC.swift in Sources */,
+				9E4FA1911FCC08160061C87C /* ContactUser.swift in Sources */,
 				9E455BCB1FB07DD500BC9A11 /* WriteMainMenuVC.swift in Sources */,
 				9EC68A2C1FC59F0700A7F793 /* UIColor+Extension.swift in Sources */,
 				9E5FA3071FBD739B0082F56F /* PictureVM.swift in Sources */,

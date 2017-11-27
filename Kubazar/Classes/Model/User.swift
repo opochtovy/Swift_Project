@@ -8,12 +8,21 @@
 
 import FirebaseAuth
 
-class User {
+protocol UserProtocol {
+    
+    var firstName: String { get set}
+    var lastName: String { get set}
+    var avatarURL: String? { get set}
+    var avatarImageData: Data? { get set}
+}
+
+class User: UserProtocol {
     
     public var id : String = ""
     public var displayName: String?
     public var email: String?
     public var avatarURL: String?
+    public var avatarImageData: Data? = nil
     
     public var firstName: String = ""
     public var lastName: String = ""

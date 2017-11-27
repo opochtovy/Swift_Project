@@ -16,10 +16,10 @@ class FriendListCellVM {
     
     public let showInviteButton: Bool
     
-    init(withUser user: User, haikuCount: Int = 0,showInvite: Bool = false) {
+    init(withUser user: UserProtocol, haikuCount: Int = 0,showInvite: Bool = false) {
         self.showInviteButton = showInvite
         
-        self.userName = user.fullName
+        self.userName = "\(user.firstName) \(user.lastName)"
         self.haikuCounter = "\(haikuCount) \(NSLocalizedString("FriendList_haikus", comment: ""))"
         
         self.userURL = URL(string: user.avatarURL ?? "") 

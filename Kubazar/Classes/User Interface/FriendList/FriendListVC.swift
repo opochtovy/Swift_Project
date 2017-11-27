@@ -36,12 +36,15 @@ class FriendListVC: ViewController, UITableViewDelegate, UITableViewDataSource, 
         self.scFilter = UISegmentedControl(items: titles)
         self.scFilter.addTarget(self, action: #selector(FriendListVC.didSelectSegmentControl(_:)), for: .valueChanged)
         self.navigationItem.titleView = self.scFilter
+        self.tblFriends.sectionIndexColor = #colorLiteral(red: 0.537254902, green: 0.537254902, blue: 0.537254902, alpha: 1)
+        self.tblFriends.sectionIndexBackgroundColor = UIColor.white
         self.tblFriends.register(UINib.init(nibName: "FriendListCell", bundle: nil), forCellReuseIdentifier: FriendListCell.reuseID)
-        self.updateContent()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.updateContent()
     }
     
     //MARK: - Private functions
@@ -49,9 +52,15 @@ class FriendListVC: ViewController, UITableViewDelegate, UITableViewDataSource, 
     private func updateContent() {
         
         self.scFilter.selectedSegmentIndex = self.viewModel.filter.rawValue
-        
-        
+        self.viewModel.requestContacts { (success, error) in
+            
+            if success {
+                
+               self.tblFriends.reloadData()
+            }
+        }
     }
+    
     private func setStatusBarAppearance() {
             
         let statusBarView = UIApplication.shared.value(forKey: "statusBar") as? UIView
@@ -63,6 +72,11 @@ class FriendListVC: ViewController, UITableViewDelegate, UITableViewDataSource, 
     
     @IBAction private func didSelectSegmentControl(_ sender: UISegmentedControl) {
         
+        if let value = FriendListVM.Filter(rawValue: sender.selectedSegmentIndex) {
+            
+            self.viewModel.filter = value
+            self.updateContent()
+        }
     }
     
     //MARK: - UITableViewDataSource
@@ -127,7 +141,14 @@ class FriendListVC: ViewController, UITableViewDelegate, UITableViewDataSource, 
     //MARK: - UISearchBarDelegate
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print("searchText")
+        
+        self.viewModel.searchFilter = searchText
+        self.updateContent()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        searchBar.resignFirstResponder()
     }
     
 }
