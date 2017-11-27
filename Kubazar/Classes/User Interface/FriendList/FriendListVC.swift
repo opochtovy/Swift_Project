@@ -44,6 +44,7 @@ class FriendListVC: ViewController, UITableViewDelegate, UITableViewDataSource, 
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.setBarAppearance()
         self.updateContent()
     }
     
@@ -61,11 +62,14 @@ class FriendListVC: ViewController, UITableViewDelegate, UITableViewDataSource, 
         }
     }
     
-    private func setStatusBarAppearance() {
+    private func setBarAppearance() {
             
         let statusBarView = UIApplication.shared.value(forKey: "statusBar") as? UIView
         statusBarView?.backgroundColor = #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)
         statusBarView?.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        
+        self.navigationController?.navigationBar.backgroundColor = #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)
+        self.navigationController?.navigationBar.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     }
     
     //MARK: - Actions
@@ -108,6 +112,16 @@ class FriendListVC: ViewController, UITableViewDelegate, UITableViewDataSource, 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        if self.viewModel.getFriendListCellVM(forIndexPath: indexPath).showInviteButton == false {
+            
+            if let vm = self.viewModel.getFrieldDetailVM(forIndexPath: indexPath) {
+                
+                let ctrl = FriendDetailVC(client: self.client, viewModel: vm)
+                ctrl.hidesBottomBarWhenPushed = true
+                self.navigationController?.pushViewController(ctrl, animated: true)
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

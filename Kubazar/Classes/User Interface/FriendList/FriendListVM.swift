@@ -91,14 +91,26 @@ class FriendListVM: BaseVM {
         }
     }
     
+    public func getFrieldDetailVM(forIndexPath indexPath: IndexPath) -> FriendDetailVM? {
+        
+        let sectionKey = self.dataSourceSectionKeys[indexPath.section]
+        
+        if let user = self.dataSource[sectionKey]?[indexPath.row] as? User {
+            
+            return FriendDetailVM(client: self.client, user: user)
+        }
+        else {
+            
+            return nil
+        }
+    }
+    
     //MARK: - Private functions
     
     private func prepareModel() {
         
        
-    }
-    
-    
+    }    
     
     private func updateDataSource() {
         

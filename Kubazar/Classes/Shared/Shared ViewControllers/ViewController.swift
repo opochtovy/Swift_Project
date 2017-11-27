@@ -51,7 +51,7 @@ class ViewController: UIViewController {
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         
-        return [.portrait, .portraitUpsideDown, .landscapeLeft, .landscapeRight]
+        return [.portrait, .portraitUpsideDown]
     }
     
     public func setBackButtonWithoutChevron(title: String) {
