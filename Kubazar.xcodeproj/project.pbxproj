@@ -27,6 +27,16 @@
 		9E2BFBF61FBC5D6500860CA0 /* FriendsCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2BFBF51FBC5D6500860CA0 /* FriendsCellVM.swift */; };
 		9E2C693D1FC80CBC000A5594 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2C693C1FC80CBC000A5594 /* GridView.swift */; };
 		9E2C693F1FC80CCC000A5594 /* GridView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E2C693E1FC80CCC000A5594 /* GridView.xib */; };
+		9E2C69431FC81F7D000A5594 /* FriendListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2C69411FC81F7D000A5594 /* FriendListVC.swift */; };
+		9E2C69441FC81F7D000A5594 /* FriendListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E2C69421FC81F7D000A5594 /* FriendListVC.xib */; };
+		9E2C69461FC81F99000A5594 /* FriendListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2C69451FC81F99000A5594 /* FriendListVM.swift */; };
+		9E2C694A1FC833C5000A5594 /* FriendListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2C69481FC833C5000A5594 /* FriendListCell.swift */; };
+		9E2C694B1FC833C5000A5594 /* FriendListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E2C69491FC833C5000A5594 /* FriendListCell.xib */; };
+		9E2C694D1FC833FF000A5594 /* FriendListCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2C694C1FC833FF000A5594 /* FriendListCellVM.swift */; };
+		9E2C694F1FC837AA000A5594 /* FriendListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2C694E1FC837AA000A5594 /* FriendListHeaderView.swift */; };
+		9E2C69511FC837E8000A5594 /* FriendListHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E2C69501FC837E8000A5594 /* FriendListHeaderView.xib */; };
+		9E2C69531FC83E51000A5594 /* FriendListFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2C69521FC83E51000A5594 /* FriendListFooterView.swift */; };
+		9E2C69551FC83E5B000A5594 /* FriendListFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E2C69541FC83E5B000A5594 /* FriendListFooterView.xib */; };
 		9E2CA5781FC401D500069FFD /* TipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2CA5771FC401D500069FFD /* TipView.swift */; };
 		9E2CA57A1FC4023800069FFD /* TipView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E2CA5791FC4023800069FFD /* TipView.xib */; };
 		9E3212251FC6B69D00F10333 /* PickFontButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3212241FC6B69D00F10333 /* PickFontButton.swift */; };
@@ -40,6 +50,7 @@
 		9E455BCE1FB07DE600BC9A11 /* WriteMainMenuVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E455BCD1FB07DE600BC9A11 /* WriteMainMenuVM.swift */; };
 		9E4AE90E1FC2BB6800E437AA /* EditTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4AE90D1FC2BB6800E437AA /* EditTextField.swift */; };
 		9E4AE9101FC2C3BA00E437AA /* Decorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4AE90F1FC2C3BA00E437AA /* Decorator.swift */; };
+		9E4FA18F1FCBEEE80061C87C /* ContactsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4FA18E1FCBEEE80061C87C /* ContactsManager.swift */; };
 		9E5E8E111FADB54600CCCBDA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E5E8E101FADB54600CCCBDA /* Images.xcassets */; };
 		9E5E8E161FADB6CE00CCCBDA /* RootVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5E8E141FADB6CE00CCCBDA /* RootVC.swift */; };
 		9E5E8E171FADB6CE00CCCBDA /* RootVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E5E8E151FADB6CE00CCCBDA /* RootVC.xib */; };
@@ -164,6 +175,16 @@
 		9E2BFBF51FBC5D6500860CA0 /* FriendsCellVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCellVM.swift; sourceTree = "<group>"; };
 		9E2C693C1FC80CBC000A5594 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		9E2C693E1FC80CCC000A5594 /* GridView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GridView.xib; sourceTree = "<group>"; };
+		9E2C69411FC81F7D000A5594 /* FriendListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListVC.swift; sourceTree = "<group>"; };
+		9E2C69421FC81F7D000A5594 /* FriendListVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendListVC.xib; sourceTree = "<group>"; };
+		9E2C69451FC81F99000A5594 /* FriendListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListVM.swift; sourceTree = "<group>"; };
+		9E2C69481FC833C5000A5594 /* FriendListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListCell.swift; sourceTree = "<group>"; };
+		9E2C69491FC833C5000A5594 /* FriendListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendListCell.xib; sourceTree = "<group>"; };
+		9E2C694C1FC833FF000A5594 /* FriendListCellVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListCellVM.swift; sourceTree = "<group>"; };
+		9E2C694E1FC837AA000A5594 /* FriendListHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListHeaderView.swift; sourceTree = "<group>"; };
+		9E2C69501FC837E8000A5594 /* FriendListHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendListHeaderView.xib; sourceTree = "<group>"; };
+		9E2C69521FC83E51000A5594 /* FriendListFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListFooterView.swift; sourceTree = "<group>"; };
+		9E2C69541FC83E5B000A5594 /* FriendListFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendListFooterView.xib; sourceTree = "<group>"; };
 		9E2CA5771FC401D500069FFD /* TipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipView.swift; sourceTree = "<group>"; };
 		9E2CA5791FC4023800069FFD /* TipView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TipView.xib; sourceTree = "<group>"; };
 		9E3212241FC6B69D00F10333 /* PickFontButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickFontButton.swift; sourceTree = "<group>"; };
@@ -177,6 +198,7 @@
 		9E455BCD1FB07DE600BC9A11 /* WriteMainMenuVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteMainMenuVM.swift; sourceTree = "<group>"; };
 		9E4AE90D1FC2BB6800E437AA /* EditTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTextField.swift; sourceTree = "<group>"; };
 		9E4AE90F1FC2C3BA00E437AA /* Decorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decorator.swift; sourceTree = "<group>"; };
+		9E4FA18E1FCBEEE80061C87C /* ContactsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsManager.swift; sourceTree = "<group>"; };
 		9E5E8E101FADB54600CCCBDA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9E5E8E141FADB6CE00CCCBDA /* RootVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootVC.swift; sourceTree = "<group>"; };
 		9E5E8E151FADB6CE00CCCBDA /* RootVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RootVC.xib; sourceTree = "<group>"; };
@@ -378,6 +400,31 @@
 			path = GridView;
 			sourceTree = "<group>";
 		};
+		9E2C69401FC81F57000A5594 /* FriendList */ = {
+			isa = PBXGroup;
+			children = (
+				9E2C69471FC833A6000A5594 /* Views */,
+				9E2C69411FC81F7D000A5594 /* FriendListVC.swift */,
+				9E2C69421FC81F7D000A5594 /* FriendListVC.xib */,
+				9E2C69451FC81F99000A5594 /* FriendListVM.swift */,
+			);
+			path = FriendList;
+			sourceTree = "<group>";
+		};
+		9E2C69471FC833A6000A5594 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9E2C69481FC833C5000A5594 /* FriendListCell.swift */,
+				9E2C69491FC833C5000A5594 /* FriendListCell.xib */,
+				9E2C694C1FC833FF000A5594 /* FriendListCellVM.swift */,
+				9E2C694E1FC837AA000A5594 /* FriendListHeaderView.swift */,
+				9E2C69501FC837E8000A5594 /* FriendListHeaderView.xib */,
+				9E2C69521FC83E51000A5594 /* FriendListFooterView.swift */,
+				9E2C69541FC83E5B000A5594 /* FriendListFooterView.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		9E2CA5761FC401C800069FFD /* TipView */ = {
 			isa = PBXGroup;
 			children = (
@@ -443,6 +490,7 @@
 		9E5E8E121FADB63E00CCCBDA /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
+				9E2C69401FC81F57000A5594 /* FriendList */,
 				9E1588911FB44CDD0063C816 /* Bazar */,
 				9EFB03601FB9800B00A78845 /* BazarDetail */,
 				9EB6BBA51FC44AB50085EA5F /* Clipper */,
@@ -507,6 +555,7 @@
 				9EED066D1FB59E5B00CCD82E /* User.swift */,
 				9E06A9C71FBAC91700FF74A5 /* HaikuManager.swift */,
 				9E5FA3111FBDA3640082F56F /* PhotoLibraryManager.swift */,
+				9E4FA18E1FCBEEE80061C87C /* ContactsManager.swift */,
 				9E4AE90F1FC2C3BA00E437AA /* Decorator.swift */,
 			);
 			path = Model;
@@ -971,6 +1020,7 @@
 				9E2BFBED1FBC54DC00860CA0 /* FriendsVC.xib in Resources */,
 				9EE16E981FB4A56500B4C5C5 /* StartPhoneVerificationVC.xib in Resources */,
 				9EB6BBA21FC422420085EA5F /* PlayerCell.xib in Resources */,
+				9E2C694B1FC833C5000A5594 /* FriendListCell.xib in Resources */,
 				9E5FA3051FBD73870082F56F /* PictureVC.xib in Resources */,
 				9EC68A341FC5B42A00A7F793 /* ReachabilityAlertView.xib in Resources */,
 				9EFB036F1FB997BC00A78845 /* countryCodes.json in Resources */,
@@ -984,10 +1034,12 @@
 				9EB6BBA91FC44AD60085EA5F /* ClipperVC.xib in Resources */,
 				9E5E8E111FADB54600CCCBDA /* Images.xcassets in Resources */,
 				9EE16E9E1FB4BF7C00B4C5C5 /* CompletePhoneVerificationVC.xib in Resources */,
+				9E2C69441FC81F7D000A5594 /* FriendListVC.xib in Resources */,
 				9EC2BF931FC2FA73005A6619 /* BazarDetailVC.xib in Resources */,
 				9E6144421FB2F5D000067295 /* StartEditProfileVC.xib in Resources */,
 				9E5FA31A1FBDB2050082F56F /* PictureCell.xib in Resources */,
 				9E8964CE1FACA21D004FFDCD /* LaunchScreen.storyboard in Resources */,
+				9E2C69551FC83E5B000A5594 /* FriendListFooterView.xib in Resources */,
 				9E6144481FB305E400067295 /* CompleteEditProfileVC.xib in Resources */,
 				9E72A9D11FB991FA009468DB /* HaikuPreview.xib in Resources */,
 				9E2C693F1FC80CCC000A5594 /* GridView.xib in Resources */,
@@ -1005,6 +1057,7 @@
 				9E2BFBF31FBC5D3E00860CA0 /* FriendsCell.xib in Resources */,
 				9E5FA30B1FBD7B020082F56F /* ChoosePictureButton.xib in Resources */,
 				9EFB03751FB997F900A78845 /* CountryCodesVC.xib in Resources */,
+				9E2C69511FC837E8000A5594 /* FriendListHeaderView.xib in Resources */,
 				9E8964CB1FACA21D004FFDCD /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1100,6 +1153,7 @@
 				9E6BB8861FC4677500CB0933 /* ProfileInfoCell.swift in Sources */,
 				9E5FA3191FBDB2050082F56F /* PictureCell.swift in Sources */,
 				9E3F9CF01FB5D6BF003BC12A /* FirebaseServerClient.swift in Sources */,
+				9E4FA18F1FCBEEE80061C87C /* ContactsManager.swift in Sources */,
 				9E4AE9101FC2C3BA00E437AA /* Decorator.swift in Sources */,
 				9E2CA5781FC401D500069FFD /* TipView.swift in Sources */,
 				9E9B4DBD1FB9E0C8001DB448 /* Field.swift in Sources */,
@@ -1122,6 +1176,7 @@
 				9E5FA3091FBD7AF40082F56F /* ChoosePictureButton.swift in Sources */,
 				9EC68A321FC5B40D00A7F793 /* ReachabilityAlertView.swift in Sources */,
 				9EFB03741FB997F900A78845 /* CountryCodesVC.swift in Sources */,
+				9E2C694D1FC833FF000A5594 /* FriendListCellVM.swift in Sources */,
 				9E455BCE1FB07DE600BC9A11 /* WriteMainMenuVM.swift in Sources */,
 				9E15889E1FB452F50063C816 /* BazarCellVM.swift in Sources */,
 				9E5E8E3D1FAE059B00CCCBDA /* SignInVM.swift in Sources */,
@@ -1129,6 +1184,7 @@
 				9EB6BBA41FC4224F0085EA5F /* PlayerCellVM.swift in Sources */,
 				9E5E8E1C1FADBA7400CCCBDA /* ViewController.swift in Sources */,
 				9E15889B1FB452E40063C816 /* BazarCell.swift in Sources */,
+				9E2C694F1FC837AA000A5594 /* FriendListHeaderView.swift in Sources */,
 				9EFB03761FB997F900A78845 /* CountryCodesVM.swift in Sources */,
 				9EADF2031FBC2F3F00B69FFE /* UserView.swift in Sources */,
 				9EED066C1FB59D2900CCD82E /* Haiku.swift in Sources */,
@@ -1144,12 +1200,14 @@
 				9E4AE90E1FC2BB6800E437AA /* EditTextField.swift in Sources */,
 				9E8964C41FACA21D004FFDCD /* AppDelegate.swift in Sources */,
 				9EED06721FB5DE3700CCD82E /* Collection+Extension.swift in Sources */,
+				9E2C69531FC83E51000A5594 /* FriendListFooterView.swift in Sources */,
 				9E06A9C81FBAC91700FF74A5 /* HaikuManager.swift in Sources */,
 				9E7C53BE1FBF04EA0082E7EC /* ColorVC.swift in Sources */,
 				9E5FA30E1FBD90DB0082F56F /* AccessAlertView.swift in Sources */,
 				9EFBEC0E1FB9F4E600A889BC /* TintMutableButton.swift in Sources */,
 				9EC68A301FC5A29300A7F793 /* FontsVM.swift in Sources */,
 				9E7C53C21FBF0DE10082E7EC /* KBBarView.swift in Sources */,
+				9E2C69461FC81F99000A5594 /* FriendListVM.swift in Sources */,
 				9E5FA31C1FBDB21D0082F56F /* PictureCellVM.swift in Sources */,
 				9E09ECD51FBED6BA00BB3BBF /* EditorVM.swift in Sources */,
 				9E2BFBF61FBC5D6500860CA0 /* FriendsCellVM.swift in Sources */,
@@ -1171,8 +1229,10 @@
 				9EF34D3B1FC0256500BCA63C /* FriendsVM.swift in Sources */,
 				9EE16EA01FB4BF8700B4C5C5 /* CompletePhoneVerificationVM.swift in Sources */,
 				9E3F15051FC4581400BC7C21 /* ProfileHeaderCell.swift in Sources */,
+				9E2C694A1FC833C5000A5594 /* FriendListCell.swift in Sources */,
 				9EBEBD471FBAFFE600DE831F /* AuthenticationRouter.swift in Sources */,
 				9E61444A1FB305F900067295 /* CompleteEditProfileVM.swift in Sources */,
+				9E2C69431FC81F7D000A5594 /* FriendListVC.swift in Sources */,
 				9E6144411FB2F5D000067295 /* StartEditProfileVC.swift in Sources */,
 				9EB170AD1FB065FE00A70A10 /* TabbedController.swift in Sources */,
 				9EDF46C01FC41F7300993134 /* ProfileVC.swift in Sources */,

@@ -42,7 +42,7 @@ class ClipperVC: ViewController {
         self.btnDone = UIBarButtonItem(title: NSLocalizedString("Picture_continue", comment: ""), style: .plain, target: self, action: #selector(ClipperVC.didPressDoneButton(_:)))
         self.navigationItem.rightBarButtonItem = self.btnDone
         
-        let btnCancel = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(ClipperVC.didPressCancelButton(_:)))
+        let btnCancel = UIBarButtonItem(title: NSLocalizedString("ButtonTitles_cancelButtonTitle", comment: ""), style: .plain, target: self, action: #selector(ClipperVC.didPressCancelButton(_:)))
         self.navigationController?.navigationBar.topItem?.backBarButtonItem = btnCancel
         
         self.imageView.alpha = 0.0

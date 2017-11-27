@@ -34,6 +34,7 @@
 
 /*TabbedController*/
 /**/"TabBarTitles_bazar" = "Bazar";
+/**/"TabBarTitles_friends" = "Friends";
 /**/"TabBarTitles_write" = "Write";
 /**/"TabBarTitles_profile" = "Profile";
 
@@ -149,5 +150,9 @@
 /**/ "PlayerCell_write" = "write";
 /**/ "PlayerCell_syllables"= "syllabels";
 
+/*FriendListVC/*
+/**/ "FriendList_kubazar" = "Kubazar";
+/**/ "FriendList_all" = "All";
+/**/ "FriendList_haikus" = "Haikus";
 
 
