@@ -10,7 +10,7 @@ import Foundation
 
 class Haiku {
     
-    public var id : Int = 0
+    public var id : String = ""
     public var date: Date?
     public var pictureURL: String?
     public var creator: User?
@@ -20,6 +20,64 @@ class Haiku {
     public var liked: Bool = false
     public var players : [User] = []
     public var decorator: Decorator = Decorator()
+    
+    public var creatorId: String?
+    public var playerIds : [String] = []
+    public var likes : [String] = []
+    public var createDate: Int = 0
+    public var finishDate: Int = 0
+    public var haikuImage: HaikuImage?
+    public var haikuFont: HaikuFont?
+    
+    public func initWithDictionary(dict: Dictionary<String, Any>) -> Haiku {
+        
+        id = dict["_id"] != nil ? dict["_id"] as! String : ""
+        creatorId = dict["creatorId"] != nil ? dict["creatorId"] as! String : ""
+        
+        var theFields: [Field] = []
+        let fieldDictsArray = dict["text"] != nil ? dict["text"] as! [Dictionary<String, Any>] : []
+        for fieldDict in fieldDictsArray {
+            
+            var field = Field(user: User(), text: "", finished: false)
+            field = field.initWithDictionary(dict: fieldDict)
+            theFields.append(field)
+        }
+        fields = theFields
+        
+        published = dict["access"] as! String == "public"
+//        isCompleted = dict["status"] as! String == "completed"
+        playerIds = dict["owners"] != nil ? dict["owners"] as! [String] : []
+        
+        var thePlayers: [User] = []
+        for playerId in playerIds {
+            
+            for owner in HaikuManager.shared.owners {
+                
+                if owner.id == playerId {
+                    
+                    thePlayers.append(owner)
+                }
+            }
+        }
+        players = thePlayers
+        
+        likes = dict["likes"] != nil ? dict["likes"] as! [String] : []
+        likesCount = dict["likesCount"] != nil ? dict["likesCount"] as! Int : 0
+        createDate = dict["createdOn"] != nil ? dict["createdOn"] as! Int : 0
+        finishDate = dict["finishedOn"] != nil ? dict["finishedOn"] as! Int : 0
+        
+        let image = HaikuImage()
+        let haikuImageDict = dict["img"] as! Dictionary<String, Any>
+        haikuImage = image.initWithDictionary(dict: haikuImageDict)
+        
+        let font = HaikuFont()
+        let haikuFontDict = dict["font"] as! Dictionary<String, Any>
+        haikuFont = font.initWithDictionary(dict: haikuFontDict)
+        
+//        print("creatorId =", creatorId ?? "no creator id")
+        
+        return self
+    }
 }
 
 extension Haiku {

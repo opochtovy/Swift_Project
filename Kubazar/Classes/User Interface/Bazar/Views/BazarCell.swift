@@ -45,6 +45,18 @@ class BazarCell: UITableViewCell {
         self.updateContent()
     }
     
+    //MARK: Public functions
+    
+    public func setImageForCell(imageURL: URL) {
+        
+        self.vHaikuContent.setImageForHaikuPreview(imageURL: imageURL)
+    }
+    
+    public func isHaikuPreviewImageNil() -> Bool {
+        
+        return self.vHaikuContent.isImageNil()
+    }
+    
     //MARK: Private functions
     
     private func updateContent() {

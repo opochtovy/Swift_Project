@@ -30,6 +30,7 @@ class FirebaseServerClient {
     typealias BaseCompletion = (_ success: Bool, _ error: Error?) -> Void
     
     static let AuthenticatorStateDidChangeNotification = "AuthenticatorStateDidChangeNotification"
+    static let DeviceTokenDidPutNotification = "DeviceTokenDidPutNotification"
     
     var sessionManager: SessionManager
     var deviceToken: Data = Data()
@@ -159,6 +160,12 @@ class FirebaseServerClient {
         return emailPart
     }
     
+    public func getProfilePhotoURL() -> URL? {
+        
+        let photoURL = Auth.auth().currentUser?.photoURL
+        return photoURL
+    }
+    
     //MARK: - Firebase
     
     public func signOut(completionHandler:@escaping (String?, Bool) -> ()) {
@@ -236,14 +243,6 @@ class FirebaseServerClient {
                 
                 UserDefaults.standard.set(true, forKey: StoreKeys.isUserAuthorized)
                 UserDefaults.standard.synchronize()
-                
-                // User is signed in
-                if let user = user {
-                    
-                    print("Phone number: \(user.phoneNumber ?? "nil")")
-                    let userInfo: Any? = user.providerData[0]
-                    print(userInfo ?? "no user info")
-                }
                 fulfill(())
             }
         }
@@ -492,6 +491,16 @@ class FirebaseServerClient {
                 
                 } else {
                     
+                    if let currentUser = Auth.auth().currentUser {
+                        
+                        let user = User()
+                        user.id = currentUser.uid
+                        user.displayName = currentUser.displayName
+                        user.email = currentUser.email
+                        user.avatarURL = currentUser.photoURL?.absoluteString
+                        
+                        HaikuManager.shared.currentUser = user
+                    }
                     fulfill(())
                 }
             })
@@ -538,7 +547,10 @@ class FirebaseServerClient {
                 
                 guard response.result.isSuccess else {
                     
-                    reject(NSError(domain:"", code:1001, userInfo:nil))
+                    if let error = response.error {
+                        
+                        reject(error)
+                    }
                     return
                 }
                 
@@ -564,68 +576,36 @@ class FirebaseServerClient {
         }
     }
     
-    // responseData
-    
-    public func getUserAvatar(completionHandler:@escaping (Data?, Bool) -> ()) {
+    public func getPersonalHaikus(completionHandler:@escaping ([Dictionary<String, Any>], [User], Bool) -> ()) {
         
-        self.downloadUserAvatar().then { imageData -> Void in
+        var haikusJSONResponse: [Dictionary<String, Any>] = []
+        
+        self.getPersonalHaikusPromise().then { jsonResponse -> Promise<[User]> in
             
-            completionHandler(imageData, true)
+            haikusJSONResponse = jsonResponse
+            return self.getOwnersForHaikusPromise(haikusJSONObject: jsonResponse)
+            
+            }.then { owners -> Void in
+            
+                print("haikusJSONResponse.count =", haikusJSONResponse.count)
+                completionHandler(haikusJSONResponse, owners, true)
             
             }.catch { error in
                 
-                completionHandler(nil, false)
+                completionHandler([], [], false)
         }
     }
     
-    public func downloadUserAvatar() -> Promise<Data?> {
+    private func getPersonalHaikusPromise() -> Promise<[Dictionary<String, Any>]> {
         
         return Promise { fulfill, reject in
             
-            if self.state == .authorized, let user = Auth.auth().currentUser, let userPhotoURL = user.photoURL {
+            if self.state == .authorized {
                 
-                let request = AuthenticationRouter.downloadProfileImage(url: userPhotoURL)
-                self.sessionManager.request(request).responseData(completionHandler: { (response) in
+                let request = AuthenticationRouter.getPersonalHaikus()
+                self.sessionManager.request(request).responseJSON(completionHandler: { (response) in
                     
-                    if let error = response.error {
-                        
-                        reject(error)
-                    }
-                    print("user.photoURL =", user.photoURL ?? "no photoURL")
-                    print("response.result.description.count =", response.result.description.count)
-                    print("response.data?.count =", response.data?.count)
-                    fulfill(response.data)
-                })
-            }
-        }
-    }
-    
-    // responseImage
-/*
-    public func getUserAvatar(completionHandler:@escaping (UIImage?, Bool) -> ()) {
-        
-        self.downloadUserAvatar().then { image -> Void in
-            
-            completionHandler(image, true)
-            
-            }.catch { error in
-                
-                completionHandler(nil, false)
-        }
-    }
-    
-    public func downloadUserAvatar() -> Promise<UIImage?> {
-        
-        return Promise { fulfill, reject in
-            
-            if self.state == .authorized, let user = Auth.auth().currentUser, let userPhotoURL = user.photoURL {
-                
-                print("user.photoURL =", user.photoURL ?? "no photoURL")
-                
-                let request = AuthenticationRouter.downloadProfileImage(url: userPhotoURL)
-                self.sessionManager.request(request).responseImage(completionHandler: { (response) in
-                    
-                    guard let image = response.result.value else {
+                    guard response.result.isSuccess else {
                         
                         if let error = response.error {
                             
@@ -633,10 +613,97 @@ class FirebaseServerClient {
                         }
                         return
                     }
-                    fulfill(image)
+                    
+                    let array = response.result.value as? [Dictionary<String, Any>]
+                    print("SUCCESS : haikus count =", array?.count)
+                    
+                    if let array = array {
+                        
+                        fulfill(array)
+                    }
                 })
             }
         }
     }
+    
+    
+    
+    private func getOwnersForHaikusPromise(haikusJSONObject: [Dictionary<String, Any>]) -> Promise<[User]> {
+        
+        return Promise { fulfill, reject in
+            
+            var ownerIds: [String] = []
+            for dict in haikusJSONObject {
+                
+                for ownerId in dict["owners"] as! [String] {
+                    
+                    if !ownerIds.contains(ownerId) {
+                        
+                        ownerIds.append(ownerId)
+                    }
+                }
+            }
+            
+            var owners: [User] = []
+/*
+            let queue = OperationQueue()
+            queue.maxConcurrentOperationCount = 50
+            for ownerId in ownerIds {
+                
+                let operation = AsyncBlockOperation(block: { operation in
+                    
+                    let request = AuthenticationRouter.getUserInfo(creatorId: ownerId)
+                    self.sessionManager.request(request).responseJSON(completionHandler: { (response) in
+                        
+                        guard response.result.isSuccess else {
+                            
+                            if let error = response.error {
+                                
+                                operation.finish(error: error)
+                            }
+                            return
+                        }
+                        
+//                            let array = response.result.value as? [Dictionary<String, Any>]
+//                            if let array = array {
+//                                fulfill(array)
+//                            }
+                        
+                        operation.finish()
+                    })
+                    
+                })
+                
+                operation.completionBlock = {
+                    
+                    if let error = operation.error {
+                        
+                        queue.cancelAllOperations()
+                        reject(error)
+                        
+                    } else if queue.operationCount == 0 {
+                        
+                        fulfill(owners)
+                    }
+                }
+                
+                queue.addOperation(operation)
+            }
+            
+            if queue.operationCount == 0 {
+                
+                fulfill(owners)
+            }
 */
+            // test till Artem write request to get User info by creatorId
+            let user = Auth.auth().currentUser
+            for ownerId in ownerIds {
+                if ownerId == user?.uid {
+                    owners.append(HaikuManager.shared.currentUser)
+                }
+            }
+            fulfill(owners)
+            // end of test
+        }
+    }
 }

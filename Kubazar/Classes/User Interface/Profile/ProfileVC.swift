@@ -75,41 +75,10 @@ class ProfileVC: ViewController, UITableViewDelegate, UITableViewDataSource, UII
     
     private func downloadProfileImage() {
         
-        self.view.bringSubview(toFront: self.contentViewForProgressView)
-        self.showProgressView()
-        MBProgressHUD.showAdded(to: self.contentViewForProgressView, animated: true)
-        self.client.authenticator.getUserAvatar(completionHandler:  { [weak self](imageData, uploadSuccess) in
+        if let url = self.client.authenticator.getProfilePhotoURL() {
             
-            guard let weakSelf = self else { return }
-            
-            weakSelf.view.bringSubview(toFront: weakSelf.contentViewForProfileImageView)
-            MBProgressHUD.hide(for: weakSelf.contentViewForProgressView, animated: true)
-            weakSelf.hideProgressView()
-            
-            // responseData
-            
-            if !uploadSuccess {
-                
-//                weakSelf.showUnsuccessfulPhotoUploadAlert()
-                
-            } else if let imageData = imageData {
-                
-                let downloadedImage:UIImage? = UIImage(data:imageData, scale:1.0)
-                weakSelf.profileImageView.image = downloadedImage == nil ? UIImage(named:"testProfileImage") : UIImage(data:imageData, scale:1.0)
-            }
-            
-            // resonseImage
-/*
-            if !uploadSuccess {
-                
-//                weakSelf.showUnsuccessfulPhotoUploadAlert()
-                
-            } else {
-                
-                weakSelf.profileImageView.image = image == nil ? UIImage(named:"testProfileImage") : image
-            }
-*/
-        })
+            self.profileImageView.af_setImage(withURL: url)
+        }
     }
     
     private func setNavigationBarAppearance() {

@@ -14,6 +14,10 @@ enum AuthenticationRouter: URLRequestConvertible {
     case addDeviceToken(bodyParameters: [String: String])
     case uploadUserAvatar(contentType: String, multipartFormData: Data)
     case downloadProfileImage(url: URL)
+    case getUserInfo(creatorId: String) // that router is to get user info by creatorId different from currentUser
+    
+    // Get Haiku
+    case getPersonalHaikus()
     
     var method: HTTPMethod {
         
@@ -21,15 +25,19 @@ enum AuthenticationRouter: URLRequestConvertible {
         case .addDeviceToken: return .put
         case .uploadUserAvatar: return .put
         case .downloadProfileImage: return .get
+        case .getPersonalHaikus: return .get
+        case .getUserInfo: return .get
         }
     }
     
     var path: String {
         
         switch self {
-        case .addDeviceToken(_): return "/v1/user/device"
+        case .addDeviceToken(_): return "/user/device"
         case .uploadUserAvatar(_): return "/user/avatar"
         case .downloadProfileImage(_): return ""
+        case .getPersonalHaikus(): return "/haiku/"
+        case .getUserInfo(let creatorId): return "/user/info"
         }
     }
     
@@ -56,6 +64,11 @@ enum AuthenticationRouter: URLRequestConvertible {
             urlRequest.httpMethod = method.rawValue
             urlRequest.httpShouldHandleCookies = false
             urlRequest.addValue("image/jpeg", forHTTPHeaderField: "Content-Type")
+            
+            
+        case .getPersonalHaikus(): print()
+            
+        case .getUserInfo(_): print()
         }
         
         return urlRequest

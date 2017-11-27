@@ -25,6 +25,11 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
         fatalError("init(coder:) has not been implemented")
     }
     
+    deinit {
+        
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -51,6 +56,8 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "iconSort"), style: .plain, target: self, action: #selector(BazarVC.didPressSortButton))
         
         self.tblView.register(UINib.init(nibName: "BazarCell", bundle: nil), forCellReuseIdentifier: BazarCell.reuseID)
+        
+        self.setupObserving()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,6 +69,8 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
         self.updateContent()
     }
     
+    //MARK: - Private functions
+    
     private func setStatusBarAppearance() {
         
         let statusBarView = UIApplication.shared.value(forKey: "statusBar") as? UIView
@@ -69,10 +78,14 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
         statusBarView?.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     }
     
-    //MARK: - Private functions
     private func updateContent() {
         
-        self.viewModel.refreshData()
+        self.tblView.reloadSections(IndexSet.init(integer: 0), with: .fade)
+    }
+    
+    private func updateContentWithJSONObject(dict: [Dictionary<String, Any>], owners: [User]) {
+        
+        self.viewModel.getHaikusFromJSONObject(dict: dict, owners: owners)
         self.tblView.reloadSections(IndexSet.init(integer: 0), with: .fade)
     }
     
@@ -92,6 +105,30 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
                 subView.removeFromSuperview()
             }
         }
+    }
+    
+    @objc private func getPersonalHaikus() {
+        
+        if self.client.authenticator.state == .authorized {
+            
+            self.client.authenticator.getPersonalHaikus { [weak self](haikusJSONResponse, owners, success) in
+                
+                guard let weakSelf = self else { return }
+                
+                if !success {
+                    
+                    weakSelf.showWrongResponseAlert(message: "")
+                } else {
+                    
+                    weakSelf.updateContentWithJSONObject(dict: haikusJSONResponse, owners: owners)
+                }
+            }
+        }
+    }
+    
+    private func setupObserving() {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(BazarVC.getPersonalHaikus), name: NSNotification.Name(rawValue: FirebaseServerClient.DeviceTokenDidPutNotification), object: nil)
     }
     
     //MARK: - Actions
@@ -142,8 +179,22 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: BazarCell.reuseID, for: indexPath) as! BazarCell
         cell.viewModel = self.viewModel.getCellVM(forIndexPath: indexPath)
+        if cell.isHaikuPreviewImageNil() {
+            
+            self.downloadHaikuImageForCell(cell: cell, indexPath: indexPath)
+        }
         
         return cell
+    }
+    
+    //MARK: Public functions
+    
+    private func downloadHaikuImageForCell(cell: BazarCell, indexPath: IndexPath) {
+        
+        if let imagePath = self.viewModel.getImagePathForHaiku(forIndexPath: indexPath), let url = URL(string: imagePath) {
+            
+            cell.setImageForCell(imageURL: url)
+        }
     }
     
     //MARK: - UITableViewDelegate

@@ -48,39 +48,25 @@ class BazarVM: BaseVM {
      
         return EditorVM(client: self.client, haiku: self.dataSource[indexPath.row])
     }
-
-    public func refreshData() {
+    
+    public func getHaikusFromJSONObject(dict: [Dictionary<String, Any>], owners: [User]) {
         
-        switch self.filter {
-        case .all:
-            
-            self.dataSource = HaikuManager.shared.haikus.filter({ (haiku) -> Bool in
-                haiku.published == true
-            })
-            
-        case .active:
-            
-            self.dataSource = HaikuManager.shared.haikus.filter({ (haiku) -> Bool in
-                
-                let isHaikuIncompleted: Bool = haiku.fields.count < 3
-                let isUserParticipant: Bool = haiku.players.contains(where: { (user) -> Bool in
-                    return user.id == HaikuManager.shared.currentUser.id
-                })
-                
-                return isUserParticipant && isHaikuIncompleted
-            })
-            
-        case .mine:
-            
-            self.dataSource = HaikuManager.shared.haikus.filter({ (haiku) -> Bool in
-                
-                let isUserCreator = haiku.creator?.id == HaikuManager.shared.currentUser.id
-                let isUserActiveParticipant = haiku.activePlayers.contains(where: { (user) -> Bool in
-                    return user.id == HaikuManager.shared.currentUser.id
-                })
-                
-                return isUserCreator && isUserActiveParticipant && haiku.isCompleted
-            })
-        }
+        var haikus: [Haiku] = []
+        
+//        switch self.filter {
+//        default:
+//            haikus = HaikuManager.shared.initHaikusFromDictionary(dict: dict, haikusType: 0)
+//        }
+        
+        haikus = HaikuManager.shared.initHaikusFromDictionary(dict: dict, haikusType: self.filter.rawValue, owners: owners)
+        
+        self.dataSource = haikus
+        print("self.dataSource =", self.dataSource)
+    }
+    
+    public func getImagePathForHaiku(forIndexPath indexPath: IndexPath) -> String? {
+        
+        let haiku = self.dataSource[indexPath.row]
+        return haiku.haikuImage?.urlString
     }
 }

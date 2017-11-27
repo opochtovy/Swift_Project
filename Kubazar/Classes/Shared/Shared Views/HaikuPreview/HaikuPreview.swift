@@ -70,6 +70,20 @@ class HaikuPreview: UIView {
         self.updateGradientFrame()
     }
     
+    //MARK: Public functions
+    
+    public func setImageForHaikuPreview(imageURL: URL) {
+        
+//        self.ivHaiku.image = image == nil ? UIImage(named:"testProfileImage") : image
+        self.ivHaiku.image = nil
+        self.ivHaiku.af_setImage(withURL: imageURL)
+    }
+    
+    public func isImageNil() -> Bool {
+        
+        return self.ivHaiku.image == nil
+    }
+    
     //MARK: Private functions
     
     private func setup() {
