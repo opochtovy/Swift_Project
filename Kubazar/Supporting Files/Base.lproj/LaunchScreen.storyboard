@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,11 +21,10 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchBackGradient" translatesAutoresizingMaskIntoConstraints="NO" id="6OC-7o-YJV">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchScreenAppIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Lg7-Mw-6Wy">
-                                <rect key="frame" x="82" y="227.5" width="211" height="211"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="Lg7-Mw-6Wy">
+                                <rect key="frame" x="107" y="214.5" width="161" height="237"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="Lg7-Mw-6Wy" secondAttribute="height" multiplier="1:1" id="BSD-li-fho"/>
-                                    <constraint firstAttribute="width" constant="211" id="IuU-vZ-Nl7"/>
+                                    <constraint firstAttribute="width" constant="161" id="IuU-vZ-Nl7"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -49,6 +47,6 @@
     </scenes>
     <resources>
         <image name="LaunchBackGradient" width="375" height="667"/>
-        <image name="LaunchScreenAppIcon" width="211" height="211"/>
+        <image name="Logo" width="161" height="237"/>
     </resources>
 </document>

@@ -21,7 +21,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="writeMainMenuLogo" translatesAutoresizingMaskIntoConstraints="NO" id="kDF-GI-ksQ">
+                <imageView userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoColored" translatesAutoresizingMaskIntoConstraints="NO" id="kDF-GI-ksQ">
                     <rect key="frame" x="18" y="19" width="94" height="81"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="94" id="IhZ-Zu-LM2"/>
@@ -95,9 +95,9 @@
         </view>
     </objects>
     <resources>
+        <image name="LogoColored" width="109" height="162"/>
         <image name="iconFriendOne" width="77" height="62"/>
         <image name="iconFriendsThree" width="131" height="62"/>
         <image name="iconFriendsTwo" width="106" height="62"/>
-        <image name="writeMainMenuLogo" width="94" height="81"/>
     </resources>
 </document>
