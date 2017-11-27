@@ -206,6 +206,9 @@ class SignInVC: ViewController, UITextFieldDelegate {
                     
                     print("authToken =", authToken)
                     self.client.authenticator.sessionManager.adapter = SessionTokenAdapter(sessionToken: authToken)
+                    
+                    let notification = Notification(name: Notification.Name(rawValue: FirebaseServerClient.DeviceTokenDidPutNotification))
+                    NotificationCenter.default.post(notification)
                 }
             }
         })
