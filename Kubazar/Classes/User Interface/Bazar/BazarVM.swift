@@ -29,7 +29,7 @@ class BazarVM: BaseVM {
     //For Pagination
     public var isDataLoading: Bool = false
     public var page: Int = 0
-    public var perPage: Int = 10
+    public var perPage: Int = 5
     public var didEndReached: Bool = false
     
     private var dataSource: [Haiku] = []
@@ -74,5 +74,10 @@ class BazarVM: BaseVM {
         
         let haiku = self.dataSource[indexPath.row]
         return haiku.haikuImage?.urlString
+    }
+    
+    public func deleteAllDataSource() {
+        
+        self.dataSource = []
     }
 }

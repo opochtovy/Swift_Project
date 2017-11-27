@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import ObjectMapper
 
 class Haiku {
     
@@ -14,7 +15,7 @@ class Haiku {
     public var date: Date?
     public var pictureURL: String?
     public var creator: User?
-    public var fields: [Field] = []    
+    public var fields: [Field] = []
     public var published: Bool = false
     public var likesCount: Int = 0
     public var liked: Bool = false
@@ -25,9 +26,15 @@ class Haiku {
     public var playerIds : [String] = []
     public var likes : [String] = []
     public var createDate: Int = 0
-    public var finishDate: Int = 0
+    public var finishDate: String = ""
     public var haikuImage: HaikuImage?
     public var haikuFont: HaikuFont?
+    
+//    public func initWithDictionary(dict: Dictionary<String, Any>) -> Haiku {
+//
+//        return self
+//    }
+
     
     public func initWithDictionary(dict: Dictionary<String, Any>) -> Haiku {
         
@@ -64,7 +71,7 @@ class Haiku {
         likes = dict["likes"] != nil ? dict["likes"] as! [String] : []
         likesCount = dict["likesCount"] != nil ? dict["likesCount"] as! Int : 0
         createDate = dict["createdOn"] != nil ? dict["createdOn"] as! Int : 0
-        finishDate = dict["finishedOn"] != nil ? dict["finishedOn"] as! Int : 0
+        finishDate = dict["finishedOn"] != nil ? dict["finishedOn"] as! String : ""
         
         let image = HaikuImage()
         let haikuImageDict = dict["img"] as! Dictionary<String, Any>
@@ -78,6 +85,7 @@ class Haiku {
         
         return self
     }
+
 }
 
 extension Haiku {

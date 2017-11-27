@@ -193,6 +193,8 @@ class SignInVC: ViewController, UITextFieldDelegate {
 */
         // test mode
         MBProgressHUD.showAdded(to: self.view, animated: true)
+        // "oleg.pochtovy@mobexs.com", password: "111111"
+        // "serge.rylko@mobexs.com", password: "111111"
         self.client.authenticator.signInWithEmailPassword(email: "oleg.pochtovy@mobexs.com", password: "111111", completionHandler: { errorDescription, success in
             
             MBProgressHUD.hide(for: self.view, animated: true)
@@ -212,6 +214,7 @@ class SignInVC: ViewController, UITextFieldDelegate {
                 }
             }
         })
+        // end of test mode
 
     }
 }

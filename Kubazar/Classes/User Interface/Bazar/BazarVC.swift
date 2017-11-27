@@ -88,10 +88,14 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
         let previousCount = self.viewModel.numberOfItems()
         self.viewModel.getHaikusFromJSONObject(dict: dict, owners: owners)
         
-        if self.viewModel.numberOfItems() >= previousCount {
-            
+        if previousCount > 0, self.viewModel.numberOfItems() >= previousCount {
+
             self.updateCells(previousCount: previousCount)
-            
+
+        } else if self.viewModel.numberOfItems() >= previousCount {
+
+            self.tblView.reloadSections(IndexSet.init(integer: 0), with: .fade)
+            self.tblView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
         }
     }
     
@@ -104,7 +108,7 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
         }
         
         self.tblView.beginUpdates()
-        self.tblView.insertRows(at: indexPaths, with: UITableViewRowAnimation.automatic)
+        self.tblView.insertRows(at: indexPaths, with: UITableViewRowAnimation.fade)
         self.tblView.endUpdates()
     }
     
@@ -130,7 +134,8 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
         
         if self.client.authenticator.state == .authorized {
             
-            self.client.authenticator.getPersonalHaikus(page: self.viewModel.page, perPage: self.viewModel.perPage) { [weak self](haikusJSONResponse, owners, success) in
+            let sortType = self.viewModel.sort == .date ? 0 : 1
+            self.client.authenticator.getPersonalHaikus(page: self.viewModel.page, perPage: self.viewModel.perPage, sort: sortType) { [weak self](haikusJSONResponse, owners, success) in
                 
                 guard let weakSelf = self else { return }
                 
@@ -153,16 +158,20 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
     //MARK: - Actions
     @objc private func didPressSortButton(_ sender: UIBarButtonItem) {
         
+        let previousSort = self.viewModel.sort
+        
         let alertCtrl = UIAlertController(title: NSLocalizedString("Bazar_sort_title", comment: ""), message: "", preferredStyle: .actionSheet)
 
         let action1 = UIAlertAction(title: NSLocalizedString("Bazar_sort_bylike", comment: ""), style: .default){ (_) in
             
-            self.viewModel.sort = .likes
+            self.viewModel.sort = .date
+            self.getPersonalHaikusDuringSorting(previousSort: previousSort)
         }
         
         let action2 = UIAlertAction(title: NSLocalizedString("Bazar_sort_bydate", comment: ""), style: .default){ (_) in
             
-            self.viewModel.sort = .date
+            self.viewModel.sort = .likes
+            self.getPersonalHaikusDuringSorting(previousSort: previousSort)
         }
         
         let action3 = UIAlertAction(title: NSLocalizedString("BazarDetail_alert_cancel", comment: ""), style: .cancel, handler: nil)
@@ -172,6 +181,15 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
         alertCtrl.addAction(action3)
         
         self.present(alertCtrl, animated: true, completion: nil)
+    }
+    
+    private func getPersonalHaikusDuringSorting(previousSort: BazarVM.BazarSort) {
+        
+        if self.viewModel.sort != previousSort {
+            self.viewModel.deleteAllDataSource()
+            self.viewModel.page = 0
+            self.getPersonalHaikus(page: self.viewModel.page, perPage: self.viewModel.perPage)
+        }
     }
     
     @objc private func didSelectSegment(_ sender: UISegmentedControl) {
@@ -238,6 +256,11 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
         }
     }
     
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        return 452.0
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         return UITableViewAutomaticDimension
@@ -250,7 +273,22 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
         self.viewModel.isDataLoading = false
     }
     
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        
+        self.getPersonalHaikusDuringScrolling()
+    }
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        
+        self.getPersonalHaikusDuringScrolling()
+    }
+    
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        
+        self.getPersonalHaikusDuringScrolling()
+    }
+    
+    private func getPersonalHaikusDuringScrolling() {
         
         if ((self.tblView.contentOffset.y + 2 * self.tblView.frame.size.height) >= self.tblView.contentSize.height) {
             

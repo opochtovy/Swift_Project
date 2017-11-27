@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AlamofireImage
 
 class HaikuPreview: UIView {
     
@@ -18,6 +19,9 @@ class HaikuPreview: UIView {
     @IBOutlet private weak var lbField3: UILabel!
     
     private var gradient: CAGradientLayer?
+    
+    private let imageCache = AutoPurgingImageCache()
+    private let downloader = ImageDownloader()
     
     public var viewModel: HaikuPreviewVM! {
         didSet {
@@ -76,7 +80,23 @@ class HaikuPreview: UIView {
         
 //        self.ivHaiku.image = image == nil ? UIImage(named:"testProfileImage") : image
         self.ivHaiku.image = nil
-        self.ivHaiku.af_setImage(withURL: imageURL)
+        if let cachedImage = self.imageCache.image(withIdentifier: imageURL.absoluteString) {
+            
+            self.ivHaiku.image = cachedImage
+        
+        } else {
+            
+//            self.ivHaiku.af_setImage(withURL: imageURL)
+            let urlRequest = URLRequest(url: imageURL)
+            self.downloader.download(urlRequest) { response in
+                
+                if let image = response.result.value {
+                    
+                    self.ivHaiku.image = image
+                    self.imageCache.add(image, withIdentifier: imageURL.absoluteString)
+                }
+            }
+        }
     }
     
     public func isImageNil() -> Bool {

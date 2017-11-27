@@ -576,11 +576,11 @@ class FirebaseServerClient {
         }
     }
     
-    public func getPersonalHaikus(page: Int, perPage: Int, completionHandler:@escaping ([Dictionary<String, Any>], [User], Bool) -> ()) {
+    public func getPersonalHaikus(page: Int, perPage: Int, sort: Int, completionHandler:@escaping ([Dictionary<String, Any>], [User], Bool) -> ()) {
         
         var haikusJSONResponse: [Dictionary<String, Any>] = []
         
-        self.getPersonalHaikusPromise(page: page, perPage: perPage).then { jsonResponse -> Promise<[User]> in
+        self.getPersonalHaikusPromise(page: page, perPage: perPage, sort: sort).then { jsonResponse -> Promise<[User]> in
             
             haikusJSONResponse = jsonResponse
             return self.getOwnersForHaikusPromise(haikusJSONObject: jsonResponse)
@@ -596,14 +596,17 @@ class FirebaseServerClient {
         }
     }
     
-    private func getPersonalHaikusPromise(page: Int, perPage: Int) -> Promise<[Dictionary<String, Any>]> {
+    private func getPersonalHaikusPromise(page: Int, perPage: Int, sort: Int) -> Promise<[Dictionary<String, Any>]> {
         
         return Promise { fulfill, reject in
             
             if self.state == .authorized {
                 
-                let urlParameters : [String: Int] = ["page": page,
+                var urlParameters : [String: Any] = ["page": page,
                                                         "perPage": perPage]
+                if sort == 1 {
+                    urlParameters.updateValue("likes", forKey: "sort")
+                }
                 let request = AuthenticationRouter.getPersonalHaikus(urlParameters: urlParameters)
                 self.sessionManager.request(request).responseJSON(completionHandler: { (response) in
                     
