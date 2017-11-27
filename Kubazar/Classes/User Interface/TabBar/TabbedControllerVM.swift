@@ -7,17 +7,21 @@
 //
 
 import Foundation
+import UIKit
 
 enum TabBarTitles {
     static let bazar = "TabBarTitles_bazar"
+    static let friends = "TabBarTitles_friends"
     static let write = "TabBarTitles_write"
     static let profile = "TabBarTitles_profile"
 }
 
 enum TabBarImages {
     static let bazar = "bazarBarItem"
+    static let friends : UIImage = #imageLiteral(resourceName: "iconFriends")
     static let write = "writeBarItem"
     static let profile = "profileBarItem"
+    
 }
 
 enum TabBarConstants {

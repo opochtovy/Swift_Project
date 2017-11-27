@@ -26,6 +26,12 @@ class BazarVM: BaseVM {
     public var filter: BazarFilter = .all
     public var sort: BazarSort = .date
     
+    //For Pagination
+    public var isDataLoading: Bool = false
+    public var page: Int = 0
+    public var perPage: Int = 10
+    public var didEndReached: Bool = false
+    
     private var dataSource: [Haiku] = []
     
     //MARK: - Public functions
@@ -60,8 +66,8 @@ class BazarVM: BaseVM {
         
         haikus = HaikuManager.shared.initHaikusFromDictionary(dict: dict, haikusType: self.filter.rawValue, owners: owners)
         
-        self.dataSource = haikus
-        print("self.dataSource =", self.dataSource)
+        self.didEndReached = haikus.count < self.perPage        
+        self.dataSource.append(contentsOf: haikus)
     }
     
     public func getImagePathForHaiku(forIndexPath indexPath: IndexPath) -> String? {

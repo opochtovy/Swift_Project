@@ -45,9 +45,17 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconWaterMark" translatesAutoresizingMaskIntoConstraints="NO" id="7MA-e8-Fu5">
+                    <rect key="frame" x="166" y="362" width="55" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="55" id="0Kg-fq-hMW"/>
+                        <constraint firstAttribute="height" constant="17" id="4Md-uN-gEF"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="5I9-or-JBS" firstAttribute="bottom" secondItem="7MA-e8-Fu5" secondAttribute="bottom" constant="16.800000000000001" id="2vP-uO-rxr"/>
                 <constraint firstAttribute="trailing" secondItem="ZZK-Jj-hbo" secondAttribute="trailing" id="6fV-MZ-jdp"/>
                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Cyn-ed-Ci8" secondAttribute="bottom" constant="50" id="G2W-T9-ghq"/>
                 <constraint firstItem="sjh-8T-z3K" firstAttribute="leading" secondItem="Er8-eC-1vf" secondAttribute="leading" id="IcF-qE-9CK"/>
@@ -58,6 +66,7 @@
                 <constraint firstItem="Cyn-ed-Ci8" firstAttribute="top" secondItem="sjh-8T-z3K" secondAttribute="bottom" constant="15" id="h0e-jA-TZW"/>
                 <constraint firstItem="Cyn-ed-Ci8" firstAttribute="leading" secondItem="sjh-8T-z3K" secondAttribute="leading" id="n42-y2-lu4"/>
                 <constraint firstItem="ZZK-Jj-hbo" firstAttribute="leading" secondItem="RDV-cp-U0Z" secondAttribute="leading" id="oFQ-Q2-NeJ"/>
+                <constraint firstItem="7MA-e8-Fu5" firstAttribute="centerX" secondItem="RDV-cp-U0Z" secondAttribute="centerX" id="r5G-Ps-L7g"/>
                 <constraint firstAttribute="bottom" secondItem="ZZK-Jj-hbo" secondAttribute="bottom" id="s67-XE-Zw5"/>
                 <constraint firstItem="Er8-eC-1vf" firstAttribute="centerX" secondItem="RDV-cp-U0Z" secondAttribute="centerX" id="tB2-YU-kbH"/>
                 <constraint firstItem="ZZK-Jj-hbo" firstAttribute="top" secondItem="RDV-cp-U0Z" secondAttribute="top" id="vOJ-mv-gs8"/>
@@ -69,6 +78,7 @@
         </view>
     </objects>
     <resources>
+        <image name="iconWaterMark" width="60" height="18"/>
         <image name="testHaikuIMage" width="343" height="343"/>
     </resources>
 </document>

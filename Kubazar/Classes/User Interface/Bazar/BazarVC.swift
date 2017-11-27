@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
+class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     
     @IBOutlet private var tblView: UITableView!
     private var scFilter: UISegmentedControl!
@@ -85,8 +85,27 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
     
     private func updateContentWithJSONObject(dict: [Dictionary<String, Any>], owners: [User]) {
         
+        let previousCount = self.viewModel.numberOfItems()
         self.viewModel.getHaikusFromJSONObject(dict: dict, owners: owners)
-        self.tblView.reloadSections(IndexSet.init(integer: 0), with: .fade)
+        
+        if self.viewModel.numberOfItems() >= previousCount {
+            
+            self.updateCells(previousCount: previousCount)
+            
+        }
+    }
+    
+    func updateCells(previousCount: Int) {
+        
+        var indexPaths: [IndexPath] = []
+        for i in (previousCount...self.viewModel.numberOfItems() - 1) {
+            
+            indexPaths.append(IndexPath(row: i, section: 0))
+        }
+        
+        self.tblView.beginUpdates()
+        self.tblView.insertRows(at: indexPaths, with: UITableViewRowAnimation.automatic)
+        self.tblView.endUpdates()
     }
     
     private func showReachabilityAlert() {
@@ -107,11 +126,11 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    @objc private func getPersonalHaikus() {
+    @objc private func getPersonalHaikus(page: Int, perPage: Int) {
         
         if self.client.authenticator.state == .authorized {
             
-            self.client.authenticator.getPersonalHaikus { [weak self](haikusJSONResponse, owners, success) in
+            self.client.authenticator.getPersonalHaikus(page: self.viewModel.page, perPage: self.viewModel.perPage) { [weak self](haikusJSONResponse, owners, success) in
                 
                 guard let weakSelf = self else { return }
                 
@@ -222,5 +241,28 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         return UITableViewAutomaticDimension
+    }
+    
+    //MARK: - UIScrollViewDelegate
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        
+        self.viewModel.isDataLoading = false
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        
+        if ((self.tblView.contentOffset.y + 2 * self.tblView.frame.size.height) >= self.tblView.contentSize.height) {
+            
+            if !self.viewModel.isDataLoading, !self.viewModel.didEndReached {
+                
+                self.viewModel.isDataLoading = true
+                self.viewModel.page = self.viewModel.page + 1
+                self.getPersonalHaikus(page: self.viewModel.page, perPage: self.viewModel.perPage)
+                
+            }
+        }
+        
+        
     }
 }

@@ -13,12 +13,9 @@ class ClipperVC: ViewController {
     @IBOutlet fileprivate weak var imageView: UIImageView!
     @IBOutlet fileprivate weak var scrollView: UIScrollView!
     
-    @IBOutlet private weak var vClipFrame: UIView!
-    @IBOutlet private weak var ivCroped: UIImageView!
+    @IBOutlet private weak var vClipFrame: UIView!    
     
-    private var btnCrop: UIBarButtonItem!
-    private var btnReset: UIBarButtonItem!
-    private var btnContinue: UIBarButtonItem!
+    private var btnDone: UIBarButtonItem!
     
     private let viewModel: ClipperVM
     
@@ -38,24 +35,26 @@ class ClipperVC: ViewController {
         
         super.viewDidLoad()
         self.edgesForExtendedLayout = []
+        
+        self.title = NSLocalizedString("Clipper_edit_photo", comment: "")
         self.imageView.image = UIImage(data: self.viewModel.imageData)
+
+        self.btnDone = UIBarButtonItem(title: NSLocalizedString("Picture_continue", comment: ""), style: .plain, target: self, action: #selector(ClipperVC.didPressDoneButton(_:)))
+        self.navigationItem.rightBarButtonItem = self.btnDone
         
-        self.btnCrop = UIBarButtonItem(title: NSLocalizedString("Clipper_crop", comment: ""), style: .plain, target: self, action: #selector(ClipperVC.didPressCropImage(_:)))
-        self.btnReset = UIBarButtonItem(title: NSLocalizedString("Clipper_reset", comment: ""), style: .plain, target: self, action: #selector(ClipperVC.didPressResetButton(_:)))
-        self.btnContinue = UIBarButtonItem(title: NSLocalizedString("Picture_continue", comment: ""), style: .plain, target: self, action: #selector(ClipperVC.didPressContinueButton(_:)))
+        let btnCancel = UIBarButtonItem(title: NSLocalizedString("ButtonTitles_cancelButtonTitle", comment: ""), style: .plain, target: self, action: #selector(ClipperVC.didPressCancelButton(_:)))
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = btnCancel
         
-        
-        self.vClipFrame.layer.cornerRadius = 4.0
         self.imageView.alpha = 0.0
-        
-        self.updateContent()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        let insetValue = (self.scrollView.bounds.height - self.vClipFrame.bounds.height) / 2
-        self.scrollView.contentInset = UIEdgeInsetsMake(insetValue, 0, insetValue, 0)
+        let insetVertical: CGFloat = (self.scrollView.bounds.height - self.vClipFrame.bounds.height) / 2
+        let insetHorizontal: CGFloat = 5.0
+        
+        self.scrollView.contentInset = UIEdgeInsetsMake(insetVertical, insetHorizontal, insetVertical, insetHorizontal)
         
         UIView.animate(withDuration: 0.3) {
             
@@ -83,24 +82,6 @@ class ClipperVC: ViewController {
         scrollView.zoomScale = minScale
     }
     
-    private func updateContent() {
-        
-        if self.ivCroped?.image == nil {
-           
-            self.navigationItem.rightBarButtonItems = [self.btnCrop]
-            
-            self.ivCroped.isHidden = true
-            self.scrollView.isHidden = false
-        }
-        else {
-            
-            self.navigationItem.rightBarButtonItems = [self.btnContinue , self.btnReset]
-            
-            self.ivCroped.isHidden = false
-            self.scrollView.isHidden = true
-        }
-    }
-    
     private func cropImage() {
         
         guard let image = imageView.image else { return }
@@ -108,8 +89,9 @@ class ClipperVC: ViewController {
         let clipViewRect = self.vClipFrame.bounds
         let scaleMultiplier = 1 / self.scrollView.zoomScale
         let verticalInset = self.scrollView.contentInset.top
+        let horizontalInset = self.scrollView.contentInset.left
         
-        let cropOrigin = CGPoint(x: self.scrollView.contentOffset.x * scaleMultiplier,
+        let cropOrigin = CGPoint(x: (self.scrollView.contentOffset.x + horizontalInset) * scaleMultiplier,
                                  y: (self.scrollView.contentOffset.y + verticalInset) * scaleMultiplier)
         
         let cropRect = CGRect(origin: cropOrigin,
@@ -119,33 +101,30 @@ class ClipperVC: ViewController {
         if let cropedImafeRef = image.cgImage?.cropping(to: cropRect) {
             
             let resultImage: UIImage = UIImage.init(cgImage: cropedImafeRef)
-            
-            self.ivCroped.image = resultImage
+            self.viewModel.cropedImageData = UIImageJPEGRepresentation(resultImage, 1.0)
         }
     }
     
     //MARK: - Actions
     
-    @IBAction private func didPressCropImage(_ sender: Any) {
+    @IBAction private func didPressDoneButton(_ sender: Any) {
         
         self.cropImage()
-        self.updateContent()
-    }
-    
-    @IBAction private func didPressResetButton(_ sender: Any) {
-    
-        self.ivCroped.image = nil
-        self.updateContent()
-    }
-    
-    @IBAction private func didPressContinueButton(_ sender: Any) {
         
-        if let image = self.ivCroped.image, let cropedImageData = UIImageJPEGRepresentation(image, 1.0) {
+        if self.viewModel.cropedImageData != nil {
             
-            self.viewModel.cropedImageData = cropedImageData
             let ctrl = EditorVC(client: self.client, viewModel: self.viewModel.getEditorVM())
             self.navigationController?.pushViewController(ctrl, animated: true)
         }
+        else {
+            
+            print("unExpected clipper error")
+        }
+    }
+    
+    @IBAction private func didPressCancelButton(_ sender: Any) {
+        
+        self.navigationController?.popViewController(animated: true)
     }
 }
 

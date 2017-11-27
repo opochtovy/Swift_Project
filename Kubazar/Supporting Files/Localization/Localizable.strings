@@ -34,6 +34,7 @@
 
 /*TabbedController*/
 /**/"TabBarTitles_bazar" = "Bazar";
+/**/"TabBarTitles_friends" = "Friends";
 /**/"TabBarTitles_write" = "Write";
 /**/"TabBarTitles_profile" = "Profile";
 
@@ -141,6 +142,7 @@
 /*ClipperVC*/
 /**/ "Clipper_crop" = "Crop";
 /**/ "Clipper_reset" = "Reset";
+/**/ "Clipper_edit_photo" = "Edit Photo";
 
 /*PlayerCellVM/*
 /**/ "PlayerCell_writes" = "writes";
@@ -148,5 +150,9 @@
 /**/ "PlayerCell_write" = "write";
 /**/ "PlayerCell_syllables"= "syllabels";
 
+/*FriendListVC/*
+/**/ "FriendList_kubazar" = "Kubazar";
+/**/ "FriendList_all" = "All";
+/**/ "FriendList_haikus" = "Haikus";
 
 

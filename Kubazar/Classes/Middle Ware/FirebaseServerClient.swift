@@ -576,11 +576,11 @@ class FirebaseServerClient {
         }
     }
     
-    public func getPersonalHaikus(completionHandler:@escaping ([Dictionary<String, Any>], [User], Bool) -> ()) {
+    public func getPersonalHaikus(page: Int, perPage: Int, completionHandler:@escaping ([Dictionary<String, Any>], [User], Bool) -> ()) {
         
         var haikusJSONResponse: [Dictionary<String, Any>] = []
         
-        self.getPersonalHaikusPromise().then { jsonResponse -> Promise<[User]> in
+        self.getPersonalHaikusPromise(page: page, perPage: perPage).then { jsonResponse -> Promise<[User]> in
             
             haikusJSONResponse = jsonResponse
             return self.getOwnersForHaikusPromise(haikusJSONObject: jsonResponse)
@@ -596,13 +596,15 @@ class FirebaseServerClient {
         }
     }
     
-    private func getPersonalHaikusPromise() -> Promise<[Dictionary<String, Any>]> {
+    private func getPersonalHaikusPromise(page: Int, perPage: Int) -> Promise<[Dictionary<String, Any>]> {
         
         return Promise { fulfill, reject in
             
             if self.state == .authorized {
                 
-                let request = AuthenticationRouter.getPersonalHaikus()
+                let urlParameters : [String: Int] = ["page": page,
+                                                        "perPage": perPage]
+                let request = AuthenticationRouter.getPersonalHaikus(urlParameters: urlParameters)
                 self.sessionManager.request(request).responseJSON(completionHandler: { (response) in
                     
                     guard response.result.isSuccess else {
@@ -615,7 +617,7 @@ class FirebaseServerClient {
                     }
                     
                     let array = response.result.value as? [Dictionary<String, Any>]
-                    print("SUCCESS : haikus count =", array?.count)
+                    print("SUCCESS : haikus count =", array?.count ?? "")
                     
                     if let array = array {
                         

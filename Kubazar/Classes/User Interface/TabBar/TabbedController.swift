@@ -48,12 +48,19 @@ class TabbedController: UITabBarController {
     private func createTabBarViewControllers() {
         
         let bazarCtrl = BazarVC(client: self.viewModel.client)
-        let bazarBarItem = UITabBarItem(title: NSLocalizedString(TabBarTitles.bazar, comment: "Bazar TabBar Item Title"), image: UIImage(named: TabBarImages.bazar), selectedImage: UIImage(named: TabBarImages.bazar))
+        let bazarBarItem = UITabBarItem(title: NSLocalizedString(TabBarTitles.bazar, comment: ""), image: UIImage(named: TabBarImages.bazar), selectedImage: UIImage(named: TabBarImages.bazar))
         bazarCtrl.tabBarItem = bazarBarItem
         let bazarNavCtrl = UINavigationController(rootViewController: bazarCtrl)
         
+        let friendListCtrl = FriendListVC(client: self.viewModel.client, viewModel: FriendListVM(client: self.viewModel.client))
+        
+        let friendListBarItem = UITabBarItem(title: NSLocalizedString(TabBarTitles.friends, comment: ""), image: TabBarImages.friends, selectedImage: nil)
+        friendListCtrl.tabBarItem = friendListBarItem
+        let friendListNavCtrl = UINavigationController(rootViewController: friendListCtrl)
+        
+        
         let writeViewController = WriteMainMenuVC(client: self.viewModel.client)
-        let writeBarItem = UITabBarItem(title: NSLocalizedString(TabBarTitles.write, comment: "Write TabBar Item Title"), image: UIImage(named: TabBarImages.write), selectedImage: UIImage(named: TabBarImages.write))
+        let writeBarItem = UITabBarItem(title: NSLocalizedString(TabBarTitles.write, comment: ""), image: UIImage(named: TabBarImages.write), selectedImage: UIImage(named: TabBarImages.write))
         writeViewController.tabBarItem = writeBarItem
         let writeNavViewController = UINavigationController(rootViewController: writeViewController)
         
@@ -62,7 +69,7 @@ class TabbedController: UITabBarController {
         profileViewController.tabBarItem = profileBarItem
         let profileNavViewController = UINavigationController(rootViewController: profileViewController)
         
-        self.viewControllers = [bazarNavCtrl, writeNavViewController, profileNavViewController]
+        self.viewControllers = [bazarNavCtrl, friendListNavCtrl,writeNavViewController, profileNavViewController]
     }
 
     private func setStatusBarAppearance() {

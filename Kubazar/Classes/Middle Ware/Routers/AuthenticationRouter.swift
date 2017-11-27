@@ -17,7 +17,7 @@ enum AuthenticationRouter: URLRequestConvertible {
     case getUserInfo(creatorId: String) // that router is to get user info by creatorId different from currentUser
     
     // Get Haiku
-    case getPersonalHaikus()
+    case getPersonalHaikus(urlParameters: Parameters)
     
     var method: HTTPMethod {
         
@@ -36,7 +36,7 @@ enum AuthenticationRouter: URLRequestConvertible {
         case .addDeviceToken(_): return "/user/device"
         case .uploadUserAvatar(_): return "/user/avatar"
         case .downloadProfileImage(_): return ""
-        case .getPersonalHaikus(): return "/haiku/"
+        case .getPersonalHaikus(_): return "/haiku/"
         case .getUserInfo(let creatorId): return "/user/info"
         }
     }
@@ -66,7 +66,8 @@ enum AuthenticationRouter: URLRequestConvertible {
             urlRequest.addValue("image/jpeg", forHTTPHeaderField: "Content-Type")
             
             
-        case .getPersonalHaikus(): print()
+        case .getPersonalHaikus(let urlParameters):
+            urlRequest = try URLEncoding.queryString.encode(urlRequest, with: urlParameters)
             
         case .getUserInfo(_): print()
         }
