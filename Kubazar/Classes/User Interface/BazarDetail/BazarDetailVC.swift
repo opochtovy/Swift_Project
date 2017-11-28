@@ -104,7 +104,11 @@ class BazarDetailVC: ViewController {
         
         lbDate.text = viewModel.dateText
         
-        vHaikuContent.viewModel = self.viewModel.getPreviewVM();
+        vHaikuContent.viewModel = self.viewModel.getPreviewVM()
+        if let imageURL = self.viewModel.getHaikuImageURL() {
+            
+            self.vHaikuContent.setImageForHaikuPreview(imageURL: imageURL)
+        }
         
         vUser1.viewModel = viewModel.getUserViewVM(forIndex: 0)
         vUser2.viewModel = viewModel.getUserViewVM(forIndex: 1)

@@ -66,6 +66,16 @@ class BazarDetailVM: BaseVM {
         HaikuManager.shared.delete(haiku: self.haiku, user: user)
     }
     
+    public func getHaikuImageURL() -> URL? {
+        
+        let imagePath = self.haiku.haikuImage?.urlString
+        if let imagePath = imagePath {
+            
+            return URL(string: imagePath)
+        }
+        return URL(string: "")
+    }
+    
     //MARK: - Private functions
     private func prepareModel() {
     
