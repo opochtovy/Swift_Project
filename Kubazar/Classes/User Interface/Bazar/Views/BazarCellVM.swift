@@ -27,10 +27,12 @@ class BazarCellVM {
 
     private(set) var actionType: ActionType = .like
     
-    private let haiku: Haiku
+    private var haiku: Haiku
+    private var client: Client
     
-    init(haiku: Haiku) {
+    init(client: Client, haiku: Haiku) {
         
+        self.client = client
         self.haiku = haiku
         self.prepareModel()
     }
@@ -42,12 +44,15 @@ class BazarCellVM {
         return HaikuPreviewVM(withHaiku: self.haiku)
     }
     
-    public func performAction() {
+    public func performAction(completionHandler:@escaping (String?, Bool) -> ()) {
         
         if self.actionType == .like {
             
-            HaikuManager.shared.like(toLike: !self.haiku.liked, haiku: self.haiku)
-            self.prepareLikes()
+            self.client.authenticator.likeHaiku(haiku: haiku, completionHandler: { (errorDescription, success) in
+                
+                self.prepareLikes()
+                completionHandler(nil, true)
+            })
         }
         else if actionType == .publish {
             
@@ -95,7 +100,8 @@ class BazarCellVM {
     
     private func prepareLikes() {
         
-        isLiked = haiku.liked
+        let currentUserId = self.client.authenticator.getUserId()
+        isLiked = self.haiku.likes.contains(currentUserId)
         
         if haiku.likesCount > 0 {
             

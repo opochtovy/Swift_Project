@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     
@@ -139,6 +140,8 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
                 
                 guard let weakSelf = self else { return }
                 
+                MBProgressHUD.hide(for: weakSelf.view, animated: true)
+                
                 if !success {
                     
                     weakSelf.showWrongResponseAlert(message: "")
@@ -188,6 +191,7 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
         if self.viewModel.sort != previousSort {
             self.viewModel.deleteAllDataSource()
             self.viewModel.page = 0
+            MBProgressHUD.showAdded(to: self.view, animated: true)
             self.getPersonalHaikus(page: self.viewModel.page, perPage: self.viewModel.perPage)
         }
     }

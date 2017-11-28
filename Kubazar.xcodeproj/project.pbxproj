@@ -153,6 +153,7 @@
 		9EFB037B1FB99A3800A78845 /* CountryCodeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EFB03791FB99A3800A78845 /* CountryCodeCell.xib */; };
 		9EFB037D1FB99A5200A78845 /* CountryCodeCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFB037C1FB99A5200A78845 /* CountryCodeCellVM.swift */; };
 		9EFBEC0E1FB9F4E600A889BC /* TintMutableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFBEC0D1FB9F4E600A889BC /* TintMutableButton.swift */; };
+		9EFF30021FCD60E300013277 /* HaikuRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFF30011FCD60E300013277 /* HaikuRouter.swift */; };
 		A2721FBC1FCB2586001CEDE1 /* AsyncBlockOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2721FBB1FCB2586001CEDE1 /* AsyncBlockOperation.swift */; };
 		BEE04B2776028D322C4EE27E /* Pods_Kubazar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A253CC5A9FE6C38C3AD695DE /* Pods_Kubazar.framework */; };
 /* End PBXBuildFile section */
@@ -309,6 +310,7 @@
 		9EFB03791FB99A3800A78845 /* CountryCodeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CountryCodeCell.xib; sourceTree = "<group>"; };
 		9EFB037C1FB99A5200A78845 /* CountryCodeCellVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCodeCellVM.swift; sourceTree = "<group>"; };
 		9EFBEC0D1FB9F4E600A889BC /* TintMutableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TintMutableButton.swift; sourceTree = "<group>"; };
+		9EFF30011FCD60E300013277 /* HaikuRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaikuRouter.swift; sourceTree = "<group>"; };
 		A253CC5A9FE6C38C3AD695DE /* Pods_Kubazar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kubazar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2721FBB1FCB2586001CEDE1 /* AsyncBlockOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncBlockOperation.swift; sourceTree = "<group>"; };
 		BCCD990FEAC61BE1A7C35E5A /* Pods-Kubazar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kubazar.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kubazar/Pods-Kubazar.debug.xcconfig"; sourceTree = "<group>"; };
@@ -880,6 +882,7 @@
 			isa = PBXGroup;
 			children = (
 				9EBEBD461FBAFFE600DE831F /* AuthenticationRouter.swift */,
+				9EFF30011FCD60E300013277 /* HaikuRouter.swift */,
 			);
 			path = Routers;
 			sourceTree = "<group>";
@@ -1200,6 +1203,7 @@
 				9EADF2051FBC2F3F00B69FFE /* UserViewVM.swift in Sources */,
 				9E1588971FB44D4E0063C816 /* BazarVM.swift in Sources */,
 				9EED06701FB5A2D300CCD82E /* Array+Extension.swift in Sources */,
+				9EFF30021FCD60E300013277 /* HaikuRouter.swift in Sources */,
 				9EE16E941FB49F4700B4C5C5 /* UIImage+Extensions.swift in Sources */,
 				9EFB037A1FB99A3800A78845 /* CountryCodeCell.swift in Sources */,
 				9E2BFBEC1FBC54DC00860CA0 /* FriendsVC.swift in Sources */,

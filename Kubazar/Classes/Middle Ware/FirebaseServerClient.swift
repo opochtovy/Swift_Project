@@ -167,6 +167,16 @@ class FirebaseServerClient {
         return photoURL
     }
     
+    public func getUserId() -> String {
+        
+        if let uid = Auth.auth().currentUser?.uid {
+            
+            return uid
+        }
+        
+        return "no user id"
+    }
+    
     //MARK: - Firebase
     
     public func signOut(completionHandler:@escaping (String?, Bool) -> ()) {
@@ -714,6 +724,44 @@ class FirebaseServerClient {
             }
             fulfill(owners)
             // end of test
+        }
+    }
+    
+    public func likeHaiku(haiku: Haiku, completionHandler:@escaping (String?, Bool) -> ()) {
+        
+        self.likeHaikuPromise(haiku: haiku).then { () -> Void in
+            
+            completionHandler(nil, true)
+            
+            }.catch { error in
+                
+                completionHandler(error.localizedDescription, false)
+        }
+    }
+    
+    private func likeHaikuPromise(haiku: Haiku) -> Promise<Void> {
+        
+        return Promise { fulfill, reject in
+            
+            if self.state == .authorized {
+                
+                let request = HaikuRouter.likeHaiku(haikuId: haiku.id)
+                self.sessionManager.request(request).responseObject { (response: DataResponse<Haiku>) in
+                    
+                    switch response.result {
+                        
+                    case .success(let newHaiku):
+                        
+                        haiku.likes = newHaiku.likes
+                        haiku.likesCount = newHaiku.likesCount
+                        fulfill(())
+                        
+                    case .failure(let error):
+                        
+                        reject(error)
+                    }
+                }
+            }
         }
     }
 }

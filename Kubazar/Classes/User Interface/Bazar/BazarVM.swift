@@ -42,7 +42,7 @@ class BazarVM: BaseVM {
     
     public func getCellVM(forIndexPath indexPath: IndexPath) -> BazarCellVM {
         
-        return BazarCellVM(haiku: self.dataSource[indexPath.row])
+        return BazarCellVM(client: self.client, haiku: self.dataSource[indexPath.row])
     }
     
     public func getDetailVM(forIndexPath indexPath: IndexPath) -> BazarDetailVM {
@@ -57,7 +57,7 @@ class BazarVM: BaseVM {
     
     public func getHaikusFromNewHaikus(newHaikus: [Haiku], owners: [User]) {
         
-        var haikus = HaikuManager.shared.addNewHaikus(newHaikus: newHaikus, haikusType: 0, owners: owners)
+        let haikus = HaikuManager.shared.addNewHaikus(newHaikus: newHaikus, haikusType: 0, owners: owners)
         
         self.didEndReached = haikus.count < self.perPage
         self.dataSource.append(contentsOf: haikus)
