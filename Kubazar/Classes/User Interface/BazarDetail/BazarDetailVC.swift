@@ -66,8 +66,12 @@ class BazarDetailVC: ViewController {
     @objc private func didPressLikeButton(_ sender: UIButton) {
         print("-- Like Detail")
         sender.isSelected = !sender.isSelected
-        self.viewModel.like()
-        self.updateToolBar()
+        self.viewModel.like(completionHandler: { [weak self](errorDescription, success) in
+            
+            guard let weakSelf = self else { return }
+            
+            weakSelf.updateToolBar()
+        })
     }
     
     @objc private func didPressShareButton(_ sender: UIBarButtonItem) {

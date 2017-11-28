@@ -47,10 +47,13 @@ class BazarDetailVM: BaseVM {
         return HaikuPreviewVM(withHaiku: self.haiku)
     }
     
-    public func like() {
-
-        HaikuManager.shared.like(toLike: !self.haiku.liked, haiku: self.haiku)
-        self.prepareModel()
+    public func like(completionHandler:@escaping (String?, Bool) -> ()) {
+        
+        self.client.authenticator.likeHaiku(haiku: haiku, completionHandler: { (errorDescription, success) in
+            
+            self.prepareModel()
+            completionHandler(nil, true)
+        })
     }
     
     public func publish() {
@@ -83,8 +86,9 @@ class BazarDetailVM: BaseVM {
         
         self.dateText = "23 Min Ago" //TODO: add date stamp
         self.isPublished = self.haiku.published
-        self.isLiked = self.haiku.liked
-        self.likesCount = "\(self.haiku.likesCount)"
+        let currentUserId = self.client.authenticator.getUserId()
+        isLiked = self.haiku.likes.contains(currentUserId)
+        self.likesCount = haiku.likesCount > 0 ? "\(self.haiku.likesCount)" : ""
         
         self.userViewVMs = []
         
