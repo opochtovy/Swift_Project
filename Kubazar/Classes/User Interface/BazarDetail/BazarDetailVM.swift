@@ -56,15 +56,18 @@ class BazarDetailVM: BaseVM {
         })
     }
     
-    public func publish() {
- 
-        HaikuManager.shared.publish(toPublish: !self.haiku.published, haiku: self.haiku)
-        self.prepareModel()        
+    public func publish(completionHandler:@escaping (String?, Bool) -> ())  {
+        
+        self.client.authenticator.changeHaikuAccess(haiku: haiku, completionHandler: { (errorDescription, success) in
+            
+            self.prepareModel()
+            completionHandler(nil, true)
+        })
     }
     
     public func delete(completionHandler:@escaping (String?, Bool) -> ()) {
         
-        self.client.authenticator.deleteHaiku(haiku: haiku, completionHandler: { (errorDescription, success) in
+        self.client.authenticator.deleteHaiku(haikuId: haiku.id, completionHandler: { (errorDescription, success) in
             
             completionHandler(nil, true)
         })

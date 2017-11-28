@@ -765,9 +765,9 @@ class FirebaseServerClient {
         }
     }
     
-    public func deleteHaiku(haiku: Haiku, completionHandler:@escaping (String?, Bool) -> ()) {
+    public func deleteHaiku(haikuId: String, completionHandler:@escaping (String?, Bool) -> ()) {
         
-        self.deleteHaikuPromise(haiku: haiku).then { () -> Void in
+        self.deleteHaikuPromise(haikuId: haikuId).then { () -> Void in
             
             completionHandler(nil, true)
             
@@ -777,13 +777,13 @@ class FirebaseServerClient {
         }
     }
     
-    private func deleteHaikuPromise(haiku: Haiku) -> Promise<Void> {
+    private func deleteHaikuPromise(haikuId: String) -> Promise<Void> {
         
         return Promise { fulfill, reject in
             
             if self.state == .authorized {
                 
-                let request = HaikuRouter.deleteHaiku(haikuId: haiku.id)
+                let request = HaikuRouter.deleteHaiku(haikuId: haikuId)
                 
                 self.sessionManager.request(request).response(completionHandler: { response in
                     
@@ -803,6 +803,46 @@ class FirebaseServerClient {
                         }
                     }
                 })
+            }
+        }
+    }
+    
+    public func changeHaikuAccess(haiku: Haiku, completionHandler:@escaping (String?, Bool) -> ()) {
+        
+        self.changeHaikuAccessPromise(haiku: haiku).then { () -> Void in
+            
+            completionHandler(nil, true)
+            
+            }.catch { error in
+                
+                completionHandler(error.localizedDescription, false)
+        }
+    }
+    
+    private func changeHaikuAccessPromise(haiku: Haiku) -> Promise<Void> {
+        
+        return Promise { fulfill, reject in
+            
+            if self.state == .authorized {
+                
+                let accessValue = haiku.published ? "private" : "public"
+                let bodyParameters: [String: String] = ["access": accessValue]
+                let request = HaikuRouter.changeHaikuAccess(haikuId: haiku.id, bodyParameters: bodyParameters)
+                self.sessionManager.request(request).responseObject { (response: DataResponse<Haiku>) in
+                    
+                    switch response.result {
+                        
+                    case .success(let newHaiku):
+                        
+                        haiku.published = newHaiku.published
+                        
+                        fulfill(())
+                        
+                    case .failure(let error):
+                        
+                        reject(error)
+                    }
+                }
             }
         }
     }

@@ -30,6 +30,7 @@ class Haiku: MappableObject {
     public var finishDate: String = ""
     public var haikuImage: HaikuImage?
     public var haikuFont: Decorator?
+    public var access : String = ""
     
     required convenience init?(map: Map){
         
@@ -41,7 +42,6 @@ class Haiku: MappableObject {
         
         id <- map["_id"]
         creatorId <- map["creatorId"]
-        var access: String = ""
         access <- map["access"]
         published = access == "public"
         

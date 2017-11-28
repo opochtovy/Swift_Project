@@ -87,8 +87,12 @@ class BazarDetailVC: ViewController {
     
     @objc private func didPressPublishButton(_ sender: UIBarButtonItem) {
         print("-- Publish")
-        self.viewModel.publish()
-        self.updateToolBar()
+        self.viewModel.publish(completionHandler: { [weak self](errorDescription, success) in
+            
+            guard let weakSelf = self else { return }
+            
+            weakSelf.updateToolBar()
+        })
     }
     
     @objc private func didPressDeleteButton(_ sender: UIBarButtonItem) {
