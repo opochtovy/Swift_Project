@@ -64,12 +64,17 @@ class TabbedController: UITabBarController {
         writeViewController.tabBarItem = writeBarItem
         let writeNavViewController = UINavigationController(rootViewController: writeViewController)
         
+        let notificationCtrl = NotificationsVC(client: self.viewModel.client, viewModel: NotificationsVM(client: self.viewModel.client))
+        let notificationBarItem = UITabBarItem(title: NSLocalizedString(TabBarTitles.notifications, comment: ""), image: TabBarImages.notifications, selectedImage: nil)
+        notificationCtrl.tabBarItem = notificationBarItem
+        let notificationNavCtrl = UINavigationController(rootViewController: notificationCtrl)
+        
         let profileViewController = ProfileVC(client: self.viewModel.client)
         let profileBarItem = UITabBarItem(title: NSLocalizedString(TabBarTitles.profile, comment: ""), image: UIImage(named: TabBarImages.profile), selectedImage: UIImage(named: TabBarImages.profile))
         profileViewController.tabBarItem = profileBarItem
         let profileNavViewController = UINavigationController(rootViewController: profileViewController)
         
-        self.viewControllers = [bazarNavCtrl, friendListNavCtrl,writeNavViewController, profileNavViewController]
+        self.viewControllers = [bazarNavCtrl, friendListNavCtrl,writeNavViewController, notificationNavCtrl, profileNavViewController]
     }
 
     private func setStatusBarAppearance() {

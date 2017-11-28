@@ -133,6 +133,17 @@
 		9EDA2C331FCD420400411D59 /* FriendHaikuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EDA2C311FCD420400411D59 /* FriendHaikuCell.xib */; };
 		9EDA2C351FCD430200411D59 /* FriendHaikuCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDA2C341FCD430200411D59 /* FriendHaikuCellVM.swift */; };
 		9EDA2C371FCD502100411D59 /* Placeholders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDA2C361FCD502100411D59 /* Placeholders.swift */; };
+		9EDA2C3B1FCD548D00411D59 /* NotificationsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDA2C391FCD548D00411D59 /* NotificationsVC.swift */; };
+		9EDA2C3C1FCD548D00411D59 /* NotificationsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EDA2C3A1FCD548D00411D59 /* NotificationsVC.xib */; };
+		9EDA2C3E1FCD549C00411D59 /* NotificationsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDA2C3D1FCD549C00411D59 /* NotificationsVM.swift */; };
+		9EDA2C421FCD59F300411D59 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDA2C401FCD59F300411D59 /* NotificationCell.swift */; };
+		9EDA2C431FCD59F300411D59 /* NotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EDA2C411FCD59F300411D59 /* NotificationCell.xib */; };
+		9EDA2C451FCD5A0700411D59 /* NotificationCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDA2C441FCD5A0700411D59 /* NotificationCellVM.swift */; };
+		9EDA2C481FCD5C5200411D59 /* RememberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDA2C461FCD5C5200411D59 /* RememberCell.swift */; };
+		9EDA2C491FCD5C5200411D59 /* RememberCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EDA2C471FCD5C5200411D59 /* RememberCell.xib */; };
+		9EDA2C4B1FCD602200411D59 /* KBNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDA2C4A1FCD602200411D59 /* KBNotification.swift */; };
+		9EDA2C4D1FCD6C3F00411D59 /* NotificationsHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDA2C4C1FCD6C3F00411D59 /* NotificationsHeader.swift */; };
+		9EDA2C4F1FCD6C6F00411D59 /* NotificationsHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EDA2C4E1FCD6C6F00411D59 /* NotificationsHeader.xib */; };
 		9EDF46C01FC41F7300993134 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDF46BE1FC41F7300993134 /* ProfileVC.swift */; };
 		9EDF46C11FC41F7300993134 /* ProfileVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EDF46BF1FC41F7300993134 /* ProfileVC.xib */; };
 		9EDF46C31FC41F8C00993134 /* ProfileVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDF46C21FC41F8C00993134 /* ProfileVM.swift */; };
@@ -291,6 +302,17 @@
 		9EDA2C311FCD420400411D59 /* FriendHaikuCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendHaikuCell.xib; sourceTree = "<group>"; };
 		9EDA2C341FCD430200411D59 /* FriendHaikuCellVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendHaikuCellVM.swift; sourceTree = "<group>"; };
 		9EDA2C361FCD502100411D59 /* Placeholders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Placeholders.swift; sourceTree = "<group>"; };
+		9EDA2C391FCD548D00411D59 /* NotificationsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsVC.swift; sourceTree = "<group>"; };
+		9EDA2C3A1FCD548D00411D59 /* NotificationsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationsVC.xib; sourceTree = "<group>"; };
+		9EDA2C3D1FCD549C00411D59 /* NotificationsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsVM.swift; sourceTree = "<group>"; };
+		9EDA2C401FCD59F300411D59 /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
+		9EDA2C411FCD59F300411D59 /* NotificationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationCell.xib; sourceTree = "<group>"; };
+		9EDA2C441FCD5A0700411D59 /* NotificationCellVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCellVM.swift; sourceTree = "<group>"; };
+		9EDA2C461FCD5C5200411D59 /* RememberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RememberCell.swift; sourceTree = "<group>"; };
+		9EDA2C471FCD5C5200411D59 /* RememberCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RememberCell.xib; sourceTree = "<group>"; };
+		9EDA2C4A1FCD602200411D59 /* KBNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KBNotification.swift; sourceTree = "<group>"; };
+		9EDA2C4C1FCD6C3F00411D59 /* NotificationsHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsHeader.swift; sourceTree = "<group>"; };
+		9EDA2C4E1FCD6C6F00411D59 /* NotificationsHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationsHeader.xib; sourceTree = "<group>"; };
 		9EDF46BE1FC41F7300993134 /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		9EDF46BF1FC41F7300993134 /* ProfileVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileVC.xib; sourceTree = "<group>"; };
 		9EDF46C21FC41F8C00993134 /* ProfileVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVM.swift; sourceTree = "<group>"; };
@@ -527,6 +549,7 @@
 		9E5E8E121FADB63E00CCCBDA /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
+				9EDA2C381FCD545500411D59 /* Notifications */,
 				9E4FA1921FCC49680061C87C /* FriendDetail */,
 				9E1588911FB44CDD0063C816 /* Bazar */,
 				9EFB03601FB9800B00A78845 /* BazarDetail */,
@@ -593,6 +616,7 @@
 				9E9B4DBC1FB9E0C8001DB448 /* Field.swift */,
 				9EED066B1FB59D2800CCD82E /* Haiku.swift */,
 				9EED066D1FB59E5B00CCD82E /* User.swift */,
+				9EDA2C4A1FCD602200411D59 /* KBNotification.swift */,
 				9E4FA1901FCC08160061C87C /* ContactUser.swift */,
 				9E06A9C71FBAC91700FF74A5 /* HaikuManager.swift */,
 				9E5FA3111FBDA3640082F56F /* PhotoLibraryManager.swift */,
@@ -938,6 +962,31 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		9EDA2C381FCD545500411D59 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				9EDA2C391FCD548D00411D59 /* NotificationsVC.swift */,
+				9EDA2C3A1FCD548D00411D59 /* NotificationsVC.xib */,
+				9EDA2C3D1FCD549C00411D59 /* NotificationsVM.swift */,
+				9EDA2C3F1FCD59D400411D59 /* Views */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
+		9EDA2C3F1FCD59D400411D59 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9EDA2C401FCD59F300411D59 /* NotificationCell.swift */,
+				9EDA2C411FCD59F300411D59 /* NotificationCell.xib */,
+				9EDA2C441FCD5A0700411D59 /* NotificationCellVM.swift */,
+				9EDA2C461FCD5C5200411D59 /* RememberCell.swift */,
+				9EDA2C471FCD5C5200411D59 /* RememberCell.xib */,
+				9EDA2C4C1FCD6C3F00411D59 /* NotificationsHeader.swift */,
+				9EDA2C4E1FCD6C6F00411D59 /* NotificationsHeader.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		9EDF46BB1FC41F0F00993134 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -1079,6 +1128,7 @@
 				9E7C53BF1FBF04EA0082E7EC /* ColorVC.xib in Resources */,
 				9E5E8E411FAE1E5500CCCBDA /* ForgotPasswordVC.xib in Resources */,
 				9E15889C1FB452E40063C816 /* BazarCell.xib in Resources */,
+				9EDA2C4F1FCD6C6F00411D59 /* NotificationsHeader.xib in Resources */,
 				9E2CA57A1FC4023800069FFD /* TipView.xib in Resources */,
 				9E1588951FB44D330063C816 /* BazarVC.xib in Resources */,
 				9E5E8E231FADC1C000CCCBDA /* Localizable.strings in Resources */,
@@ -1092,17 +1142,20 @@
 				9E5FA31A1FBDB2050082F56F /* PictureCell.xib in Resources */,
 				9E8964CE1FACA21D004FFDCD /* LaunchScreen.storyboard in Resources */,
 				9E2C69551FC83E5B000A5594 /* FriendListFooterView.xib in Resources */,
+				9EDA2C431FCD59F300411D59 /* NotificationCell.xib in Resources */,
 				9E6144481FB305E400067295 /* CompleteEditProfileVC.xib in Resources */,
 				9E72A9D11FB991FA009468DB /* HaikuPreview.xib in Resources */,
 				9EDA2C331FCD420400411D59 /* FriendHaikuCell.xib in Resources */,
 				9E2C693F1FC80CCC000A5594 /* GridView.xib in Resources */,
 				9E5FA3101FBD90E60082F56F /* AccessAlertView.xib in Resources */,
 				9E1588A31FB45DE10063C816 /* Media.xcassets in Resources */,
+				9EDA2C3C1FCD548D00411D59 /* NotificationsVC.xib in Resources */,
 				9E5E8E171FADB6CE00CCCBDA /* RootVC.xib in Resources */,
 				9E7C53C71FBF155D0082E7EC /* FontsVC.xib in Resources */,
 				9E5E8E3B1FAE058900CCCBDA /* SignInVC.xib in Resources */,
 				9E9B4DBB1FB9D146001DB448 /* ActionButton.xib in Resources */,
 				9E455BCC1FB07DD500BC9A11 /* WriteMainMenuVC.xib in Resources */,
+				9EDA2C491FCD5C5200411D59 /* RememberCell.xib in Resources */,
 				9EFB037B1FB99A3800A78845 /* CountryCodeCell.xib in Resources */,
 				9E6BB8871FC4677500CB0933 /* ProfileInfoCell.xib in Resources */,
 				9EADF2041FBC2F3F00B69FFE /* UserView.xib in Resources */,
@@ -1236,6 +1289,7 @@
 				9E455BCE1FB07DE600BC9A11 /* WriteMainMenuVM.swift in Sources */,
 				9E15889E1FB452F50063C816 /* BazarCellVM.swift in Sources */,
 				9E5E8E3D1FAE059B00CCCBDA /* SignInVM.swift in Sources */,
+				9EDA2C481FCD5C5200411D59 /* RememberCell.swift in Sources */,
 				9E6144471FB305E400067295 /* CompleteEditProfileVC.swift in Sources */,
 				9EB6BBA41FC4224F0085EA5F /* PlayerCellVM.swift in Sources */,
 				9E5E8E1C1FADBA7400CCCBDA /* ViewController.swift in Sources */,
@@ -1257,11 +1311,14 @@
 				9E4AE90E1FC2BB6800E437AA /* EditTextField.swift in Sources */,
 				9E8964C41FACA21D004FFDCD /* AppDelegate.swift in Sources */,
 				9EED06721FB5DE3700CCD82E /* Collection+Extension.swift in Sources */,
+				9EDA2C451FCD5A0700411D59 /* NotificationCellVM.swift in Sources */,
+				9EDA2C3B1FCD548D00411D59 /* NotificationsVC.swift in Sources */,
 				9E2C69531FC83E51000A5594 /* FriendListFooterView.swift in Sources */,
 				9E06A9C81FBAC91700FF74A5 /* HaikuManager.swift in Sources */,
 				9E7C53BE1FBF04EA0082E7EC /* ColorVC.swift in Sources */,
 				9E5FA30E1FBD90DB0082F56F /* AccessAlertView.swift in Sources */,
 				9EFBEC0E1FB9F4E600A889BC /* TintMutableButton.swift in Sources */,
+				9EDA2C3E1FCD549C00411D59 /* NotificationsVM.swift in Sources */,
 				9EC68A301FC5A29300A7F793 /* FontsVM.swift in Sources */,
 				9E7C53C21FBF0DE10082E7EC /* KBBarView.swift in Sources */,
 				9E2C69461FC81F99000A5594 /* FriendListVM.swift in Sources */,
@@ -1287,6 +1344,8 @@
 				9EB6BBA11FC422420085EA5F /* PlayerCell.swift in Sources */,
 				9EE16E9A1FB4A57500B4C5C5 /* StartPhoneVerificationVM.swift in Sources */,
 				9EF34D3B1FC0256500BCA63C /* FriendsVM.swift in Sources */,
+				9EDA2C421FCD59F300411D59 /* NotificationCell.swift in Sources */,
+				9EDA2C4B1FCD602200411D59 /* KBNotification.swift in Sources */,
 				9EE16EA01FB4BF8700B4C5C5 /* CompletePhoneVerificationVM.swift in Sources */,
 				9E3F15051FC4581400BC7C21 /* ProfileHeaderCell.swift in Sources */,
 				9E2C694A1FC833C5000A5594 /* FriendListCell.swift in Sources */,
@@ -1298,6 +1357,7 @@
 				9EDF46C01FC41F7300993134 /* ProfileVC.swift in Sources */,
 				9E5E8E161FADB6CE00CCCBDA /* RootVC.swift in Sources */,
 				9E2BFBF21FBC5D3E00860CA0 /* FriendsCell.swift in Sources */,
+				9EDA2C4D1FCD6C3F00411D59 /* NotificationsHeader.swift in Sources */,
 				9E2C693D1FC80CBC000A5594 /* GridView.swift in Sources */,
 				9E5FA3041FBD73870082F56F /* PictureVC.swift in Sources */,
 			);
