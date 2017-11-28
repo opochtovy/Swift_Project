@@ -23,13 +23,14 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ioi-Q6-JAQ">
                         <rect key="frame" x="0.0" y="23" width="344" height="28"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testAuthor" translatesAutoresizingMaskIntoConstraints="NO" id="AKt-Lw-KQi">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z44-tq-XIi" customClass="UserThumbnail" customModule="Kubazar" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="28" height="28"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="28" id="CcW-qE-OPM"/>
-                                    <constraint firstAttribute="height" constant="28" id="Um5-H2-ICg"/>
+                                    <constraint firstAttribute="height" constant="28" id="Tjk-Xa-WBH"/>
+                                    <constraint firstAttribute="width" secondItem="z44-tq-XIi" secondAttribute="height" multiplier="1:1" id="aco-7M-NSr"/>
                                 </constraints>
-                            </imageView>
+                            </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="JWQ-PG-mTk">
                                 <rect key="frame" x="36" y="0.0" width="34.5" height="28"/>
                                 <subviews>
@@ -51,13 +52,13 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="AKt-Lw-KQi" firstAttribute="leading" secondItem="ioi-Q6-JAQ" secondAttribute="leading" id="31F-QP-BpF"/>
-                            <constraint firstItem="AKt-Lw-KQi" firstAttribute="top" secondItem="ioi-Q6-JAQ" secondAttribute="top" id="EM3-m1-N5n"/>
+                            <constraint firstItem="z44-tq-XIi" firstAttribute="centerY" secondItem="ioi-Q6-JAQ" secondAttribute="centerY" id="0Uz-2I-e2H"/>
+                            <constraint firstItem="z44-tq-XIi" firstAttribute="leading" secondItem="ioi-Q6-JAQ" secondAttribute="leading" id="9GH-3n-SP4"/>
+                            <constraint firstItem="JWQ-PG-mTk" firstAttribute="leading" secondItem="z44-tq-XIi" secondAttribute="trailing" constant="8" id="Gjh-4c-X7u"/>
                             <constraint firstAttribute="bottom" secondItem="JWQ-PG-mTk" secondAttribute="bottom" id="QDl-Lo-qUw"/>
                             <constraint firstAttribute="height" constant="28" id="Saj-Zz-hVh"/>
                             <constraint firstItem="JWQ-PG-mTk" firstAttribute="top" secondItem="ioi-Q6-JAQ" secondAttribute="top" id="gmo-fT-JHh"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="JWQ-PG-mTk" secondAttribute="trailing" constant="10" id="j0g-qf-hQX"/>
-                            <constraint firstItem="JWQ-PG-mTk" firstAttribute="leading" secondItem="AKt-Lw-KQi" secondAttribute="trailing" constant="8" id="tn0-Zt-eBZ"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ucg-yt-gwc" customClass="HaikuPreview" customModule="Kubazar" customModuleProvider="target">
@@ -111,18 +112,17 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="btnLike" destination="JJE-L9-33p" id="kAM-aQ-l8w"/>
-                <outlet property="ivAuthor" destination="AKt-Lw-KQi" id="fM3-UC-ywR"/>
                 <outlet property="lbAuthorName" destination="pvw-to-JoV" id="2fG-HO-MwX"/>
                 <outlet property="lbDate" destination="kuz-UT-oHU" id="ydo-9U-63j"/>
                 <outlet property="lbParticipants" destination="tYh-v0-dRX" id="oGD-ig-YlQ"/>
                 <outlet property="svNames" destination="JWQ-PG-mTk" id="CFb-gN-zEl"/>
                 <outlet property="vHaikuContent" destination="ucg-yt-gwc" id="CvR-yR-2Lg"/>
+                <outlet property="vUserThumbnail" destination="z44-tq-XIi" id="44A-5M-4b3"/>
             </connections>
             <point key="canvasLocation" x="62" y="115"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="iconLike" width="20" height="17"/>
-        <image name="testAuthor" width="215" height="235"/>
     </resources>
 </document>

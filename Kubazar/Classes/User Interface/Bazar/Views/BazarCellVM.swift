@@ -103,5 +103,10 @@ class BazarCellVM {
             btnText = ""
         }
     }
+    
+    public func getThumbnailVM() -> UserThumbnailVM {
+        
+        return UserThumbnailVM(withUser: self.haiku.creator!, needBorders: true) //TODO: fix crator unwrap
+    }
 
 }

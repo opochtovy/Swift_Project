@@ -12,7 +12,7 @@ class FriendListCell: UITableViewCell {
 
     public static var reuseID = "FriendListCell"
     
-    @IBOutlet private weak var ivUser: UIImageView!
+    @IBOutlet private weak var vUserThumbnail: UserThumbnail!
     @IBOutlet private weak var lbUserName: UILabel!
     @IBOutlet private weak var lbhaikuCounter: UILabel!
     @IBOutlet private weak var btnInvite: UIButton!
@@ -25,12 +25,7 @@ class FriendListCell: UITableViewCell {
             
             lbhaikuCounter.isHidden = !viewModel.showInviteButton
             btnInvite.isHidden = !viewModel.showInviteButton
-            
-            ivUser.image = nil
-            if let url = viewModel.userURL {
-                
-                ivUser.af_setImage(withURL: url)
-            }
+            self.vUserThumbnail.viewModel = viewModel.getThumbnailVM()
         }
     }
     override func awakeFromNib() {
@@ -38,10 +33,8 @@ class FriendListCell: UITableViewCell {
         self.setup()
     }
     
-    private func setup() {        
-        
-        self.ivUser.layer.cornerRadius = self.ivUser.bounds.width / 2
-        self.ivUser.layer.masksToBounds = true
+    private func setup() {
+
         self.btnInvite.layer.cornerRadius = 10.0
     }
 }

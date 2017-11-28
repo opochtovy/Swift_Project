@@ -29,9 +29,11 @@ class PlayerCellVM {
     public var status: PlayerStatus = .waiting
     public var userURL: URL?
     public var statusText = ""
+    private let player: User
     
     init(withPlayer player: User, status: PlayerStatus, syllablesCount: Int) {
         
+        self.player = player
         if let url: URL = URL(string: player.avatarURL ?? "") {
             
             self.userURL = url
@@ -39,5 +41,10 @@ class PlayerCellVM {
         
         self.status = status
         self.statusText = "\(player.firstName) \(self.status.writeText) \(syllablesCount) \(NSLocalizedString("PlayerCell_syllables", comment: ""))"        
+    }
+    
+    public func getThumbnailVM() -> UserThumbnailVM {
+        
+        return UserThumbnailVM(withUser: self.player)
     }
 }

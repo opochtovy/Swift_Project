@@ -97,7 +97,7 @@ class HaikuManager {
         user3.id = "3"
         user3.firstName = "Andy"
         user3.lastName = "Wood"
-        user3.avatarURL = "https://pp.userapi.com/c9790/u125899584/a_47452a9d.jpg"
+        user3.avatarURL = nil//"https://pp.userapi.com/c9790/u125899584/a_47452a9d.jpg"
         
         let user4 = User()
         user4.id = "4"

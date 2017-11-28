@@ -6,15 +6,16 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UserView" customModule="Kubazar" customModuleProvider="target">
             <connections>
-                <outlet property="ivUser" destination="At9-8s-cpd" id="CA9-S2-COE"/>
                 <outlet property="lbFirstName" destination="DtY-p6-4IX" id="fhQ-rw-igx"/>
                 <outlet property="lbLastName" destination="of7-ux-gum" id="1cH-u8-8yK"/>
+                <outlet property="vUserThumbnail" destination="Htc-ZN-afM" id="1Ee-vY-tPI"/>
                 <outlet property="view" destination="iN0-l3-epB" id="Dyh-Li-vnW"/>
             </connections>
         </placeholder>
@@ -23,13 +24,6 @@
             <rect key="frame" x="0.0" y="0.0" width="213" height="95"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="At9-8s-cpd">
-                    <rect key="frame" x="0.0" y="30" width="35" height="35"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="35" id="COR-rs-AkE"/>
-                        <constraint firstAttribute="width" constant="35" id="c7R-gS-YqH"/>
-                    </constraints>
-                </imageView>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="cDw-6A-dk5">
                     <rect key="frame" x="43" y="29" width="170" height="37"/>
                     <subviews>
@@ -47,18 +41,26 @@
                         </label>
                     </subviews>
                 </stackView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Htc-ZN-afM" customClass="UserThumbnail" customModule="Kubazar" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="29.5" width="35" height="35"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="Tbf-Si-G6o"/>
+                        <constraint firstAttribute="width" secondItem="Htc-ZN-afM" secondAttribute="height" multiplier="1:1" id="ZpW-ds-Tof"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="cDw-6A-dk5" secondAttribute="trailing" id="6D5-yC-WhQ"/>
+                <constraint firstItem="Htc-ZN-afM" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="JgA-m4-pES"/>
                 <constraint firstItem="cDw-6A-dk5" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Zjj-sY-2sG"/>
-                <constraint firstItem="cDw-6A-dk5" firstAttribute="leading" secondItem="At9-8s-cpd" secondAttribute="trailing" constant="8" id="cdD-Td-hJT"/>
-                <constraint firstItem="At9-8s-cpd" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="tb3-0m-vRX"/>
-                <constraint firstItem="At9-8s-cpd" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="uIP-Z4-xn7"/>
+                <constraint firstItem="cDw-6A-dk5" firstAttribute="leading" secondItem="Htc-ZN-afM" secondAttribute="trailing" constant="8" id="gkx-Km-J2k"/>
+                <constraint firstItem="Htc-ZN-afM" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="x9v-sK-v3V"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="-56.5" y="47.5"/>
+            <point key="canvasLocation" x="-60" y="28"/>
         </view>
     </objects>
 </document>

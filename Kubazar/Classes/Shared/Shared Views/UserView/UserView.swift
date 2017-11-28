@@ -11,7 +11,7 @@ import UIKit
 class UserView: UIView {
 
     @IBOutlet private weak var view: UIView!
-    @IBOutlet private weak var ivUser: UIImageView!
+    @IBOutlet private weak var vUserThumbnail: UserThumbnail!
     @IBOutlet private weak var lbFirstName: UILabel!
     @IBOutlet private weak var lbLastName: UILabel!
     
@@ -20,11 +20,7 @@ class UserView: UIView {
             
             self.lbFirstName.text = viewModel?.firstName ?? ""
             self.lbLastName.text = viewModel?.lastName ?? ""
-            
-            if let url = viewModel?.userImageURL {
-                
-                ivUser.af_setImage(withURL: url)
-            }
+            self.vUserThumbnail.viewModel = viewModel?.getThumbnailVM()
         }
     }
     
@@ -34,11 +30,5 @@ class UserView: UIView {
         self.view = loadViewFromNib()
         addSubview(self.view)
         self.view.frame = self.bounds
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        self.ivUser.layer.cornerRadius = self.ivUser.bounds.width / 2
-        self.ivUser.layer.masksToBounds = true
     }
 }

@@ -8,10 +8,9 @@
 
 import UIKit
 
-class PlayerCell: UITableViewCell {
-    
-    @IBOutlet private weak var ivUser: UIImageView!
-    @IBOutlet private weak var vUserImageContainer: UIView!
+class PlayerCell: UITableViewCell {    
+
+    @IBOutlet private weak var vUserThumbnail: UserThumbnail!
     @IBOutlet private weak var lbStatus: UILabel!
     @IBOutlet private weak var btnStatus: UIButton!
     
@@ -29,11 +28,7 @@ class PlayerCell: UITableViewCell {
             }
             self.btnStatus.setImage(statusImage, for: .normal)
             self.lbStatus.text = viewModel.statusText
-            
-            if let url = self.viewModel.userURL {
-                
-                self.ivUser.af_setImage(withURL: url)
-            }
+            self.vUserThumbnail.viewModel = viewModel.getThumbnailVM()
         }
     }
 
@@ -45,16 +40,12 @@ class PlayerCell: UITableViewCell {
     //MARK: - Private functions
     
     private func setup() {
-        
-        self.ivUser.layer.cornerRadius = self.ivUser.bounds.width / 2
-        self.ivUser.layer.masksToBounds = true
-        
-        self.vUserImageContainer.layer.cornerRadius = self.ivUser.bounds.width / 2
-        
-        self.vUserImageContainer.layer.shadowRadius = 4.0
-        self.vUserImageContainer.layer.shadowOpacity = 0.2
-        self.vUserImageContainer.layer.shadowColor = UIColor.black.cgColor
-        self.vUserImageContainer.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+
+        self.vUserThumbnail.layer.masksToBounds = false
+        self.vUserThumbnail.layer.shadowRadius = 4.0
+        self.vUserThumbnail.layer.shadowOpacity = 0.2
+        self.vUserThumbnail.layer.shadowColor = UIColor.black.cgColor
+        self.vUserThumbnail.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
     }
 
 }

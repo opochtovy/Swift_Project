@@ -14,11 +14,16 @@ class FriendsCellVM {
     public var initials: String = ""
     public var iconUrl: URL?
     public var isChosen: Bool = false
+    private let user: User
     
     init(user: User, isChosen: Bool) {
-        
+        self.user = user
         self.name = user.fullName
         self.iconUrl = URL(string: user.avatarURL ?? "")
         self.isChosen = isChosen
+    }
+    
+    public func getThumbnailVM() -> UserThumbnailVM {
+        return UserThumbnailVM(withUser: self.user)
     }
 }
