@@ -764,4 +764,46 @@ class FirebaseServerClient {
             }
         }
     }
+    
+    public func deleteHaiku(haiku: Haiku, completionHandler:@escaping (String?, Bool) -> ()) {
+        
+        self.deleteHaikuPromise(haiku: haiku).then { () -> Void in
+            
+            completionHandler(nil, true)
+            
+            }.catch { error in
+                
+                completionHandler(error.localizedDescription, false)
+        }
+    }
+    
+    private func deleteHaikuPromise(haiku: Haiku) -> Promise<Void> {
+        
+        return Promise { fulfill, reject in
+            
+            if self.state == .authorized {
+                
+                let request = HaikuRouter.deleteHaiku(haikuId: haiku.id)
+                
+                self.sessionManager.request(request).response(completionHandler: { response in
+                    
+                    if let error = response.error {
+                        
+                        reject(error)
+                        
+                    } else {
+                        
+                        let statusCode = response.response?.statusCode
+                        if statusCode == 204 {
+
+                            print("SUCCESS")
+                            fulfill(())
+                        } else {
+                            reject(NSError(domain:"", code:1001, userInfo:nil))
+                        }
+                    }
+                })
+            }
+        }
+    }
 }

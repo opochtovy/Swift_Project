@@ -73,4 +73,9 @@ class BazarVM: BaseVM {
         
         self.dataSource = []
     }
+    
+    public func deleteHaiku(haiku: Haiku) {
+        
+        self.dataSource.remove(object: haiku)
+    }
 }

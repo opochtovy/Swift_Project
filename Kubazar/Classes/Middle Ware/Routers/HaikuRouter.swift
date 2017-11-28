@@ -12,11 +12,13 @@ import Alamofire
 enum HaikuRouter: URLRequestConvertible {
     
     case likeHaiku(haikuId: String)
+    case deleteHaiku(haikuId: String)
 
     var method: HTTPMethod {
         
         switch self {
         case .likeHaiku: return .put
+        case .deleteHaiku: return .delete
         }
     }
     
@@ -24,6 +26,7 @@ enum HaikuRouter: URLRequestConvertible {
         
         switch self {
         case .likeHaiku(let haikuId): return "/haiku/like/\(haikuId)"
+        case .deleteHaiku(let haikuId): return "/haiku/\(haikuId)"
         }
     }
     
@@ -36,7 +39,7 @@ enum HaikuRouter: URLRequestConvertible {
         urlRequest.httpMethod = self.method.rawValue
         
         switch self {
-        case .likeHaiku(_): print()
+        default: print()
         }
         
         return urlRequest

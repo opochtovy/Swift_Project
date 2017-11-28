@@ -9,7 +9,7 @@
 import UIKit
 import MBProgressHUD
 
-class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
+class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, BazarDetailVCDelegate {
     
     @IBOutlet private var tblView: UITableView!
     private var scFilter: UISegmentedControl!
@@ -88,6 +88,8 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
         
         let previousCount = self.viewModel.numberOfItems()
         self.viewModel.getHaikusFromNewHaikus(newHaikus: haikus, owners: owners)
+        
+        if haikus.count == 0 { return }
         
         if previousCount > 0, self.viewModel.numberOfItems() >= previousCount {
             
@@ -238,6 +240,14 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
         }
     }
     
+    // MARK: - BazarDetailVCDelegate
+    
+    func deleteButtonWasPressed(vc: BazarDetailVC, haiku: Haiku) {
+        
+        self.viewModel.deleteHaiku(haiku: haiku)
+        self.tblView.reloadData()
+    }
+    
     //MARK: - UITableViewDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -249,6 +259,7 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
             
             let ctrl = BazarDetailVC(client: self.client, viewModel: self.viewModel.getDetailVM(forIndexPath: indexPath))
             ctrl.hidesBottomBarWhenPushed = true
+            ctrl.bazarDetailDelegate = self
             self.navigationController?.pushViewController(ctrl, animated: true)
             
         case .active:

@@ -62,11 +62,12 @@ class BazarDetailVM: BaseVM {
         self.prepareModel()        
     }
     
-    public func delete() {
+    public func delete(completionHandler:@escaping (String?, Bool) -> ()) {
         
-        let user = User()
-        user.id = "1"
-        HaikuManager.shared.delete(haiku: self.haiku, user: user)
+        self.client.authenticator.deleteHaiku(haiku: haiku, completionHandler: { (errorDescription, success) in
+            
+            completionHandler(nil, true)
+        })
     }
     
     public func getHaikuImageURL() -> URL? {
@@ -77,6 +78,11 @@ class BazarDetailVM: BaseVM {
             return URL(string: imagePath)
         }
         return URL(string: "")
+    }
+    
+    public func getHaikuToDelete() -> Haiku {
+        
+        return self.haiku
     }
     
     //MARK: - Private functions

@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol BazarDetailVCDelegate : class {
+    
+    func deleteButtonWasPressed(vc: BazarDetailVC, haiku: Haiku)
+}
+
 class BazarDetailVC: ViewController {
     
     private enum BackColors {
@@ -25,6 +30,8 @@ class BazarDetailVC: ViewController {
     @IBOutlet private weak var vUser3: UserView!
     
     @IBOutlet private weak var toolBar: UIToolbar!
+    
+    weak var bazarDetailDelegate: BazarDetailVCDelegate?
     
     //MARK: - LifeCycle
     init(client: Client, viewModel: BazarDetailVM) {
@@ -92,8 +99,13 @@ class BazarDetailVC: ViewController {
         let alertCtrl = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .actionSheet)
         let action1 = UIAlertAction(title: NSLocalizedString("BazarDetail_alert_removing_delete", comment: ""), style: .destructive) { (_) in
             
-            self.viewModel.delete()
-            self.navigationController?.popViewController(animated: true)
+            self.viewModel.delete(completionHandler: { [weak self](errorDescription, success) in
+                
+                guard let weakSelf = self else { return }
+                
+                weakSelf.bazarDetailDelegate?.deleteButtonWasPressed(vc: weakSelf, haiku: weakSelf.viewModel.getHaikuToDelete())
+                weakSelf.navigationController?.popViewController(animated: true)
+            })
         }
         let action2 = UIAlertAction(title: NSLocalizedString("BazarDetail_alert_cancel", comment: ""), style: .cancel, handler: nil)
         alertCtrl.addAction(action1)
