@@ -418,6 +418,24 @@ class FirebaseServerClient {
         }
     }
     
+    public func updateUserPassword(password: String, completionHandler:@escaping (String?, Bool) -> ()) {
+        
+        let user = Auth.auth().currentUser
+        user?.updatePassword(to: password) { (error) in
+            
+            if error != nil {
+                
+                if let error = error {
+                    
+                    completionHandler(error.localizedDescription, false)
+                    return
+                }
+            }
+            
+            completionHandler(nil, true)
+        }
+    }
+    
     public func uploadPhotoToUserProfile(displayName: String, photoData: Data, completionHandler:@escaping (URL?, Bool) -> ()) {
         
         let emailPart = self.getUserDisplayName()

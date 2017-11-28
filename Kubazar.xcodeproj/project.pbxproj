@@ -155,6 +155,9 @@
 		9EFBEC0E1FB9F4E600A889BC /* TintMutableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFBEC0D1FB9F4E600A889BC /* TintMutableButton.swift */; };
 		9EFF30021FCD60E300013277 /* HaikuRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFF30011FCD60E300013277 /* HaikuRouter.swift */; };
 		A2721FBC1FCB2586001CEDE1 /* AsyncBlockOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2721FBB1FCB2586001CEDE1 /* AsyncBlockOperation.swift */; };
+		A28213621FCDF57D00074291 /* ChangePasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28213601FCDF57D00074291 /* ChangePasswordVC.swift */; };
+		A28213631FCDF57D00074291 /* ChangePasswordVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = A28213611FCDF57D00074291 /* ChangePasswordVC.xib */; };
+		A28213651FCDF58800074291 /* ChangePasswordVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28213641FCDF58800074291 /* ChangePasswordVM.swift */; };
 		BEE04B2776028D322C4EE27E /* Pods_Kubazar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A253CC5A9FE6C38C3AD695DE /* Pods_Kubazar.framework */; };
 /* End PBXBuildFile section */
 
@@ -313,6 +316,9 @@
 		9EFF30011FCD60E300013277 /* HaikuRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaikuRouter.swift; sourceTree = "<group>"; };
 		A253CC5A9FE6C38C3AD695DE /* Pods_Kubazar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kubazar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2721FBB1FCB2586001CEDE1 /* AsyncBlockOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncBlockOperation.swift; sourceTree = "<group>"; };
+		A28213601FCDF57D00074291 /* ChangePasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordVC.swift; sourceTree = "<group>"; };
+		A28213611FCDF57D00074291 /* ChangePasswordVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChangePasswordVC.xib; sourceTree = "<group>"; };
+		A28213641FCDF58800074291 /* ChangePasswordVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordVM.swift; sourceTree = "<group>"; };
 		BCCD990FEAC61BE1A7C35E5A /* Pods-Kubazar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kubazar.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kubazar/Pods-Kubazar.debug.xcconfig"; sourceTree = "<group>"; };
 		C96C8C2A05A77F3E563D985D /* Pods-Kubazar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kubazar.release.xcconfig"; path = "Pods/Target Support Files/Pods-Kubazar/Pods-Kubazar.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -898,6 +904,7 @@
 		9EDF46BB1FC41F0F00993134 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				A282135F1FCDF55F00074291 /* ChangePassword */,
 				9E3F15001FC457C500BC7C21 /* HeaderCell */,
 				9E3F15021FC457C600BC7C21 /* InfoCell */,
 				9EDF46BE1FC41F7300993134 /* ProfileVC.swift */,
@@ -936,6 +943,16 @@
 				9EFB037C1FB99A5200A78845 /* CountryCodeCellVM.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		A282135F1FCDF55F00074291 /* ChangePassword */ = {
+			isa = PBXGroup;
+			children = (
+				A28213601FCDF57D00074291 /* ChangePasswordVC.swift */,
+				A28213611FCDF57D00074291 /* ChangePasswordVC.xib */,
+				A28213641FCDF58800074291 /* ChangePasswordVM.swift */,
+			);
+			path = ChangePassword;
 			sourceTree = "<group>";
 		};
 		FA4BD90D3972633479640F1E /* Pods */ = {
@@ -1050,6 +1067,7 @@
 				9E6144481FB305E400067295 /* CompleteEditProfileVC.xib in Resources */,
 				9E72A9D11FB991FA009468DB /* HaikuPreview.xib in Resources */,
 				9E2C693F1FC80CCC000A5594 /* GridView.xib in Resources */,
+				A28213631FCDF57D00074291 /* ChangePasswordVC.xib in Resources */,
 				9E5FA3101FBD90E60082F56F /* AccessAlertView.xib in Resources */,
 				9E1588A31FB45DE10063C816 /* Media.xcassets in Resources */,
 				9E5E8E171FADB6CE00CCCBDA /* RootVC.xib in Resources */,
@@ -1191,6 +1209,7 @@
 				9E5E8E3D1FAE059B00CCCBDA /* SignInVM.swift in Sources */,
 				9E6144471FB305E400067295 /* CompleteEditProfileVC.swift in Sources */,
 				9EB6BBA41FC4224F0085EA5F /* PlayerCellVM.swift in Sources */,
+				A28213621FCDF57D00074291 /* ChangePasswordVC.swift in Sources */,
 				9E5E8E1C1FADBA7400CCCBDA /* ViewController.swift in Sources */,
 				9E3EF2AB1FCC4A9100108DF4 /* MappableObject.swift in Sources */,
 				9E15889B1FB452E40063C816 /* BazarCell.swift in Sources */,
@@ -1242,6 +1261,7 @@
 				9EE16EA01FB4BF8700B4C5C5 /* CompletePhoneVerificationVM.swift in Sources */,
 				9E3F15051FC4581400BC7C21 /* ProfileHeaderCell.swift in Sources */,
 				9E2C694A1FC833C5000A5594 /* FriendListCell.swift in Sources */,
+				A28213651FCDF58800074291 /* ChangePasswordVM.swift in Sources */,
 				9EBEBD471FBAFFE600DE831F /* AuthenticationRouter.swift in Sources */,
 				9E61444A1FB305F900067295 /* CompleteEditProfileVM.swift in Sources */,
 				9E2C69431FC81F7D000A5594 /* FriendListVC.swift in Sources */,

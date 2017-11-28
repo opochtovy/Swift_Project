@@ -15,6 +15,7 @@ enum ButtonTitles {
     static let nextButtonTitle = "ButtonTitles_nextButtonTitle"
     static let editButtonTitle = "ButtonTitles_editButtonTitle"
     static let yesButtonTitle = "ButtonTitles_yesButtonTitle"
+    static let changeButtonTitle = "ButtonTitles_changeButtonTitle"
 }
 
 enum CommonTitles {

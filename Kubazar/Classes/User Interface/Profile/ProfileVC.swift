@@ -89,6 +89,7 @@ class ProfileVC: ViewController, UITableViewDelegate, UITableViewDataSource, UII
         self.scFilter.addTarget(self, action: #selector(ProfileVC.didSelectSegment), for: .valueChanged)
         self.scFilter.selectedSegmentIndex = self.viewModel.filter.rawValue
         self.navigationItem.titleView = self.scFilter
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString(ProfileVM.infoHeaderButtonTitle, comment: ""), style: .plain, target: self, action: #selector(self.pressRightButton(button:)))
     }
     
     private func updateUserProfile(displayName: String, email: String) {
@@ -206,6 +207,12 @@ class ProfileVC: ViewController, UITableViewDelegate, UITableViewDataSource, UII
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         self.tblView.deselectRow(at: indexPath, animated: false)
+        
+        if indexPath.row == self.viewModel.getCountOfTableViewCells() - 1 {
+            
+            let changePasswordViewController = ChangePasswordVC(client: self.client)
+            self.navigationController?.pushViewController(changePasswordViewController, animated: true)
+        }
     }
     
     //MARK: - UIImagePickerControllerDelegate
@@ -239,10 +246,11 @@ class ProfileVC: ViewController, UITableViewDelegate, UITableViewDataSource, UII
     
     //MARK: - Actions
     
-    @objc func pressRightButton(button: UIButton) {
+    @objc func pressRightButton(button: UIBarButtonItem) {
         
         let title = self.isTblViewEditable ? NSLocalizedString(ProfileVM.infoHeaderButtonTitle, comment: "") : NSLocalizedString(ButtonTitles.doneButtonTitle, comment: "")
-        button.setTitle(title, for: .normal)
+        button.title = title
+        
         self.isTblViewEditable = !self.isTblViewEditable
         
         var displayName = ""
@@ -256,12 +264,12 @@ class ProfileVC: ViewController, UITableViewDelegate, UITableViewDataSource, UII
                     case 1: cell.infoTextField.isEnabled = self.isTblViewEditable
                     if let text = cell.infoTextField.text {
                         displayName = text
-                    }
+                        }
                         
                     case 3: cell.infoTextField.isEnabled = self.isTblViewEditable
                     if let text = cell.infoTextField.text {
                         email = text
-                    }
+                        }
                         
                     default: continue
                     }
