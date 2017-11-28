@@ -93,7 +93,7 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
             
             self.updateCells(previousCount: previousCount)
             
-        } else if self.viewModel.numberOfItems() >= previousCount {
+        } else if self.viewModel.numberOfItems() > previousCount {
             
             self.tblView.reloadSections(IndexSet.init(integer: 0), with: .fade)
             self.tblView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)

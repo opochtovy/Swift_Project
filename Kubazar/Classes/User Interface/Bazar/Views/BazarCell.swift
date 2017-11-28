@@ -41,9 +41,11 @@ class BazarCell: UITableViewCell {
     
     @IBAction private func didPressActionButton(_ sender: UIButton) {
         
-        self.viewModel.performAction(completionHandler: { (errorDescription, success) in
+        self.viewModel.performAction(completionHandler: { [weak self](errorDescription, success) in
             
-            self.updateLikeButton()
+            guard let weakSelf = self else { return }
+            
+            weakSelf.updateLikeButton()
         })
     }
     
