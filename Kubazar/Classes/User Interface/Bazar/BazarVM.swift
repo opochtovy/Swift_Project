@@ -55,7 +55,9 @@ class BazarVM: BaseVM {
         return EditorVM(client: self.client, haiku: self.dataSource[indexPath.row])
     }
     
-    public func getHaikusFromNewHaikus(haikus: [Haiku]) {
+    public func getHaikusFromNewHaikus(newHaikus: [Haiku], owners: [User]) {
+        
+        var haikus = HaikuManager.shared.addNewHaikus(newHaikus: newHaikus, haikusType: 0, owners: owners)
         
         self.didEndReached = haikus.count < self.perPage
         self.dataSource.append(contentsOf: haikus)

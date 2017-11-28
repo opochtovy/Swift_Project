@@ -58,6 +58,7 @@ class Haiku: MappableObject {
         haikuFont <- map["font"]
         
         fields <- (map["text"])
+        playerIds <- (map["owners"])
         
         // ??? - needs to be changed when request to get user info will be ready and HaikuManager.shared.owners will be filled
         var thePlayers: [User] = []

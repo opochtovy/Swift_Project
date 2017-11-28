@@ -618,8 +618,9 @@ class FirebaseServerClient {
                         print("SUCCESS : haikus count =", haikus.count)
                         for haiku in haikus {
                             
-                            print("haiku.haikuImage?.urlString =", haiku.haikuImage?.urlString ?? "")
-                            print("haiku.haikuImage?.fileName =", haiku.haikuImage?.fileName ?? "")
+//                            print("haiku.creatorId =", haiku.creatorId ?? "")
+//                            print("haiku.creator?.avatarURL =", haiku.creator?.avatarURL ?? "")
+//                            print("haiku.creator?.displayName =", haiku.creator?.displayName ?? "")
                         }
                         print("===")
                         fulfill(haikus)
@@ -691,10 +692,23 @@ class FirebaseServerClient {
             }
 */
             // test till Artem write request to get User info by creatorId
+            
+            var ownerIds: [String] = []
+            for haiku in haikus {
+                
+                for ownerId in haiku.playerIds {
+                    
+                    if !ownerIds.contains(ownerId) {
+                        
+                        ownerIds.append(ownerId)
+                    }
+                }
+            }
+            
             var owners: [User] = []
             let user = Auth.auth().currentUser
-            for owner in owners {
-                if owner.id == user?.uid {
+            for ownerId in ownerIds {
+                if ownerId == user?.uid {
                     owners.append(HaikuManager.shared.currentUser)
                 }
             }

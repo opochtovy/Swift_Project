@@ -61,12 +61,15 @@ class BazarCellVM {
         
         guard let creator = haiku.creator else { return }
         
-        creatorName = creator.fullName
+        if let displayName = creator.displayName {
+            
+            creatorName = displayName
+        }
         
         var haikuParticipants: Set<User> = Set(haiku.players)
         haikuParticipants.remove(creator)
         
-        let friendNames = haikuParticipants.flatMap({$0.fullName}).joined(separator: ", ")
+        let friendNames = haikuParticipants.flatMap({$0.displayName}).joined(separator: ", ")
         
         isSingle = haikuParticipants.count == 0
         

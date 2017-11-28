@@ -179,7 +179,7 @@ class HaikuManager {
         
         let field7 = Field(user: user2, text: "Nothing happens")
         let field8 = Field(user: user3, text: "Solo1 happens")
-        let field9 = Field(user: user1, text: "Solo2 happens")
+//        let field9 = Field(user: user1, text: "Solo2 happens")
         
         let field10 = Field(user: user4, text: "Nothing happens")
         let field11 = Field(user: user1, text: "Solo1 happens")

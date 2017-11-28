@@ -83,10 +83,10 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
         self.tblView.reloadSections(IndexSet.init(integer: 0), with: .fade)
     }
     
-    private func updateContentWithNewHaikus(haikus: [Haiku]) {
+    private func updateContentWithNewHaikus(haikus: [Haiku], owners: [User]) {
         
         let previousCount = self.viewModel.numberOfItems()
-        self.viewModel.getHaikusFromNewHaikus(haikus: haikus)
+        self.viewModel.getHaikusFromNewHaikus(newHaikus: haikus, owners: owners)
         
         if previousCount > 0, self.viewModel.numberOfItems() >= previousCount {
             
@@ -144,7 +144,7 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
                     weakSelf.showWrongResponseAlert(message: "")
                 } else {
                     
-                    weakSelf.updateContentWithNewHaikus(haikus: haikus)
+                    weakSelf.updateContentWithNewHaikus(haikus: haikus, owners: owners)
                 }
             }
         }
