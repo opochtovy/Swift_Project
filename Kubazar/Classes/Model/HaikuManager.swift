@@ -88,13 +88,10 @@ class HaikuManager {
         return haiku
     }
     
-    public func initHaikusFromDictionary(dict: [Dictionary<String, Any>], haikusType: Int, owners: [User]) -> [Haiku] {
+    public func addNewHaikus(newHaikus: [Haiku], haikusType: Int, owners: [User]) -> [Haiku] {
         
-        var haikusArray: [Haiku] = []
-        for data in dict {
+        for haiku in newHaikus {
             
-            var haiku = Haiku()
-            haiku = haiku.initWithDictionary(dict: data)
             for owner in owners {
                 if owner.id == haiku.creatorId {
                     
@@ -105,47 +102,24 @@ class HaikuManager {
                     haiku.players.append(owner)
                 }
             }
-            // test print
-//            print("HaikuManager : haiku id =", haiku.id)
-//            print("HaikuManager : haiku creatorId =", haiku.creatorId ?? "")
-//            for field in haiku.fields {
-//                
-//                print("HaikuManager : field text =", field.text ?? "")
-//                print("HaikuManager : field creatorId =", field.creatorId ?? "")
-//            }
-//            print("HaikuManager : haiku published =", haiku.published)
-//            print("HaikuManager : haiku isCompleted =", haiku.isCompleted)
-//            print("HaikuManager : haiku playerIds =", haiku.playerIds)
-//            print("HaikuManager : haiku likes =", haiku.likes)
-//            print("HaikuManager : haiku likesCount =", haiku.likesCount)
-//            print("HaikuManager : haiku createDate =", haiku.createDate)
-//            print("HaikuManager : haiku finishDate =", haiku.finishDate)
-//            print("HaikuManager : haiku haikuImage fileId =", haiku.haikuImage?.fileId ?? "")
-//            print("HaikuManager : haiku haikuImage urlString =", haiku.haikuImage?.urlString ?? "")
-//            print("HaikuManager : haiku haikuFont family =", haiku.haikuFont?.family ?? "")
-//            print("HaikuManager : haiku haikuFont size =", haiku.haikuFont?.size ?? "")
-//            print("HaikuManager : haiku haikuFont color =", haiku.haikuFont?.color ?? "")
-            // end of test print
-            haikusArray.append(haiku)
         }
         
         guard let aFilter = HaikuManager.HaikusFilter(rawValue: haikusType) else {
             
             return []
         }
-//        let filter: HaikusFilter = HaikuManager.HaikusFilter(rawValue: haikusType)
-//        self.filter = aFilter
+        
         switch aFilter {
         case .all:
-//            personalHaikus = haikusArray
-            self.haikus = haikusArray
+//            self.haikus = newHaikus // incorrect adding of new haikus to existing array of haikus
+            print("HaikuManager : self.haikus count =", self.haikus.count)
         default:
             print()
         }
         
         self.findOutNewOwnerIds()
         
-        return haikusArray
+        return newHaikus
     }
     
     //MARK: - Private functions

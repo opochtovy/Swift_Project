@@ -9,7 +9,7 @@
 import Foundation
 import ObjectMapper
 
-class Haiku {
+class Haiku: MappableObject {
     
     public var id : String = ""
     public var date: Date?
@@ -17,6 +17,7 @@ class Haiku {
     public var creator: User?
     public var fields: [Field] = []
     public var published: Bool = false
+    public var isCompleted: Bool = true
     public var likesCount: Int = 0
     public var liked: Bool = false
     public var players : [User] = []
@@ -28,33 +29,37 @@ class Haiku {
     public var createDate: Int = 0
     public var finishDate: String = ""
     public var haikuImage: HaikuImage?
-    public var haikuFont: HaikuFont?
+    public var haikuFont: Decorator?
     
-//    public func initWithDictionary(dict: Dictionary<String, Any>) -> Haiku {
-//
-//        return self
-//    }
-
+    required convenience init?(map: Map){
+        
+        self.init()
+    }
     
-    public func initWithDictionary(dict: Dictionary<String, Any>) -> Haiku {
+    override func mapping(map: Map) {
+        super.mapping(map: map)
         
-        id = dict["_id"] != nil ? dict["_id"] as! String : ""
-        creatorId = dict["creatorId"] != nil ? dict["creatorId"] as! String : ""
+        id <- map["_id"]
+        creatorId <- map["creatorId"]
+        var access: String = ""
+        access <- map["access"]
+        published = access == "public"
         
-        var theFields: [Field] = []
-        let fieldDictsArray = dict["text"] != nil ? dict["text"] as! [Dictionary<String, Any>] : []
-        for fieldDict in fieldDictsArray {
-            
-            var field = Field(user: User(), text: "", finished: false)
-            field = field.initWithDictionary(dict: fieldDict)
-            theFields.append(field)
-        }
-        fields = theFields
+        var status: String = ""
+        status <- map["status"]
+        isCompleted = status == "completed"
         
-        published = dict["access"] as! String == "public"
-//        isCompleted = dict["status"] as! String == "completed"
-        playerIds = dict["owners"] != nil ? dict["owners"] as! [String] : []
+        likes <- map["likes"]
+        likesCount <- map["likesCount"]
+        createDate <- map["createdOn"]
+        finishDate <- map["finishedOn"]
         
+        haikuImage <- map["img"]
+        haikuFont <- map["font"]
+        
+        fields <- (map["text"])
+        
+        // ??? - needs to be changed when request to get user info will be ready and HaikuManager.shared.owners will be filled
         var thePlayers: [User] = []
         for playerId in playerIds {
             
@@ -67,23 +72,6 @@ class Haiku {
             }
         }
         players = thePlayers
-        
-        likes = dict["likes"] != nil ? dict["likes"] as! [String] : []
-        likesCount = dict["likesCount"] != nil ? dict["likesCount"] as! Int : 0
-        createDate = dict["createdOn"] != nil ? dict["createdOn"] as! Int : 0
-        finishDate = dict["finishedOn"] != nil ? dict["finishedOn"] as! String : ""
-        
-        let image = HaikuImage()
-        let haikuImageDict = dict["img"] as! Dictionary<String, Any>
-        haikuImage = image.initWithDictionary(dict: haikuImageDict)
-        
-        let font = HaikuFont()
-        let haikuFontDict = dict["font"] as! Dictionary<String, Any>
-        haikuFont = font.initWithDictionary(dict: haikuFontDict)
-        
-//        print("creatorId =", creatorId ?? "no creator id")
-        
-        return self
     }
 
 }
@@ -95,10 +83,10 @@ extension Haiku {
         return self.fields.filter({$0.isActive}).flatMap({$0.owner})
     }
     
-    public var isCompleted: Bool {
-        
-        return self.finishedFieldsCount == 3
-    }
+//    public var isCompleted: Bool {
+//
+//        return self.finishedFieldsCount == 3
+//    }
     
     public var finishedFieldsCount: Int {
     

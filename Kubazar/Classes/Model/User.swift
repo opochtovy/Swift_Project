@@ -7,8 +7,9 @@
 //
 
 import FirebaseAuth
+import ObjectMapper
 
-class User {
+class User: MappableObject {
     
     public var id : String = ""
     public var displayName: String?
@@ -29,6 +30,16 @@ class User {
         avatarURL = firebaseUser.photoURL?.absoluteString
         
         return self
+    }
+    
+    required convenience init?(map: Map){
+        
+        self.init()
+    }
+    
+    override func mapping(map: Map) {
+        super.mapping(map: map)
+        
     }
 }
 

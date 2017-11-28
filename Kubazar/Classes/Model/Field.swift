@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import ObjectMapper
 
-class Field {
+class Field: MappableObject {
 
     public var id: Int = 0
     public var text: String?
@@ -27,13 +28,15 @@ class Field {
         self.isFinished = finished
     }
     
-    public func initWithDictionary(dict: Dictionary<String, Any>) -> Field {
+    required convenience init?(map: Map){
         
-        text = dict["line"] != nil ? dict["line"] as! String : ""
-        creatorId = dict["creatorId"] != nil ? dict["creatorId"] as! String : ""
+        self.init(user: User(), text: "", finished: false)
+    }
+    
+    override func mapping(map: Map) {
+        super.mapping(map: map)
         
-//        print("Field : text =", text ?? "no text for Haiku")
-        
-        return self
+        text <- map["line"]
+        creatorId <- map["creatorId"]
     }
 }

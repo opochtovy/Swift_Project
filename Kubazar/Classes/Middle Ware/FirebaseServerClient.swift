@@ -10,6 +10,7 @@ import Foundation
 import Firebase
 import FirebaseStorage
 import Alamofire
+import AlamofireObjectMapper
 import PromiseKit
 
 enum AuthenticatorState {
@@ -576,19 +577,18 @@ class FirebaseServerClient {
         }
     }
     
-    public func getPersonalHaikus(page: Int, perPage: Int, sort: Int, completionHandler:@escaping ([Dictionary<String, Any>], [User], Bool) -> ()) {
+    public func getPersonalHaikus(page: Int, perPage: Int, sort: Int, completionHandler:@escaping ([Haiku], [User], Bool) -> ()) {
         
-        var haikusJSONResponse: [Dictionary<String, Any>] = []
+        var haikus: [Haiku] = []
         
-        self.getPersonalHaikusPromise(page: page, perPage: perPage, sort: sort).then { jsonResponse -> Promise<[User]> in
+        self.getPersonalHaikusPromise(page: page, perPage: perPage, sort: sort).then { haikusResult -> Promise<[User]> in
             
-            haikusJSONResponse = jsonResponse
-            return self.getOwnersForHaikusPromise(haikusJSONObject: jsonResponse)
+            haikus = haikusResult
+            return self.getOwnersForHaikusPromise(haikus: haikusResult)
             
             }.then { owners -> Void in
             
-                print("haikusJSONResponse.count =", haikusJSONResponse.count)
-                completionHandler(haikusJSONResponse, owners, true)
+                completionHandler(haikus, owners, true)
             
             }.catch { error in
                 
@@ -596,7 +596,7 @@ class FirebaseServerClient {
         }
     }
     
-    private func getPersonalHaikusPromise(page: Int, perPage: Int, sort: Int) -> Promise<[Dictionary<String, Any>]> {
+    private func getPersonalHaikusPromise(page: Int, perPage: Int, sort: Int) -> Promise<[Haiku]> {
         
         return Promise { fulfill, reject in
             
@@ -608,48 +608,38 @@ class FirebaseServerClient {
                     urlParameters.updateValue("likes", forKey: "sort")
                 }
                 let request = AuthenticationRouter.getPersonalHaikus(urlParameters: urlParameters)
-                self.sessionManager.request(request).responseJSON(completionHandler: { (response) in
+                
+                self.sessionManager.request(request).responseArray{(response: DataResponse <[Haiku]>) in
                     
-                    guard response.result.isSuccess else {
+                    switch response.result {
                         
-                        if let error = response.error {
+                    case .success(let haikus):
+                        
+                        print("SUCCESS : haikus count =", haikus.count)
+                        for haiku in haikus {
                             
-                            reject(error)
+                            print("haiku.haikuImage?.urlString =", haiku.haikuImage?.urlString ?? "")
+                            print("haiku.haikuImage?.fileName =", haiku.haikuImage?.fileName ?? "")
                         }
-                        return
-                    }
-                    
-                    let array = response.result.value as? [Dictionary<String, Any>]
-                    print("SUCCESS : haikus count =", array?.count ?? "")
-                    
-                    if let array = array {
+                        print("===")
+                        fulfill(haikus)
                         
-                        fulfill(array)
+                    case .failure(let error):
+                        
+                        reject(error)
                     }
-                })
+                }
+                
             }
         }
     }
     
     
     
-    private func getOwnersForHaikusPromise(haikusJSONObject: [Dictionary<String, Any>]) -> Promise<[User]> {
+    private func getOwnersForHaikusPromise(haikus: [Haiku]) -> Promise<[User]> {
         
         return Promise { fulfill, reject in
             
-            var ownerIds: [String] = []
-            for dict in haikusJSONObject {
-                
-                for ownerId in dict["owners"] as! [String] {
-                    
-                    if !ownerIds.contains(ownerId) {
-                        
-                        ownerIds.append(ownerId)
-                    }
-                }
-            }
-            
-            var owners: [User] = []
 /*
             let queue = OperationQueue()
             queue.maxConcurrentOperationCount = 50
@@ -701,9 +691,10 @@ class FirebaseServerClient {
             }
 */
             // test till Artem write request to get User info by creatorId
+            var owners: [User] = []
             let user = Auth.auth().currentUser
-            for ownerId in ownerIds {
-                if ownerId == user?.uid {
+            for owner in owners {
+                if owner.id == user?.uid {
                     owners.append(HaikuManager.shared.currentUser)
                 }
             }

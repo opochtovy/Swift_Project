@@ -55,18 +55,9 @@ class BazarVM: BaseVM {
         return EditorVM(client: self.client, haiku: self.dataSource[indexPath.row])
     }
     
-    public func getHaikusFromJSONObject(dict: [Dictionary<String, Any>], owners: [User]) {
+    public func getHaikusFromNewHaikus(haikus: [Haiku]) {
         
-        var haikus: [Haiku] = []
-        
-//        switch self.filter {
-//        default:
-//            haikus = HaikuManager.shared.initHaikusFromDictionary(dict: dict, haikusType: 0)
-//        }
-        
-        haikus = HaikuManager.shared.initHaikusFromDictionary(dict: dict, haikusType: self.filter.rawValue, owners: owners)
-        
-        self.didEndReached = haikus.count < self.perPage        
+        self.didEndReached = haikus.count < self.perPage
         self.dataSource.append(contentsOf: haikus)
     }
     

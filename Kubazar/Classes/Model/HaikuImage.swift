@@ -7,23 +7,26 @@
 //
 
 import Foundation
+import ObjectMapper
 
-class HaikuImage {
+class HaikuImage: MappableObject {
     
     public var fileId: String?
     public var fileName: String?
     public var mimeType: String?
     public var urlString: String?
     
-    public func initWithDictionary(dict: Dictionary<String, Any>) -> HaikuImage {
+    required convenience init?(map: Map){
         
-        fileId = dict["fileId"] != nil ? dict["fileId"] as! String : ""
-        fileName = dict["fileName"] != nil ? dict["fileName"] as! String : ""
-        mimeType = dict["mimeType"] != nil ? dict["mimeType"] as! String : ""
-        urlString = dict["url"] != nil ? dict["url"] as! String : ""
+        self.init()
+    }
+    
+    override func mapping(map: Map) {
+        super.mapping(map: map)
         
-//        print("HaikuImage : urlString =", urlString ?? "no image")
-        
-        return self
+        fileId <- map["fileId"]
+        fileName <- map["fileName"]
+        mimeType <- map["mimeType"]
+        urlString <- map["url"]
     }
 }

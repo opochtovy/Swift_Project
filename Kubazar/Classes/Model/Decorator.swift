@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import ObjectMapper
 
-class Decorator {
+class Decorator: MappableObject {
     
     enum defaults {
         
@@ -23,4 +24,17 @@ class Decorator {
     public var fontSize: Float = defaults.fontSize
     public var fontFamily: String = defaults.familyName
     public var fontHexColor: String = defaults.fontColor
+    
+    required convenience init?(map: Map){
+        
+        self.init()
+    }
+    
+    override func mapping(map: Map) {
+        super.mapping(map: map)
+        
+        fontFamily <- map["family"]
+        fontHexColor <- map["color"]
+        fontSize <- map["size"]
+    }
 }

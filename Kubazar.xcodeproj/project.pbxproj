@@ -39,7 +39,6 @@
 		9E2C69551FC83E5B000A5594 /* FriendListFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E2C69541FC83E5B000A5594 /* FriendListFooterView.xib */; };
 		9E2CA5781FC401D500069FFD /* TipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2CA5771FC401D500069FFD /* TipView.swift */; };
 		9E2CA57A1FC4023800069FFD /* TipView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E2CA5791FC4023800069FFD /* TipView.xib */; };
-		9E3170F11FC997AD00CDAA3E /* HaikuFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3170F01FC997AD00CDAA3E /* HaikuFont.swift */; };
 		9E3170F31FC998FA00CDAA3E /* HaikuImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3170F21FC998FA00CDAA3E /* HaikuImage.swift */; };
 		9E3170F51FC9A5A700CDAA3E /* URLRequestConvertible+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3170F41FC9A5A700CDAA3E /* URLRequestConvertible+Extensions.swift */; };
 		9E3212251FC6B69D00F10333 /* PickFontButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3212241FC6B69D00F10333 /* PickFontButton.swift */; };
@@ -192,7 +191,6 @@
 		9E2C69541FC83E5B000A5594 /* FriendListFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendListFooterView.xib; sourceTree = "<group>"; };
 		9E2CA5771FC401D500069FFD /* TipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipView.swift; sourceTree = "<group>"; };
 		9E2CA5791FC4023800069FFD /* TipView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TipView.xib; sourceTree = "<group>"; };
-		9E3170F01FC997AD00CDAA3E /* HaikuFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaikuFont.swift; sourceTree = "<group>"; };
 		9E3170F21FC998FA00CDAA3E /* HaikuImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaikuImage.swift; sourceTree = "<group>"; };
 		9E3170F41FC9A5A700CDAA3E /* URLRequestConvertible+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequestConvertible+Extensions.swift"; sourceTree = "<group>"; };
 		9E3212241FC6B69D00F10333 /* PickFontButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickFontButton.swift; sourceTree = "<group>"; };
@@ -555,7 +553,6 @@
 				9E5E8E1E1FADBC9E00CCCBDA /* Client.swift */,
 				9E9B4DBC1FB9E0C8001DB448 /* Field.swift */,
 				9EED066B1FB59D2800CCD82E /* Haiku.swift */,
-				9E3170F01FC997AD00CDAA3E /* HaikuFont.swift */,
 				9E3170F21FC998FA00CDAA3E /* HaikuImage.swift */,
 				9E06A9C71FBAC91700FF74A5 /* HaikuManager.swift */,
 				9E3EF2AA1FCC4A9100108DF4 /* MappableObject.swift */,
@@ -1217,7 +1214,6 @@
 				9E5FA30E1FBD90DB0082F56F /* AccessAlertView.swift in Sources */,
 				9EFBEC0E1FB9F4E600A889BC /* TintMutableButton.swift in Sources */,
 				9EC68A301FC5A29300A7F793 /* FontsVM.swift in Sources */,
-				9E3170F11FC997AD00CDAA3E /* HaikuFont.swift in Sources */,
 				9E7C53C21FBF0DE10082E7EC /* KBBarView.swift in Sources */,
 				9E2C69461FC81F99000A5594 /* FriendListVM.swift in Sources */,
 				9E5FA31C1FBDB21D0082F56F /* PictureCellVM.swift in Sources */,

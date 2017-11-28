@@ -83,17 +83,17 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
         self.tblView.reloadSections(IndexSet.init(integer: 0), with: .fade)
     }
     
-    private func updateContentWithJSONObject(dict: [Dictionary<String, Any>], owners: [User]) {
+    private func updateContentWithNewHaikus(haikus: [Haiku]) {
         
         let previousCount = self.viewModel.numberOfItems()
-        self.viewModel.getHaikusFromJSONObject(dict: dict, owners: owners)
+        self.viewModel.getHaikusFromNewHaikus(haikus: haikus)
         
         if previousCount > 0, self.viewModel.numberOfItems() >= previousCount {
-
+            
             self.updateCells(previousCount: previousCount)
-
+            
         } else if self.viewModel.numberOfItems() >= previousCount {
-
+            
             self.tblView.reloadSections(IndexSet.init(integer: 0), with: .fade)
             self.tblView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
         }
@@ -135,7 +135,7 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
         if self.client.authenticator.state == .authorized {
             
             let sortType = self.viewModel.sort == .date ? 0 : 1
-            self.client.authenticator.getPersonalHaikus(page: self.viewModel.page, perPage: self.viewModel.perPage, sort: sortType) { [weak self](haikusJSONResponse, owners, success) in
+            self.client.authenticator.getPersonalHaikus(page: self.viewModel.page, perPage: self.viewModel.perPage, sort: sortType) { [weak self](haikus, owners, success) in
                 
                 guard let weakSelf = self else { return }
                 
@@ -144,7 +144,7 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
                     weakSelf.showWrongResponseAlert(message: "")
                 } else {
                     
-                    weakSelf.updateContentWithJSONObject(dict: haikusJSONResponse, owners: owners)
+                    weakSelf.updateContentWithNewHaikus(haikus: haikus)
                 }
             }
         }
