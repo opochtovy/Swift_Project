@@ -12,6 +12,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FriendDetailVC" customModule="Kubazar" customModuleProvider="target">
             <connections>
+                <outlet property="cvHaikus" destination="XSa-Dc-b8S" id="VLv-OU-t5U"/>
+                <outlet property="ivUser" destination="yNU-kl-PBd" id="i9L-W8-tP6"/>
+                <outlet property="lbPhone" destination="ofD-A3-JKp" id="ZgJ-za-fXl"/>
+                <outlet property="lbUsername" destination="VVH-SX-1IB" id="OO6-mY-3s8"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -36,17 +40,17 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DPC-Wo-ia3">
                     <rect key="frame" x="0.0" y="161" width="375" height="86"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="OkU-sF-2lv">
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="OkU-sF-2lv">
                             <rect key="frame" x="16" y="19" width="343" height="48"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VVH-SX-1IB">
-                                    <rect key="frame" x="0.0" y="0.0" width="343" height="21"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="343" height="25"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                     <color key="textColor" red="0.22352941176470587" green="0.22352941176470587" blue="0.22745098039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ofD-A3-JKp">
-                                    <rect key="frame" x="0.0" y="27" width="343" height="21"/>
+                                    <rect key="frame" x="0.0" y="31" width="343" height="17"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <color key="textColor" red="0.53725490196078429" green="0.53725490196078429" blue="0.53725490196078429" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
@@ -73,8 +77,8 @@
                         <constraint firstItem="OkU-sF-2lv" firstAttribute="centerY" secondItem="DPC-Wo-ia3" secondAttribute="centerY" id="z3j-Ii-b9Q"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qXR-ue-eIa">
-                    <rect key="frame" x="16" y="264" width="43" height="20.5"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Haiku" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qXR-ue-eIa">
+                    <rect key="frame" x="16" y="264" width="45" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                     <color key="textColor" red="0.40000000000000002" green="0.74901960784313726" blue="0.73333333333333328" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
@@ -88,9 +92,13 @@
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="loC-7U-i8D"/>
+                        <outlet property="delegate" destination="-1" id="WHM-AC-ymq"/>
+                    </connections>
                 </collectionView>
             </subviews>
-            <color key="backgroundColor" red="0.2901960784" green="0.2901960784" blue="0.80578210849999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="sEk-2Q-z7M" secondAttribute="trailing" id="34n-KJ-hOw"/>
                 <constraint firstItem="qXR-ue-eIa" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="3pm-gA-9KR"/>

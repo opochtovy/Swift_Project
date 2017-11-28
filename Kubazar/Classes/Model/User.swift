@@ -26,6 +26,7 @@ class User: UserProtocol {
     
     public var firstName: String = ""
     public var lastName: String = ""
+    public var phoneNumber: String = ""
     public lazy var fullName: String = {
         return "\(firstName) \(lastName)"
     }()
