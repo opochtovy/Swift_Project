@@ -21,23 +21,23 @@ class UserThumbnail: UIView {
             ivUser.image = nil
             lbInitials.isHidden = true
             self.backgroundColor = UIColor.clear
+            let placeholder = Placeholders.thumbnail.getRandom()
             
             if let url = viewModel?.userImageURL {
                 
                 self.ivUser.isHidden = false
-                self.ivUser.af_setImage(withURL: url)
+                self.ivUser.af_setImage(withURL: url, placeholderImage: placeholder, imageTransition: .crossDissolve(0.2))
             }
             else if let data = viewModel?.userImageData {
                 
                 self.ivUser.isHidden = false
                 ivUser.image = UIImage.init(data: data)
             }
-            else if let viewModel = viewModel{
-                
-                self.ivUser.isHidden = true
+            else if let viewModel = viewModel {
+
+                self.ivUser.image = placeholder
                 self.lbInitials.isHidden = false
                 self.lbInitials.text = viewModel.userInitials
-                self.backgroundColor = #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)
                 
                 if viewModel.needBorders == true {
                     
