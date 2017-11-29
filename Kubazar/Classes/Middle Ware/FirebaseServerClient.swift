@@ -28,6 +28,13 @@ enum StoreKeys {
 
 class FirebaseServerClient {
     
+    enum BazarFilter: Int {
+        
+        case all = 0
+        case mine = 1
+        case active = 2
+    }
+    
     typealias BaseCompletion = (_ success: Bool, _ error: Error?) -> Void
     
     static let AuthenticatorStateDidChangeNotification = "AuthenticatorStateDidChangeNotification"
@@ -522,7 +529,7 @@ class FirebaseServerClient {
                     
                     if let currentUser = Auth.auth().currentUser {
                         
-                        let user = User().initWithFirebaseUser(firebaseUser: currentUser)                        
+                        let user = User().initWithFirebaseUser(firebaseUser: currentUser)
                         HaikuManager.shared.currentUser = user
                     }
                     fulfill(())
@@ -600,11 +607,11 @@ class FirebaseServerClient {
         }
     }
     
-    public func getPersonalHaikus(page: Int, perPage: Int, sort: Int, completionHandler:@escaping ([Haiku], [User], Bool) -> ()) {
+    public func getHaikus(page: Int, perPage: Int, sort: Int, filter: Int, completionHandler:@escaping ([Haiku], [User], Bool) -> ()) {
         
         var haikus: [Haiku] = []
         
-        self.getPersonalHaikusPromise(page: page, perPage: perPage, sort: sort).then { haikusResult -> Promise<[User]> in
+        self.getHaikusPromise(page: page, perPage: perPage, sort: sort, filter: filter).then { haikusResult -> Promise<[User]> in
             
             haikus = haikusResult
             return self.getOwnersForHaikusPromise(haikus: haikusResult)
@@ -619,7 +626,7 @@ class FirebaseServerClient {
         }
     }
     
-    private func getPersonalHaikusPromise(page: Int, perPage: Int, sort: Int) -> Promise<[Haiku]> {
+    private func getHaikusPromise(page: Int, perPage: Int, sort: Int, filter: Int) -> Promise<[Haiku]> {
         
         return Promise { fulfill, reject in
             
@@ -630,7 +637,16 @@ class FirebaseServerClient {
                 if sort == 1 {
                     urlParameters.updateValue("likes", forKey: "sort")
                 }
-                let request = AuthenticationRouter.getPersonalHaikus(urlParameters: urlParameters)
+                
+                var request = HaikuRouter.getAllHaikus(urlParameters: urlParameters)
+                if let value = FirebaseServerClient.BazarFilter(rawValue: filter) {
+                    
+                    switch value {
+                    case .mine: request = HaikuRouter.getPersonalHaikus(urlParameters: urlParameters)
+                    case .active: request = HaikuRouter.getActiveHaikus(urlParameters: urlParameters)
+                    default: request = HaikuRouter.getAllHaikus(urlParameters: urlParameters)
+                    }
+                }
                 
                 self.sessionManager.request(request).responseArray{(response: DataResponse <[Haiku]>) in
                     
@@ -639,13 +655,6 @@ class FirebaseServerClient {
                     case .success(let haikus):
                         
                         print("SUCCESS : haikus count =", haikus.count)
-                        for haiku in haikus {
-                            
-//                            print("haiku.creatorId =", haiku.creatorId ?? "")
-//                            print("haiku.creator?.avatarURL =", haiku.creator?.avatarURL ?? "")
-//                            print("haiku.creator?.displayName =", haiku.creator?.displayName ?? "")
-                        }
-                        print("===")
                         fulfill(haikus)
                         
                     case .failure(let error):
@@ -714,8 +723,6 @@ class FirebaseServerClient {
                 fulfill(owners)
             }
 */
-            // test till Artem write request to get User info by creatorId
-            
             var ownerIds: [String] = []
             for haiku in haikus {
                 
@@ -727,8 +734,11 @@ class FirebaseServerClient {
                     }
                 }
             }
+            print("ownerIds.count =", ownerIds.count)
             
             var owners: [User] = []
+            
+            // test till Artem write request to get User info by creatorId
             let user = Auth.auth().currentUser
             for ownerId in ownerIds {
                 if ownerId == user?.uid {

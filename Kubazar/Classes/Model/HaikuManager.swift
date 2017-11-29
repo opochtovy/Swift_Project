@@ -21,7 +21,6 @@ class HaikuManager {
     public var currentUser: User = User()
 //    private var filter: HaikusFilter = .all
     private(set) var haikus: [Haiku] = []
-//    private(set) var personalHaikus: [Haiku] = []
     private(set) var owners: [User] = []
     private(set) var ownerIds: [String] = []
     private(set) var newOwnerIds: [String] = []

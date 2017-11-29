@@ -97,8 +97,7 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
             
         } else if self.viewModel.numberOfItems() > previousCount {
             
-            self.tblView.reloadSections(IndexSet.init(integer: 0), with: .fade)
-            self.tblView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+            self.reloadTableView()
         }
     }
     
@@ -138,7 +137,7 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
         if self.client.authenticator.state == .authorized {
             
             let sortType = self.viewModel.sort == .date ? 0 : 1
-            self.client.authenticator.getPersonalHaikus(page: self.viewModel.page, perPage: self.viewModel.perPage, sort: sortType) { [weak self](haikus, owners, success) in
+            self.client.authenticator.getHaikus(page: self.viewModel.page, perPage: self.viewModel.perPage, sort: sortType, filter: self.viewModel.filter.rawValue) { [weak self](haikus, owners, success) in
                 
                 guard let weakSelf = self else { return }
                 
@@ -191,10 +190,26 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
     private func getPersonalHaikusDuringSorting(previousSort: BazarVM.BazarSort) {
         
         if self.viewModel.sort != previousSort {
-            self.viewModel.deleteAllDataSource()
-            self.viewModel.page = 0
-            MBProgressHUD.showAdded(to: self.view, animated: true)
-            self.getPersonalHaikus(page: self.viewModel.page, perPage: self.viewModel.perPage)
+            
+            self.getHaikus()
+        }
+    }
+    
+    private func getHaikus() {
+        
+        self.viewModel.updateDataSource()
+        self.viewModel.page = 0
+        self.reloadTableView()
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        self.getPersonalHaikus(page: self.viewModel.page, perPage: self.viewModel.perPage)
+    }
+    
+    private func reloadTableView() {
+        
+        if self.viewModel.numberOfItems() > 0 {
+            
+            self.tblView.reloadSections(IndexSet.init(integer: 0), with: .fade)
+            self.tblView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
         }
     }
     
@@ -203,8 +218,7 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
         if let value = BazarVM.BazarFilter(rawValue: sender.selectedSegmentIndex) {
             
             self.viewModel.filter = value
-            self.updateContent()
-            self.tblView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+            self.getHaikus()
         }
     }
     
