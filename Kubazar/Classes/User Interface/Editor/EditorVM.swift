@@ -90,9 +90,9 @@ class EditorVM: BaseVM {
         else {
             //is user turn
             
-            let finishedfields = self.haiku.finishedFieldsCount
-            let playersCount = self.haiku.players.count
-            let indexOfPlayer = playersCount % (finishedfields + 1)
+//            let finishedfields = self.haiku.finishedFieldsCount
+//            let playersCount = self.haiku.players.count
+//            let indexOfPlayer = playersCount % (finishedfields + 1)
             let player = self.haiku.players[safe: index]
             
             result = player == HaikuManager.shared.currentUser

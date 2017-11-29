@@ -41,11 +41,37 @@ class BazarCell: UITableViewCell {
     
     @IBAction private func didPressActionButton(_ sender: UIButton) {
         
-        self.viewModel.performAction()
-        self.updateContent()
+        self.viewModel.performAction(completionHandler: { [weak self](errorDescription, success) in
+            
+            guard let weakSelf = self else { return }
+            
+            weakSelf.updateLikeButton()
+        })
+    }
+    
+    //MARK: Public functions
+    
+    public func setImageForCell(imageURL: URL) {
+        
+        self.vHaikuContent.setImageForHaikuPreview(imageURL: imageURL)
+    }
+    
+    public func isHaikuPreviewImageNil() -> Bool {
+        
+        return self.vHaikuContent.isImageNil()
     }
     
     //MARK: Private functions
+    
+    private func updateLikeButton() {
+        
+        self.btnLike.setTitle(viewModel.btnText, for: .normal)
+        if viewModel.actionType == .like {
+            
+            self.btnLike.setImage(#imageLiteral(resourceName: "iconLike"), for: .normal)
+            self.btnLike.isSelected = viewModel.isLiked
+        }
+    }
     
     private func updateContent() {
         

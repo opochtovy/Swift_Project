@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol BazarDetailVCDelegate : class {
+    
+    func deleteButtonWasPressed(vc: BazarDetailVC, haiku: Haiku)
+}
+
 class BazarDetailVC: ViewController {
     
     private enum BackColors {
@@ -25,6 +30,8 @@ class BazarDetailVC: ViewController {
     @IBOutlet private weak var vUser3: UserView!
     
     @IBOutlet private weak var toolBar: UIToolbar!
+    
+    weak var bazarDetailDelegate: BazarDetailVCDelegate?
     
     //MARK: - LifeCycle
     init(client: Client, viewModel: BazarDetailVM) {
@@ -66,8 +73,12 @@ class BazarDetailVC: ViewController {
     @objc private func didPressLikeButton(_ sender: UIButton) {
         print("-- Like Detail")
         sender.isSelected = !sender.isSelected
-        self.viewModel.like()
-        self.updateToolBar()
+        self.viewModel.like(completionHandler: { [weak self](errorDescription, success) in
+            
+            guard let weakSelf = self else { return }
+            
+            weakSelf.updateToolBar()
+        })
     }
     
     @objc private func didPressShareButton(_ sender: UIBarButtonItem) {
@@ -76,8 +87,12 @@ class BazarDetailVC: ViewController {
     
     @objc private func didPressPublishButton(_ sender: UIBarButtonItem) {
         print("-- Publish")
-        self.viewModel.publish()
-        self.updateToolBar()
+        self.viewModel.publish(completionHandler: { [weak self](errorDescription, success) in
+            
+            guard let weakSelf = self else { return }
+            
+            weakSelf.updateToolBar()
+        })
     }
     
     @objc private func didPressDeleteButton(_ sender: UIBarButtonItem) {
@@ -88,8 +103,13 @@ class BazarDetailVC: ViewController {
         let alertCtrl = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .actionSheet)
         let action1 = UIAlertAction(title: NSLocalizedString("BazarDetail_alert_removing_delete", comment: ""), style: .destructive) { (_) in
             
-            self.viewModel.delete()
-            self.navigationController?.popViewController(animated: true)
+            self.viewModel.delete(completionHandler: { [weak self](errorDescription, success) in
+                
+                guard let weakSelf = self else { return }
+                
+                weakSelf.bazarDetailDelegate?.deleteButtonWasPressed(vc: weakSelf, haiku: weakSelf.viewModel.getHaikuToDelete())
+                weakSelf.navigationController?.popViewController(animated: true)
+            })
         }
         let action2 = UIAlertAction(title: NSLocalizedString("BazarDetail_alert_cancel", comment: ""), style: .cancel, handler: nil)
         alertCtrl.addAction(action1)
@@ -104,7 +124,11 @@ class BazarDetailVC: ViewController {
         
         lbDate.text = viewModel.dateText
         
-        vHaikuContent.viewModel = self.viewModel.getPreviewVM();
+        vHaikuContent.viewModel = self.viewModel.getPreviewVM()
+        if let imageURL = self.viewModel.getHaikuImageURL() {
+            
+            self.vHaikuContent.setImageForHaikuPreview(imageURL: imageURL)
+        }
         
         vUser1.viewModel = viewModel.getUserViewVM(forIndex: 0)
         vUser2.viewModel = viewModel.getUserViewVM(forIndex: 1)

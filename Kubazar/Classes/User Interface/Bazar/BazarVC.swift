@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MBProgressHUD
 
-class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
+class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, BazarDetailVCDelegate {
     
     @IBOutlet private var tblView: UITableView!
     private var scFilter: UISegmentedControl!
@@ -23,6 +24,11 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        
+        NotificationCenter.default.removeObserver(self)
     }
     
     override func viewDidLoad() {
@@ -51,6 +57,8 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "iconSort"), style: .plain, target: self, action: #selector(BazarVC.didPressSortButton))
         
         self.tblView.register(UINib.init(nibName: "BazarCell", bundle: nil), forCellReuseIdentifier: BazarCell.reuseID)
+        
+        self.setupObserving()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,6 +70,8 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
         self.updateContent()
     }
     
+    //MARK: - Private functions
+    
     private func setStatusBarAppearance() {
         
         let statusBarView = UIApplication.shared.value(forKey: "statusBar") as? UIView
@@ -69,11 +79,40 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
         statusBarView?.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     }
     
-    //MARK: - Private functions
     private func updateContent() {
         
-        self.viewModel.refreshData()
         self.tblView.reloadSections(IndexSet.init(integer: 0), with: .fade)
+    }
+    
+    private func updateContentWithNewHaikus(haikus: [Haiku], owners: [User]) {
+        
+        let previousCount = self.viewModel.numberOfItems()
+        self.viewModel.getHaikusFromNewHaikus(newHaikus: haikus, owners: owners)
+        
+        if haikus.count == 0 { return }
+        
+        if previousCount > 0, self.viewModel.numberOfItems() >= previousCount {
+            
+            self.updateCells(previousCount: previousCount)
+            
+        } else if self.viewModel.numberOfItems() > previousCount {
+            
+            self.tblView.reloadSections(IndexSet.init(integer: 0), with: .fade)
+            self.tblView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+        }
+    }
+    
+    func updateCells(previousCount: Int) {
+        
+        var indexPaths: [IndexPath] = []
+        for i in (previousCount...self.viewModel.numberOfItems() - 1) {
+            
+            indexPaths.append(IndexPath(row: i, section: 0))
+        }
+        
+        self.tblView.beginUpdates()
+        self.tblView.insertRows(at: indexPaths, with: UITableViewRowAnimation.fade)
+        self.tblView.endUpdates()
     }
     
     private func showReachabilityAlert() {
@@ -94,19 +133,50 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    @objc private func getPersonalHaikus(page: Int, perPage: Int) {
+        
+        if self.client.authenticator.state == .authorized {
+            
+            let sortType = self.viewModel.sort == .date ? 0 : 1
+            self.client.authenticator.getPersonalHaikus(page: self.viewModel.page, perPage: self.viewModel.perPage, sort: sortType) { [weak self](haikus, owners, success) in
+                
+                guard let weakSelf = self else { return }
+                
+                MBProgressHUD.hide(for: weakSelf.view, animated: true)
+                
+                if !success {
+                    
+                    weakSelf.showWrongResponseAlert(message: "")
+                } else {
+                    
+                    weakSelf.updateContentWithNewHaikus(haikus: haikus, owners: owners)
+                }
+            }
+        }
+    }
+    
+    private func setupObserving() {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(BazarVC.getPersonalHaikus), name: NSNotification.Name(rawValue: FirebaseServerClient.DeviceTokenDidPutNotification), object: nil)
+    }
+    
     //MARK: - Actions
     @objc private func didPressSortButton(_ sender: UIBarButtonItem) {
+        
+        let previousSort = self.viewModel.sort
         
         let alertCtrl = UIAlertController(title: NSLocalizedString("Bazar_sort_title", comment: ""), message: "", preferredStyle: .actionSheet)
 
         let action1 = UIAlertAction(title: NSLocalizedString("Bazar_sort_bylike", comment: ""), style: .default){ (_) in
             
-            self.viewModel.sort = .likes
+            self.viewModel.sort = .date
+            self.getPersonalHaikusDuringSorting(previousSort: previousSort)
         }
         
         let action2 = UIAlertAction(title: NSLocalizedString("Bazar_sort_bydate", comment: ""), style: .default){ (_) in
             
-            self.viewModel.sort = .date
+            self.viewModel.sort = .likes
+            self.getPersonalHaikusDuringSorting(previousSort: previousSort)
         }
         
         let action3 = UIAlertAction(title: NSLocalizedString("BazarDetail_alert_cancel", comment: ""), style: .cancel, handler: nil)
@@ -116,6 +186,16 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
         alertCtrl.addAction(action3)
         
         self.present(alertCtrl, animated: true, completion: nil)
+    }
+    
+    private func getPersonalHaikusDuringSorting(previousSort: BazarVM.BazarSort) {
+        
+        if self.viewModel.sort != previousSort {
+            self.viewModel.deleteAllDataSource()
+            self.viewModel.page = 0
+            MBProgressHUD.showAdded(to: self.view, animated: true)
+            self.getPersonalHaikus(page: self.viewModel.page, perPage: self.viewModel.perPage)
+        }
     }
     
     @objc private func didSelectSegment(_ sender: UISegmentedControl) {
@@ -142,8 +222,30 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: BazarCell.reuseID, for: indexPath) as! BazarCell
         cell.viewModel = self.viewModel.getCellVM(forIndexPath: indexPath)
+        if cell.isHaikuPreviewImageNil() {
+            
+            self.downloadHaikuImageForCell(cell: cell, indexPath: indexPath)
+        }
         
         return cell
+    }
+    
+    //MARK: Public functions
+    
+    private func downloadHaikuImageForCell(cell: BazarCell, indexPath: IndexPath) {
+        
+        if let imagePath = self.viewModel.getImagePathForHaiku(forIndexPath: indexPath), let url = URL(string: imagePath) {
+            
+            cell.setImageForCell(imageURL: url)
+        }
+    }
+    
+    // MARK: - BazarDetailVCDelegate
+    
+    func deleteButtonWasPressed(vc: BazarDetailVC, haiku: Haiku) {
+        
+        self.viewModel.deleteHaiku(haiku: haiku)
+        self.tblView.reloadData()
     }
     
     //MARK: - UITableViewDelegate
@@ -157,6 +259,7 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
             
             let ctrl = BazarDetailVC(client: self.client, viewModel: self.viewModel.getDetailVM(forIndexPath: indexPath))
             ctrl.hidesBottomBarWhenPushed = true
+            ctrl.bazarDetailDelegate = self
             self.navigationController?.pushViewController(ctrl, animated: true)
             
         case .active:
@@ -168,8 +271,51 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        return 452.0
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         return UITableViewAutomaticDimension
+    }
+    
+    //MARK: - UIScrollViewDelegate
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        
+        self.viewModel.isDataLoading = false
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        
+        self.getPersonalHaikusDuringScrolling()
+    }
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        
+        self.getPersonalHaikusDuringScrolling()
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        
+        self.getPersonalHaikusDuringScrolling()
+    }
+    
+    private func getPersonalHaikusDuringScrolling() {
+        
+        if ((self.tblView.contentOffset.y + 2 * self.tblView.frame.size.height) >= self.tblView.contentSize.height) {
+            
+            if !self.viewModel.isDataLoading, !self.viewModel.didEndReached {
+                
+                self.viewModel.isDataLoading = true
+                self.viewModel.page = self.viewModel.page + 1
+                self.getPersonalHaikus(page: self.viewModel.page, perPage: self.viewModel.perPage)
+                
+            }
+        }
+        
+        
     }
 }

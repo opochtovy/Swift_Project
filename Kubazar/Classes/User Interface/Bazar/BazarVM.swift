@@ -26,6 +26,12 @@ class BazarVM: BaseVM {
     public var filter: BazarFilter = .all
     public var sort: BazarSort = .date
     
+    //For Pagination
+    public var isDataLoading: Bool = false
+    public var page: Int = 0
+    public var perPage: Int = 5
+    public var didEndReached: Bool = false
+    
     private var dataSource: [Haiku] = []
     
     //MARK: - Public functions
@@ -36,7 +42,7 @@ class BazarVM: BaseVM {
     
     public func getCellVM(forIndexPath indexPath: IndexPath) -> BazarCellVM {
         
-        return BazarCellVM(haiku: self.dataSource[indexPath.row])
+        return BazarCellVM(client: self.client, haiku: self.dataSource[indexPath.row])
     }
     
     public func getDetailVM(forIndexPath indexPath: IndexPath) -> BazarDetailVM {
@@ -48,39 +54,28 @@ class BazarVM: BaseVM {
      
         return EditorVM(client: self.client, haiku: self.dataSource[indexPath.row])
     }
-
-    public func refreshData() {
+    
+    public func getHaikusFromNewHaikus(newHaikus: [Haiku], owners: [User]) {
         
-        switch self.filter {
-        case .all:
-            
-            self.dataSource = HaikuManager.shared.haikus.filter({ (haiku) -> Bool in
-                haiku.published == true
-            })
-            
-        case .active:
-            
-            self.dataSource = HaikuManager.shared.haikus.filter({ (haiku) -> Bool in
-                
-                let isHaikuIncompleted: Bool = haiku.fields.count < 3
-                let isUserParticipant: Bool = haiku.players.contains(where: { (user) -> Bool in
-                    return user.id == HaikuManager.shared.currentUser.id
-                })
-                
-                return isUserParticipant && isHaikuIncompleted
-            })
-            
-        case .mine:
-            
-            self.dataSource = HaikuManager.shared.haikus.filter({ (haiku) -> Bool in
-                
-                let isUserCreator = haiku.creator?.id == HaikuManager.shared.currentUser.id
-                let isUserActiveParticipant = haiku.activePlayers.contains(where: { (user) -> Bool in
-                    return user.id == HaikuManager.shared.currentUser.id
-                })
-                
-                return isUserCreator && isUserActiveParticipant && haiku.isCompleted
-            })
-        }
+        let haikus = HaikuManager.shared.addNewHaikus(newHaikus: newHaikus, haikusType: 0, owners: owners)
+        
+        self.didEndReached = haikus.count < self.perPage
+        self.dataSource.append(contentsOf: haikus)
+    }
+    
+    public func getImagePathForHaiku(forIndexPath indexPath: IndexPath) -> String? {
+        
+        let haiku = self.dataSource[indexPath.row]
+        return haiku.haikuImage?.urlString
+    }
+    
+    public func deleteAllDataSource() {
+        
+        self.dataSource = []
+    }
+    
+    public func deleteHaiku(haiku: Haiku) {
+        
+        self.dataSource.remove(object: haiku)
     }
 }

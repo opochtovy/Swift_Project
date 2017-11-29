@@ -27,10 +27,12 @@ class BazarCellVM {
 
     private(set) var actionType: ActionType = .like
     
-    private let haiku: Haiku
+    private var haiku: Haiku
+    private var client: Client
     
-    init(haiku: Haiku) {
+    init(client: Client, haiku: Haiku) {
         
+        self.client = client
         self.haiku = haiku
         self.prepareModel()
     }
@@ -42,12 +44,15 @@ class BazarCellVM {
         return HaikuPreviewVM(withHaiku: self.haiku)
     }
     
-    public func performAction() {
+    public func performAction(completionHandler:@escaping (String?, Bool) -> ()) {
         
         if self.actionType == .like {
             
-            HaikuManager.shared.like(toLike: !self.haiku.liked, haiku: self.haiku)
-            self.prepareLikes()
+            self.client.authenticator.likeHaiku(haiku: haiku, completionHandler: { (errorDescription, success) in
+                
+                self.prepareLikes()
+                completionHandler(nil, true)
+            })
         }
         else if actionType == .publish {
             
@@ -61,12 +66,15 @@ class BazarCellVM {
         
         guard let creator = haiku.creator else { return }
         
-        creatorName = creator.fullName
+        if let displayName = creator.displayName {
+            
+            creatorName = displayName
+        }
         
         var haikuParticipants: Set<User> = Set(haiku.players)
         haikuParticipants.remove(creator)
         
-        let friendNames = haikuParticipants.flatMap({$0.fullName}).joined(separator: ", ")
+        let friendNames = haikuParticipants.flatMap({$0.displayName}).joined(separator: ", ")
         
         isSingle = haikuParticipants.count == 0
         
@@ -92,7 +100,8 @@ class BazarCellVM {
     
     private func prepareLikes() {
         
-        isLiked = haiku.liked
+        let currentUserId = self.client.authenticator.getUserId()
+        isLiked = self.haiku.likes.contains(currentUserId)
         
         if haiku.likesCount > 0 {
             

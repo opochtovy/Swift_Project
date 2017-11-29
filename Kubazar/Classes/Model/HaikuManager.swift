@@ -9,10 +9,22 @@
 import Foundation
 
 class HaikuManager {
+    
+    enum HaikusFilter: Int {
+        
+        case all = 0
+        case mine = 1
+        case active = 2
+    }
 
     public static let shared: HaikuManager = HaikuManager()
-    public var currentUser: User
+    public var currentUser: User = User()
+//    private var filter: HaikusFilter = .all
     private(set) var haikus: [Haiku] = []
+//    private(set) var personalHaikus: [Haiku] = []
+    private(set) var owners: [User] = []
+    private(set) var ownerIds: [String] = []
+    private(set) var newOwnerIds: [String] = []
     
     init() {
         
@@ -22,9 +34,9 @@ class HaikuManager {
         user.firstName = "Serge"
         user.lastName = "Rylko"
         user.avatarURL = "https://vignette.wikia.nocookie.net/animal-jam-clans-1/images/0/0d/Shiba-inu-puppy-2.jpg"
-        self.currentUser = user
+//        self.currentUser = user
         
-        self.prepareData()
+//        self.prepareData()
     }
     
     //MARK: - Public functions
@@ -71,12 +83,64 @@ class HaikuManager {
         let haiku = Haiku()
         haiku.creator = self.currentUser
         haiku.players = [self.currentUser]
-        haiku.id = 25 //
+        haiku.id = "25" //
         
         return haiku
     }
     
+    public func addNewHaikus(newHaikus: [Haiku], haikusType: Int, owners: [User]) -> [Haiku] {
+        
+        for haiku in newHaikus {
+            
+            for owner in owners {
+                if owner.id == haiku.creatorId {
+                    
+                    haiku.creator = owner
+                }
+                if haiku.playerIds.contains(owner.id) {
+                    
+                    haiku.players.append(owner)
+                }
+            }
+        }
+        
+        guard let aFilter = HaikuManager.HaikusFilter(rawValue: haikusType) else {
+            
+            return []
+        }
+        
+        switch aFilter {
+        case .all:
+//            self.haikus = newHaikus // incorrect adding of new haikus to existing array of haikus
+            print("HaikuManager : self.haikus count =", self.haikus.count)
+        default:
+            print()
+        }
+        
+        self.findOutNewOwnerIds()
+        
+        return newHaikus
+    }
+    
     //MARK: - Private functions
+    
+    private func findOutNewOwnerIds() {
+        
+        var newOwnerIdsArray: [String] = []
+        
+        for haiku in self.haikus {
+            
+            for ownerId in haiku.playerIds {
+                
+                if !self.ownerIds.contains(ownerId) {
+                    
+                    newOwnerIdsArray.append(ownerId)
+                }
+            }
+        }
+        
+        self.newOwnerIds = newOwnerIdsArray
+    }
     
     private func prepareData() {
         //MOCKED data
@@ -115,7 +179,7 @@ class HaikuManager {
         
         let field7 = Field(user: user2, text: "Nothing happens")
         let field8 = Field(user: user3, text: "Solo1 happens")
-        let field9 = Field(user: user1, text: "Solo2 happens")
+//        let field9 = Field(user: user1, text: "Solo2 happens")
         
         let field10 = Field(user: user4, text: "Nothing happens")
         let field11 = Field(user: user1, text: "Solo1 happens")
@@ -142,7 +206,7 @@ class HaikuManager {
         
         ////-- haikus
         let h1 = Haiku()
-        h1.id = 2
+        h1.id = "2"
         h1.creator = user2
         h1.likesCount = 10
         h1.fields = [field1, field2, field3]
@@ -153,7 +217,7 @@ class HaikuManager {
         h1.players = [h1.creator!, user2, user3]
         
         let h2 = Haiku()
-        h2.id = 6
+        h2.id = "6"
         h2.creator = user3
         h2.likesCount = 10
         h2.fields = [field4, field5, field6]
@@ -164,7 +228,7 @@ class HaikuManager {
         h2.players = [user3, user4, user1]
         
         let h3 = Haiku()
-        h3.id = 3
+        h3.id = "3"
         h3.creator = user2
         h3.likesCount = 366
         h3.fields = [field7, field8]
@@ -175,7 +239,7 @@ class HaikuManager {
         h3.players = [user2, user3, user1]
         
         let h4 = Haiku()
-        h4.id = 4
+        h4.id = "4"
         h4.creator = user1
         h4.likesCount = 0
         h4.fields = [field10, field11, field12]
@@ -186,7 +250,7 @@ class HaikuManager {
         h4.players = [user4, h4.creator!, user2]
         
         let h5 = Haiku()
-        h5.id = 5
+        h5.id = "5"
         h5.creator = user1
         h5.likesCount = 12
         h5.fields = [field13, field14]
@@ -197,7 +261,7 @@ class HaikuManager {
         h5.players = [user4, h5.creator!]
         
         let h6 = Haiku()
-        h6.id = 6
+        h6.id = "6"
         h6.creator = user3
         h6.likesCount = 5
         h6.fields = [field16, field17, field18]
@@ -208,7 +272,7 @@ class HaikuManager {
         h6.players = [user4, h6.creator!, user2]
         
         let h7 = Haiku()
-        h7.id = 7
+        h7.id = "7"
         h7.creator = user4
         h7.likesCount = 1500
         h7.fields = [field19, field20, field21]
@@ -219,7 +283,7 @@ class HaikuManager {
         h7.players = [h7.creator!, user1, user2]
         
         let h8 = Haiku()
-        h8.id = 8
+        h8.id = "8"
         h8.creator = user1
         h8.likesCount = 1500
         h8.fields = [field22, field23, field24]
@@ -230,7 +294,7 @@ class HaikuManager {
         h8.players = [h8.creator!]
         
         let h9 = Haiku()
-        h9.id = 8
+        h9.id = "8"
         h9.creator = user1
         h9.likesCount = 777
         h9.fields = [field25, field26]

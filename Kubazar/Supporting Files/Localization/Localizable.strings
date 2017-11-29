@@ -28,6 +28,7 @@
 /**/"ButtonTitles_nextButtonTitle" = "Next";
 /**/"ButtonTitles_editButtonTitle" = "Edit";
 /**/"ButtonTitles_yesButtonTitle" = "Yes";
+/**/"ButtonTitles_changeButtonTitle" = "Change";
 
 /**/"CommonTitles_errorTitle" = "Error";
 /**/"CommonTitles_wrongResponseMessage" = "There was an error during your request.";
@@ -162,6 +163,13 @@
 /**/ "Notifications_liked" = "liked haiku";
 /**/ "Notifications_shared" = "shared haiku";
 /**/ "Notifications_published" = "published haiku";
+
+/*ChangePasswordVC/*
+/**/ "ChangePasswordVC_title" = "Change Password";
+/**/ "ChangePasswordVC_passwordLabel" = "New";
+/**/ "ChangePasswordVC_confirmPasswordLabel" = "Confirm";
+/**/ "ChangePasswordVC_passwordPlaceholder" = "Enter password";
+/**/ "ChangePasswordVC_confirmPasswordPlaceholder" = "Password again";
 
 
 

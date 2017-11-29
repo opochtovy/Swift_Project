@@ -7,12 +7,14 @@
 //
 
 import Foundation
+import ObjectMapper
 
-class Field {
+class Field: MappableObject {
 
     public var id: Int = 0
-    public var text: String = ""
+    public var text: String?
     public var owner: User
+    public var creatorId: String?
     
     /** false if user delete haiku from collection*/
     public var isActive: Bool = true
@@ -24,5 +26,17 @@ class Field {
         self.owner = user
         self.text = text
         self.isFinished = finished
+    }
+    
+    required convenience init?(map: Map){
+        
+        self.init(user: User(), text: "", finished: false)
+    }
+    
+    override func mapping(map: Map) {
+        super.mapping(map: map)
+        
+        text <- map["line"]
+        creatorId <- map["creatorId"]
     }
 }

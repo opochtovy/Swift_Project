@@ -47,23 +47,45 @@ class BazarDetailVM: BaseVM {
         return HaikuPreviewVM(withHaiku: self.haiku)
     }
     
-    public func like() {
-
-        HaikuManager.shared.like(toLike: !self.haiku.liked, haiku: self.haiku)
-        self.prepareModel()
-    }
-    
-    public func publish() {
- 
-        HaikuManager.shared.publish(toPublish: !self.haiku.published, haiku: self.haiku)
-        self.prepareModel()        
-    }
-    
-    public func delete() {
+    public func like(completionHandler:@escaping (String?, Bool) -> ()) {
         
-        let user = User()
-        user.id = "1"
-        HaikuManager.shared.delete(haiku: self.haiku, user: user)
+        self.client.authenticator.likeHaiku(haiku: haiku, completionHandler: { (errorDescription, success) in
+            
+            self.prepareModel()
+            completionHandler(nil, true)
+        })
+    }
+    
+    public func publish(completionHandler:@escaping (String?, Bool) -> ())  {
+        
+        self.client.authenticator.changeHaikuAccess(haiku: haiku, completionHandler: { (errorDescription, success) in
+            
+            self.prepareModel()
+            completionHandler(nil, true)
+        })
+    }
+    
+    public func delete(completionHandler:@escaping (String?, Bool) -> ()) {
+        
+        self.client.authenticator.deleteHaiku(haikuId: haiku.id, completionHandler: { (errorDescription, success) in
+            
+            completionHandler(nil, true)
+        })
+    }
+    
+    public func getHaikuImageURL() -> URL? {
+        
+        let imagePath = self.haiku.haikuImage?.urlString
+        if let imagePath = imagePath {
+            
+            return URL(string: imagePath)
+        }
+        return URL(string: "")
+    }
+    
+    public func getHaikuToDelete() -> Haiku {
+        
+        return self.haiku
     }
     
     //MARK: - Private functions
@@ -73,8 +95,9 @@ class BazarDetailVM: BaseVM {
         
         self.dateText = "23 Min Ago" //TODO: add date stamp
         self.isPublished = self.haiku.published
-        self.isLiked = self.haiku.liked
-        self.likesCount = "\(self.haiku.likesCount)"
+        let currentUserId = self.client.authenticator.getUserId()
+        isLiked = self.haiku.likes.contains(currentUserId)
+        self.likesCount = haiku.likesCount > 0 ? "\(self.haiku.likesCount)" : ""
         
         self.userViewVMs = []
         

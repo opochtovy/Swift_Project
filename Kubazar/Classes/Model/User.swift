@@ -7,6 +7,7 @@
 //
 
 import FirebaseAuth
+import ObjectMapper
 
 protocol UserProtocol {
     
@@ -16,7 +17,7 @@ protocol UserProtocol {
     var avatarImageData: Data? { get set}
 }
 
-class User: UserProtocol {
+class User: MappableObject, UserProtocol {
     
     public var id : String = ""
     public var displayName: String?
@@ -38,7 +39,27 @@ class User: UserProtocol {
         email = firebaseUser.email
         avatarURL = firebaseUser.photoURL?.absoluteString
         
+        let nameComponents = displayName?.components(separatedBy: " ")
+        if let firstComponent = nameComponents?.first {
+            
+            firstName = firstComponent
+        }
+        if let components = nameComponents, components.count > 1, let lastComponent = nameComponents?.last {
+            
+            lastName = lastComponent
+        }
+        
         return self
+    }
+    
+    required convenience init?(map: Map){
+        
+        self.init()
+    }
+    
+    override func mapping(map: Map) {
+        super.mapping(map: map)
+        
     }
 }
 

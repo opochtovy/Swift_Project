@@ -40,8 +40,8 @@ class ProfileVM: BaseVM {
     public func createTableViewData() {
         
         self.tableViewData = [(NSLocalizedString(ProfileVM.nameHeaderTitle, comment: ""), "", false),
-                              (self.client.authenticator.getUserDisplayName(), "", true),
-                              (NSLocalizedString(ProfileVM.infoHeaderTitle, comment: ""), NSLocalizedString(ProfileVM.infoHeaderButtonTitle, comment: ""), false),
+                              (self.client.authenticator.getUserDisplayName(), "", false),
+                              (NSLocalizedString(ProfileVM.infoHeaderTitle, comment: ""), "", false),
                               (self.client.authenticator.getUserEmail(), "", false),
                               (self.client.authenticator.getUserPhone(), "", false),
                               (NSLocalizedString(ProfileVM.changePasswordTitle, comment: ""), "", true)]

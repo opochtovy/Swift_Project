@@ -14,11 +14,13 @@ class UserViewVM {
     public let firstName: String
     public let lastName: String
     private let user: User
+    public let displayName: String
     
     init(withUser user: User) {
         self.user = user
         self.firstName = user.firstName
         self.lastName = user.lastName
+        self.displayName = user.displayName ?? ""
         self.userImageURL = URL(string: user.avatarURL ?? "")
     }
     

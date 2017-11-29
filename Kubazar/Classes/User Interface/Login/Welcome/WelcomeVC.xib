@@ -25,15 +25,15 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="welcomeLogo" translatesAutoresizingMaskIntoConstraints="NO" id="uBx-Yb-4rE">
-                    <rect key="frame" x="65.5" y="87" width="189" height="163"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoColored" translatesAutoresizingMaskIntoConstraints="NO" id="uBx-Yb-4rE">
+                    <rect key="frame" x="105.5" y="87" width="109" height="162"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="163" id="lMi-OR-hN5"/>
-                        <constraint firstAttribute="width" constant="189" id="zgM-mA-0ZK"/>
+                        <constraint firstAttribute="height" constant="162" id="lMi-OR-hN5"/>
+                        <constraint firstAttribute="width" constant="109" id="zgM-mA-0ZK"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R8F-Zu-tmO">
-                    <rect key="frame" x="131.5" y="285" width="57" height="29"/>
+                    <rect key="frame" x="131.5" y="284" width="57" height="29"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="29" id="WxU-gZ-q7i"/>
                     </constraints>
@@ -42,7 +42,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0RL-hI-yL1">
-                    <rect key="frame" x="40" y="337" width="240" height="17"/>
+                    <rect key="frame" x="40" y="336" width="240" height="17"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="240" id="UgS-wx-VIm"/>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="17" id="eUZ-je-Ahp"/>
@@ -52,10 +52,10 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P94-hu-Jnd">
-                    <rect key="frame" x="0.0" y="354" width="320" height="143"/>
+                    <rect key="frame" x="0.0" y="353" width="320" height="144"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e8M-6B-1PV">
-                            <rect key="frame" x="116.5" y="49" width="87" height="44"/>
+                            <rect key="frame" x="116.5" y="49.5" width="87" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="7On-gA-Dve"/>
                             </constraints>
@@ -118,7 +118,7 @@
         </view>
     </objects>
     <resources>
+        <image name="LogoColored" width="109" height="162"/>
         <image name="welcomeArrow" width="18" height="16"/>
-        <image name="welcomeLogo" width="189" height="163"/>
     </resources>
 </document>

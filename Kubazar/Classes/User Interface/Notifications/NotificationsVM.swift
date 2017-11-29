@@ -65,7 +65,7 @@ class NotificationsVM: BaseVM {
     private func prepareModel() {
         
         //-- mocked notifications
-        
+/*
         let haikus = HaikuManager.shared.haikus
         let haiku1 = haikus[0]
         let haiku2 = haikus[1]
@@ -83,7 +83,9 @@ class NotificationsVM: BaseVM {
         n5.readed = true
         
         let notifications = [n1, n2, n3, n4, n5]
-        
+*/
+        let notifications: [KBNotification] = []
+            
         self.dataSource = []
         
         //Sort by sections

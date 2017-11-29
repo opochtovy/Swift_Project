@@ -27,6 +27,8 @@ class ProfileVC: ViewController, UITableViewDelegate, UITableViewDataSource, UII
     @IBOutlet weak var thankYouLabel: UILabel!
     @IBOutlet weak var termsOfServiceButton: UIButton!
     @IBOutlet weak var progressView: UIProgressView!
+    @IBOutlet weak var contentViewForProgressView: UIView!
+    @IBOutlet weak var contentViewForProfileImageView: UIView!
     
     private var scFilter: UISegmentedControl!
     
@@ -37,6 +39,7 @@ class ProfileVC: ViewController, UITableViewDelegate, UITableViewDataSource, UII
         
         let picker = UIImagePickerController()
         picker.allowsEditing = false
+        picker.modalPresentationStyle = .overCurrentContext
         picker.delegate = self
         
         return picker
@@ -66,14 +69,16 @@ class ProfileVC: ViewController, UITableViewDelegate, UITableViewDataSource, UII
         self.tblView.separatorStyle = .none
         
         self.downloadProfileImage()
-        self.hideProgressView()
     }
     
     //MARK: - Private functions
     
     private func downloadProfileImage() {
         
-        self.profileImageView.image = UIImage(named:"testProfileImage")
+        if let url = self.client.authenticator.getProfilePhotoURL() {
+            
+            self.profileImageView.af_setImage(withURL: url)
+        }
     }
     
     private func setNavigationBarAppearance() {
@@ -84,6 +89,7 @@ class ProfileVC: ViewController, UITableViewDelegate, UITableViewDataSource, UII
         self.scFilter.addTarget(self, action: #selector(ProfileVC.didSelectSegment), for: .valueChanged)
         self.scFilter.selectedSegmentIndex = self.viewModel.filter.rawValue
         self.navigationItem.titleView = self.scFilter
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString(ProfileVM.infoHeaderButtonTitle, comment: ""), style: .plain, target: self, action: #selector(self.pressRightButton(button:)))
     }
     
     private func updateUserProfile(displayName: String, email: String) {
@@ -201,13 +207,17 @@ class ProfileVC: ViewController, UITableViewDelegate, UITableViewDataSource, UII
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         self.tblView.deselectRow(at: indexPath, animated: false)
+        
+        if indexPath.row == self.viewModel.getCountOfTableViewCells() - 1 {
+            
+            let changePasswordViewController = ChangePasswordVC(client: self.client)
+            self.navigationController?.pushViewController(changePasswordViewController, animated: true)
+        }
     }
     
     //MARK: - UIImagePickerControllerDelegate
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        
-        self.profileImageView.image = nil
         
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
 
@@ -220,10 +230,6 @@ class ProfileVC: ViewController, UITableViewDelegate, UITableViewDataSource, UII
             }
 
             if let editedImage = UIImage().resizePhoto(image: pickedImage, scale: scale), let data = UIImageJPEGRepresentation(editedImage, 1.0) {
-
-//                DispatchQueue.main.async(){
-//                    self.profileImageView.image = editedImage
-//                }
 
                 self.profileImageView.image = editedImage
                 self.uploadUserAtatar(imageData: data)
@@ -240,11 +246,11 @@ class ProfileVC: ViewController, UITableViewDelegate, UITableViewDataSource, UII
     
     //MARK: - Actions
     
-    @objc func pressRightButton(button: UIButton) {
+    @objc func pressRightButton(button: UIBarButtonItem) {
         
-        print("right button was pressed")
         let title = self.isTblViewEditable ? NSLocalizedString(ProfileVM.infoHeaderButtonTitle, comment: "") : NSLocalizedString(ButtonTitles.doneButtonTitle, comment: "")
-        button.setTitle(title, for: .normal)
+        button.title = title
+        
         self.isTblViewEditable = !self.isTblViewEditable
         
         var displayName = ""
@@ -258,12 +264,12 @@ class ProfileVC: ViewController, UITableViewDelegate, UITableViewDataSource, UII
                     case 1: cell.infoTextField.isEnabled = self.isTblViewEditable
                     if let text = cell.infoTextField.text {
                         displayName = text
-                    }
+                        }
                         
                     case 3: cell.infoTextField.isEnabled = self.isTblViewEditable
                     if let text = cell.infoTextField.text {
                         email = text
-                    }
+                        }
                         
                     default: continue
                     }

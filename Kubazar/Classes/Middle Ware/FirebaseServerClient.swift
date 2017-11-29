@@ -10,6 +10,7 @@ import Foundation
 import Firebase
 import FirebaseStorage
 import Alamofire
+import AlamofireObjectMapper
 import PromiseKit
 
 enum AuthenticatorState {
@@ -30,6 +31,7 @@ class FirebaseServerClient {
     typealias BaseCompletion = (_ success: Bool, _ error: Error?) -> Void
     
     static let AuthenticatorStateDidChangeNotification = "AuthenticatorStateDidChangeNotification"
+    static let DeviceTokenDidPutNotification = "DeviceTokenDidPutNotification"
     
     var sessionManager: SessionManager
     var deviceToken: Data = Data()
@@ -159,6 +161,22 @@ class FirebaseServerClient {
         return emailPart
     }
     
+    public func getProfilePhotoURL() -> URL? {
+        
+        let photoURL = Auth.auth().currentUser?.photoURL
+        return photoURL
+    }
+    
+    public func getUserId() -> String {
+        
+        if let uid = Auth.auth().currentUser?.uid {
+            
+            return uid
+        }
+        
+        return "no user id"
+    }
+    
     //MARK: - Firebase
     
     public func signOut(completionHandler:@escaping (String?, Bool) -> ()) {
@@ -236,14 +254,6 @@ class FirebaseServerClient {
                 
                 UserDefaults.standard.set(true, forKey: StoreKeys.isUserAuthorized)
                 UserDefaults.standard.synchronize()
-                
-                // User is signed in
-                if let user = user {
-                    
-                    print("Phone number: \(user.phoneNumber ?? "nil")")
-                    let userInfo: Any? = user.providerData[0]
-                    print(userInfo ?? "no user info")
-                }
                 fulfill(())
             }
         }
@@ -353,6 +363,28 @@ class FirebaseServerClient {
         }
     }
     
+    public func updatePhotoURL(photoURL: URL?) -> Promise<URL?> {
+        
+        return Promise { fulfill, reject in
+            
+            let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+            changeRequest?.photoURL = photoURL
+            
+            changeRequest?.commitChanges { (error) in
+                
+                if error != nil {
+                    
+                    if let error = error {
+                        
+                        reject(error)
+                    }
+                }
+                
+                fulfill(photoURL)
+            }
+        }
+    }
+    
     public func updateUserProfile(displayName: String, email: String, completionHandler:@escaping (String?, Bool) -> ()) {
         
         let user = Auth.auth().currentUser
@@ -383,6 +415,24 @@ class FirebaseServerClient {
                 
                 completionHandler(nil, true)
             })
+        }
+    }
+    
+    public func updateUserPassword(password: String, completionHandler:@escaping (String?, Bool) -> ()) {
+        
+        let user = Auth.auth().currentUser
+        user?.updatePassword(to: password) { (error) in
+            
+            if error != nil {
+                
+                if let error = error {
+                    
+                    completionHandler(error.localizedDescription, false)
+                    return
+                }
+            }
+            
+            completionHandler(nil, true)
         }
     }
     
@@ -470,6 +520,11 @@ class FirebaseServerClient {
                 
                 } else {
                     
+                    if let currentUser = Auth.auth().currentUser {
+                        
+                        let user = User().initWithFirebaseUser(firebaseUser: currentUser)                        
+                        HaikuManager.shared.currentUser = user
+                    }
                     fulfill(())
                 }
             })
@@ -478,10 +533,14 @@ class FirebaseServerClient {
     
     public func setUserAvatar(imageData: Data, progressCompletion: @escaping (_ percent: Float) -> Void, completionHandler:@escaping (URL?, Bool) -> ()) {
         
-        self.uploadUserAvatar(imageData: imageData, progressCompletion: progressCompletion).then { downloadURL -> Void in
+        self.uploadUserAvatar(imageData: imageData, progressCompletion: progressCompletion).then { downloadURL -> Promise<URL?> in
             
-            completionHandler(downloadURL, true)
+            self.updatePhotoURL(photoURL: downloadURL)
             
+            }.then { downloadURL -> Void in
+                
+                completionHandler(downloadURL, true)
+                
             }.catch { error in
                 
                 completionHandler(nil, false)
@@ -492,7 +551,12 @@ class FirebaseServerClient {
         
         return Promise { fulfill, reject in
             
-            let imageName = self.getUserDisplayName()
+            var imageName = self.getUserDisplayName()
+            let user = Auth.auth().currentUser
+            if let userDisplayName = user?.displayName {
+                
+                imageName = self.getProfileImageName(displayName: userDisplayName)
+            }
             let multipartFormData = MultipartFormData()
             multipartFormData.append(imageData, withName: imageName, fileName: imageName, mimeType: "image/jpeg")
             
@@ -507,7 +571,10 @@ class FirebaseServerClient {
                 
                 guard response.result.isSuccess else {
                     
-                    reject(NSError(domain:"", code:1001, userInfo:nil))
+                    if let error = response.error {
+                        
+                        reject(error)
+                    }
                     return
                 }
                 
@@ -530,6 +597,266 @@ class FirebaseServerClient {
                 print("SUCCESS")
                 fulfill(nil)
             })
+        }
+    }
+    
+    public func getPersonalHaikus(page: Int, perPage: Int, sort: Int, completionHandler:@escaping ([Haiku], [User], Bool) -> ()) {
+        
+        var haikus: [Haiku] = []
+        
+        self.getPersonalHaikusPromise(page: page, perPage: perPage, sort: sort).then { haikusResult -> Promise<[User]> in
+            
+            haikus = haikusResult
+            return self.getOwnersForHaikusPromise(haikus: haikusResult)
+            
+            }.then { owners -> Void in
+            
+                completionHandler(haikus, owners, true)
+            
+            }.catch { error in
+                
+                completionHandler([], [], false)
+        }
+    }
+    
+    private func getPersonalHaikusPromise(page: Int, perPage: Int, sort: Int) -> Promise<[Haiku]> {
+        
+        return Promise { fulfill, reject in
+            
+            if self.state == .authorized {
+                
+                var urlParameters : [String: Any] = ["page": page,
+                                                        "perPage": perPage]
+                if sort == 1 {
+                    urlParameters.updateValue("likes", forKey: "sort")
+                }
+                let request = AuthenticationRouter.getPersonalHaikus(urlParameters: urlParameters)
+                
+                self.sessionManager.request(request).responseArray{(response: DataResponse <[Haiku]>) in
+                    
+                    switch response.result {
+                        
+                    case .success(let haikus):
+                        
+                        print("SUCCESS : haikus count =", haikus.count)
+                        for haiku in haikus {
+                            
+//                            print("haiku.creatorId =", haiku.creatorId ?? "")
+//                            print("haiku.creator?.avatarURL =", haiku.creator?.avatarURL ?? "")
+//                            print("haiku.creator?.displayName =", haiku.creator?.displayName ?? "")
+                        }
+                        print("===")
+                        fulfill(haikus)
+                        
+                    case .failure(let error):
+                        
+                        reject(error)
+                    }
+                }
+                
+            }
+        }
+    }
+    
+    
+    
+    private func getOwnersForHaikusPromise(haikus: [Haiku]) -> Promise<[User]> {
+        
+        return Promise { fulfill, reject in
+            
+/*
+            let queue = OperationQueue()
+            queue.maxConcurrentOperationCount = 50
+            for ownerId in ownerIds {
+                
+                let operation = AsyncBlockOperation(block: { operation in
+                    
+                    let request = AuthenticationRouter.getUserInfo(creatorId: ownerId)
+                    self.sessionManager.request(request).responseJSON(completionHandler: { (response) in
+                        
+                        guard response.result.isSuccess else {
+                            
+                            if let error = response.error {
+                                
+                                operation.finish(error: error)
+                            }
+                            return
+                        }
+                        
+//                            let array = response.result.value as? [Dictionary<String, Any>]
+//                            if let array = array {
+//                                fulfill(array)
+//                            }
+                        
+                        operation.finish()
+                    })
+                    
+                })
+                
+                operation.completionBlock = {
+                    
+                    if let error = operation.error {
+                        
+                        queue.cancelAllOperations()
+                        reject(error)
+                        
+                    } else if queue.operationCount == 0 {
+                        
+                        fulfill(owners)
+                    }
+                }
+                
+                queue.addOperation(operation)
+            }
+            
+            if queue.operationCount == 0 {
+                
+                fulfill(owners)
+            }
+*/
+            // test till Artem write request to get User info by creatorId
+            
+            var ownerIds: [String] = []
+            for haiku in haikus {
+                
+                for ownerId in haiku.playerIds {
+                    
+                    if !ownerIds.contains(ownerId) {
+                        
+                        ownerIds.append(ownerId)
+                    }
+                }
+            }
+            
+            var owners: [User] = []
+            let user = Auth.auth().currentUser
+            for ownerId in ownerIds {
+                if ownerId == user?.uid {
+                    owners.append(HaikuManager.shared.currentUser)
+                }
+            }
+            fulfill(owners)
+            // end of test
+        }
+    }
+    
+    public func likeHaiku(haiku: Haiku, completionHandler:@escaping (String?, Bool) -> ()) {
+        
+        self.likeHaikuPromise(haiku: haiku).then { () -> Void in
+            
+            completionHandler(nil, true)
+            
+            }.catch { error in
+                
+                completionHandler(error.localizedDescription, false)
+        }
+    }
+    
+    private func likeHaikuPromise(haiku: Haiku) -> Promise<Void> {
+        
+        return Promise { fulfill, reject in
+            
+            if self.state == .authorized {
+                
+                let request = HaikuRouter.likeHaiku(haikuId: haiku.id)
+                self.sessionManager.request(request).responseObject { (response: DataResponse<Haiku>) in
+                    
+                    switch response.result {
+                        
+                    case .success(let newHaiku):
+                        
+                        haiku.likes = newHaiku.likes
+                        haiku.likesCount = newHaiku.likesCount
+                        fulfill(())
+                        
+                    case .failure(let error):
+                        
+                        reject(error)
+                    }
+                }
+            }
+        }
+    }
+    
+    public func deleteHaiku(haikuId: String, completionHandler:@escaping (String?, Bool) -> ()) {
+        
+        self.deleteHaikuPromise(haikuId: haikuId).then { () -> Void in
+            
+            completionHandler(nil, true)
+            
+            }.catch { error in
+                
+                completionHandler(error.localizedDescription, false)
+        }
+    }
+    
+    private func deleteHaikuPromise(haikuId: String) -> Promise<Void> {
+        
+        return Promise { fulfill, reject in
+            
+            if self.state == .authorized {
+                
+                let request = HaikuRouter.deleteHaiku(haikuId: haikuId)
+                
+                self.sessionManager.request(request).response(completionHandler: { response in
+                    
+                    if let error = response.error {
+                        
+                        reject(error)
+                        
+                    } else {
+                        
+                        let statusCode = response.response?.statusCode
+                        if statusCode == 204 {
+
+                            print("SUCCESS")
+                            fulfill(())
+                        } else {
+                            reject(NSError(domain:"", code:1001, userInfo:nil))
+                        }
+                    }
+                })
+            }
+        }
+    }
+    
+    public func changeHaikuAccess(haiku: Haiku, completionHandler:@escaping (String?, Bool) -> ()) {
+        
+        self.changeHaikuAccessPromise(haiku: haiku).then { () -> Void in
+            
+            completionHandler(nil, true)
+            
+            }.catch { error in
+                
+                completionHandler(error.localizedDescription, false)
+        }
+    }
+    
+    private func changeHaikuAccessPromise(haiku: Haiku) -> Promise<Void> {
+        
+        return Promise { fulfill, reject in
+            
+            if self.state == .authorized {
+                
+                let accessValue = haiku.published ? "private" : "public"
+                let bodyParameters: [String: String] = ["access": accessValue]
+                let request = HaikuRouter.changeHaikuAccess(haikuId: haiku.id, bodyParameters: bodyParameters)
+                self.sessionManager.request(request).responseObject { (response: DataResponse<Haiku>) in
+                    
+                    switch response.result {
+                        
+                    case .success(let newHaiku):
+                        
+                        haiku.published = newHaiku.published
+                        
+                        fulfill(())
+                        
+                    case .failure(let error):
+                        
+                        reject(error)
+                    }
+                }
+            }
         }
     }
 }
