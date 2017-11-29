@@ -157,6 +157,7 @@
 /**/ "FriendList_haikus" = "Haikus";
 
 /*ChangePasswordVC/*
+/**/ "ChangePasswordVC_title" = "Change Password";
 /**/ "ChangePasswordVC_passwordLabel" = "New";
 /**/ "ChangePasswordVC_confirmPasswordLabel" = "Confirm";
 /**/ "ChangePasswordVC_passwordPlaceholder" = "Enter password";

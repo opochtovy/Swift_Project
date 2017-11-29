@@ -14,6 +14,7 @@ class ChangePasswordVC: ViewController, UITextFieldDelegate {
     
     static let titleText = "ChangePasswordVC_title"
     static let passwordLabelText = "ChangePasswordVC_passwordLabel"
+    static let passwordPlaceholder = "ChangePasswordVC_passwordPlaceholder"
     static let confirmPasswordLabelText = "ChangePasswordVC_confirmPasswordLabel"
     static let confirmPasswordPlaceholder = "ChangePasswordVC_confirmPasswordPlaceholder"
 
@@ -62,7 +63,7 @@ class ChangePasswordVC: ViewController, UITextFieldDelegate {
         self.title = NSLocalizedString(ChangePasswordVC.titleText, comment: "")
         self.passwordLabel.text = NSLocalizedString(ChangePasswordVC.passwordLabelText, comment: "")
         self.confirmPasswordLabel.text = NSLocalizedString(ChangePasswordVC.confirmPasswordLabelText, comment: "")
-        self.passwordTextField.placeholder = NSLocalizedString(ProfileVM.changePasswordTitle, comment: "")
+        self.passwordTextField.placeholder = NSLocalizedString(ChangePasswordVC.passwordPlaceholder, comment: "")
         self.confirmPasswordTextField.placeholder = NSLocalizedString(ChangePasswordVC.confirmPasswordPlaceholder, comment: "")
     }
     
