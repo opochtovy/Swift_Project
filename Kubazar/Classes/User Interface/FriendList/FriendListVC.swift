@@ -36,12 +36,16 @@ class FriendListVC: ViewController, UITableViewDelegate, UITableViewDataSource, 
         self.scFilter = UISegmentedControl(items: titles)
         self.scFilter.addTarget(self, action: #selector(FriendListVC.didSelectSegmentControl(_:)), for: .valueChanged)
         self.navigationItem.titleView = self.scFilter
+        self.tblFriends.sectionIndexColor = #colorLiteral(red: 0.537254902, green: 0.537254902, blue: 0.537254902, alpha: 1)
+        self.tblFriends.sectionIndexBackgroundColor = UIColor.white
         self.tblFriends.register(UINib.init(nibName: "FriendListCell", bundle: nil), forCellReuseIdentifier: FriendListCell.reuseID)
-        self.updateContent()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.setBarAppearance()
+        self.updateContent()
     }
     
     //MARK: - Private functions
@@ -49,20 +53,34 @@ class FriendListVC: ViewController, UITableViewDelegate, UITableViewDataSource, 
     private func updateContent() {
         
         self.scFilter.selectedSegmentIndex = self.viewModel.filter.rawValue
-        
-        
+        self.viewModel.requestContacts { (success, error) in
+            
+            if success {
+                
+               self.tblFriends.reloadData()
+            }
+        }
     }
-    private func setStatusBarAppearance() {
+    
+    private func setBarAppearance() {
             
         let statusBarView = UIApplication.shared.value(forKey: "statusBar") as? UIView
         statusBarView?.backgroundColor = #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)
         statusBarView?.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        
+        self.navigationController?.navigationBar.backgroundColor = #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)
+        self.navigationController?.navigationBar.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     }
     
     //MARK: - Actions
     
     @IBAction private func didSelectSegmentControl(_ sender: UISegmentedControl) {
         
+        if let value = FriendListVM.Filter(rawValue: sender.selectedSegmentIndex) {
+            
+            self.viewModel.filter = value
+            self.updateContent()
+        }
     }
     
     //MARK: - UITableViewDataSource
@@ -94,6 +112,16 @@ class FriendListVC: ViewController, UITableViewDelegate, UITableViewDataSource, 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        if self.viewModel.getFriendListCellVM(forIndexPath: indexPath).showInviteButton == false {
+            
+            if let vm = self.viewModel.getFrieldDetailVM(forIndexPath: indexPath) {
+                
+                let ctrl = FriendDetailVC(client: self.client, viewModel: vm)
+                ctrl.hidesBottomBarWhenPushed = true
+                self.navigationController?.pushViewController(ctrl, animated: true)
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -127,7 +155,14 @@ class FriendListVC: ViewController, UITableViewDelegate, UITableViewDataSource, 
     //MARK: - UISearchBarDelegate
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print("searchText")
+        
+        self.viewModel.searchFilter = searchText
+        self.updateContent()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        searchBar.resignFirstResponder()
     }
     
 }

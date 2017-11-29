@@ -12,7 +12,7 @@ class FriendsCell: UITableViewCell {
     
     static var reuseID: String = "FriendsCell"
     
-    @IBOutlet private weak var ivUser: UIImageView!
+    @IBOutlet private weak var vUserThumbnail: UserThumbnail!
     @IBOutlet private weak var lbName: UILabel!
     @IBOutlet public weak var btnCheck: UIButton!
     
@@ -21,14 +21,8 @@ class FriendsCell: UITableViewCell {
         didSet {
             
             lbName.text = viewModel.name
-            self.btnCheck.isSelected = self.viewModel.isChosen
-            
-            ivUser.image = nil
-            
-            if let url = self.viewModel.iconUrl {
-                
-                ivUser.af_setImage(withURL: url)
-            }
+            self.btnCheck.isSelected = self.viewModel.isChosen            
+            self.vUserThumbnail.viewModel = self.viewModel.getThumbnailVM()
         }
     }
 
@@ -41,8 +35,6 @@ class FriendsCell: UITableViewCell {
     private func setup() {
         
         self.addGestureRecognizer(UISwipeGestureRecognizer(target: nil, action: nil))
-        self.ivUser.layer.cornerRadius = self.ivUser.bounds.width / 2
-        self.ivUser.layer.masksToBounds = true
     }
     
 }

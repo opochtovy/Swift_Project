@@ -38,6 +38,7 @@
 /**/"TabBarTitles_friends" = "Friends";
 /**/"TabBarTitles_write" = "Write";
 /**/"TabBarTitles_profile" = "Profile";
+/**/"TabBarTitles_notifications" = "Notifications";
 
 /*WriteMainMenuVC*/
 /**/"WriteMainMenuTitles_title" = "Write";
@@ -156,11 +157,19 @@
 /**/ "FriendList_all" = "All";
 /**/ "FriendList_haikus" = "Haikus";
 
+/*NotificationsVC*/
+/**/ "Notifications_new" = "New";
+/**/ "Notifications_earlier" = "Earlier";
+/**/ "Notifications_liked" = "liked haiku";
+/**/ "Notifications_shared" = "shared haiku";
+/**/ "Notifications_published" = "published haiku";
+
 /*ChangePasswordVC/*
 /**/ "ChangePasswordVC_title" = "Change Password";
 /**/ "ChangePasswordVC_passwordLabel" = "New";
 /**/ "ChangePasswordVC_confirmPasswordLabel" = "Confirm";
 /**/ "ChangePasswordVC_passwordPlaceholder" = "Enter password";
 /**/ "ChangePasswordVC_confirmPasswordPlaceholder" = "Password again";
+
 
 

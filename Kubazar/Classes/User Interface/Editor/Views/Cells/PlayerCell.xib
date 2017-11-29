@@ -34,25 +34,12 @@
                         </constraints>
                         <state key="normal" image="iconCheck"/>
                     </button>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ava-mX-lsD">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ava-mX-lsD" customClass="UserThumbnail" customModule="Kubazar" customModuleProvider="target">
                         <rect key="frame" x="16" y="53.5" width="31" height="31"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testAuthor" translatesAutoresizingMaskIntoConstraints="NO" id="hKO-Pm-EYm">
-                                <rect key="frame" x="0.0" y="-0.5" width="31" height="31"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="31" id="3qE-TZ-lU1"/>
-                                    <constraint firstAttribute="width" secondItem="hKO-Pm-EYm" secondAttribute="height" multiplier="1:1" id="Q4B-ZZ-JH8"/>
-                                </constraints>
-                            </imageView>
-                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="31" id="7oH-Wp-v2l"/>
                             <constraint firstAttribute="width" secondItem="ava-mX-lsD" secondAttribute="height" multiplier="1:1" id="LhA-lV-PvM"/>
-                            <constraint firstAttribute="trailing" secondItem="hKO-Pm-EYm" secondAttribute="trailing" id="Ugi-jE-9Ns"/>
-                            <constraint firstItem="hKO-Pm-EYm" firstAttribute="leading" secondItem="ava-mX-lsD" secondAttribute="leading" id="ad0-OK-qCd"/>
-                            <constraint firstAttribute="bottom" secondItem="hKO-Pm-EYm" secondAttribute="bottom" id="gaG-3D-dQO"/>
-                            <constraint firstItem="hKO-Pm-EYm" firstAttribute="top" secondItem="ava-mX-lsD" secondAttribute="top" id="xKo-j2-cf3"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -70,15 +57,13 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="btnStatus" destination="rPT-UH-syK" id="54v-ch-ehw"/>
-                <outlet property="ivUser" destination="hKO-Pm-EYm" id="zR7-2f-cGg"/>
                 <outlet property="lbStatus" destination="zg2-TZ-jSh" id="lFg-12-2Fv"/>
-                <outlet property="vUserImageContainer" destination="ava-mX-lsD" id="b9H-8b-NPO"/>
+                <outlet property="vUserThumbnail" destination="ava-mX-lsD" id="y5O-ZJ-j9j"/>
             </connections>
             <point key="canvasLocation" x="-25" y="32"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="iconCheck" width="22" height="22"/>
-        <image name="testAuthor" width="215" height="235"/>
     </resources>
 </document>

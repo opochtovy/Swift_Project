@@ -13,12 +13,19 @@ class UserViewVM {
     public let userImageURL: URL?
     public let firstName: String
     public let lastName: String
+    private let user: User
     public let displayName: String
     
     init(withUser user: User) {
+        self.user = user
         self.firstName = user.firstName
         self.lastName = user.lastName
         self.displayName = user.displayName ?? ""
         self.userImageURL = URL(string: user.avatarURL ?? "")
+    }
+    
+    public func getThumbnailVM() -> UserThumbnailVM {
+        
+        return UserThumbnailVM(withUser: user)
     }
 }

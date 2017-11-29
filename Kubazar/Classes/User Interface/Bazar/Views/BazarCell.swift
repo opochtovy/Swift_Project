@@ -14,7 +14,7 @@ class BazarCell: UITableViewCell {
 
     static let reuseID: String = "BazarCell"
     
-    @IBOutlet private weak var ivAuthor: UIImageView!
+    @IBOutlet private weak var vUserThumbnail: UserThumbnail!
     
     @IBOutlet private weak var svNames: UIStackView!
     @IBOutlet private weak var lbAuthorName: UILabel!
@@ -93,22 +93,11 @@ class BazarCell: UITableViewCell {
             self.btnLike.isSelected = false
         }
         
-        self.ivAuthor.image = nil
-        
-        if let url = viewModel.authorPictureURL {
-            
-            self.ivAuthor.af_setImage(withURL: url)
-        }
-        
+        self.vUserThumbnail.viewModel = viewModel.getThumbnailVM()
         self.vHaikuContent.viewModel = viewModel.getPreviewVM()
     }
     
     private func setup() {
-        
-        self.ivAuthor.layer.cornerRadius = self.ivAuthor.bounds.height / 2
-        self.ivAuthor.layer.borderWidth = 1.0
-        self.ivAuthor.layer.borderColor = UIColor(red: 0.82, green: 0.82, blue: 0.82, alpha: 1.0).cgColor
-        self.ivAuthor.layer.masksToBounds = true
         
         self.vHaikuContent.layer.shadowColor = UIColor.black.cgColor
         self.vHaikuContent.layer.shadowOffset = CGSize(width: 0, height: 2.0)
