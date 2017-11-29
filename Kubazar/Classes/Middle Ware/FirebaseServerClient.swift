@@ -522,12 +522,7 @@ class FirebaseServerClient {
                     
                     if let currentUser = Auth.auth().currentUser {
                         
-                        let user = User()
-                        user.id = currentUser.uid
-                        user.displayName = currentUser.displayName
-                        user.email = currentUser.email
-                        user.avatarURL = currentUser.photoURL?.absoluteString
-                        
+                        let user = User().initWithFirebaseUser(firebaseUser: currentUser)                        
                         HaikuManager.shared.currentUser = user
                     }
                     fulfill(())

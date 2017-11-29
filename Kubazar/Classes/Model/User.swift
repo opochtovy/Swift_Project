@@ -39,6 +39,16 @@ class User: MappableObject, UserProtocol {
         email = firebaseUser.email
         avatarURL = firebaseUser.photoURL?.absoluteString
         
+        let nameComponents = displayName?.components(separatedBy: " ")
+        if let firstComponent = nameComponents?.first {
+            
+            firstName = firstComponent
+        }
+        if let components = nameComponents, components.count > 1, let lastComponent = nameComponents?.last {
+            
+            lastName = lastComponent
+        }
+        
         return self
     }
     

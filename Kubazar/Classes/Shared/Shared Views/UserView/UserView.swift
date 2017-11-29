@@ -18,11 +18,8 @@ class UserView: UIView {
     public var viewModel: UserViewVM? {
         didSet {
             
-//            self.lbFirstName.text = viewModel?.firstName ?? ""
-//            self.lbLastName.text = viewModel?.lastName ?? ""
-            let nameComponents = viewModel?.displayName.components(separatedBy: " ")
-            self.lbFirstName.text = nameComponents?.first
-            self.lbLastName.text = nameComponents?.last
+            self.lbFirstName.text = viewModel?.firstName ?? ""
+            self.lbLastName.text = viewModel?.lastName ?? ""
             self.vUserThumbnail.viewModel = viewModel?.getThumbnailVM()
         }
     }
