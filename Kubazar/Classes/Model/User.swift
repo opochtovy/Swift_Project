@@ -28,6 +28,7 @@ class User: MappableObject, UserProtocol {
     public var firstName: String = ""
     public var lastName: String = ""
     public var phoneNumber: String = ""
+    public var haikusCount: Int = 0
     public lazy var fullName: String = {
         return "\(firstName) \(lastName)"
     }()
@@ -40,6 +41,7 @@ class User: MappableObject, UserProtocol {
         avatarURL = firebaseUser.photoURL?.absoluteString
         
         let nameComponents = displayName?.components(separatedBy: " ")
+        
         if let firstComponent = nameComponents?.first {
             
             firstName = firstComponent
@@ -59,7 +61,16 @@ class User: MappableObject, UserProtocol {
     
     override func mapping(map: Map) {
         super.mapping(map: map)
+        id <- map["uid"]
+        displayName <- map["displayName"]
         
+        let nameComponents = displayName?.components(separatedBy: " ")
+        firstName = nameComponents?[safe: 0] ?? ""
+        lastName = nameComponents?[safe: 1] ?? ""
+        
+        avatarURL <- map["photoURL"]
+        phoneNumber <- map["phoneNumber"]
+        haikusCount <- map["haikusCount"]
     }
 }
 

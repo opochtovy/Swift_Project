@@ -11,6 +11,8 @@ import AlamofireImage
 
 class HaikuPreview: UIView {
     
+    static let placeholder = Placeholders.haiku.getRandom()
+    
     @IBOutlet private weak var view: UIView!
     
     @IBOutlet private weak var ivHaiku: UIImageView!
@@ -46,7 +48,7 @@ class HaikuPreview: UIView {
             
             if let url = viewModel.haikuPictureURL {
                 
-                self.ivHaiku.af_setImage(withURL: url)
+                self.ivHaiku.af_setImage(withURL: url, placeholderImage: HaikuPreview.placeholder, imageTransition: .crossDissolve(0.2))
             }
         }
     }
