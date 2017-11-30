@@ -89,7 +89,12 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
         let previousCount = self.viewModel.numberOfItems()
         self.viewModel.getHaikusFromNewHaikus(newHaikus: haikus, owners: owners)
         
-        if haikus.count == 0 { return }
+        if haikus.count == 0 {
+            
+            self.tblView.reloadData()
+            return
+            
+        }
         
         if previousCount > 0, self.viewModel.numberOfItems() >= previousCount {
             
@@ -104,6 +109,8 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
     func updateCells(previousCount: Int) {
         
         var indexPaths: [IndexPath] = []
+        if self.viewModel.numberOfItems() == 0 || previousCount >= self.viewModel.numberOfItems() { return }
+        
         for i in (previousCount...self.viewModel.numberOfItems() - 1) {
             
             indexPaths.append(IndexPath(row: i, section: 0))
@@ -145,6 +152,7 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
                 
                 if !success {
                     
+                    weakSelf.tblView.reloadData()
                     weakSelf.showWrongResponseAlert(message: "")
                 } else {
                     
