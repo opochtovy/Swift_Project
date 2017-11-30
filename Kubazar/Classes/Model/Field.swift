@@ -37,6 +37,6 @@ class Field: MappableObject {
         super.mapping(map: map)
         
         text <- map["line"]
-        creatorId <- map["creatorId"]
+        creatorId <- map["authorId"]
     }
 }

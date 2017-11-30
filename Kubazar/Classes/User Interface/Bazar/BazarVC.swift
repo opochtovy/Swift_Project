@@ -200,7 +200,10 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
         self.viewModel.updateDataSource()
         self.viewModel.page = 0
         self.reloadTableView()
-        MBProgressHUD.showAdded(to: self.view, animated: true)
+        if self.viewModel.numberOfItems() == 0 {
+            
+            MBProgressHUD.showAdded(to: self.view, animated: true)
+        }
         self.getPersonalHaikus(page: self.viewModel.page, perPage: self.viewModel.perPage)
     }
     
@@ -236,22 +239,8 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
         
         let cell = tableView.dequeueReusableCell(withIdentifier: BazarCell.reuseID, for: indexPath) as! BazarCell
         cell.viewModel = self.viewModel.getCellVM(forIndexPath: indexPath)
-        if cell.isHaikuPreviewImageNil() {
-            
-            self.downloadHaikuImageForCell(cell: cell, indexPath: indexPath)
-        }
         
         return cell
-    }
-    
-    //MARK: Public functions
-    
-    private func downloadHaikuImageForCell(cell: BazarCell, indexPath: IndexPath) {
-        
-        if let imagePath = self.viewModel.getImagePathForHaiku(forIndexPath: indexPath), let url = URL(string: imagePath) {
-            
-            cell.setImageForCell(imageURL: url)
-        }
     }
     
     // MARK: - BazarDetailVCDelegate

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Social
 
 protocol BazarDetailVCDelegate : class {
     
@@ -14,6 +15,10 @@ protocol BazarDetailVCDelegate : class {
 }
 
 class BazarDetailVC: ViewController {
+    
+    static let facebookSheetTitle = "BazarDetailVC_facebookSheetTitle"
+    static let facebookAlertTitle = "BazarDetailVC_facebookAlertTitle"
+    static let facebookAlertMessage = "BazarDetailVC_facebookAlertMessage"
     
     private enum BackColors {
         
@@ -82,7 +87,20 @@ class BazarDetailVC: ViewController {
     }
     
     @objc private func didPressShareButton(_ sender: UIBarButtonItem) {
-        print("-- Share Details")
+        
+        if SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook){
+            let facebookSheet:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+            facebookSheet.setInitialText(NSLocalizedString(BazarDetailVC.facebookSheetTitle, comment: ""))
+            
+            let image = self.vHaikuContent.imageWithHaiku()
+            facebookSheet.add(image)
+            
+            self.present(facebookSheet, animated: true, completion: nil)
+        } else {
+            let alert = UIAlertController(title: NSLocalizedString(BazarDetailVC.facebookAlertTitle, comment: ""), message: NSLocalizedString(BazarDetailVC.facebookAlertMessage, comment: ""), preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString(ButtonTitles.doneButtonTitle, comment: ""), style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     @objc private func didPressPublishButton(_ sender: UIBarButtonItem) {
@@ -125,10 +143,6 @@ class BazarDetailVC: ViewController {
         lbDate.text = viewModel.dateText
         
         vHaikuContent.viewModel = self.viewModel.getPreviewVM()
-        if let imageURL = self.viewModel.getHaikuImageURL() {
-            
-            self.vHaikuContent.setImageForHaikuPreview(imageURL: imageURL)
-        }
         
         vUser1.viewModel = viewModel.getUserViewVM(forIndex: 0)
         vUser2.viewModel = viewModel.getUserViewVM(forIndex: 1)

@@ -17,6 +17,7 @@ class HaikuPreview: UIView {
     @IBOutlet private weak var lbField1: UILabel!
     @IBOutlet private weak var lbField2: UILabel!
     @IBOutlet private weak var lbField3: UILabel!
+    @IBOutlet weak var ivWaterMark: UIImageView!
     
     private var gradient: CAGradientLayer?
     
@@ -76,32 +77,19 @@ class HaikuPreview: UIView {
     
     //MARK: Public functions
     
-    public func setImageForHaikuPreview(imageURL: URL) {
+    public func getImageToShare() -> UIImage? {
         
-//        self.ivHaiku.image = image == nil ? UIImage(named:"testProfileImage") : image
-        self.ivHaiku.image = nil
-        if let cachedImage = self.imageCache.image(withIdentifier: imageURL.absoluteString) {
-            
-            self.ivHaiku.image = cachedImage
-        
-        } else {
-            
-//            self.ivHaiku.af_setImage(withURL: imageURL)
-            let urlRequest = URLRequest(url: imageURL)
-            self.downloader.download(urlRequest) { response in
-                
-                if let image = response.result.value {
-                    
-                    self.ivHaiku.image = image
-                    self.imageCache.add(image, withIdentifier: imageURL.absoluteString)
-                }
-            }
-        }
+        return self.ivHaiku.image
     }
     
-    public func isImageNil() -> Bool {
-        
-        return self.ivHaiku.image == nil
+    public func imageWithHaiku() -> UIImage? {
+        self.ivWaterMark.isHidden = false
+        UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, false, 0.0)
+        self.view.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        self.ivWaterMark.isHidden = true        
+        return img
     }
     
     //MARK: Private functions

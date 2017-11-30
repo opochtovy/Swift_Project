@@ -31,6 +31,6 @@ class HaikuPreviewVM {
         self.fontSize = decorator.fontSize
         self.fontfamilyName = decorator.fontFamily
         
-        self.haikuPictureURL = URL(string: haiku.haikuImage?.urlString ?? "")
+        self.haikuPictureURL = URL(string: haiku.pictureURL ?? "")
     }    
 }

@@ -266,6 +266,26 @@ class FirebaseServerClient {
         }
     }
     
+    public func getValidToken(completionHandler:@escaping (String?, Bool) -> ()) {
+        
+        self.getToken().then { (_) -> Void in
+                
+                completionHandler(nil, true)
+                
+            }.catch { error in
+                
+                if let currentUser = Auth.auth().currentUser {
+                    
+                    let user = User().initWithFirebaseUser(firebaseUser: currentUser)
+                    HaikuManager.shared.currentUser = user
+                    
+                    print("self.authToken =", self.authToken)
+                }
+                
+                completionHandler(error.localizedDescription, false)
+        }
+    }
+    
     public func signInWithEmailPassword(email: String, password: String, completionHandler:@escaping (String?, Bool) -> ()) {
         
         self.signInWithEmailAuthProvider(email: email, password: password).then { (_) -> Promise<Void> in

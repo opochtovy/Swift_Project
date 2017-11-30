@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HaikuPreview" customModule="Kubazar" customModuleProvider="target">
             <connections>
                 <outlet property="ivHaiku" destination="ZZK-Jj-hbo" id="CHx-cr-nRK"/>
+                <outlet property="ivWaterMark" destination="7MA-e8-Fu5" id="8q0-mx-1xa"/>
                 <outlet property="lbField1" destination="Er8-eC-1vf" id="die-jS-bkY"/>
                 <outlet property="lbField2" destination="sjh-8T-z3K" id="Nat-fm-CkM"/>
                 <outlet property="lbField3" destination="Cyn-ed-Ci8" id="ebd-aS-Dam"/>

@@ -83,6 +83,9 @@
 /**/ "BazarDetail_alert_removing_message" = "The Haiku will be removed from your collection.";
 /**/ "BazarDetail_alert_removing_delete" = "Delete";
 /**/ "BazarDetail_alert_cancel" = "Cancel";
+/**/ "BazarDetailVC_facebookSheetTitle" = "Share on Facebook";
+/**/ "BazarDetailVC_facebookAlertTitle" = "Accounts";
+/**/ "BazarDetailVC_facebookAlertMessage" = "Please login to a Facebook account to share.";
 
 /*StartPhoneVerificationVC*/
 /**/"StartPhoneVerificationVC_title" = "Verify phone number";

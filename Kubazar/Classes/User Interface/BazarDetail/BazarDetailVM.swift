@@ -73,16 +73,6 @@ class BazarDetailVM: BaseVM {
         })
     }
     
-    public func getHaikuImageURL() -> URL? {
-        
-        let imagePath = self.haiku.haikuImage?.urlString
-        if let imagePath = imagePath {
-            
-            return URL(string: imagePath)
-        }
-        return URL(string: "")
-    }
-    
     public func getHaikuToDelete() -> Haiku {
         
         return self.haiku
@@ -93,7 +83,7 @@ class BazarDetailVM: BaseVM {
     
         self.chooseMode()
         
-        self.dateText = "23 Min Ago" //TODO: add date stamp
+        self.dateText = self.haiku.finishDate.convertToDate()
         self.isPublished = self.haiku.published
         let currentUserId = self.client.authenticator.getUserId()
         isLiked = self.haiku.likes.contains(currentUserId)
@@ -116,7 +106,17 @@ class BazarDetailVM: BaseVM {
         
         let isUserAuthor = self.haiku.creator?.id == HaikuManager.shared.currentUser.id
         
-        let isUserSoloWritten = Set(self.haiku.players).count == 1 &&
+        var authorIds: [String] = []
+        for field in self.haiku.fields {
+            
+            if let creatorId = field.creatorId, !authorIds.contains(creatorId) {
+                
+                authorIds.append(creatorId)
+            }
+        }
+        
+        // Set(self.haiku.players).count == 1
+        let isUserSoloWritten = authorIds.count == 1 &&
                                 self.haiku.players[0].id == HaikuManager.shared.currentUser.id
         
         if isUserSoloWritten {

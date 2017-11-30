@@ -82,7 +82,7 @@ class BazarCellVM {
         participants = "\(andString) \(friendNames)"
         
         //TODO: udpate dates info with ago cases
-        dateInfo = "23 min ago".uppercased()
+        dateInfo = self.haiku.finishDate.convertToDate().uppercased()
         
         authorPictureURL = URL(string: creator.avatarURL ?? "")
         
@@ -115,7 +115,11 @@ class BazarCellVM {
     
     public func getThumbnailVM() -> UserThumbnailVM {
         
-        return UserThumbnailVM(withUser: self.haiku.creator!, needBorders: true) //TODO: fix crator unwrap
+        if let creator = self.haiku.creator {
+            
+            return UserThumbnailVM(withUser: creator, needBorders: true)
+        }
+        return UserThumbnailVM(withUser: User(), needBorders: true)
     }
 
 }

@@ -37,9 +37,18 @@ class RootVC: ViewController {
         self.setupObserving()
         
         self.client.authenticator.signOut { (errorDescription, success) in
-            
+
             self.client.authenticator.sessionManager.adapter = nil
         }
+        
+//        self.client.authenticator.getValidToken { (errorDescription, success) in
+//
+//            if let authToken = self.client.authenticator.authToken {
+//
+//                print("getValidToken : authToken =", authToken)
+//                self.client.authenticator.sessionManager.adapter = SessionTokenAdapter(sessionToken: authToken)
+//            }
+//        }
     }
     
     override func viewDidLayoutSubviews() {

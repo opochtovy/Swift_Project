@@ -54,6 +54,7 @@ class Haiku: MappableObject {
         createDate <- map["createdOn"]
         finishDate <- map["finishedOn"]
         
+        pictureURL <- map["img.url"]
         haikuImage <- map["img"]
         haikuFont <- map["font"]
         
