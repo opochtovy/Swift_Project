@@ -16,7 +16,10 @@ enum HaikuRouter: URLRequestConvertible {
     case getActiveHaikus(urlParameters: Parameters)
     case likeHaiku(haikuId: String)
     case deleteHaiku(haikuId: String)
-    case changeHaikuAccess(haikuId: String, bodyParameters: [String: String])
+    case changeHaikuAccess(haikuId: String, bodyParameters: Parameters)
+   
+    case createSingleHaiku(bodyParameters: Parameters)
+    case createMultiHaiku(bodyParameters: Parameters)
 
     var method: HTTPMethod {
         
@@ -27,6 +30,9 @@ enum HaikuRouter: URLRequestConvertible {
         case .likeHaiku: return .put
         case .deleteHaiku: return .delete
         case .changeHaikuAccess: return .put
+        
+        case .createSingleHaiku: return .post
+        case .createMultiHaiku: return .post
         }
     }
     
@@ -39,6 +45,8 @@ enum HaikuRouter: URLRequestConvertible {
         case .likeHaiku(let haikuId): return "/haiku/like/\(haikuId)"
         case .deleteHaiku(let haikuId): return "/haiku/\(haikuId)"
         case .changeHaikuAccess(let haikuId, _): return "/haiku/access/\(haikuId)"
+        case .createSingleHaiku(_): return "/haiku/single"
+        case .createMultiHaiku(_): return "/haiku/plural"
         }
     }
     
@@ -62,6 +70,14 @@ enum HaikuRouter: URLRequestConvertible {
             urlRequest = try URLEncoding.queryString.encode(urlRequest, with: urlParameters)
             
         case .changeHaikuAccess(_, let bodyParameters):
+            let jsonData = try JSONSerialization.data(withJSONObject: bodyParameters, options: .prettyPrinted)
+            urlRequest.httpBody = jsonData
+            
+        case .createSingleHaiku(let bodyParameters):
+            let jsonData = try JSONSerialization.data(withJSONObject: bodyParameters, options: .prettyPrinted)
+            urlRequest.httpBody = jsonData
+            
+        case .createMultiHaiku(let bodyParameters):
             let jsonData = try JSONSerialization.data(withJSONObject: bodyParameters, options: .prettyPrinted)
             urlRequest.httpBody = jsonData
             

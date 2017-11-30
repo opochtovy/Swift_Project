@@ -54,7 +54,6 @@ class Haiku: MappableObject {
         fields <- (map["text"])
         players <- (map["owners"])
     }
-
 }
 
 extension Haiku {

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 protocol DecoratorDelegate {
     
@@ -72,6 +73,24 @@ class EditorVC: ViewController, DecoratorDelegate, UITextFieldDelegate, UITableV
 
     @IBAction private func didPressContinueButton(_ sender: UIButton) {
         
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        self.viewModel.sendSingleHaiku {[weak self](success, error) in
+            guard let weakSelf = self else { return }
+            
+            MBProgressHUD.showAdded(to: weakSelf.view, animated: true)
+            if success {
+                
+                weakSelf.navigationController?.popToRootViewController(animated: true)
+            }
+            else {
+                let alertTitle = NSLocalizedString("Editor_alert_fail_title", comment: "")
+                let alertMessage = NSLocalizedString("Editor_alert_fail_message", comment: "")
+                let alertCtrl = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+                let action1 = UIAlertAction(title: NSLocalizedString("Editor_congrats_alert_ok", comment: ""), style: .default, handler: nil)
+                alertCtrl.addAction(action1)
+                weakSelf.present(alertCtrl, animated: true, completion: nil)
+            }
+        }
     }
     
     @IBAction private func didPressColorPickButton( _ sender: UIButton) {
