@@ -223,7 +223,7 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
         let cell = tableView.dequeueReusableCell(withIdentifier: BazarCell.reuseID, for: indexPath) as! BazarCell
         cell.viewModel = self.viewModel.getCellVM(forIndexPath: indexPath)
         if cell.isHaikuPreviewImageNil() {
-            
+
             self.downloadHaikuImageForCell(cell: cell, indexPath: indexPath)
         }
         

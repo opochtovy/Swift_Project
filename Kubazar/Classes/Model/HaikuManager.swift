@@ -25,6 +25,7 @@ class HaikuManager {
     private(set) var owners: [User] = []
     private(set) var ownerIds: [String] = []
     private(set) var newOwnerIds: [String] = []
+    public var friends: [User] = []
     
     init() {
         

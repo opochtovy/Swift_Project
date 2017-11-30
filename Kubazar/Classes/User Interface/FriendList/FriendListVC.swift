@@ -45,21 +45,31 @@ class FriendListVC: ViewController, UITableViewDelegate, UITableViewDataSource, 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setBarAppearance()
-        self.updateContent()
+        self.fetchAndResreshContent()
     }
     
     //MARK: - Private functions
     
-    private func updateContent() {
+    private func fetchAndResreshContent() {
         
-        self.scFilter.selectedSegmentIndex = self.viewModel.filter.rawValue
-        self.viewModel.requestContacts { (success, error) in
+        self.updateContent()
+        
+        self.viewModel.requestContacts { [weak self](success, error) in
+            
+            guard let weakSelf = self else { return }
             
             if success {
                 
-               self.tblFriends.reloadData()
+                weakSelf.updateContent()
             }
         }
+    }
+    
+    private func updateContent() {
+        
+        self.scFilter.selectedSegmentIndex = self.viewModel.filter.rawValue
+        self.tblFriends.reloadData()
+
     }
     
     private func setBarAppearance() {
@@ -79,6 +89,7 @@ class FriendListVC: ViewController, UITableViewDelegate, UITableViewDataSource, 
         if let value = FriendListVM.Filter(rawValue: sender.selectedSegmentIndex) {
             
             self.viewModel.filter = value
+            self.viewModel.prepareModel()
             self.updateContent()
         }
     }

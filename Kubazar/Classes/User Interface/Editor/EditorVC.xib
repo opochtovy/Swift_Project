@@ -79,7 +79,7 @@
                         <constraint firstItem="YnC-bx-83G" firstAttribute="leading" secondItem="VXz-Sr-c7s" secondAttribute="leading" id="nH1-YX-uaw"/>
                     </constraints>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testHaikuIMage" translatesAutoresizingMaskIntoConstraints="NO" id="PTg-AQ-laU" customClass="testHaikuIMage">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testHaikuIMage" translatesAutoresizingMaskIntoConstraints="NO" id="PTg-AQ-laU" customClass="testHaikuIMage">
                     <rect key="frame" x="0.0" y="92" width="320" height="320"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="PTg-AQ-laU" secondAttribute="height" multiplier="1:1" id="YcW-hK-N2M"/>

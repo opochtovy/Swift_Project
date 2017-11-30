@@ -859,4 +859,28 @@ class FirebaseServerClient {
             }
         }
     }
+    
+    //MARK: Friends
+    
+    public func fetchFriends(phones: [String]) -> Promise<[User]> {
+        
+        return Promise {  fulfill, reject in
+            
+            let bodyParams: [String : Any] = ["phones" : phones]
+            let request = FriendsRouter.getFriends(bodyParameters: bodyParams)
+
+            self.sessionManager.request(request).responseArray(keyPath: "users") { (response: DataResponse<[User]>) in
+                
+                switch response.result {
+                case .success(let friends):
+                    
+                    fulfill(friends)
+                    
+                case .failure(let error):
+                    
+                    reject(error)
+                }
+            }
+        }
+    }
 }

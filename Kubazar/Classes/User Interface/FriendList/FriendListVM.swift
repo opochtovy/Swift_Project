@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PromiseKit
 
 class FriendListVM: BaseVM {
     
@@ -52,14 +53,17 @@ class FriendListVM: BaseVM {
         let user = self.dataSource[sectionKey]![indexPath.row]
         
         var toInvite = false
-        
+        var haikusCount = 0
         switch user {
-        case is User:           toInvite = false
-        case is ContactUser:    toInvite = true
+        case is User:
+            toInvite = false
+            haikusCount = (user as! User).haikusCount
+        case is ContactUser:
+            toInvite = true
         default: break
         }
-        //TODO: get haiku count by user
-        return FriendListCellVM(withUser: user, haikuCount: 2, showInvite: toInvite)
+        
+        return FriendListCellVM(withUser: user, haikuCount: haikusCount, showInvite: toInvite)
     }
     
     public func getSectionIndexTitles() -> [String] {
@@ -79,8 +83,19 @@ class FriendListVM: BaseVM {
                         
                         //Set dataSource
                         self.contactUsers = contacts
-                        self.updateDataSource()
-                        completion(true, nil)
+                        
+                        self.getFriend(completion: { (success, error) in
+                            
+                            if success {
+                                
+                                self.prepareModel()
+                                completion(true, nil)
+                            }
+                            else {
+                                
+                                completion(false, error)
+                            }
+                        })
                     }
                     else {
                         
@@ -88,6 +103,21 @@ class FriendListVM: BaseVM {
                     }
                 })
             }
+        }
+    }
+    
+    public func getFriend(completion: @escaping BaseCompletion) {
+        
+        let phones = self.contactUsers.flatMap({$0.phones})
+        self.client.authenticator.fetchFriends(phones: phones).then { users -> Void in
+            
+            HaikuManager.shared.friends = users
+            self.filterUserContacts()
+            completion(true, nil)
+        
+        }.catch { (error) in
+            
+            completion(false, error)
         }
     }
     
@@ -105,17 +135,10 @@ class FriendListVM: BaseVM {
         }
     }
     
-    //MARK: - Private functions
-    
-    private func prepareModel() {
-        
-       
-    }    
-    
-    private func updateDataSource() {
+    public func prepareModel() {
         
         //mocked users
-        let usersSet = Set(HaikuManager.shared.haikus.flatMap({$0.players}))
+        let usersSet = Set(HaikuManager.shared.friends)
         self.users = Array(usersSet)
         
         var resultUsers: [UserProtocol] = []
@@ -151,5 +174,33 @@ class FriendListVM: BaseVM {
         
         self.dataSourceSectionKeys = Array(sortedUsers.keys).sorted(by: {$0 < $1}) // add sort
         self.dataSource = sortedUsers
+    }
+    
+    //MARK: - Private functions
+    
+    /** Exlude contact user that is in users*/
+    private func filterUserContacts() {
+        
+        let truncatedPhones = HaikuManager.shared.friends.map { (user) -> String in
+            
+            return user.phoneNumber.replacingOccurrences(of: "[-() +]", with: "", options: [.regularExpression])
+        }
+
+        self.contactUsers = self.contactUsers.filter { (contactUser) -> Bool in
+            
+            var result: Bool = true
+            
+            for phone in contactUser.phones {
+                
+                let trimmedPhone = phone.replacingOccurrences(of: "[^0-9]", with: "", options: [.regularExpression])
+                if truncatedPhones.contains(trimmedPhone) {
+                    
+                    result = false
+                }
+            }
+            
+            return result
+        }
+        
     }
 }
