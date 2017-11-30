@@ -78,12 +78,6 @@ class BazarVM: BaseVM {
         print("BazarVM - getHaikusFromNewHaikus : self.dataSource =", self.dataSource)
     }
     
-    public func getImagePathForHaiku(forIndexPath indexPath: IndexPath) -> String? {
-        
-        let haiku = self.dataSource[indexPath.row]
-        return haiku.haikuImage?.urlString
-    }
-    
     public func updateDataSource() {
         
         switch self.filter {

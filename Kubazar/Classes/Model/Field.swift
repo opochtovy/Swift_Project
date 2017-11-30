@@ -38,5 +38,6 @@ class Field: MappableObject {
         
         text <- map["line"]
         creatorId <- map["authorId"]
+        owner <- map["creator"]
     }
 }

@@ -23,13 +23,8 @@ class Haiku: MappableObject {
     public var players : [User] = []
     public var decorator: Decorator = Decorator()
     
-    public var creatorId: String?
-    public var playerIds : [String] = []
     public var likes : [String] = []
-    public var createDate: Int = 0
     public var finishDate: String = ""
-    public var haikuImage: HaikuImage?
-    public var haikuFont: Decorator?
     public var access : String = ""
     
     required convenience init?(map: Map){
@@ -41,7 +36,7 @@ class Haiku: MappableObject {
         super.mapping(map: map)
         
         id <- map["_id"]
-        creatorId <- map["creatorId"]
+        creator <- map["creator"]
         access <- map["access"]
         published = access == "public"
         
@@ -51,29 +46,13 @@ class Haiku: MappableObject {
         
         likes <- map["likes"]
         likesCount <- map["likesCount"]
-        createDate <- map["createdOn"]
         finishDate <- map["finishedOn"]
         
         pictureURL <- map["img.url"]
-        haikuImage <- map["img"]
-        haikuFont <- map["font"]
+        decorator <- map["font"]
         
         fields <- (map["text"])
-        playerIds <- (map["owners"])
-        
-        // ??? - needs to be changed when request to get user info will be ready and HaikuManager.shared.owners will be filled
-        var thePlayers: [User] = []
-        for playerId in playerIds {
-            
-            for owner in HaikuManager.shared.owners {
-                
-                if owner.id == playerId {
-                    
-                    thePlayers.append(owner)
-                }
-            }
-        }
-        players = thePlayers
+        players <- (map["owners"])
     }
 
 }
@@ -84,11 +63,6 @@ extension Haiku {
 
         return self.fields.filter({$0.isActive}).flatMap({$0.owner})
     }
-    
-//    public var isCompleted: Bool {
-//
-//        return self.finishedFieldsCount == 3
-//    }
     
     public var finishedFieldsCount: Int {
     

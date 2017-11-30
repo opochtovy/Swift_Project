@@ -743,29 +743,8 @@ class FirebaseServerClient {
                 fulfill(owners)
             }
 */
-            var ownerIds: [String] = []
-            for haiku in haikus {
-                
-                for ownerId in haiku.playerIds {
-                    
-                    if !ownerIds.contains(ownerId) {
-                        
-                        ownerIds.append(ownerId)
-                    }
-                }
-            }
-            print("ownerIds.count =", ownerIds.count)
-            
-            var owners: [User] = []
-            
             // test till Artem write request to get User info by creatorId
-            let user = Auth.auth().currentUser
-            for ownerId in ownerIds {
-                if ownerId == user?.uid {
-                    owners.append(HaikuManager.shared.currentUser)
-                }
-            }
-            fulfill(owners)
+            fulfill([])
             // end of test
         }
     }
