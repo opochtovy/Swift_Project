@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class FriendsVC: ViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -33,10 +34,11 @@ class FriendsVC: ViewController, UITableViewDataSource, UITableViewDelegate {
         self.tblView.register(UINib.init(nibName: "FriendsCell", bundle: nil), forCellReuseIdentifier: FriendsCell.reuseID)
         self.tblView.tableFooterView = UIView()
         
+        MBProgressHUD.showAdded(to: self.tblView, animated: true)
         self.viewModel.getContacts { [weak self](success, error) in
             
             guard let weakSelf = self else { return }
-            
+            MBProgressHUD.hide(for: weakSelf.tblView, animated: true)
             if success {
                 
                 weakSelf.updateContent()

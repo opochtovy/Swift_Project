@@ -67,6 +67,11 @@ extension Haiku {
     
         return self.fields.flatMap({$0.isFinished}).count
     }
+    
+    public var friends: [User] {
+        
+        return self.players.filter{$0 != self.creator}
+    }
 }
 
 extension Haiku: Equatable {
