@@ -100,26 +100,20 @@ class BazarDetailVM: BaseVM {
         
         //mode choosing
         
-        var authorIds: [String] = []
-        for field in self.haiku.fields {
-            
-            let creatorId = field.owner.id
-            if !authorIds.contains(creatorId) {
-                
-                authorIds.append(creatorId)
-            }
-        }
+        let authorIds = haiku.fields.flatMap{$0.creatorId}
         
         print("authorIds =", authorIds)
         print("HaikuManager.shared.currentUser.id =", HaikuManager.shared.currentUser.id)
         for owner in self.haiku.players {
-            print("ownerId =", owner.id)
+            print("player id =", owner.id)
         }
-        let isUserParticipant = self.haiku.players.contains(HaikuManager.shared.currentUser)
+        print("self.haiku.players.count =", self.haiku.players.count)
+        
+        let isUserParticipant = authorIds.contains(HaikuManager.shared.currentUser.id)
         
         let isUserAuthor = self.haiku.creator?.id == HaikuManager.shared.currentUser.id
         
-        let isUserSoloWritten = authorIds.count == 1 &&
+        let isUserSoloWritten = self.haiku.players.count == 1 &&
                                 self.haiku.players[0].id == HaikuManager.shared.currentUser.id
         
         if isUserSoloWritten {
