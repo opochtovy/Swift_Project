@@ -160,7 +160,7 @@ class SignInVC: ViewController, UITextFieldDelegate {
     }
     
     @IBAction private func actionLogin(_ sender: UIButton) {
-
+/*
         if let email = self.emailTextField.text, let password = self.passwordTextField.text  {
             
             if email.count < 7 {
@@ -197,7 +197,7 @@ class SignInVC: ViewController, UITextFieldDelegate {
                 }
             })
         }
-/*
+*/
         // test mode - comment 1
         MBProgressHUD.showAdded(to: self.view, animated: true)
         // "oleg.pochtovy@mobexs.com", password: "111111"
@@ -223,6 +223,6 @@ class SignInVC: ViewController, UITextFieldDelegate {
             }
         })
         // end of test mode
-*/
+
     }
 }
