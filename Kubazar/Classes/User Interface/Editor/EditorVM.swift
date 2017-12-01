@@ -192,4 +192,17 @@ class EditorVM: BaseVM {
             completion(false, error)
         }
     }
+    
+    public func addLine(completion: @escaping BaseCompletion) {
+        
+        self.client.authenticator.putLine(haiku: self.haiku).then { haiku -> Void in
+        
+            //checkHaiku
+            completion(true, nil)
+            
+        }.catch { error -> Void in
+            
+            completion(false, error)
+        }
+    }
 }
