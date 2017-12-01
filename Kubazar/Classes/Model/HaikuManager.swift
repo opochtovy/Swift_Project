@@ -61,12 +61,19 @@ class HaikuManager {
         }
     }
    
-    public func createNewHaiku() -> Haiku{
+    public func createNewHaiku(_ players: [User] = []) -> Haiku{
         
         let haiku = Haiku()
         haiku.creator = self.currentUser
         haiku.players = [self.currentUser]
-        haiku.id = "25" //
+        
+        //solo
+        if players.count == 1 {
+            
+            haiku.fields = [Field(user: players[0], text: ""),
+                            Field(user: players[0], text: ""),
+                            Field(user: players[0], text: ""),]
+        }
         
         return haiku
     }

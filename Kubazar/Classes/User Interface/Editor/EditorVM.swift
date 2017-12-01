@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PromiseKit
 
 class EditorVM: BaseVM {
 
@@ -33,7 +34,7 @@ class EditorVM: BaseVM {
     public var imageData: Data?
     public var haikuBackURL: URL?
     
-    public var nextActionEnabled: Bool = false //TODO: add condition
+    public var nextActionEnabled: Bool = true //TODO: add condition
     
     init(client: Client, haiku: Haiku, imageData: Data? = nil) {
         self.haiku = haiku
@@ -48,7 +49,7 @@ class EditorVM: BaseVM {
         
         self.haikuBackURL = URL(string: self.haiku.pictureURL ?? "")
         self.fields = self.haiku.fields.flatMap({$0.text})
-        self.scope = self.haiku.finishedFieldsCount == 0 ? .creator : .player
+        self.scope = self.haiku.id.count > 1 ? .player : .creator
         self.prepareDecorator()
     }
     
@@ -63,19 +64,11 @@ class EditorVM: BaseVM {
     
     public func inputText(forIndex index: Int, text: String) {
         
-        if self.haiku.fields.count < index + 1 {
-            
-            self.haiku.fields.append(Field(user: HaikuManager.shared.currentUser, text: text, finished: false))
-            print("-- Field appended")
-        }
-        else if self.haiku.fields.count == index + 1 {
-            
-            self.haiku.fields[index].text = text
-            print("-- Field updated")
-        }
-        else {
-             print("-- Field update failed")
-        }
+
+        self.haiku.fields[index].text = text
+        print("-- Field updated")
+        
+
     }
     
     public func isEditingEnabled(forIndex index: Int) -> Bool {
@@ -88,11 +81,7 @@ class EditorVM: BaseVM {
             result = true
         }
         else {
-            //is user turn
-            
-//            let finishedfields = self.haiku.finishedFieldsCount
-//            let playersCount = self.haiku.players.count
-//            let indexOfPlayer = playersCount % (finishedfields + 1)
+
             let player = self.haiku.players[safe: index]
             
             result = player == HaikuManager.shared.currentUser
@@ -159,5 +148,24 @@ class EditorVM: BaseVM {
         
         self.haiku.decorator = Decorator()
         self.prepareDecorator()
+    }
+    
+    public func sendSingleHaiku(completion: @escaping BaseCompletion) {
+        
+        guard let imageData = self.imageData else { completion(false, AppError.nilFound); return }
+        
+        self.client.authenticator.postSingleHaiku(self.haiku).then { (haiku) -> Promise<Haiku> in
+            
+            return self.client.authenticator.postHaikuImage(imageData, haiku)
+            
+        }.then { haiku -> Void in
+        
+            print(haiku)
+            completion(true, nil)
+            
+        }.catch { error -> Void in
+            
+            completion(false, error)
+        }
     }
 }

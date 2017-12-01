@@ -143,6 +143,8 @@
 /**/ "Editor_congrats_alert_title" = "Congrats";
 /**/ "Editor_congrats_alert_ok" = "OK";
 
+/**/ "Editor_alert_fail_title" = "Oops";
+/**/ "Editor_alert_fail_message" = "Something goes wrong";
 
 /*ClipperVC*/
 /**/ "Clipper_crop" = "Crop";

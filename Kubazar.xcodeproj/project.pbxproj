@@ -135,6 +135,7 @@
 		9EC68A301FC5A29300A7F793 /* FontsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC68A2F1FC5A29300A7F793 /* FontsVM.swift */; };
 		9EC68A321FC5B40D00A7F793 /* ReachabilityAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC68A311FC5B40D00A7F793 /* ReachabilityAlertView.swift */; };
 		9EC68A341FC5B42A00A7F793 /* ReachabilityAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EC68A331FC5B42900A7F793 /* ReachabilityAlertView.xib */; };
+		9ED5B5431FD03A500063CCE5 /* ImageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED5B5421FD03A500063CCE5 /* ImageRouter.swift */; };
 		9EDA2C321FCD420400411D59 /* FriendHaikuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDA2C301FCD420400411D59 /* FriendHaikuCell.swift */; };
 		9EDA2C331FCD420400411D59 /* FriendHaikuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EDA2C311FCD420400411D59 /* FriendHaikuCell.xib */; };
 		9EDA2C351FCD430200411D59 /* FriendHaikuCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDA2C341FCD430200411D59 /* FriendHaikuCellVM.swift */; };
@@ -317,6 +318,7 @@
 		9EC68A2F1FC5A29300A7F793 /* FontsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsVM.swift; sourceTree = "<group>"; };
 		9EC68A311FC5B40D00A7F793 /* ReachabilityAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityAlertView.swift; sourceTree = "<group>"; };
 		9EC68A331FC5B42900A7F793 /* ReachabilityAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReachabilityAlertView.xib; sourceTree = "<group>"; };
+		9ED5B5421FD03A500063CCE5 /* ImageRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRouter.swift; sourceTree = "<group>"; };
 		9EDA2C301FCD420400411D59 /* FriendHaikuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendHaikuCell.swift; sourceTree = "<group>"; };
 		9EDA2C311FCD420400411D59 /* FriendHaikuCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendHaikuCell.xib; sourceTree = "<group>"; };
 		9EDA2C341FCD430200411D59 /* FriendHaikuCellVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendHaikuCellVM.swift; sourceTree = "<group>"; };
@@ -975,6 +977,7 @@
 			children = (
 				9EBEBD461FBAFFE600DE831F /* AuthenticationRouter.swift */,
 				9EFF30011FCD60E300013277 /* HaikuRouter.swift */,
+				9ED5B5421FD03A500063CCE5 /* ImageRouter.swift */,
 				9E2BEEFA1FCEEF41006EEA44 /* FriendsRouter.swift */,
 			);
 			path = Routers;
@@ -1329,6 +1332,7 @@
 				9EED066E1FB59E5B00CCD82E /* User.swift in Sources */,
 				9E3212251FC6B69D00F10333 /* PickFontButton.swift in Sources */,
 				9E5E8E271FADC41A00CCCBDA /* BaseVM.swift in Sources */,
+				9ED5B5431FD03A500063CCE5 /* ImageRouter.swift in Sources */,
 				9EDA2C321FCD420400411D59 /* FriendHaikuCell.swift in Sources */,
 				9E04A4E11FC2C030005D3559 /* SMSCodeTextField.swift in Sources */,
 				9E5FA3091FBD7AF40082F56F /* ChoosePictureButton.swift in Sources */,

@@ -89,6 +89,7 @@ class PictureVM: BaseVM {
                 self.chooseImage(withData: data)
                 completion(true, nil)
             } else {
+                
                 completion(false, PhotoError.nilImageData)
             }
         }

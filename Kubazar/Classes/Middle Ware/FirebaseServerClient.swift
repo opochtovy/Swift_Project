@@ -13,6 +13,11 @@ import Alamofire
 import AlamofireObjectMapper
 import PromiseKit
 
+enum AppError: Error {
+    
+    case nilFound
+}
+
 enum AuthenticatorState {
     
     case unauthorized
@@ -881,6 +886,59 @@ class FirebaseServerClient {
                     reject(error)
                 }
             }
+        }
+    }
+    
+    //MARK: Haikus Creation
+    
+    public func postSingleHaiku(_ haiku: Haiku) -> Promise<Haiku> {
+        
+        return Promise {  fulfill, reject in
+
+            let texts = haiku.fields.flatMap{$0.text}
+            var font: [String: Any] = [:]
+            font["color"]   = haiku.decorator.fontHexColor
+            font["family"]  = haiku.decorator.fontFamily
+            font["size"]    = haiku.decorator.fontSize
+            
+            let bodyParams: [String : Any] = ["text" : texts,
+                                              "font" : font]
+            
+            let request = HaikuRouter.createSingleHaiku(bodyParameters: bodyParams)
+            
+            self.sessionManager.request(request).validate().responseObject(completionHandler: { (response: DataResponse<Haiku>) in
+                
+                switch response.result {
+                case .success(let haiku):
+                    fulfill(haiku)
+                case .failure(let error):
+                    reject(error)
+                }
+            })
+        }
+        
+    }
+    
+    public func postHaikuImage(_ imageData: Data, _ haiku: Haiku) -> Promise<Haiku> {
+        
+        return Promise { fulfill, reject in
+            
+            let multipartFormData = MultipartFormData()
+            multipartFormData.append(imageData, withName: "file", fileName: "fileName.jpg", mimeType: "image/jpeg")
+            
+            guard let data = try? multipartFormData.encode() else { reject(AppError.nilFound); return }
+            let request = imageRouter.addImage(argument: haiku.id, contentType: multipartFormData.contentType, multipartFormData: data)
+            
+            
+            self.sessionManager.request(request).validate().responseObject(completionHandler: { (response: DataResponse<Haiku>) in
+                
+                switch response.result {
+                case .success(let haiku):
+                    fulfill(haiku)
+                case .failure(let error):
+                    reject(error)
+                }
+            })
         }
     }
 }
