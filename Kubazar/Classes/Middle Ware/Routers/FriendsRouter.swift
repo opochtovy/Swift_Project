@@ -11,12 +11,14 @@ import Alamofire
 
 enum FriendsRouter: URLRequestConvertible {
     
-    case getFriends(bodyParameters: [String : Any])
+    case getFriends(bodyParameters: Parameters)
+    case inviteFriend(bodyParameters: Parameters)
     
     var method: HTTPMethod {
         
         switch self {
         case .getFriends: return .post
+        case .inviteFriend: return .post
 
         }
     }
@@ -25,6 +27,7 @@ enum FriendsRouter: URLRequestConvertible {
         
         switch self {
         case .getFriends: return "/user/friends"
+        case .inviteFriend: return "/user/invite"
         }
     }
     
@@ -41,7 +44,10 @@ enum FriendsRouter: URLRequestConvertible {
         case .getFriends(let bodyParameters):
             let jsonData = try JSONSerialization.data(withJSONObject: bodyParameters, options: .prettyPrinted)
             urlRequest.httpBody = jsonData
-
+            
+        case .inviteFriend(let bodyParameters):
+            let jsonData = try JSONSerialization.data(withJSONObject: bodyParameters, options: .prettyPrinted)
+            urlRequest.httpBody = jsonData
         }
         
         return urlRequest

@@ -36,7 +36,6 @@ class EditorVC: ViewController, DecoratorDelegate, UITextFieldDelegate, UITableV
         }
     }
     
-    let viewModel: EditorVM
     @IBOutlet private weak var actionBar: UIView!
     @IBOutlet private weak var ivHaikuBack: UIImageView!
     @IBOutlet fileprivate weak var btnColor: UIButton!
@@ -44,6 +43,7 @@ class EditorVC: ViewController, DecoratorDelegate, UITextFieldDelegate, UITableV
     @IBOutlet fileprivate var barButtons: [UIButton]!
     @IBOutlet private var fields: [EditTextField]!
     @IBOutlet private weak var cstrTableHeight: NSLayoutConstraint!
+    let viewModel: EditorVM
     
     init(client: Client, viewModel: EditorVM) {
         self.viewModel = viewModel

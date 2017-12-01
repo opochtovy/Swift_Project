@@ -884,7 +884,7 @@ class FirebaseServerClient {
             let bodyParams: [String : Any] = ["phones" : phones]
             let request = FriendsRouter.getFriends(bodyParameters: bodyParams)
 
-            self.sessionManager.request(request).responseArray(keyPath: "users") { (response: DataResponse<[User]>) in
+            self.sessionManager.request(request).validate().responseArray(keyPath: "users") { (response: DataResponse<[User]>) in
                 
                 switch response.result {
                 case .success(let friends):
@@ -896,6 +896,25 @@ class FirebaseServerClient {
                     reject(error)
                 }
             }
+        }
+    }
+    
+    public func postInvite(onPhoneNumber phoneNumber: String) -> Promise<Void> {
+        
+        return Promise { fulfill, reject in
+            
+            guard phoneNumber.count > 5 else { reject(AppError.nilFound); return }
+            let bodyParams: [String : Any] = ["phone" : phoneNumber]
+            
+            let request = FriendsRouter.inviteFriend(bodyParameters: bodyParams)
+            self.sessionManager.request(request).validate().responseJSON(completionHandler: { (response: DataResponse<Any>) in
+                switch response.result {
+                case .success:
+                    fulfill(())
+                case .failure(let error):
+                    reject(error)
+                }
+            })
         }
     }
     
