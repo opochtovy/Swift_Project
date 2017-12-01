@@ -92,7 +92,7 @@ class BazarDetailVC: ViewController {
             let facebookSheet:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
             facebookSheet.setInitialText(NSLocalizedString(BazarDetailVC.facebookSheetTitle, comment: ""))
             
-            let image = self.vHaikuContent.imageWithHaiku()
+            let image = self.vHaikuContent.textToImage()
             facebookSheet.add(image)
             
             self.present(facebookSheet, animated: true, completion: nil)

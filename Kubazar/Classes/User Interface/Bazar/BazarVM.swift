@@ -86,7 +86,7 @@ class BazarVM: BaseVM {
         print("BazarVM - getHaikusFromNewHaikus : self.dataSource.count =", self.dataSource.count)
     }
     
-    public func updateDataSource() {
+    public func updateDataSource(isSortButtonPressed: Bool) {
         
         switch self.filter {
             
@@ -98,6 +98,11 @@ class BazarVM: BaseVM {
             
         case .active: self.dataSource = self.activeHaikus
             
+        }
+        
+        if isSortButtonPressed && !self.didEndReached {
+            
+            self.dataSource = []
         }
         
         switch self.sort {

@@ -184,6 +184,15 @@ class FirebaseServerClient {
         return "no user id"
     }
     
+    public func activateCurrentUser() {
+        
+        if let currentUser = Auth.auth().currentUser {
+            
+            let user = User().initWithFirebaseUser(firebaseUser: currentUser)
+            HaikuManager.shared.currentUser = user
+        }
+    }
+    
     //MARK: - Firebase
     
     public func signOut(completionHandler:@escaping (String?, Bool) -> ()) {
@@ -266,31 +275,10 @@ class FirebaseServerClient {
         }
     }
     
-    public func getValidToken(completionHandler:@escaping (String?, Bool) -> ()) {
-        
-        self.getToken().then { (_) -> Void in
-                
-                completionHandler(nil, true)
-                
-            }.catch { error in
-                
-                if let currentUser = Auth.auth().currentUser {
-                    
-                    let user = User().initWithFirebaseUser(firebaseUser: currentUser)
-                    HaikuManager.shared.currentUser = user
-                    
-                    print("self.authToken =", self.authToken)
-                }
-                
-                completionHandler(error.localizedDescription, false)
-        }
-    }
-    
     public func signInWithEmailPassword(email: String, password: String, completionHandler:@escaping (String?, Bool) -> ()) {
         
         self.signInWithEmailAuthProvider(email: email, password: password).then { (_) -> Promise<Void> in
             
-            self.state = .authorized
             return self.getToken()
             
             }.then { (_) -> Promise<Void> in
@@ -299,6 +287,7 @@ class FirebaseServerClient {
                 
             }.then { (_) -> Void in
                 
+                self.state = .authorized
                 completionHandler(nil, true)
                 
             }.catch { error in
@@ -857,6 +846,8 @@ class FirebaseServerClient {
                     case .success(let newHaiku):
                         
                         haiku.published = newHaiku.published
+                        haiku.likes = newHaiku.likes
+                        haiku.likesCount = newHaiku.likesCount
                         
                         fulfill(())
                         

@@ -84,6 +84,83 @@ class HaikuPreview: UIView {
         return self.ivHaiku.image
     }
     
+    public func textToImage() -> UIImage {
+        
+        let inImage = self.ivHaiku.image ?? UIImage()
+        let imageScale = inImage.size.height / self.view.frame.height
+        
+        // Setup the font specific variables
+        let textColor = UIColor.init(hex: self.viewModel.fontHexColor)// UIColor.white
+        let fontSize = CGFloat(self.viewModel.fontSize) * imageScale
+        let textFont: UIFont = UIFont(name: self.viewModel.fontfamilyName, size: fontSize)!
+        
+        //Setup the image context using the passed image.
+        UIGraphicsBeginImageContext(inImage.size)
+        
+        //Setups up the font attributes that will be later used to dictate how the text should be drawn
+        let textFontAttributes = [
+            NSAttributedStringKey.font: textFont,
+            NSAttributedStringKey.foregroundColor: textColor,
+            ] as [NSAttributedStringKey : Any]
+        
+        //Put the image into a rectangle as large as the original image.
+        let rect: CGRect = CGRect(x: 0, y: 0, width: inImage.size.width, height: inImage.size.height)
+        
+        inImage.draw(in: rect)
+        
+        //Now Draw the text into an image.
+        let label = UILabel(frame: rect)
+        label.font = textFont
+        
+        // 1st line
+        var drawText = self.lbField1.text
+        label.text = drawText
+        label.sizeToFit()
+        var labelWidth = label.frame.size.width
+        let labelHeight = label.frame.size.height
+        let labelsVertSpacing = 15 * imageScale
+        if let drawText = drawText {
+            drawText.draw(in: CGRect(x: (inImage.size.width - labelWidth) / 2, y: (inImage.size.width - labelHeight) / 2  - labelHeight - labelsVertSpacing, width: labelWidth, height: labelHeight), withAttributes: textFontAttributes)
+        }
+        print("2nd line center Y =", (inImage.size.width) / 2)
+        print("inImage.size.height = ", inImage.size.height)
+        print("labelHeight = ", labelHeight)
+        
+        // 2nd line
+        drawText = self.lbField2.text
+        label.text = drawText
+        label.sizeToFit()
+        labelWidth = label.frame.size.width
+        if let drawText = drawText {
+            drawText.draw(in: CGRect(x: (inImage.size.width - labelWidth) / 2, y: (inImage.size.width - labelHeight) / 2, width: labelWidth, height: labelHeight), withAttributes: textFontAttributes)
+        }
+        
+        // 3rd line
+        drawText = self.lbField3.text
+        label.text = drawText
+        label.sizeToFit()
+        labelWidth = label.frame.size.width
+        if let drawText = drawText {
+            drawText.draw(in: CGRect(x: (inImage.size.width - labelWidth) / 2, y: (inImage.size.width + labelHeight) / 2 + labelsVertSpacing, width: labelWidth, height: labelHeight), withAttributes: textFontAttributes)
+        }
+        
+        if let waterMarkImage = self.ivWaterMark.image {
+            let width = (waterMarkImage.size.width / self.view.frame.width) * inImage.size.width
+            let height = (waterMarkImage.size.height / self.view.frame.height) * inImage.size.height
+            let bottomMargin = 17 * imageScale
+            waterMarkImage.draw(in: CGRect(x: (inImage.size.width - width) / 2, y: inImage.size.height - bottomMargin - height, width: width, height: height))
+        }
+        
+        // Create a new image out of the images we have created
+        let newImage: UIImage? = UIGraphicsGetImageFromCurrentImageContext()
+        
+        // End the context now that we have the image we need
+        UIGraphicsEndImageContext()
+        
+        //And pass it back up to the caller.
+        return newImage ?? UIImage()
+    }
+    
     public func imageWithHaiku() -> UIImage? {
         self.ivWaterMark.isHidden = false
         UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, false, 0.0)
@@ -93,7 +170,31 @@ class HaikuPreview: UIView {
         self.ivWaterMark.isHidden = true        
         return img
     }
-    
+/*
+    public func secondImageWithHaiku() -> UIImage? {
+        
+        // [view resizableSnapshotViewFromRect:rect afterScreenUpdates:YES withCapInsets:edgeInsets]
+        
+        let viewInsets = UIEdgeInsetsMake(-100.0, -100.0, -100.0, -100.0)
+        let imageView = self.view.resizableSnapshotView(from: self.view.frame, afterScreenUpdates: true, withCapInsets: viewInsets)
+        if let imageView = imageView {
+            
+            print("imageView.frame.size.widt =", imageView.frame.size.width)
+            print("self.ivHaiku.image?.size.width =", self.ivHaiku.image?.size.width)
+            
+            self.ivWaterMark.isHidden = false
+            UIGraphicsBeginImageContextWithOptions(imageView.bounds.size, false, 0.0)
+            imageView.layer.render(in: UIGraphicsGetCurrentContext()!)
+            let img = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            self.ivWaterMark.isHidden = true
+            
+            return img
+        }
+        
+        return UIImage()
+    }
+*/
     //MARK: Private functions
     
     private func setup() {

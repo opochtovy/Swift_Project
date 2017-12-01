@@ -41,13 +41,12 @@ class RootVC: ViewController {
             self.client.authenticator.sessionManager.adapter = nil
         }
         
-//        self.client.authenticator.getValidToken { (errorDescription, success) in
+//        if let authToken = self.client.authenticator.authToken {
 //
-//            if let authToken = self.client.authenticator.authToken {
-//
-//                print("getValidToken : authToken =", authToken)
-//                self.client.authenticator.sessionManager.adapter = SessionTokenAdapter(sessionToken: authToken)
-//            }
+//            print("authToken =", authToken)
+//            print("StoreKeys.isUserAuthorized =", UserDefaults.standard.bool(forKey: StoreKeys.isUserAuthorized))
+//            self.client.authenticator.sessionManager.adapter = SessionTokenAdapter(sessionToken: authToken)
+//            self.client.authenticator.activateCurrentUser()
 //        }
     }
     

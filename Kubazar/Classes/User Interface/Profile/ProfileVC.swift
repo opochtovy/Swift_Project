@@ -18,6 +18,7 @@ class ProfileVC: ViewController, UITableViewDelegate, UITableViewDataSource, UII
     static let termsOfServiceButtonTitle = "ProfileVC_termsOfServiceButtonTitle"
     
     static let imagePickerMinSide: CGFloat = 800
+    static let placeholder = Placeholders.profile.getRandom()
 
     @IBOutlet weak var profileContentView: UIView!
     @IBOutlet weak var profileImageView: UIImageView!
@@ -77,7 +78,7 @@ class ProfileVC: ViewController, UITableViewDelegate, UITableViewDataSource, UII
         
         if let url = self.client.authenticator.getProfilePhotoURL() {
             
-            self.profileImageView.af_setImage(withURL: url)
+            self.profileImageView.af_setImage(withURL: url, placeholderImage: ProfileVC.placeholder, imageTransition: .crossDissolve(0.2))
         }
     }
     

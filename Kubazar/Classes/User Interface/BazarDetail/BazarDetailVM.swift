@@ -112,7 +112,10 @@ class BazarDetailVM: BaseVM {
         
         print("authorIds =", authorIds)
         print("HaikuManager.shared.currentUser.id =", HaikuManager.shared.currentUser.id)
-        let isUserParticipant = authorIds.contains(HaikuManager.shared.currentUser.id)
+        for owner in self.haiku.players {
+            print("ownerId =", owner.id)
+        }
+        let isUserParticipant = self.haiku.players.contains(HaikuManager.shared.currentUser)
         
         let isUserAuthor = self.haiku.creator?.id == HaikuManager.shared.currentUser.id
         
