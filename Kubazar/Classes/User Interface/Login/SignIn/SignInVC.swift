@@ -160,7 +160,7 @@ class SignInVC: ViewController, UITextFieldDelegate {
     }
     
     @IBAction private func actionLogin(_ sender: UIButton) {
-/*
+
         if let email = self.emailTextField.text, let password = self.passwordTextField.text  {
             
             if email.count < 7 {
@@ -186,12 +186,19 @@ class SignInVC: ViewController, UITextFieldDelegate {
                     
                 } else {
                     
-                    self.client.authenticator.state = .authorized
+                    if let authToken = self.client.authenticator.authToken {
+                        
+                        print("-- authToken =", authToken)
+                        self.client.authenticator.sessionManager.adapter = SessionTokenAdapter(sessionToken: authToken)
+                        
+                        let notification = Notification(name: Notification.Name(rawValue: FirebaseServerClient.DeviceTokenDidPutNotification))
+                        NotificationCenter.default.post(notification)
+                    }
                 }
             })
         }
-*/
-        // test mode
+/*
+        // test mode - comment 1
         MBProgressHUD.showAdded(to: self.view, animated: true)
         // "oleg.pochtovy@mobexs.com", password: "111111"
         // "serge.rylko@mobexs.com", password: "111111"
@@ -216,6 +223,6 @@ class SignInVC: ViewController, UITextFieldDelegate {
             }
         })
         // end of test mode
-
+*/
     }
 }

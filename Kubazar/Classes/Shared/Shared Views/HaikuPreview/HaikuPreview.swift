@@ -87,7 +87,7 @@ class HaikuPreview: UIView {
     public func textToImage() -> UIImage {
         
         let inImage = self.ivHaiku.image ?? UIImage()
-        self.saveImageToFile1(anImage: inImage)
+//        self.saveImageToFile1(anImage: inImage)
         let imageScale = inImage.size.height / self.view.frame.height
         
         // Setup the font specific variables
@@ -161,7 +161,7 @@ class HaikuPreview: UIView {
         //And pass it back up to the caller.
         return newImage ?? UIImage()
     }
-    
+/*
     // after drawing
     public func saveImageToFile(anImage: UIImage) {
         
@@ -184,11 +184,11 @@ class HaikuPreview: UIView {
         print("file path = ", paths[0])
         return paths[0]
     }
-    
+*/
     public func imageWithHaiku() -> UIImage? {
         
         let inImage = self.ivHaiku.image ?? UIImage()
-        self.saveImageToFile1(anImage: inImage)
+//        self.saveImageToFile1(anImage: inImage)
         
         self.ivWaterMark.isHidden = false
         UIGraphicsBeginImageContextWithOptions(inImage.size, false, 0.0)

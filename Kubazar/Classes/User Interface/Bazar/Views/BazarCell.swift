@@ -83,6 +83,8 @@ class BazarCell: UITableViewCell {
         
         self.vUserThumbnail.viewModel = viewModel.getThumbnailVM()
         self.vHaikuContent.viewModel = viewModel.getPreviewVM()
+        
+        self.btnLike.isHidden = !self.viewModel.isHaikuStatusCompleted()
     }
     
     private func setup() {

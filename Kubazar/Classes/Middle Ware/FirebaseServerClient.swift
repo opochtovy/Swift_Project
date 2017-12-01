@@ -47,6 +47,7 @@ class FirebaseServerClient {
     
     var sessionManager: SessionManager
     var deviceToken: Data = Data()
+    var isJustAfterAuth: Bool = false
     
     public var state : AuthenticatorState? {
         
@@ -285,6 +286,7 @@ class FirebaseServerClient {
         
         self.signInWithEmailAuthProvider(email: email, password: password).then { (_) -> Promise<Void> in
             
+            self.isJustAfterAuth = true
             self.state = .authorized
             return self.getToken()
             
@@ -380,6 +382,9 @@ class FirebaseServerClient {
                     return
                 }
             }
+            
+            self.isJustAfterAuth = true
+            self.state = .authorized
             
             completionHandler(nil, true)
         }
@@ -534,7 +539,7 @@ class FirebaseServerClient {
             let bodyParameters: [String: String] = ["token": self.deviceToken.base64EncodedString()]
             let request = AuthenticationRouter.addDeviceToken(bodyParameters: bodyParameters)
             
-            self.sessionManager.request(request).response(completionHandler: { dataResponse in
+            self.sessionManager.request(request).validate().response(completionHandler: { dataResponse in
                 
                 if let error = dataResponse.error {
                     
@@ -589,7 +594,7 @@ class FirebaseServerClient {
             }
             
             let request = AuthenticationRouter.uploadUserAvatar(contentType: multipartFormData.contentType, multipartFormData: data)
-            self.sessionManager.request(request).responseJSON(completionHandler: { (response) in
+            self.sessionManager.request(request).validate().responseJSON(completionHandler: { (response) in
                 
                 guard response.result.isSuccess else {
                     
@@ -647,11 +652,10 @@ class FirebaseServerClient {
             
             if self.state == .authorized {
                 
+                let sortValue = sort == 0 ? "date" : "likes"
                 var urlParameters : [String: Any] = ["page": page,
-                                                        "perPage": perPage]
-                if sort == 1 {
-                    urlParameters.updateValue("likes", forKey: "sort")
-                }
+                                                        "perPage": perPage,
+                                                        "sort": sortValue]
                 
                 var request = HaikuRouter.getAllHaikus(urlParameters: urlParameters)
                 if let value = FirebaseServerClient.BazarFilter(rawValue: filter) {
@@ -663,7 +667,7 @@ class FirebaseServerClient {
                     }
                 }
                 
-                self.sessionManager.request(request).responseArray{(response: DataResponse <[Haiku]>) in
+                self.sessionManager.request(request).validate().responseArray{(response: DataResponse <[Haiku]>) in
                     
                     switch response.result {
                         
@@ -696,7 +700,7 @@ class FirebaseServerClient {
                 let operation = AsyncBlockOperation(block: { operation in
                     
                     let request = AuthenticationRouter.getUserInfo(creatorId: ownerId)
-                    self.sessionManager.request(request).responseJSON(completionHandler: { (response) in
+                    self.sessionManager.request(request).validate().responseJSON(completionHandler: { (response) in
                         
                         guard response.result.isSuccess else {
                             
@@ -763,7 +767,7 @@ class FirebaseServerClient {
             if self.state == .authorized {
                 
                 let request = HaikuRouter.likeHaiku(haikuId: haiku.id)
-                self.sessionManager.request(request).responseObject { (response: DataResponse<Haiku>) in
+                self.sessionManager.request(request).validate().responseObject { (response: DataResponse<Haiku>) in
                     
                     switch response.result {
                         
@@ -802,7 +806,7 @@ class FirebaseServerClient {
                 
                 let request = HaikuRouter.deleteHaiku(haikuId: haikuId)
                 
-                self.sessionManager.request(request).response(completionHandler: { response in
+                self.sessionManager.request(request).validate().response(completionHandler: { response in
                     
                     if let error = response.error {
                         
@@ -845,7 +849,7 @@ class FirebaseServerClient {
                 let accessValue = haiku.published ? "private" : "public"
                 let bodyParameters: [String: String] = ["access": accessValue]
                 let request = HaikuRouter.changeHaikuAccess(haikuId: haiku.id, bodyParameters: bodyParameters)
-                self.sessionManager.request(request).responseObject { (response: DataResponse<Haiku>) in
+                self.sessionManager.request(request).validate().responseObject { (response: DataResponse<Haiku>) in
                     
                     switch response.result {
                         
@@ -875,7 +879,7 @@ class FirebaseServerClient {
             let bodyParams: [String : Any] = ["phones" : phones]
             let request = FriendsRouter.getFriends(bodyParameters: bodyParams)
 
-            self.sessionManager.request(request).responseArray(keyPath: "users") { (response: DataResponse<[User]>) in
+            self.sessionManager.request(request).validate().responseArray(keyPath: "users") { (response: DataResponse<[User]>) in
                 
                 switch response.result {
                 case .success(let friends):

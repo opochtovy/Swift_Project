@@ -177,9 +177,6 @@ class CompleteEditProfileVC: ViewController, UIImagePickerControllerDelegate, UI
                 
                 self.showWrongResponseAlert(message: errorDescription)
                 
-            } else {
-                
-                self.client.authenticator.state = .authorized
             }
         })
     }

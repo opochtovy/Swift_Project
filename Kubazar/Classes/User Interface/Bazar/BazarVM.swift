@@ -96,8 +96,9 @@ class BazarVM: BaseVM {
         print("self.dataSource.count =", self.dataSource.count)
         print("self.personalHaikus.count =", self.personalHaikus.count)
             
-        case .active: self.dataSource = self.activeHaikus
-            
+        case .active:
+            self.dataSource = self.activeHaikus
+            self.sort = .date
         }
         
         if isSortButtonPressed && !self.didEndReached {
@@ -107,8 +108,17 @@ class BazarVM: BaseVM {
         
         switch self.sort {
             
-        case .date: self.dataSource = self.dataSource.sorted(by: { $0.finishDate > $1.finishDate })
-        case .likes: self.dataSource = self.dataSource.sorted(by: { $0.likesCount > $1.likesCount })
+        case .date:
+            if self.filter == .active {
+                self.dataSource = self.dataSource.sorted(by: { $0.createDate > $1.createDate })
+            } else {
+                self.dataSource = self.dataSource.sorted(by: { $0.finishDate > $1.finishDate })
+            }
+        case .likes:
+            if self.filter != .active {
+                
+                self.dataSource = self.dataSource.sorted(by: { $0.likesCount > $1.likesCount })
+            }
         }
         
         print("BazarVM - updateDataSource : self.dataSource.count =", self.dataSource.count)

@@ -60,6 +60,11 @@ class BazarCellVM {
         }
     }
     
+    public func isHaikuStatusCompleted() -> Bool {
+        
+        return self.haiku.isCompleted
+    }
+    
     //MARK: - Private functions
     
     private func prepareModel() {

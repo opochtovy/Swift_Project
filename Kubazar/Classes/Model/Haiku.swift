@@ -25,7 +25,9 @@ class Haiku: MappableObject {
     
     public var likes : [String] = []
     public var finishDate: String = ""
+    public var createDate: String = ""
     public var access : String = ""
+    public var status : String = ""
     
     required convenience init?(map: Map){
         
@@ -40,13 +42,13 @@ class Haiku: MappableObject {
         access <- map["access"]
         published = access == "public"
         
-        var status: String = ""
         status <- map["status"]
         isCompleted = status == "completed"
         
         likes <- map["likes"]
         likesCount <- map["likesCount"]
         finishDate <- map["finishedOn"]
+        createDate <- map["createdOn"]
         
         pictureURL <- map["img.url"]
         decorator <- map["font"]

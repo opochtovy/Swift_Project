@@ -36,18 +36,20 @@ class RootVC: ViewController {
         self.setNavigationBarAppearance()
         self.setupObserving()
         
-        self.client.authenticator.signOut { (errorDescription, success) in
-
-            self.client.authenticator.sessionManager.adapter = nil
-        }
-        
-//        if let authToken = self.client.authenticator.authToken {
-//
-//            print("authToken =", authToken)
-//            print("StoreKeys.isUserAuthorized =", UserDefaults.standard.bool(forKey: StoreKeys.isUserAuthorized))
-//            self.client.authenticator.sessionManager.adapter = SessionTokenAdapter(sessionToken: authToken)
-//            self.client.authenticator.activateCurrentUser()
+//        self.client.authenticator.signOut { (errorDescription, success) in
+//            self.client.authenticator.sessionManager.adapter = nil
+//            self.client.authenticator.authToken = nil
 //        }
+        
+        if let authToken = self.client.authenticator.authToken {
+
+            print("authToken =", authToken)
+            print("StoreKeys.isUserAuthorized =", UserDefaults.standard.bool(forKey: StoreKeys.isUserAuthorized))
+            UserDefaults.standard.set(true, forKey: StoreKeys.isUserAuthorized)
+            UserDefaults.standard.synchronize()
+            self.client.authenticator.sessionManager.adapter = SessionTokenAdapter(sessionToken: authToken)
+            self.client.authenticator.activateCurrentUser()
+        }
     }
     
     override func viewDidLayoutSubviews() {

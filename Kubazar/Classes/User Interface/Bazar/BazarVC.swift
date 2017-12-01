@@ -60,8 +60,11 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
         
         self.setupObserving()
         
-//        let notification = Notification(name: Notification.Name(rawValue: FirebaseServerClient.DeviceTokenDidPutNotification))
-//        NotificationCenter.default.post(notification)
+        if !self.client.authenticator.isJustAfterAuth {
+            
+            let notification = Notification(name: Notification.Name(rawValue: FirebaseServerClient.DeviceTokenDidPutNotification))
+            NotificationCenter.default.post(notification)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
