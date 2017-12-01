@@ -114,6 +114,7 @@ class FirebaseServerClient {
             print("user.email =", user.email ?? "no email")
             print("user.photoURL =", user.photoURL ?? "no photoURL")
             print("user.displayName =", user.displayName ?? "no displayName")
+            print("user.phoneNumber =", user.phoneNumber ?? "no phone number")
         }
     }
     

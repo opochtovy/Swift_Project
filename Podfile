@@ -13,6 +13,7 @@ target 'Kubazar' do
   pod 'Firebase/Core', '~> 4.0'
   pod 'Firebase/Auth', '~> 4.3'
   pod 'Firebase/Storage'
+  pod 'Firebase/Messaging'
   pod 'Fabric', '~> 1.7'
   pod 'Crashlytics', '~> 3.9'
   pod 'AlamofireImage', '~> 3.3'
