@@ -982,4 +982,21 @@ class FirebaseServerClient {
             })
         }
     }
+    
+    public func putLine(haiku: Haiku) -> Promise<Haiku> {
+        
+        return Promise { fulfill, reject in
+            
+            let bodyParams : [String: Any] = [:]
+            let request = HaikuRouter.addLine(haikuId: haiku.id, bodyParameters: bodyParams)
+            self.sessionManager.request(request).validate().responseObject(completionHandler: { (response: DataResponse<Haiku>) in
+                switch response.result {
+                case .success(let haiku):
+                    fulfill(haiku)
+                case .failure(let error):
+                    reject(error)
+                }
+            })
+        }
+    }
 }
