@@ -114,6 +114,7 @@ class FirebaseServerClient {
             print("user.email =", user.email ?? "no email")
             print("user.photoURL =", user.photoURL ?? "no photoURL")
             print("user.displayName =", user.displayName ?? "no displayName")
+            print("user.phoneNumber =", user.phoneNumber ?? "no phone number")
         }
     }
     
@@ -187,6 +188,15 @@ class FirebaseServerClient {
         }
         
         return "no user id"
+    }
+    
+    public func activateCurrentUser() {
+        
+        if let currentUser = Auth.auth().currentUser {
+            
+            let user = User().initWithFirebaseUser(firebaseUser: currentUser)
+            HaikuManager.shared.currentUser = user
+        }
     }
     
     //MARK: - Firebase
@@ -268,26 +278,6 @@ class FirebaseServerClient {
                 UserDefaults.standard.synchronize()
                 fulfill(())
             }
-        }
-    }
-    
-    public func getValidToken(completionHandler:@escaping (String?, Bool) -> ()) {
-        
-        self.getToken().then { (_) -> Void in
-                
-                completionHandler(nil, true)
-                
-            }.catch { error in
-                
-                if let currentUser = Auth.auth().currentUser {
-                    
-                    let user = User().initWithFirebaseUser(firebaseUser: currentUser)
-                    HaikuManager.shared.currentUser = user
-                    
-                    print("self.authToken =", self.authToken)
-                }
-                
-                completionHandler(error.localizedDescription, false)
         }
     }
     
@@ -863,6 +853,8 @@ class FirebaseServerClient {
                     case .success(let newHaiku):
                         
                         haiku.published = newHaiku.published
+                        haiku.likes = newHaiku.likes
+                        haiku.likesCount = newHaiku.likesCount
                         
                         fulfill(())
                         

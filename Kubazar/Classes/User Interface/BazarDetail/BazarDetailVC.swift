@@ -91,16 +91,26 @@ class BazarDetailVC: ViewController {
         if SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook){
             let facebookSheet:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
             facebookSheet.setInitialText(NSLocalizedString(BazarDetailVC.facebookSheetTitle, comment: ""))
-            
-            let image = self.vHaikuContent.imageWithHaiku()
+
+            let image = self.vHaikuContent.textToImage()
             facebookSheet.add(image)
-            
+
             self.present(facebookSheet, animated: true, completion: nil)
         } else {
             let alert = UIAlertController(title: NSLocalizedString(BazarDetailVC.facebookAlertTitle, comment: ""), message: NSLocalizedString(BazarDetailVC.facebookAlertMessage, comment: ""), preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: NSLocalizedString(ButtonTitles.doneButtonTitle, comment: ""), style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
+        
+        // test 1
+//        if let image = self.vHaikuContent.imageWithHaiku() {
+//
+//            self.vHaikuContent.saveImageToFile(anImage: image)
+//        }
+        
+        // test 2 - good
+//        let image = self.vHaikuContent.textToImage()
+//        self.vHaikuContent.saveImageToFile(anImage: image)
     }
     
     @objc private func didPressPublishButton(_ sender: UIBarButtonItem) {

@@ -18,7 +18,6 @@ extension String {
         if let date = date {
             
             let timeInterval = Date().timeIntervalSince(date)
-            print("timeInterval =", timeInterval)
             
             if timeInterval < 3600 {
                 

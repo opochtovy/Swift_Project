@@ -84,9 +84,114 @@ class HaikuPreview: UIView {
         return self.ivHaiku.image
     }
     
+    public func textToImage() -> UIImage {
+        
+        let inImage = self.ivHaiku.image ?? UIImage()
+        self.saveImageToFile1(anImage: inImage)
+        let imageScale = inImage.size.height / self.view.frame.height
+        
+        // Setup the font specific variables
+        let textColor = UIColor.init(hex: self.viewModel.fontHexColor)// UIColor.white
+        let fontSize = CGFloat(self.viewModel.fontSize) * imageScale
+        let textFont: UIFont = UIFont(name: self.viewModel.fontfamilyName, size: fontSize)!
+        
+        //Put the image into a rectangle as large as the original image.
+        let rect: CGRect = CGRect(x: 0, y: 0, width: inImage.size.width, height: inImage.size.height)
+        
+        //Setup the image context using the passed image.
+        UIGraphicsBeginImageContextWithOptions(inImage.size, false, 0.0)
+        
+        //Setups up the font attributes that will be later used to dictate how the text should be drawn
+        let textFontAttributes = [
+            NSAttributedStringKey.font: textFont,
+            NSAttributedStringKey.foregroundColor: textColor,
+            ] as [NSAttributedStringKey : Any]
+        
+        inImage.draw(in: rect)
+        
+        //Now Draw the text into an image.
+        let label = UILabel(frame: rect)
+        label.font = textFont
+        
+        // 1st line
+        var drawText = self.lbField1.text
+        label.text = drawText
+        label.sizeToFit()
+        var labelTop = 90 * imageScale
+        var labelWidth = label.bounds.size.width
+        let labelHeight = label.bounds.size.height
+        let labelsVertSpacing = 15 * imageScale
+        if let drawText = drawText {
+            drawText.draw(in: CGRect(x: (inImage.size.width - labelWidth) / 2, y: labelTop, width: labelWidth, height: labelHeight), withAttributes: textFontAttributes)
+        }
+        
+        // 2nd line
+        drawText = self.lbField2.text
+        label.text = drawText
+        label.sizeToFit()
+        labelTop = labelTop + labelHeight + labelsVertSpacing
+        labelWidth = label.bounds.size.width
+        if let drawText = drawText {
+            drawText.draw(in: CGRect(x: (inImage.size.width - labelWidth) / 2, y: labelTop, width: labelWidth, height: labelHeight), withAttributes: textFontAttributes)
+        }
+        
+        // 3rd line
+        drawText = self.lbField3.text
+        label.text = drawText
+        label.sizeToFit()
+        labelTop = labelTop + labelHeight + labelsVertSpacing
+        labelWidth = label.bounds.size.width
+        if let drawText = drawText {
+            drawText.draw(in: CGRect(x: (inImage.size.width - labelWidth) / 2, y: labelTop, width: labelWidth, height: labelHeight), withAttributes: textFontAttributes)
+        }
+        
+        if let waterMarkImage = self.ivWaterMark.image {
+            let width = (waterMarkImage.size.width / self.view.bounds.width) * inImage.size.width
+            let height = (waterMarkImage.size.height / self.view.bounds.height) * inImage.size.height
+            let bottomMargin = 17 * imageScale
+            waterMarkImage.draw(in: CGRect(x: (inImage.size.width - width) / 2, y: (inImage.size.height - bottomMargin - height), width: width, height: height))
+        }
+        
+        // Create a new image out of the images we have created
+        let newImage: UIImage? = UIGraphicsGetImageFromCurrentImageContext()
+        
+        // End the context now that we have the image we need
+        UIGraphicsEndImageContext()
+        
+        //And pass it back up to the caller.
+        return newImage ?? UIImage()
+    }
+    
+    // after drawing
+    public func saveImageToFile(anImage: UIImage) {
+        
+        if let data = UIImageJPEGRepresentation(anImage, 1.0) {
+            let filename = getDocumentsDirectory().appendingPathComponent("kubazar_image_copy.png")
+            try? data.write(to: filename)
+        }
+    }
+    
+    public func saveImageToFile1(anImage: UIImage) {
+        
+        if let data = UIImageJPEGRepresentation(anImage, 1.0) {
+            let filename = getDocumentsDirectory().appendingPathComponent("kubazar_image_copy1.png")
+            try? data.write(to: filename)
+        }
+    }
+    
+    func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        print("file path = ", paths[0])
+        return paths[0]
+    }
+    
     public func imageWithHaiku() -> UIImage? {
+        
+        let inImage = self.ivHaiku.image ?? UIImage()
+        self.saveImageToFile1(anImage: inImage)
+        
         self.ivWaterMark.isHidden = false
-        UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, false, 0.0)
+        UIGraphicsBeginImageContextWithOptions(inImage.size, false, 0.0)
         self.view.layer.render(in: UIGraphicsGetCurrentContext()!)
         let img = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()

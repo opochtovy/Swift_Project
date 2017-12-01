@@ -14,7 +14,7 @@ import UserNotifications
 import IQKeyboardManagerSwift
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
 
     var window: UIWindow?
     let client = Client()
@@ -37,6 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         application.registerForRemoteNotifications()
         
         FirebaseApp.configure()
+        Messaging.messaging().delegate = self
         
         let controller = RootVC(client: self.client)
         self.window = UIWindow(frame: UIScreen.main.bounds)
@@ -81,6 +82,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         self.client.authenticator.deviceToken = deviceToken
         print("deviceToken =", deviceToken.base64EncodedString())
         
+        let token = Messaging.messaging().fcmToken
+        print("FCM token: \(token ?? "")")
+        
         // Pass device token to auth.
         
         //At development time we use .sandbox
@@ -96,6 +100,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             print(userInfo)
             return
         }
+        
+        // Print message ID.
+        let gcmMessageIDKey = "gcm.message_id"
+        if let messageID = userInfo[gcmMessageIDKey] {
+            print("Message ID: \(messageID)")
+        }
+        
+        // Print full message.
+        print(userInfo)
+        
+        completionHandler(UIBackgroundFetchResult.newData)
+    }
+    
+    //MARK: - MessagingDelegate
+    
+    func messaging(_ messaging: Messaging, didRefreshRegistrationToken fcmToken: String) {
+        
+        print("Firebase registration token: \(fcmToken)")
+        
+        let token = Messaging.messaging().fcmToken
+        print("FCM token: \(token ?? "")")
     }
 }
 

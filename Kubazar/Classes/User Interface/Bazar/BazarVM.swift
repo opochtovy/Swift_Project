@@ -45,7 +45,8 @@ class BazarVM: BaseVM {
     
     public func getCellVM(forIndexPath indexPath: IndexPath) -> BazarCellVM {
         
-        return BazarCellVM(client: self.client, haiku: self.dataSource[indexPath.row])
+        let haiku = self.numberOfItems() > 0 ? self.dataSource[indexPath.row] : Haiku()
+        return BazarCellVM(client: self.client, haiku: haiku)
     }
     
     public func getDetailVM(forIndexPath indexPath: IndexPath) -> BazarDetailVM {
@@ -63,7 +64,14 @@ class BazarVM: BaseVM {
         let haikus = HaikuManager.shared.addNewHaikus(newHaikus: newHaikus, haikusType: 0, owners: owners)
         
         self.didEndReached = haikus.count < self.perPage
-        self.dataSource.append(contentsOf: haikus)
+        
+        for haiku in haikus {
+            
+            if !self.dataSource.contains(haiku) {
+                
+                self.dataSource.append(haiku)
+            }
+        }
         
         switch self.filter {
             
@@ -75,19 +83,26 @@ class BazarVM: BaseVM {
             
         }
         
-        print("BazarVM - getHaikusFromNewHaikus : self.dataSource =", self.dataSource)
+        print("BazarVM - getHaikusFromNewHaikus : self.dataSource.count =", self.dataSource.count)
     }
     
-    public func updateDataSource() {
+    public func updateDataSource(isSortButtonPressed: Bool) {
         
         switch self.filter {
             
         case .all: self.dataSource = self.allHaikus
             
         case .mine: self.dataSource = self.personalHaikus
+        print("self.dataSource.count =", self.dataSource.count)
+        print("self.personalHaikus.count =", self.personalHaikus.count)
             
         case .active: self.dataSource = self.activeHaikus
             
+        }
+        
+        if isSortButtonPressed && !self.didEndReached {
+            
+            self.dataSource = []
         }
         
         switch self.sort {
@@ -96,7 +111,7 @@ class BazarVM: BaseVM {
         case .likes: self.dataSource = self.dataSource.sorted(by: { $0.likesCount > $1.likesCount })
         }
         
-        print("BazarVM - updateDataSource : self.dataSource =", self.dataSource)
+        print("BazarVM - updateDataSource : self.dataSource.count =", self.dataSource.count)
     }
     
     public func refreshData() {
@@ -136,18 +151,16 @@ class BazarVM: BaseVM {
     
     public func deleteHaiku(haiku: Haiku) {
         
-        self.dataSource.remove(object: haiku)
-        
         switch self.filter {
             
-        case .all: self.allHaikus = self.dataSource
+        case .mine:
+            self.dataSource.remove(object: haiku)
+            self.personalHaikus.remove(object: haiku)
             
-        case .mine: self.personalHaikus = self.dataSource
-            
-        case .active: self.activeHaikus = self.dataSource
+        default: self.personalHaikus.remove(object: haiku)
             
         }
         
-        print("BazarVM - deleteHaiku : self.dataSource =", self.dataSource)
+        print("BazarVM - deleteHaiku : self.dataSource.count =", self.dataSource.count)
     }
 }
