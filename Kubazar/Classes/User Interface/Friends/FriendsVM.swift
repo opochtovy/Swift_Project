@@ -7,7 +7,7 @@
 
 import Foundation
 
-class FriendsVM: BaseVM {
+class FriendsVM: FriendsBaseVM {
 
     public let maxFriends: Int
     private(set) var title = ""
@@ -24,36 +24,6 @@ class FriendsVM: BaseVM {
     }
     
     //MARK: Public functions
-    public func getFriends(completion: BaseCompletion) {
-        
-        let user1 = User()
-        user1.id = "1"
-        user1.firstName = "Serge"
-        user1.lastName = "Rylko"
-        user1.avatarURL = "https://vignette.wikia.nocookie.net/animal-jam-clans-1/images/0/0d/Shiba-inu-puppy-2.jpg"
-        
-        let user2 = User()
-        user2.id = "2"
-        user2.firstName = "Jimm"
-        user2.lastName = "Smith"
-        user2.avatarURL = "https://static.blog.playstation.com/wp-content/uploads/avatars/avatar_452240.jpg"
-        
-        let user3 = User()
-        user3.id = "3"
-        user3.firstName = "Andy"
-        user3.lastName = "Wood"
-        user3.avatarURL = nil//"https://pp.userapi.com/c9790/u125899584/a_47452a9d.jpg"
-        
-        let user4 = User()
-        user4.id = "4"
-        user4.firstName = "Stan"
-        user4.lastName = "Owlman"
-        user4.avatarURL = "https://cdn.pixabay.com/photo/2017/03/06/15/44/bird-2121811_960_720.jpg"
-        
-        self.friends = [user2, user3, user4]
-        
-        completion(true, nil)
-    }
     
     public func numberOfItems() -> Int {
         
@@ -88,11 +58,23 @@ class FriendsVM: BaseVM {
     
     public func getPictureVM() -> PictureVM {
         
+        switch self.haiku.players.count {
+            
+        case 2:
+            self.haiku.fields.append(Field(user: self.haiku.players[1], text: ""))
+            self.haiku.fields.append(Field(user: self.haiku.players[0], text: ""))
+        case 3:
+            self.haiku.fields.append(Field(user: self.haiku.players[1], text: ""))
+            self.haiku.fields.append(Field(user: self.haiku.players[2], text: ""))
+        default:
+            break
+        }
+        print("-- Players Count -- \(self.haiku.players.count)")
         return PictureVM(client: self.client, haiku: self.haiku)
     }
     
     //MARK: Private functions
-    private func prepareModel() {
+    override func prepareModel() {
         
         if self.maxFriends == 1 {
             
@@ -102,5 +84,7 @@ class FriendsVM: BaseVM {
             
             self.title = NSLocalizedString("Friends_choose", comment: "")
         }
+        
+        self.friends = HaikuManager.shared.friends
     }
 }

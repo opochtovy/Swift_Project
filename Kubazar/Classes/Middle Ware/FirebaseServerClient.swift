@@ -295,7 +295,7 @@ class FirebaseServerClient {
         
         self.signInWithEmailAuthProvider(email: email, password: password).then { (_) -> Promise<Void> in
             
-            
+            self.state = .authorized
             return self.getToken()
             
             }.then { (_) -> Promise<Void> in
@@ -304,7 +304,7 @@ class FirebaseServerClient {
                 
             }.then { (_) -> Void in
                 
-                self.state = .authorized
+                
                 completionHandler(nil, true)
                 
             }.catch { error in

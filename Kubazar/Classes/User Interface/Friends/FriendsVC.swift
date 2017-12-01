@@ -25,29 +25,39 @@ class FriendsVC: ViewController, UITableViewDataSource, UITableViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title =  self.viewModel.title
+        self.title = self.viewModel.title
         
-        let barBtnNext = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(FriendsVC.didPressNextButton))
+        let barBtnNext = UIBarButtonItem(title: NSLocalizedString("Friends_next", comment: ""), style: .plain, target: self, action: #selector(FriendsVC.didPressNextButton))
         self.navigationItem.rightBarButtonItem = barBtnNext
         
         self.tblView.register(UINib.init(nibName: "FriendsCell", bundle: nil), forCellReuseIdentifier: FriendsCell.reuseID)
         self.tblView.tableFooterView = UIView()
         
-        self.viewModel.getFriends { (success, error) in
-            self.updateContent()
+        self.viewModel.getContacts { [weak self](success, error) in
+            
+            guard let weakSelf = self else { return }
+            
+            if success {
+                
+                weakSelf.updateContent()
+            }
+            else if let error = error {
+                
+                weakSelf.showAlert(error)
+            }
         }
     }
 
     //MARK: - Actions
     
-    @objc private func didPressNextButton(_ sender: UIButton) {
+    @IBAction private func didPressNextButton(_ sender: UIButton) {
         
         let ctrl = PictureVC(client: self.client, viewModel: self.viewModel.getPictureVM())
         ctrl.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(ctrl, animated: true)
     }
     
-    @objc private func didSelectUser(_ sender: UIButton) {
+    @IBAction private func didSelectUser(_ sender: UIButton) {
         
        self.chooseFriend(row: sender.tag)
     }
@@ -69,6 +79,16 @@ class FriendsVC: ViewController, UITableViewDataSource, UITableViewDelegate {
         self.viewModel.chooseFriend(row: row)
         self.tblView.reloadRows(at: [IndexPath(row: row, section: 0)], with: .none)
         self.updateBarButton()
+    }
+    
+    private func showAlert(_ error: Error) {
+        
+        let alertTitle = "Error"
+        let alertMessage = "Error while fetching friends - \(error.localizedDescription)"
+        let alertCtrl = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        let action1 = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertCtrl.addAction(action1)
+        self.present(alertCtrl, animated: true, completion: nil)
     }
     
     //MARK: - UITableViewDataSource

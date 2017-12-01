@@ -115,6 +115,7 @@
 /*FriendsVC*/
 /**/ "Friends_choose_one" = "Choose One Friend";
 /**/ "Friends_choose" = "Choose Friends";
+/**/ "Friends_next" = "Next";
 
 /*PictureVC*/
 /**/ "Picture_choose_photo" = "Choose Photo";
