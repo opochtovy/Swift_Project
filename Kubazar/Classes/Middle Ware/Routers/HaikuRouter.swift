@@ -20,6 +20,7 @@ enum HaikuRouter: URLRequestConvertible {
    
     case createSingleHaiku(bodyParameters: Parameters)
     case createMultiHaiku(bodyParameters: Parameters)
+    case addLine(haikuId: String, bodyParameters: Parameters)
 
     var method: HTTPMethod {
         
@@ -33,6 +34,7 @@ enum HaikuRouter: URLRequestConvertible {
         
         case .createSingleHaiku: return .post
         case .createMultiHaiku: return .post
+        case .addLine: return .put
         }
     }
     
@@ -47,6 +49,7 @@ enum HaikuRouter: URLRequestConvertible {
         case .changeHaikuAccess(let haikuId, _): return "/haiku/access/\(haikuId)"
         case .createSingleHaiku(_): return "/haiku/single"
         case .createMultiHaiku(_): return "/haiku/plural"
+        case .addLine(let haikuId,_): return "/haiku/line/\(haikuId)"
         }
     }
     
@@ -81,10 +84,14 @@ enum HaikuRouter: URLRequestConvertible {
             let jsonData = try JSONSerialization.data(withJSONObject: bodyParameters, options: .prettyPrinted)
             urlRequest.httpBody = jsonData
             
+        case .addLine(_, let bodyParameters):
+            let jsonData = try JSONSerialization.data(withJSONObject: bodyParameters, options: .prettyPrinted)
+            urlRequest.httpBody = jsonData
+            
         default: print()
         }
         
-        print("HaikuRouter : urlRequest.url =", urlRequest.url)
+        print("HaikuRouter : urlRequest.url =\(urlRequest.url)")
         
         return urlRequest
     }

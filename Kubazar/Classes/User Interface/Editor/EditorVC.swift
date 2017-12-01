@@ -34,7 +34,6 @@ class EditorVC: ViewController, DecoratorDelegate, UITextFieldDelegate, UITableV
             case .colorPicker:  return UIColor(red: 98/255.0, green: 98/255.0, blue: 98/255.0, alpha: 1.0)
             }
         }
-        
     }
     
     let viewModel: EditorVM
@@ -73,23 +72,41 @@ class EditorVC: ViewController, DecoratorDelegate, UITextFieldDelegate, UITableV
 
     @IBAction private func didPressContinueButton(_ sender: UIButton) {
         
-        MBProgressHUD.showAdded(to: self.view, animated: true)
-        self.viewModel.sendSingleHaiku {[weak self](success, error) in
-            guard let weakSelf = self else { return }
-            
-            MBProgressHUD.showAdded(to: weakSelf.view, animated: true)
-            if success {
+        if self.viewModel.editScope == .creator && self.viewModel.playerScope == .solo {
+            //create solo haiku
+            print("-- Create solo haiku")
+            MBProgressHUD.showAdded(to: self.view, animated: true)
+            self.viewModel.createSingleHaiku {[weak self](success, error) in
                 
-                weakSelf.navigationController?.popToRootViewController(animated: true)
+                guard let weakSelf = self else { return }
+                MBProgressHUD.showAdded(to: weakSelf.view, animated: true)
+                if success {
+                    weakSelf.navigationController?.popToRootViewController(animated: true)
+                }
+                else {
+                    weakSelf.showErrorAlert()
+                }
             }
-            else {
-                let alertTitle = NSLocalizedString("Editor_alert_fail_title", comment: "")
-                let alertMessage = NSLocalizedString("Editor_alert_fail_message", comment: "")
-                let alertCtrl = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
-                let action1 = UIAlertAction(title: NSLocalizedString("Editor_congrats_alert_ok", comment: ""), style: .default, handler: nil)
-                alertCtrl.addAction(action1)
-                weakSelf.present(alertCtrl, animated: true, completion: nil)
-            }
+        }
+        else if self.viewModel.editScope == .creator && self.viewModel.playerScope == .multi {
+            //create multi haiku
+            print("-- Create multi haiku")
+            MBProgressHUD.showAdded(to: self.view, animated: true)
+            self.viewModel.createMultiHaiku(completion: { [weak self](success, error) in
+                
+                guard let weakSelf = self else { return }
+                MBProgressHUD.hide(for: weakSelf.view, animated: true)
+                if success {
+                    weakSelf.navigationController?.popToRootViewController(animated: true)
+                }
+                else {
+                    weakSelf.showErrorAlert()
+                }
+            })
+        }
+        else if self.viewModel.editScope == .player {
+            //add line to haiku
+            
         }
     }
     
@@ -141,7 +158,7 @@ class EditorVC: ViewController, DecoratorDelegate, UITextFieldDelegate, UITableV
     
     private func updateContent() {        
   
-        if self.viewModel.scope == .creator {
+        if self.viewModel.editScope == .creator {
             
             self.actionBar.isHidden = false
             self.tblPlayers.isHidden = true
@@ -208,6 +225,16 @@ class EditorVC: ViewController, DecoratorDelegate, UITextFieldDelegate, UITableV
         
         alertCtrl.addAction(action1)
         
+        self.present(alertCtrl, animated: true, completion: nil)
+    }
+    
+    private func showErrorAlert() {
+        
+        let alertTitle = NSLocalizedString("Editor_alert_fail_title", comment: "")
+        let alertMessage = NSLocalizedString("Editor_alert_fail_message", comment: "")
+        let alertCtrl = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        let action1 = UIAlertAction(title: NSLocalizedString("Editor_congrats_alert_ok", comment: ""), style: .default, handler: nil)
+        alertCtrl.addAction(action1)
         self.present(alertCtrl, animated: true, completion: nil)
     }
     

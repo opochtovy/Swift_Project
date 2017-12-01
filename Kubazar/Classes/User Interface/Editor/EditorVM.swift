@@ -17,6 +17,12 @@ class EditorVM: BaseVM {
         case player
     }
     
+    enum PlayserScope {
+        
+        case solo
+        case multi
+    }
+    
     private enum Tips {
         
         static let firstLane = NSLocalizedString("Editor_tip_firstLine", comment: "")
@@ -25,7 +31,8 @@ class EditorVM: BaseVM {
     }
     
     var fields: [String] = []
-    public var scope: EditScope = .creator
+    public var editScope: EditScope = .creator
+    public var playerScope: PlayserScope = .solo
     public var fontSize: Float = Decorator.defaults.fontSize
     public var fontHexColor: String = Decorator.defaults.fontColor
     public var fontFamilyName: String = Decorator.defaults.familyName
@@ -49,7 +56,8 @@ class EditorVM: BaseVM {
         
         self.haikuBackURL = URL(string: self.haiku.pictureURL ?? "")
         self.fields = self.haiku.fields.flatMap({$0.text})
-        self.scope = self.haiku.id.count > 1 ? .player : .creator
+        self.editScope = self.haiku.id.count > 1 ? .player : .creator
+        self.playerScope = self.haiku.players.count == 1 ? .solo : .multi
         self.prepareDecorator()
     }
     
@@ -67,8 +75,6 @@ class EditorVM: BaseVM {
 
         self.haiku.fields[index].text = text
         print("-- Field updated")
-        
-
     }
     
     public func isEditingEnabled(forIndex index: Int) -> Bool {
@@ -140,7 +146,7 @@ class EditorVM: BaseVM {
     
     public func numberOfItems() -> Int {
         
-        guard self.scope == .player else { return 0 }
+        guard self.editScope == .player else { return 0 }
         return self.haiku.players.count
     }
     
@@ -150,7 +156,7 @@ class EditorVM: BaseVM {
         self.prepareDecorator()
     }
     
-    public func sendSingleHaiku(completion: @escaping BaseCompletion) {
+    public func createSingleHaiku(completion: @escaping BaseCompletion) {
         
         guard let imageData = self.imageData else { completion(false, AppError.nilFound); return }
         
@@ -161,6 +167,37 @@ class EditorVM: BaseVM {
         }.then { haiku -> Void in
         
             print(haiku)
+            completion(true, nil)
+            
+        }.catch { error -> Void in
+            
+            completion(false, error)
+        }
+    }
+    
+    public func createMultiHaiku(completion: @escaping BaseCompletion) {
+        
+        guard let imageData = self.imageData else { completion(false, AppError.nilFound); return }
+        self.client.authenticator.postMultiHaiku(self.haiku).then { (haiku) -> Promise<Haiku> in
+            
+            return self.client.authenticator.postHaikuImage(imageData, haiku)
+            
+        }.then { haiku -> Void in
+            
+            print(haiku)
+            completion(true, nil)
+            
+        }.catch { error -> Void in
+            
+            completion(false, error)
+        }
+    }
+    
+    public func addLine(completion: @escaping BaseCompletion) {
+        
+        self.client.authenticator.putLine(haiku: self.haiku).then { haiku -> Void in
+        
+            //checkHaiku
             completion(true, nil)
             
         }.catch { error -> Void in

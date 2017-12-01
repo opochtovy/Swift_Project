@@ -54,7 +54,7 @@ class FriendListVC: ViewController, UITableViewDelegate, UITableViewDataSource, 
         
         self.updateContent()
         
-        self.viewModel.requestContacts { [weak self](success, error) in
+        self.viewModel.getContacts { [weak self](success, error) in
             
             guard let weakSelf = self else { return }
             

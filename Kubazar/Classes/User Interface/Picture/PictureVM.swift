@@ -37,7 +37,6 @@ class PictureVM: BaseVM {
         
         guard self.accessAllowed == true else { return }
         self.assets = PhotoLibraryManager.shared.getAllPhotos()
-        self.assets.append(contentsOf: PhotoLibraryManager.shared.getAllPhotos())
     }
     
     public func getClipperVM() -> ClipperVM? {

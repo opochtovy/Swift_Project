@@ -22,8 +22,7 @@ class FriendListCell: UITableViewCell {
             
             lbUserName.text = viewModel.userName
             lbhaikuCounter.text = viewModel.haikuCounter
-            
-            lbhaikuCounter.isHidden = !viewModel.showInviteButton
+            lbhaikuCounter.isHidden = viewModel.showInviteButton
             btnInvite.isHidden = !viewModel.showInviteButton
             self.vUserThumbnail.viewModel = viewModel.getThumbnailVM()
         }

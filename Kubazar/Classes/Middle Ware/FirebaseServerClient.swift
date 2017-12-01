@@ -917,7 +917,38 @@ class FirebaseServerClient {
                 }
             })
         }
+    }
+    
+    public func postMultiHaiku(_ haiku: Haiku) -> Promise<Haiku> {
         
+        return Promise {  fulfill, reject in
+            
+            guard let firstLineText = haiku.fields[0].text else { reject(AppError.nilFound); return}
+            let texts: [String] = [firstLineText]
+            let friends = haiku.friends.flatMap({ (friend) -> String? in
+                return friend.id
+            })
+            var font: [String: Any] = [:]
+            font["color"]   = haiku.decorator.fontHexColor
+            font["family"]  = haiku.decorator.fontFamily
+            font["size"]    = haiku.decorator.fontSize
+            
+            let bodyParams: [String : Any] = ["text"    : texts,
+                                              "font"    : font,
+                                              "friends" : friends]
+            
+            let request = HaikuRouter.createMultiHaiku(bodyParameters: bodyParams)
+            
+            self.sessionManager.request(request).validate().responseObject(completionHandler: { (response: DataResponse<Haiku>) in
+                
+                switch response.result {
+                case .success(let haiku):
+                    fulfill(haiku)
+                case .failure(let error):
+                    reject(error)
+                }
+            })
+        }
     }
     
     public func postHaikuImage(_ imageData: Data, _ haiku: Haiku) -> Promise<Haiku> {
@@ -933,6 +964,23 @@ class FirebaseServerClient {
             
             self.sessionManager.request(request).validate().responseObject(completionHandler: { (response: DataResponse<Haiku>) in
                 
+                switch response.result {
+                case .success(let haiku):
+                    fulfill(haiku)
+                case .failure(let error):
+                    reject(error)
+                }
+            })
+        }
+    }
+    
+    public func putLine(haiku: Haiku) -> Promise<Haiku> {
+        
+        return Promise { fulfill, reject in
+            
+            let bodyParams : [String: Any] = [:]
+            let request = HaikuRouter.addLine(haikuId: haiku.id, bodyParameters: bodyParams)
+            self.sessionManager.request(request).validate().responseObject(completionHandler: { (response: DataResponse<Haiku>) in
                 switch response.result {
                 case .success(let haiku):
                     fulfill(haiku)

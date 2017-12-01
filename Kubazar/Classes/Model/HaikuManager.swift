@@ -66,14 +66,10 @@ class HaikuManager {
         let haiku = Haiku()
         haiku.creator = self.currentUser
         haiku.players = [self.currentUser]
-        
-        //solo
-        if players.count == 1 {
-            
-            haiku.fields = [Field(user: players[0], text: ""),
-                            Field(user: players[0], text: ""),
-                            Field(user: players[0], text: ""),]
-        }
+ 
+        haiku.fields = [Field(user: haiku.players[0], text: ""),
+                        Field(user: haiku.players[0], text: ""),
+                        Field(user: haiku.players[0], text: "")]
         
         return haiku
     }

@@ -22,6 +22,7 @@ class ContactsManager {
     
     public static let shared: ContactsManager = ContactsManager()
     private var store = CNContactStore()
+    public var userContacts: [ContactUser] = []
     
     public func requestAssess(completion: @escaping ContactsAccessCompletion) {
         
@@ -38,7 +39,7 @@ class ContactsManager {
         }
     }
     
-    public func getAllContacts(completion: @escaping ContactsRequestCompletion) {
+    public func getAllContacts(completion: @escaping ContactsAccessCompletion) {
    
         let keysToFetch = [
             CNContactFormatter.descriptorForRequiredKeys(for: .fullName),
@@ -55,7 +56,7 @@ class ContactsManager {
         }
         catch {
             
-            completion(false, ContactsError.fetchException, [])
+            completion(false, ContactsError.fetchException)
         }
         
         var results: [CNContact] = []
@@ -72,13 +73,18 @@ class ContactsManager {
                     ContactUser(withContact: contact)
                 })
                 
+                self.userContacts = contactUsers
+                
                 DispatchQueue.main.async {
-                    completion(true, nil, contactUsers)
+                    
+                    completion(true, nil)
                 }
             }
             catch {
+                
                 DispatchQueue.main.async {
-                    completion(false, ContactsError.fetchException, [])
+                    
+                    completion(false, ContactsError.fetchException)
                 }
             }
         }
