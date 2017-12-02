@@ -133,7 +133,9 @@ class BazarDetailVC: ViewController {
     @objc private func didPressDeleteButton(_ sender: UIBarButtonItem) {
         
         let alertTitle: String = NSLocalizedString("BazarDetail_alert_removing_title", comment: "")
-        let alertMessage: String = NSLocalizedString("BazarDetail_alert_removing_message", comment: "")
+        let alertMessageSingle: String = NSLocalizedString("BazarDetail_alert_removing_message", comment: "")
+        let multipleAlertMessage: String = NSLocalizedString("BazarDetail_alert_removing_message_multiple", comment: "")
+        let alertMessage = self.viewModel.isUserSinglePlayer() ? alertMessageSingle : multipleAlertMessage
         
         let alertCtrl = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .actionSheet)
         let action1 = UIAlertAction(title: NSLocalizedString("BazarDetail_alert_removing_delete", comment: ""), style: .destructive) { (_) in

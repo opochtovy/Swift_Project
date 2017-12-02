@@ -90,6 +90,11 @@ class BazarDetailVM: BaseVM {
         return self.bazarFilter == .all
     }
     
+    public func isUserSinglePlayer() -> Bool {
+        
+        return self.haiku.players.count <= 1
+    }
+    
     //MARK: - Private functions
     private func prepareModel() {
     

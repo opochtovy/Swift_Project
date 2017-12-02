@@ -79,8 +79,9 @@
 /**/ "Bazar_sort_title" = "Choose sort for haiku list";
 
 /*BazarDetailVC*/
-/**/ "BazarDetail_alert_removing_title" = "Removing Haiku";
-/**/ "BazarDetail_alert_removing_message" = "The Haiku will be removed from your collection.";
+/**/ "BazarDetail_alert_removing_title" = "Delete Haiku";
+/**/ "BazarDetail_alert_removing_message" = "Are you sure you want to delete this haiku?";
+/**/ "BazarDetail_alert_removing_message_multiple" = "You are about to delete the haiku where you are not the only writer. For this reason, you can delete it from your collection, but it will be visible for other writers' friends.";
 /**/ "BazarDetail_alert_removing_delete" = "Delete";
 /**/ "BazarDetail_alert_cancel" = "Cancel";
 /**/ "BazarDetailVC_facebookSheetTitle" = "Share on Facebook";
