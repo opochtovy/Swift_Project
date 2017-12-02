@@ -49,6 +49,7 @@
                     </stackView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testHaikuIMage" translatesAutoresizingMaskIntoConstraints="NO" id="rEO-bX-dLp">
                         <rect key="frame" x="289.5" y="14" width="40" height="40"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="rEO-bX-dLp" secondAttribute="height" multiplier="1:1" id="3m2-Rn-J1U"/>
                             <constraint firstAttribute="height" constant="40" id="uUB-8d-gIV"/>

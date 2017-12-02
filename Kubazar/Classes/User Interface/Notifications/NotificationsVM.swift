@@ -11,6 +11,8 @@ import Foundation
 class NotificationsVM: BaseVM {
     
     private var dataSource: [[KBNotification]] = []
+    public var page: Int = 0
+    public var perPage: Int = 10
     
     override init(client: Client) {
         super.init(client: client)
@@ -36,12 +38,10 @@ class NotificationsVM: BaseVM {
     
     public func getSectionTitle(forSection section: Int) -> String {
         
-        var result = ""
-        let firstNotificationInSectionType = self.dataSource[safe: section]?[safe: 0]?.readed
-       
-        if let type = firstNotificationInSectionType {
+        var result = NSLocalizedString("Notifications_new", comment: "")
+        if let first = self.dataSource[safe: section]?[safe: 0], first.createdOn.isOlderThanOneDay() {
             
-            result = type == true ? NSLocalizedString("Notifications_earlier", comment: "") : NSLocalizedString("Notifications_new", comment: "")
+            result = NSLocalizedString("Notifications_earlier", comment: "")
         }
         return result
     }
@@ -51,7 +51,7 @@ class NotificationsVM: BaseVM {
         let notification = self.dataSource[indexPath.section][indexPath.row]
         
         switch notification.type {
-        case .like, .publish, .share: return NotificationCell.reuseID
+        case .like, .publish, .share, .nextTurn: return NotificationCell.reuseID
         case .remember: return RememberCell.reuseID
         }
     }
@@ -61,36 +61,35 @@ class NotificationsVM: BaseVM {
         let notification = self.dataSource[indexpath.section][indexpath.row]
         return BazarDetailVM(client: self.client, haiku: notification.haiku, filter: 0)
     }
+    
+    public func getNotifications(completion: @escaping BaseCompletion) {
+        
+        self.client.authenticator.fetchNotifications(page: self.page, perPage: self.perPage).then { notifications -> Void in
+            
+            HaikuManager.shared.notifications = notifications
+            self.prepareModel()
+            completion(true, nil)
+            
+            }.catch { error in
+                
+                completion(false, error)
+        }
+    }
+    
     //MARK: - Private functions
     private func prepareModel() {
         
-        //-- mocked notifications
-/*
-        let haikus = HaikuManager.shared.haikus
-        let haiku1 = haikus[0]
-        let haiku2 = haikus[1]
-        let haiku3 = haikus[2]
-        let haiku4 = haikus[3]
-        let haiku5 = haikus[4]
-        
-        let n1 = KBNotification(haiku: haiku1, user: haiku1.players[1], date: Date(), type: .like)
-        let n2 = KBNotification(haiku: haiku2, user: haiku2.players[2], date: Date(), type: .publish)
-        let n3 = KBNotification(haiku: haiku3, user: haiku3.players[1], date: Date(), type: .remember)
-        let n4 = KBNotification(haiku: haiku4, user: haiku4.players[2], date: Date(), type: .share)
-        let n5 = KBNotification(haiku: haiku5, user: haiku5.players[0], date: Date(), type: .like)
-        
-        n4.readed = true
-        n5.readed = true
-        
-        let notifications = [n1, n2, n3, n4, n5]
-*/
-        let notifications: [KBNotification] = []
+        let notifications: [KBNotification] = HaikuManager.shared.notifications
             
         self.dataSource = []
         
         //Sort by sections
-        let newNotifications = notifications.filter({$0.readed == false})
-        let oldNotifications = notifications.filter({$0.readed == true})
+        let newNotifications = notifications.filter { (notification) -> Bool in
+            !notification.createdOn.isOlderThanOneDay()
+        }
+        let oldNotifications = notifications.filter { (notification) -> Bool in
+            notification.createdOn.isOlderThanOneDay()
+        }
         
         if newNotifications.count > 0 {
             

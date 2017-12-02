@@ -16,6 +16,7 @@ class NotificationBaseCell: UITableViewCell {
 class NotificationCell: NotificationBaseCell {
 
     static public let reuseID = "NotificationCell"
+    static let placeholder = Placeholders.haiku.getRandom()
     
     @IBOutlet private weak var ivUser: UIImageView!
     @IBOutlet private weak var ivHaiku: UIImageView!
@@ -35,7 +36,7 @@ class NotificationCell: NotificationBaseCell {
             ivHaiku.image = nil
             if let url = viewModel.haikuImageURL {
                 
-                ivHaiku.af_setImage(withURL: url)
+                ivHaiku.af_setImage(withURL: url, placeholderImage: HaikuPreview.placeholder, imageTransition: .crossDissolve(0.2))
             }
             
             lbNoteInfo.text = viewModel.notificationText

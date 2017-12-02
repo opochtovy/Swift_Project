@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class NotificationsVC: ViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -29,6 +30,14 @@ class NotificationsVC: ViewController, UITableViewDataSource, UITableViewDelegat
         self.tblNotifications.register(UINib.init(nibName: "NotificationCell", bundle: nil), forCellReuseIdentifier: NotificationCell.reuseID)
         self.tblNotifications.register(UINib.init(nibName: "RememberCell", bundle: nil), forCellReuseIdentifier: RememberCell.reuseID)
 
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        self.viewModel.getNotifications { [weak self](success, error) in
+            
+            guard let weakSelf = self else { return }
+            
+            MBProgressHUD.hide(for: weakSelf.view, animated: true)
+            self?.tblNotifications.reloadData()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

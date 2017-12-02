@@ -71,4 +71,19 @@ extension String {
         
         return ""
     }
+    
+    func isOlderThanOneDay() -> Bool {
+        
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        
+        let date: Date? = dateFormatterGet.date(from: self)
+        if let date = date {
+            
+            let timeInterval = Date().timeIntervalSince(date)
+            return timeInterval > 86400
+        }
+        
+        return true
+    }
 }

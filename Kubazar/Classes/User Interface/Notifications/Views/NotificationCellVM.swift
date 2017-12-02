@@ -34,13 +34,15 @@ class NotificationCellVM {
         case .publish:  noteText.append(NSLocalizedString("Notifications_published", comment: ""))
         case .share:    noteText.append(NSLocalizedString("Notifications_shared", comment: ""))
         case .remember: noteText = ""
+        case .nextTurn: noteText = NSLocalizedString("Notifications_nextTurn", comment: "")
         }
         
         self.notificationText = noteText
         
         let df = DateFormatter()
         df.dateFormat = "EEEE"
-        self.dateText = df.string(from: notification.date)
+//        self.dateText = df.string(from: notification.date)
+        self.dateText = notification.createdOn.convertToDate()
     }
     
 }

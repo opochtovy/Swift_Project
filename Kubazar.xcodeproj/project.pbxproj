@@ -180,6 +180,7 @@
 		9EFBEC0E1FB9F4E600A889BC /* TintMutableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFBEC0D1FB9F4E600A889BC /* TintMutableButton.swift */; };
 		9EFF30021FCD60E300013277 /* HaikuRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFF30011FCD60E300013277 /* HaikuRouter.swift */; };
 		A2721FBC1FCB2586001CEDE1 /* AsyncBlockOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2721FBB1FCB2586001CEDE1 /* AsyncBlockOperation.swift */; };
+		A27F4B111FD2DC880064D7B4 /* NotificationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27F4B101FD2DC880064D7B4 /* NotificationRouter.swift */; };
 		A28213621FCDF57D00074291 /* ChangePasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28213601FCDF57D00074291 /* ChangePasswordVC.swift */; };
 		A28213631FCDF57D00074291 /* ChangePasswordVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = A28213611FCDF57D00074291 /* ChangePasswordVC.xib */; };
 		A28213651FCDF58800074291 /* ChangePasswordVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28213641FCDF58800074291 /* ChangePasswordVM.swift */; };
@@ -368,6 +369,7 @@
 		9EFF30011FCD60E300013277 /* HaikuRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaikuRouter.swift; sourceTree = "<group>"; };
 		A253CC5A9FE6C38C3AD695DE /* Pods_Kubazar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kubazar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2721FBB1FCB2586001CEDE1 /* AsyncBlockOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncBlockOperation.swift; sourceTree = "<group>"; };
+		A27F4B101FD2DC880064D7B4 /* NotificationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRouter.swift; sourceTree = "<group>"; };
 		A28213601FCDF57D00074291 /* ChangePasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordVC.swift; sourceTree = "<group>"; };
 		A28213611FCDF57D00074291 /* ChangePasswordVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChangePasswordVC.xib; sourceTree = "<group>"; };
 		A28213641FCDF58800074291 /* ChangePasswordVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordVM.swift; sourceTree = "<group>"; };
@@ -982,6 +984,7 @@
 				9EFF30011FCD60E300013277 /* HaikuRouter.swift */,
 				9ED5B5421FD03A500063CCE5 /* ImageRouter.swift */,
 				9E2BEEFA1FCEEF41006EEA44 /* FriendsRouter.swift */,
+				A27F4B101FD2DC880064D7B4 /* NotificationRouter.swift */,
 			);
 			path = Routers;
 			sourceTree = "<group>";
@@ -1314,6 +1317,7 @@
 				9E6BB8861FC4677500CB0933 /* ProfileInfoCell.swift in Sources */,
 				9E5FA3191FBDB2050082F56F /* PictureCell.swift in Sources */,
 				9E3F9CF01FB5D6BF003BC12A /* FirebaseServerClient.swift in Sources */,
+				A27F4B111FD2DC880064D7B4 /* NotificationRouter.swift in Sources */,
 				9E4FA18F1FCBEEE80061C87C /* ContactsManager.swift in Sources */,
 				9E4AE9101FC2C3BA00E437AA /* Decorator.swift in Sources */,
 				9E2CA5781FC401D500069FFD /* TipView.swift in Sources */,

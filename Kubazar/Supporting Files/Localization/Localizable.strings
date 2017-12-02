@@ -169,6 +169,7 @@
 /**/ "Notifications_liked" = "liked haiku";
 /**/ "Notifications_shared" = "shared haiku";
 /**/ "Notifications_published" = "published haiku";
+/**/ "Notifications_nextTurn" = "It's your turn to write haiku";
 
 /*ChangePasswordVC/*
 /**/ "ChangePasswordVC_title" = "Change Password";

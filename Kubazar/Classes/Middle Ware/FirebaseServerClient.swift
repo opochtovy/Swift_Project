@@ -944,4 +944,29 @@ class FirebaseServerClient {
             })
         }
     }
+    
+    //MARK: - Notifications
+    
+    public func fetchNotifications(page: Int, perPage: Int) -> Promise<[KBNotification]> {
+        
+        return Promise {  fulfill, reject in
+            
+            let urlParameters : [String: Any] = ["page": page,
+                                                 "perPage": perPage]
+            let request = NotificationRouter.getNotifications(urlParameters: urlParameters)
+            
+            self.sessionManager.request(request).validate().responseArray{(response: DataResponse <[KBNotification]>) in
+                
+                switch response.result {
+                case .success(let notifications):
+                    
+                    fulfill(notifications)
+                    
+                case .failure(let error):
+                    
+                    reject(error)
+                }
+            }
+        }
+    }
 }

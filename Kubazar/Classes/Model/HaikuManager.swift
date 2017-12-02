@@ -14,6 +14,7 @@ class HaikuManager {
     public var currentUser: User = User()
     private(set) var haikus: [Haiku] = []
     public var friends: [User] = []
+    public var notifications: [KBNotification] = []
     
     //MARK: - Public functions
     
