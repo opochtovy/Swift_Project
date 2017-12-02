@@ -59,13 +59,11 @@ class BazarVM: BaseVM {
         return EditorVM(client: self.client, haiku: self.dataSource[indexPath.row])
     }
     
-    public func getHaikusFromNewHaikus(newHaikus: [Haiku], owners: [User]) {
+    public func getHaikusFromNewHaikus(newHaikus: [Haiku]) {
         
-        let haikus = HaikuManager.shared.addNewHaikus(newHaikus: newHaikus, haikusType: 0, owners: owners)
+        self.didEndReached = newHaikus.count < self.perPage
         
-        self.didEndReached = haikus.count < self.perPage
-        
-        for haiku in haikus {
+        for haiku in newHaikus {
             
             if !self.dataSource.contains(haiku) {
                 

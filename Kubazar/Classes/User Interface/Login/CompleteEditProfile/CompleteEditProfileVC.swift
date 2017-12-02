@@ -177,6 +177,10 @@ class CompleteEditProfileVC: ViewController, UIImagePickerControllerDelegate, UI
                 
                 self.showWrongResponseAlert(message: errorDescription)
                 
+            } else {
+                
+                let notification = Notification(name: Notification.Name(rawValue: FirebaseServerClient.DeviceTokenDidPutNotification))
+                NotificationCenter.default.post(notification)
             }
         })
     }

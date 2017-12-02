@@ -514,6 +514,8 @@ class FirebaseServerClient {
                         reject(error)
                     }
                 })
+            } else {
+                print()
             }
         }
     }
@@ -627,22 +629,15 @@ class FirebaseServerClient {
         }
     }
     
-    public func getHaikus(page: Int, perPage: Int, sort: Int, filter: Int, completionHandler:@escaping ([Haiku], [User], Bool) -> ()) {
+    public func getHaikus(page: Int, perPage: Int, sort: Int, filter: Int, completionHandler:@escaping ([Haiku], Bool) -> ()) {
         
-        var haikus: [Haiku] = []
-        
-        self.getHaikusPromise(page: page, perPage: perPage, sort: sort, filter: filter).then { haikusResult -> Promise<[User]> in
+        self.getHaikusPromise(page: page, perPage: perPage, sort: sort, filter: filter).then { haikus -> Void in
             
-            haikus = haikusResult
-            return self.getOwnersForHaikusPromise(haikus: haikusResult)
-            
-            }.then { owners -> Void in
-            
-                completionHandler(haikus, owners, true)
+                completionHandler(haikus, true)
             
             }.catch { error in
                 
-                completionHandler([], [], false)
+                completionHandler([], false)
         }
     }
     
@@ -653,7 +648,7 @@ class FirebaseServerClient {
             if self.state == .authorized {
                 
                 let sortValue = sort == 0 ? "date" : "likes"
-                var urlParameters : [String: Any] = ["page": page,
+                let urlParameters : [String: Any] = ["page": page,
                                                         "perPage": perPage,
                                                         "sort": sortValue]
                 
@@ -683,68 +678,6 @@ class FirebaseServerClient {
                 }
                 
             }
-        }
-    }
-    
-    
-    
-    private func getOwnersForHaikusPromise(haikus: [Haiku]) -> Promise<[User]> {
-        
-        return Promise { fulfill, reject in
-            
-/*
-            let queue = OperationQueue()
-            queue.maxConcurrentOperationCount = 50
-            for ownerId in ownerIds {
-                
-                let operation = AsyncBlockOperation(block: { operation in
-                    
-                    let request = AuthenticationRouter.getUserInfo(creatorId: ownerId)
-                    self.sessionManager.request(request).validate().responseJSON(completionHandler: { (response) in
-                        
-                        guard response.result.isSuccess else {
-                            
-                            if let error = response.error {
-                                
-                                operation.finish(error: error)
-                            }
-                            return
-                        }
-                        
-//                            let array = response.result.value as? [Dictionary<String, Any>]
-//                            if let array = array {
-//                                fulfill(array)
-//                            }
-                        
-                        operation.finish()
-                    })
-                    
-                })
-                
-                operation.completionBlock = {
-                    
-                    if let error = operation.error {
-                        
-                        queue.cancelAllOperations()
-                        reject(error)
-                        
-                    } else if queue.operationCount == 0 {
-                        
-                        fulfill(owners)
-                    }
-                }
-                
-                queue.addOperation(operation)
-            }
-            
-            if queue.operationCount == 0 {
-                
-                fulfill(owners)
-            }
-*/
-            // test till Artem write request to get User info by creatorId
-            fulfill([])
-            // end of test
         }
     }
     

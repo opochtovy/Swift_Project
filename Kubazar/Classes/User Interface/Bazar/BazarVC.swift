@@ -90,10 +90,10 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
         self.tblView.reloadSections(IndexSet.init(integer: 0), with: .fade)
     }
     
-    private func updateContentWithNewHaikus(haikus: [Haiku], owners: [User]) {
+    private func updateContentWithNewHaikus(haikus: [Haiku]) {
         
         let previousCount = self.viewModel.numberOfItems()
-        self.viewModel.getHaikusFromNewHaikus(newHaikus: haikus, owners: owners)
+        self.viewModel.getHaikusFromNewHaikus(newHaikus: haikus)
         
         if haikus.count == 0 {
             
@@ -150,7 +150,7 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
         if self.client.authenticator.state == .authorized {
             
             let sortType = self.viewModel.sort == .date ? 0 : 1
-            self.client.authenticator.getHaikus(page: self.viewModel.page, perPage: self.viewModel.perPage, sort: sortType, filter: self.viewModel.filter.rawValue) { [weak self](haikus, owners, success) in
+            self.client.authenticator.getHaikus(page: self.viewModel.page, perPage: self.viewModel.perPage, sort: sortType, filter: self.viewModel.filter.rawValue) { [weak self](haikus, success) in
                 
                 guard let weakSelf = self else { return }
                 
@@ -162,7 +162,7 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
                     weakSelf.showWrongResponseAlert(message: "")
                 } else {
                     
-                    weakSelf.updateContentWithNewHaikus(haikus: haikus, owners: owners)
+                    weakSelf.updateContentWithNewHaikus(haikus: haikus)
                 }
             }
         }

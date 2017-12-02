@@ -73,23 +73,4 @@ class HaikuManager {
         
         return haiku
     }
-    
-    public func addNewHaikus(newHaikus: [Haiku], haikusType: Int, owners: [User]) -> [Haiku] {
-        
-        for haiku in newHaikus {
-            
-            for owner in owners {
-                if owner.id == haiku.creator?.id {
-                    
-                    haiku.creator = owner
-                }
-                if haiku.players.contains(owner) {
-                    
-                    haiku.players.append(owner)
-                }
-            }
-        }
-        
-        return newHaikus
-    }
 }
