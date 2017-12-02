@@ -186,7 +186,7 @@ class SignInVC: ViewController, UITextFieldDelegate {
                     
                 } else {
                     
-                    if let authToken = self.client.authenticator.authToken {
+                    if let authToken = self.client.authenticator.authToken, authToken.count > 0 {
                         
                         print("-- authToken =", authToken)
                         self.client.authenticator.sessionManager.adapter = SessionTokenAdapter(sessionToken: authToken)
@@ -212,7 +212,7 @@ class SignInVC: ViewController, UITextFieldDelegate {
                 
             } else {
                 
-                if let authToken = self.client.authenticator.authToken {
+                if let authToken = self.client.authenticator.authToken, authToken.count > 0 {
                     
                     print("-- authToken =", authToken)
                     self.client.authenticator.sessionManager.adapter = SessionTokenAdapter(sessionToken: authToken)

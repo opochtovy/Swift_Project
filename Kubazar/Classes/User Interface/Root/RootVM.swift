@@ -23,13 +23,68 @@ class RootVM: BaseVM {
         NotificationCenter.default.removeObserver(self)
     }
     
+    //MARK: - Public functions
+    
+    public func signOut() {
+        
+        self.client.authenticator.signOut { (errorDescription, success) in
+            
+            self.loginAccepted = false
+            UserDefaults.standard.set(false, forKey: StoreKeys.isUserAuthorized)
+            UserDefaults.standard.synchronize()
+            self.client.authenticator.authToken = ""
+            self.client.authenticator.sessionManager.adapter = nil
+            
+            if let authToken = self.client.authenticator.authToken, authToken.count > 0 {
+                
+                print("RooVM : authToken =", authToken)
+                print("Error")
+            }
+        }
+    }
+    
+    public func checkLoginState() {
+        
+        if self.loginAccepted {
+            
+            print("RootVM : authToken =", self.client.authenticator.authToken ?? "no authToken")
+            print("StoreKeys.isUserAuthorized =", UserDefaults.standard.bool(forKey: StoreKeys.isUserAuthorized))
+            UserDefaults.standard.set(true, forKey: StoreKeys.isUserAuthorized)
+            UserDefaults.standard.synchronize()
+            if let authToken = self.client.authenticator.authToken, authToken.count > 0 {
+                
+                self.client.authenticator.sessionManager.adapter = SessionTokenAdapter(sessionToken: authToken)
+            }
+            self.client.authenticator.activateCurrentUser()
+        }
+    }
+    
+    public func setStateOfCurrentUser() {
+        
+        self.client.authenticator.setStateOfCurrentUser()
+    }
+    
     //MARK: - Private functions
     
     private func allowToPassAuth() {
         
         self.loginAccepted = UserDefaults.standard.bool(forKey: StoreKeys.isUserAuthorized)
         
+        if !self.loginAccepted {
+            self.deleteAuthToken()
+        }
+        print("RootVM : self.loginAccepted =", self.loginAccepted)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(userChanged), name: NSNotification.Name(rawValue: FirebaseServerClient.AuthenticatorStateDidChangeNotification), object: nil)
+    }
+    
+    private func deleteAuthToken() {
+        
+        if let authToken = self.client.authenticator.authToken, authToken.count > 0 {
+            self.client.authenticator.authToken = ""
+            self.client.authenticator.sessionManager.adapter = nil
+            print("RootVM : authToken =", authToken)
+        }
     }
     
     //MARK: - Notification

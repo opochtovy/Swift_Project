@@ -145,6 +145,11 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
         }
     }
     
+    private func setupObserving() {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(BazarVC.getPersonalHaikus), name: NSNotification.Name(rawValue: FirebaseServerClient.DeviceTokenDidPutNotification), object: nil)
+    }
+    
     @objc private func getPersonalHaikus(page: Int, perPage: Int) {
         
         if self.client.authenticator.state == .authorized {
@@ -166,11 +171,6 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
                 }
             }
         }
-    }
-    
-    private func setupObserving() {
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(BazarVC.getPersonalHaikus), name: NSNotification.Name(rawValue: FirebaseServerClient.DeviceTokenDidPutNotification), object: nil)
     }
     
     //MARK: - Actions

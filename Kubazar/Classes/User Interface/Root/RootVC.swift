@@ -36,20 +36,9 @@ class RootVC: ViewController {
         self.setNavigationBarAppearance()
         self.setupObserving()
         
-//        self.client.authenticator.signOut { (errorDescription, success) in
-//            self.client.authenticator.sessionManager.adapter = nil
-//            self.client.authenticator.authToken = nil
-//        }
+//        self.viewModel.signOut()
         
-        if let authToken = self.client.authenticator.authToken {
-
-            print("authToken =", authToken)
-            print("StoreKeys.isUserAuthorized =", UserDefaults.standard.bool(forKey: StoreKeys.isUserAuthorized))
-            UserDefaults.standard.set(true, forKey: StoreKeys.isUserAuthorized)
-            UserDefaults.standard.synchronize()
-            self.client.authenticator.sessionManager.adapter = SessionTokenAdapter(sessionToken: authToken)
-            self.client.authenticator.activateCurrentUser()
-        }
+        self.viewModel.checkLoginState()
     }
     
     override func viewDidLayoutSubviews() {
@@ -68,7 +57,7 @@ class RootVC: ViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(RootVC.chooseController), name: NSNotification.Name(rawValue: FirebaseServerClient.AuthenticatorStateDidChangeNotification), object: nil)
         
-        self.client.authenticator.setStateOfCurrentUser()
+        self.viewModel.setStateOfCurrentUser()
     }
     
     private func setNavigationBarAppearance() {

@@ -258,7 +258,7 @@ class CompletePhoneVerificationVC: ViewController, UITextFieldDelegate, SMSCodeT
                 
             } else {
                 
-                if let authToken = self.client.authenticator.authToken {
+                if let authToken = self.client.authenticator.authToken, authToken.count > 0 {
                     
                     print("signInWithPhoneNumber : authToken =", authToken)
                     self.client.authenticator.sessionManager.adapter = SessionTokenAdapter(sessionToken: authToken)

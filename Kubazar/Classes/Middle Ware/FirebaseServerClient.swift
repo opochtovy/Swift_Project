@@ -538,24 +538,29 @@ class FirebaseServerClient {
         
         return Promise { fulfill, reject in
             
+            if self.deviceToken.count == 0 {
+                print("Error")
+            }
+            
             let bodyParameters: [String: String] = ["token": self.deviceToken.base64EncodedString()]
+            print("bodyParameters =", bodyParameters)
             let request = AuthenticationRouter.addDeviceToken(bodyParameters: bodyParameters)
             
-            self.sessionManager.request(request).validate().response(completionHandler: { dataResponse in
+            // ??? - when validate() is here -> reject(erro)
+            self.sessionManager.request(request).response(completionHandler: { dataResponse in
                 
                 if let error = dataResponse.error {
                     
                     reject(error)
                 
-                } else {
-                    
-                    if let currentUser = Auth.auth().currentUser {
-                        
-                        let user = User().initWithFirebaseUser(firebaseUser: currentUser)
-                        HaikuManager.shared.currentUser = user
-                    }
-                    fulfill(())
                 }
+                
+                if let currentUser = Auth.auth().currentUser {
+                    
+                    let user = User().initWithFirebaseUser(firebaseUser: currentUser)
+                    HaikuManager.shared.currentUser = user
+                }
+                fulfill(())
             })
         }
     }

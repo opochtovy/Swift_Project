@@ -104,7 +104,11 @@ struct KeychainPasswordItem {
         let status = SecItemDelete(query as CFDictionary)
         
         // Throw an error if an unexpected status was returned.
-        guard status == noErr || status == errSecItemNotFound else { throw KeychainError.unhandledError(status: status) }
+        guard status == noErr || status == errSecItemNotFound else {
+            
+            throw KeychainError.unhandledError(status: status)
+            
+        }
     }
 
     // MARK: Convenience
