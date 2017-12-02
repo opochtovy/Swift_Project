@@ -33,13 +33,6 @@ enum StoreKeys {
 
 class FirebaseServerClient {
     
-    enum BazarFilter: Int {
-        
-        case all = 0
-        case mine = 1
-        case active = 2
-    }
-    
     typealias BaseCompletion = (_ success: Bool, _ error: Error?) -> Void
     
     static let AuthenticatorStateDidChangeNotification = "AuthenticatorStateDidChangeNotification"
@@ -658,7 +651,7 @@ class FirebaseServerClient {
                                                         "sort": sortValue]
                 
                 var request = HaikuRouter.getAllHaikus(urlParameters: urlParameters)
-                if let value = FirebaseServerClient.BazarFilter(rawValue: filter) {
+                if let value = BazarVM.BazarFilter(rawValue: filter) {
                     
                     switch value {
                     case .mine: request = HaikuRouter.getPersonalHaikus(urlParameters: urlParameters)
@@ -678,6 +671,19 @@ class FirebaseServerClient {
                         
                     case .failure(let error):
                         
+                        self.signOut { (errorDescription, success) in
+                            
+                            UserDefaults.standard.set(false, forKey: StoreKeys.isUserAuthorized)
+                            UserDefaults.standard.synchronize()
+                            self.authToken = ""
+                            self.sessionManager.adapter = nil
+                            
+                            if let authToken = self.authToken, authToken.count > 0 {
+                                
+                                print("FirebaseServerClient : authToken =", authToken)
+                                print("Error")
+                            }
+                        }
                         reject(error)
                     }
                 }
@@ -711,6 +717,8 @@ class FirebaseServerClient {
                         
                     case .success(let newHaiku):
                         
+                        print("Like : newHaiku.likesCount =", newHaiku.likesCount)
+                        print("Like : newHaiku.likes =", newHaiku.likes)
                         haiku.likes = newHaiku.likes
                         haiku.likesCount = newHaiku.likesCount
                         fulfill(())
@@ -793,9 +801,13 @@ class FirebaseServerClient {
                         
                     case .success(let newHaiku):
                         
+                        print("Publish/Unpublish : newHaiku.likesCount =", newHaiku.likesCount)
+                        print("Publish/Unpublish : newHaiku.likes =", newHaiku.likes)
+                        print("Publish/Unpublish : newHaiku.access =", newHaiku.access)
                         haiku.published = newHaiku.published
                         haiku.likes = newHaiku.likes
                         haiku.likesCount = newHaiku.likesCount
+                        haiku.access = newHaiku.access
                         
                         fulfill(())
                         
@@ -881,7 +893,7 @@ class FirebaseServerClient {
             
             let request = HaikuRouter.createMultiHaiku(bodyParameters: bodyParams)
             
-            self.sessionManager.request(request).validate().responseObject(completionHandler: { (response: DataResponse<Haiku>) in
+            self.sessionManager.request(request).responseObject(completionHandler: { (response: DataResponse<Haiku>) in
                 
                 switch response.result {
                 case .success(let haiku):

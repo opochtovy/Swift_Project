@@ -51,7 +51,7 @@ class BazarVM: BaseVM {
     
     public func getDetailVM(forIndexPath indexPath: IndexPath) -> BazarDetailVM {
         
-        return BazarDetailVM(client: self.client, haiku: self.dataSource[indexPath.row])
+        return BazarDetailVM(client: self.client, haiku: self.dataSource[indexPath.row], filter: self.filter.rawValue)
     }
     
     public func getEditorVM(forIndexPath indexPath: IndexPath) -> EditorVM {
@@ -59,15 +59,22 @@ class BazarVM: BaseVM {
         return EditorVM(client: self.client, haiku: self.dataSource[indexPath.row])
     }
     
-    public func getHaikusFromNewHaikus(newHaikus: [Haiku]) {
+    public func getHaikusFromNewHaikus(newHaikus: [Haiku], shouldResetDataSource: Bool) {
         
         self.didEndReached = newHaikus.count < self.perPage
         
-        for haiku in newHaikus {
+        if shouldResetDataSource {
             
-            if !self.dataSource.contains(haiku) {
+            self.dataSource = newHaikus
+            
+        } else {
+            
+            for haiku in newHaikus {
                 
-                self.dataSource.append(haiku)
+                if !self.dataSource.contains(haiku) {
+                    
+                    self.dataSource.append(haiku)
+                }
             }
         }
         
@@ -159,16 +166,16 @@ class BazarVM: BaseVM {
     
     public func deleteHaiku(haiku: Haiku) {
         
-        switch self.filter {
-            
-        case .mine:
-            self.dataSource.remove(object: haiku)
-            self.personalHaikus.remove(object: haiku)
-            
-        default: self.personalHaikus.remove(object: haiku)
-            
-        }
+        self.dataSource.remove(object: haiku)
+        self.allHaikus.remove(object: haiku)
+        self.personalHaikus.remove(object: haiku)
         
         print("BazarVM - deleteHaiku : self.dataSource.count =", self.dataSource.count)
+    }
+    
+    public func unpublishHaiku(haiku: Haiku) {
+        
+        self.dataSource.remove(object: haiku)
+        self.allHaikus.remove(object: haiku)
     }
 }

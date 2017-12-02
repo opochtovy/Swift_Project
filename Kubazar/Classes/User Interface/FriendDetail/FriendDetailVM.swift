@@ -50,6 +50,6 @@ class FriendDetailVM: BaseVM {
     
     public func getHaikuDetailVM(forIndexPath indexPath: IndexPath) -> BazarDetailVM {
         
-        return BazarDetailVM(client: self.client, haiku: self.userHaikus[indexPath.row])
+        return BazarDetailVM(client: self.client, haiku: self.userHaikus[indexPath.row], filter: 0)
     }
 }

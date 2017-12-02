@@ -28,10 +28,17 @@ class BazarDetailVM: BaseVM {
     public var likesCount: String = "0"
     
     private var userViewVMs : [UserViewVM] = []
+    private var bazarFilter: BazarVM.BazarFilter = .all
     
-    init(client: Client, haiku: Haiku) {
+    init(client: Client, haiku: Haiku, filter: Int) {
         
         self.haiku = haiku
+        if let result = BazarVM.BazarFilter(rawValue: filter) {
+            
+            self.bazarFilter = result
+            print("BazarDetail : self.bazarFilter =", self.bazarFilter)
+        }
+        print("BazarDetail : haiku.id =", haiku.id)
         super.init(client: client)
         self.prepareModel()
     }
@@ -73,9 +80,14 @@ class BazarDetailVM: BaseVM {
         })
     }
     
-    public func getHaikuToDelete() -> Haiku {
+    public func getHaiku() -> Haiku {
         
         return self.haiku
+    }
+    
+    public func shouldLeaveBazarDetail() -> Bool {
+        
+        return self.bazarFilter == .all
     }
     
     //MARK: - Private functions
@@ -100,7 +112,16 @@ class BazarDetailVM: BaseVM {
         
         //mode choosing
         
-        let authorIds = haiku.fields.flatMap{$0.creatorId}
+//        let authorIds = haiku.fields.flatMap{$0.creatorId}
+        var authorIds: [String] = []
+        for field in self.haiku.fields {
+            
+            let creatorId = field.owner.id
+            if !authorIds.contains(creatorId) {
+                
+                authorIds.append(creatorId)
+            }
+        }
         
         print("authorIds =", authorIds)
         print("HaikuManager.shared.currentUser.id =", HaikuManager.shared.currentUser.id)

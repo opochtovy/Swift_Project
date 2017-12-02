@@ -59,7 +59,7 @@ class NotificationsVM: BaseVM {
     public func getBazarDetailVM(forIndexPath indexpath: IndexPath) -> BazarDetailVM{
         
         let notification = self.dataSource[indexpath.section][indexpath.row]
-        return BazarDetailVM(client: self.client, haiku: notification.haiku)
+        return BazarDetailVM(client: self.client, haiku: notification.haiku, filter: 0)
     }
     //MARK: - Private functions
     private func prepareModel() {

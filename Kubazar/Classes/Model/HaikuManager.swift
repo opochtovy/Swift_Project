@@ -9,13 +9,6 @@
 import Foundation
 
 class HaikuManager {
-    
-    enum HaikusFilter: Int {
-        
-        case all = 0
-        case mine = 1
-        case active = 2
-    }
 
     public static let shared: HaikuManager = HaikuManager()
     public var currentUser: User = User()

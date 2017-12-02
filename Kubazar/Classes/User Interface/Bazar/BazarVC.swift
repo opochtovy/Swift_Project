@@ -90,12 +90,12 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
         self.tblView.reloadSections(IndexSet.init(integer: 0), with: .fade)
     }
     
-    private func updateContentWithNewHaikus(haikus: [Haiku]) {
+    private func updateContentWithNewHaikus(haikus: [Haiku], shouldResetDataSource: Bool) {
         
         let previousCount = self.viewModel.numberOfItems()
-        self.viewModel.getHaikusFromNewHaikus(newHaikus: haikus)
+        self.viewModel.getHaikusFromNewHaikus(newHaikus: haikus, shouldResetDataSource: shouldResetDataSource)
         
-        if haikus.count == 0 {
+        if haikus.count == 0 || shouldResetDataSource {
             
             self.tblView.reloadData()
             return
@@ -150,7 +150,7 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
         NotificationCenter.default.addObserver(self, selector: #selector(BazarVC.getPersonalHaikus), name: NSNotification.Name(rawValue: FirebaseServerClient.DeviceTokenDidPutNotification), object: nil)
     }
     
-    @objc private func getPersonalHaikus(page: Int, perPage: Int) {
+    @objc private func getPersonalHaikus(page: Int, perPage: Int, shouldResetDataSource: Bool) {
         
         if self.client.authenticator.state == .authorized {
             
@@ -167,7 +167,7 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
                     weakSelf.showWrongResponseAlert(message: "")
                 } else {
                     
-                    weakSelf.updateContentWithNewHaikus(haikus: haikus)
+                    weakSelf.updateContentWithNewHaikus(haikus: haikus, shouldResetDataSource: shouldResetDataSource)
                 }
             }
         }
@@ -218,7 +218,7 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
             
             MBProgressHUD.showAdded(to: self.view, animated: true)
         }
-        self.getPersonalHaikus(page: self.viewModel.page, perPage: self.viewModel.perPage)
+        self.getPersonalHaikus(page: self.viewModel.page, perPage: self.viewModel.perPage, shouldResetDataSource: true)
     }
     
     private func reloadTableView() {
@@ -262,6 +262,13 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
     func deleteButtonWasPressed(vc: BazarDetailVC, haiku: Haiku) {
         
         self.viewModel.deleteHaiku(haiku: haiku)
+        self.tblView.reloadData()
+    }
+    
+    
+    func unpublishButtonWasPressed(vc: BazarDetailVC, haiku: Haiku) {
+        
+        self.viewModel.unpublishHaiku(haiku: haiku)
         self.tblView.reloadData()
     }
     
@@ -328,7 +335,7 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
                 
                 self.viewModel.isDataLoading = true
                 self.viewModel.page = self.viewModel.page + 1
-                self.getPersonalHaikus(page: self.viewModel.page, perPage: self.viewModel.perPage)
+                self.getPersonalHaikus(page: self.viewModel.page, perPage: self.viewModel.perPage, shouldResetDataSource: false)
                 
             }
         }

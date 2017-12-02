@@ -12,6 +12,7 @@ import Social
 protocol BazarDetailVCDelegate : class {
     
     func deleteButtonWasPressed(vc: BazarDetailVC, haiku: Haiku)
+    func unpublishButtonWasPressed(vc: BazarDetailVC, haiku: Haiku)
 }
 
 class BazarDetailVC: ViewController {
@@ -119,6 +120,12 @@ class BazarDetailVC: ViewController {
             
             guard let weakSelf = self else { return }
             
+            if weakSelf.viewModel.shouldLeaveBazarDetail() {
+                
+                weakSelf.bazarDetailDelegate?.unpublishButtonWasPressed(vc: weakSelf, haiku: weakSelf.viewModel.getHaiku())
+                weakSelf.navigationController?.popViewController(animated: true)
+            }
+            
             weakSelf.updateToolBar()
         })
     }
@@ -135,7 +142,7 @@ class BazarDetailVC: ViewController {
                 
                 guard let weakSelf = self else { return }
                 
-                weakSelf.bazarDetailDelegate?.deleteButtonWasPressed(vc: weakSelf, haiku: weakSelf.viewModel.getHaikuToDelete())
+                weakSelf.bazarDetailDelegate?.deleteButtonWasPressed(vc: weakSelf, haiku: weakSelf.viewModel.getHaiku())
                 weakSelf.navigationController?.popViewController(animated: true)
             })
         }
