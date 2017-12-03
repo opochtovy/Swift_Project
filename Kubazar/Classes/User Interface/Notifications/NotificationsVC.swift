@@ -9,11 +9,12 @@
 import UIKit
 import MBProgressHUD
 
-class NotificationsVC: ViewController, UITableViewDataSource, UITableViewDelegate {
+class NotificationsVC: ViewController, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate {
     
     @IBOutlet private weak var tblNotifications: UITableView!
     
     private let viewModel: NotificationsVM
+    private var scrollViewPosition: CGPoint = CGPoint(x: 0, y: 0)
     
     init(client: Client, viewModel: NotificationsVM) {
         self.viewModel = viewModel
@@ -30,14 +31,7 @@ class NotificationsVC: ViewController, UITableViewDataSource, UITableViewDelegat
         self.tblNotifications.register(UINib.init(nibName: "NotificationCell", bundle: nil), forCellReuseIdentifier: NotificationCell.reuseID)
         self.tblNotifications.register(UINib.init(nibName: "RememberCell", bundle: nil), forCellReuseIdentifier: RememberCell.reuseID)
 
-        MBProgressHUD.showAdded(to: self.view, animated: true)
-        self.viewModel.getNotifications { [weak self](success, error) in
-            
-            guard let weakSelf = self else { return }
-            
-            MBProgressHUD.hide(for: weakSelf.view, animated: true)
-            self?.tblNotifications.reloadData()
-        }
+        self.getNotifications()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,6 +47,46 @@ class NotificationsVC: ViewController, UITableViewDataSource, UITableViewDelegat
         statusBarView?.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         
         self.navigationController?.navigationBar.backgroundColor = #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)
+    }
+    
+    private func getNotifications() {
+        
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        self.viewModel.getNotifications { [weak self](success, error) in
+            
+            guard let weakSelf = self else { return }
+            
+            MBProgressHUD.hide(for: weakSelf.view, animated: true)
+            weakSelf.tblNotifications.reloadData()
+            weakSelf.getMoreNotificationsDuringScrolling()
+        }
+    }
+    
+    private func getMoreNotificationsDuringScrolling() {
+        
+        if ((self.tblNotifications.contentOffset.y + 2 * self.tblNotifications.frame.size.height) >= self.tblNotifications.contentSize.height) {
+            
+            if !self.viewModel.isDataLoading, !self.viewModel.didEndReached {
+                
+                self.viewModel.isDataLoading = true
+                self.viewModel.page = self.viewModel.page + 1
+                self.scrollViewPosition = self.tblNotifications.contentOffset
+                self.viewModel.getNotifications { [weak self](success, error) in
+                    
+                    guard let weakSelf = self else { return }
+                    
+                    if !success {
+                        
+                        weakSelf.showWrongResponseAlert(message: "")
+                    } else {
+                        
+                        weakSelf.tblNotifications.reloadData()
+                        weakSelf.tblNotifications.setContentOffset(weakSelf.scrollViewPosition, animated: false)
+                    }
+                }
+                
+            }
+        }
     }
     
     //MARK: - UITableViewDataSource
@@ -107,5 +141,27 @@ class NotificationsVC: ViewController, UITableViewDataSource, UITableViewDelegat
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.5
+    }
+    
+    //MARK: - UIScrollViewDelegate
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        
+        self.viewModel.isDataLoading = false
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        
+        self.getMoreNotificationsDuringScrolling()
+    }
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        
+        self.getMoreNotificationsDuringScrolling()
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        
+        self.getMoreNotificationsDuringScrolling()
     }
 }

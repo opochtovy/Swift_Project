@@ -13,6 +13,9 @@ class NotificationsVM: BaseVM {
     private var dataSource: [[KBNotification]] = []
     public var page: Int = 0
     public var perPage: Int = 10
+    public var didEndReached: Bool = false
+    public var isDataLoading: Bool = false
+    public var previousCount: Int = 0
     
     override init(client: Client) {
         super.init(client: client)
@@ -66,7 +69,9 @@ class NotificationsVM: BaseVM {
         
         self.client.authenticator.fetchNotifications(page: self.page, perPage: self.perPage).then { notifications -> Void in
             
-            HaikuManager.shared.notifications = notifications
+            HaikuManager.shared.notifications.append(contentsOf: notifications)
+            self.didEndReached = HaikuManager.shared.notifications.count - self.previousCount < self.perPage
+            self.previousCount = HaikuManager.shared.notifications.count
             self.prepareModel()
             completion(true, nil)
             
@@ -79,7 +84,7 @@ class NotificationsVM: BaseVM {
     //MARK: - Private functions
     private func prepareModel() {
         
-        let notifications: [KBNotification] = HaikuManager.shared.notifications
+        let notifications: [KBNotification] = HaikuManager.shared.notifications.sorted(by: { $0.createdOn > $1.createdOn })
             
         self.dataSource = []
         
