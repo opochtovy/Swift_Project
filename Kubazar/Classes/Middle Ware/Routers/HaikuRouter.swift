@@ -20,7 +20,7 @@ enum HaikuRouter: URLRequestConvertible {
    
     case createSingleHaiku(bodyParameters: Parameters)
     case createMultiHaiku(bodyParameters: Parameters)
-    case addLine(haikuId: String, bodyParameters: Parameters)
+    case addLine(arguments: Parameters, bodyParameters: Parameters)
 
     var method: HTTPMethod {
         
@@ -49,7 +49,9 @@ enum HaikuRouter: URLRequestConvertible {
         case .changeHaikuAccess(let haikuId, _): return "/haiku/access/\(haikuId)"
         case .createSingleHaiku(_): return "/haiku/single"
         case .createMultiHaiku(_): return "/haiku/plural"
-        case .addLine(let haikuId,_): return "/haiku/line/\(haikuId)"
+        case .addLine(let arguments,_):
+            guard let haikuId = arguments["haikuID"] else { return "" }
+            return "/haiku/line/\(haikuId)"
         }
     }
     

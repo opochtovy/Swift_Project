@@ -25,7 +25,7 @@
             <rect key="frame" x="0.0" y="0.0" width="387" height="396"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testHaikuIMage" translatesAutoresizingMaskIntoConstraints="NO" id="ZZK-Jj-hbo">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZZK-Jj-hbo">
                     <rect key="frame" x="0.0" y="-0.5" width="387" height="396.5"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Er8-eC-1vf">
@@ -80,6 +80,5 @@
     </objects>
     <resources>
         <image name="iconWaterMark" width="60" height="18"/>
-        <image name="testHaikuIMage" width="343" height="343"/>
     </resources>
 </document>

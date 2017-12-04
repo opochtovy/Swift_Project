@@ -82,8 +82,8 @@ class EditorVC: ViewController, DecoratorDelegate, UITextFieldDelegate, UITableV
                 if success {
                     weakSelf.navigationController?.popToRootViewController(animated: true)
                 }
-                else {
-                    weakSelf.showErrorAlert()
+                else if let error = error {
+                    weakSelf.showErrorAlert(error)
                 }
             }
         }
@@ -97,8 +97,8 @@ class EditorVC: ViewController, DecoratorDelegate, UITextFieldDelegate, UITableV
                 if success {
                     weakSelf.navigationController?.popToRootViewController(animated: true)
                 }
-                else {
-                    weakSelf.showErrorAlert()
+                else if let error = error {
+                    weakSelf.showErrorAlert(error)
                 }
             })
         }
@@ -113,9 +113,8 @@ class EditorVC: ViewController, DecoratorDelegate, UITextFieldDelegate, UITableV
                     
                     weakSelf.navigationController?.popToRootViewController(animated: true)
                 }
-                else {
-                    
-                    weakSelf.showErrorAlert()
+                else if let error = error {
+                    weakSelf.showErrorAlert(error)
                 }
             })
         }
@@ -242,10 +241,10 @@ class EditorVC: ViewController, DecoratorDelegate, UITextFieldDelegate, UITableV
         self.present(alertCtrl, animated: true, completion: nil)
     }
     
-    private func showErrorAlert() {
+    private func showErrorAlert(_ error: Error) {
         
         let alertTitle = NSLocalizedString("Editor_alert_fail_title", comment: "")
-        let alertMessage = NSLocalizedString("Editor_alert_fail_message", comment: "")
+        let alertMessage = error.localizedDescription
         let alertCtrl = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
         let action1 = UIAlertAction(title: NSLocalizedString("Editor_congrats_alert_ok", comment: ""), style: .default, handler: nil)
         alertCtrl.addAction(action1)
@@ -264,6 +263,7 @@ class EditorVC: ViewController, DecoratorDelegate, UITextFieldDelegate, UITableV
     func textFieldDidEndEditing(_ textField: UITextField) {
         
         self.viewModel.inputText(forIndex: textField.tag, text: textField.text)
+        self.updateRightBarButton()
         TipView.hideTip(fromView: textField)
     }
     

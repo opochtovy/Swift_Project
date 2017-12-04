@@ -912,20 +912,11 @@ class FirebaseServerClient {
     
     //MARK: Haikus Creation
     
-    public func postSingleHaiku(_ haiku: Haiku) -> Promise<Haiku> {
+    public func postSingleHaiku(_ bodyParameters: Parameters) -> Promise<Haiku> {
         
         return Promise {  fulfill, reject in
-
-            let texts = haiku.fields.flatMap{$0.text}
-            var font: [String: Any] = [:]
-            font["color"]   = haiku.decorator.fontHexColor
-            font["family"]  = haiku.decorator.fontFamily
-            font["size"]    = haiku.decorator.fontSize
             
-            let bodyParams: [String : Any] = ["text" : texts,
-                                              "font" : font]
-            
-            let request = HaikuRouter.createSingleHaiku(bodyParameters: bodyParams)
+            let request = HaikuRouter.createSingleHaiku(bodyParameters: bodyParameters)
             
             self.sessionManager.request(request).validate().responseObject(completionHandler: { (response: DataResponse<Haiku>) in
                 
@@ -939,25 +930,11 @@ class FirebaseServerClient {
         }
     }
     
-    public func postMultiHaiku(_ haiku: Haiku) -> Promise<Haiku> {
+    public func postMultiHaiku(_ bodyParameters: Parameters) -> Promise<Haiku> {
         
         return Promise {  fulfill, reject in
             
-            guard let firstLineText = haiku.fields[0].text else { reject(AppError.nilFound); return}
-            let texts: [String] = [firstLineText]
-            let friends = haiku.friends.flatMap({ (friend) -> String? in
-                return friend.id
-            })
-            var font: [String: Any] = [:]
-            font["color"]   = haiku.decorator.fontHexColor
-            font["family"]  = haiku.decorator.fontFamily
-            font["size"]    = haiku.decorator.fontSize
-            
-            let bodyParams: [String : Any] = ["text"    : texts,
-                                              "font"    : font,
-                                              "friends" : friends]
-            
-            let request = HaikuRouter.createMultiHaiku(bodyParameters: bodyParams)
+            let request = HaikuRouter.createMultiHaiku(bodyParameters: bodyParameters)
             
             self.sessionManager.request(request).validate().responseObject(completionHandler: { (response: DataResponse<Haiku>) in
                 
@@ -994,14 +971,11 @@ class FirebaseServerClient {
         }
     }
     
-    public func putLine(haiku: Haiku, fieldText: String) -> Promise<Haiku> {
+    public func putLine(arguments: Parameters, bodyparameters: Parameters) -> Promise<Haiku> {
         
         return Promise { fulfill, reject in
             
-            var bodyParams : [String: Any] = [:]
-            bodyParams["line"] = fieldText
-            
-            let request = HaikuRouter.addLine(haikuId: haiku.id, bodyParameters: bodyParams)
+            let request = HaikuRouter.addLine(arguments: arguments, bodyParameters: bodyparameters)
             
             self.sessionManager.request(request).validate().responseObject(completionHandler: { (response: DataResponse<Haiku>) in
                 switch response.result {

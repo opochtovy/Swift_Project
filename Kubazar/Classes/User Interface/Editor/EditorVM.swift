@@ -86,7 +86,16 @@ class EditorVM: BaseVM {
     private func prepareModel() {
         
         self.haikuBackURL = URL(string: self.haiku.pictureURL ?? "")
-        self.fields = self.haiku.fields.flatMap({$0.text})
+        
+        self.fields = ["", "", ""]
+       
+        var i = 0
+        for haikuField in self.haiku.fields {
+            
+            self.fields[i] = haikuField.text ?? ""
+            i += 1
+        }
+//        self.fields = self.haiku.fields.flatMap({$0.text})
         self.editScope = self.haiku.id.count > 0 ? .player : .creator
         self.playerScope = self.haiku.players.count == 1 ? .solo : .multi
         self.prepareDecorator()
@@ -100,12 +109,14 @@ class EditorVM: BaseVM {
         self.fontSize = self.haiku.decorator.fontSize
         self.fontFamilyName = self.haiku.decorator.fontFamily
     }
-        public func inputText(forIndex index: Int, text: String?) {
-        
+    
+    public func inputText(forIndex index: Int, text: String?) {
 
+        guard let text = text else { return }
+        
         if self.editScope == .creator {
             
-            self.haiku.fields[index].text = text
+            self.fields[index] = text
         }
         else {
             
@@ -155,10 +166,12 @@ class EditorVM: BaseVM {
             
             //show completed fields or your field if your turn
             let field = self.haiku.fields[index]
-            let isCurrentUserTurn = self.haiku.currentTurnUser == field.owner
-            result = field.text != nil || isCurrentUserTurn
+            let isCurrentUserTurn = self.haiku.currentTurnUser == HaikuManager.shared.currentUser
+            let isCurrentUserField = field.owner == HaikuManager.shared.currentUser
+            result = field.text != nil || (isCurrentUserTurn && isCurrentUserField)
         }
         
+        print("\(result)")
         return result
     }
     
@@ -223,7 +236,24 @@ class EditorVM: BaseVM {
         
         guard let imageData = self.imageData else { completion(false, AppError.nilFound); return }
         
-        self.client.authenticator.postSingleHaiku(self.haiku).then { (haiku) -> Promise<Haiku> in
+        //Check fields is not empty
+        for field in fields {
+            
+            if field.count == 0 {
+                
+                completion(false, HaikuCreationError.shortField)
+            }
+        }
+        let texts = self.fields
+        var font: [String: Any] = [:]
+        font["color"]   = haiku.decorator.fontHexColor
+        font["family"]  = haiku.decorator.fontFamily
+        font["size"]    = haiku.decorator.fontSize
+        
+        let bodyParams: [String : Any] = ["text" : texts,
+                                          "font" : font]
+        
+        self.client.authenticator.postSingleHaiku(bodyParams).then { (haiku) -> Promise<Haiku> in
             
             return self.client.authenticator.postHaikuImage(imageData, haiku)
             
@@ -240,8 +270,23 @@ class EditorVM: BaseVM {
     
     public func createMultiHaiku(completion: @escaping BaseCompletion) {
         
-        guard let imageData = self.imageData else { completion(false, AppError.nilFound); return }
-        self.client.authenticator.postMultiHaiku(self.haiku).then { (haiku) -> Promise<Haiku> in
+        guard let imageData = self.imageData        else { completion(false, AppError.nilFound); return }
+        guard self.fields[0].count > 0  else { completion(false, HaikuCreationError.shortField); return }
+        
+        let texts: [String] = [self.fields[0]]
+        let friends = haiku.friends.flatMap({ (friend) -> String? in
+            return friend.id
+        })
+        var font: [String: Any] = [:]
+        font["color"]   = haiku.decorator.fontHexColor
+        font["family"]  = haiku.decorator.fontFamily
+        font["size"]    = haiku.decorator.fontSize
+        
+        let bodyParams: [String : Any] = ["text"    : texts,
+                                          "font"    : font,
+                                          "friends" : friends]
+        
+        self.client.authenticator.postMultiHaiku(bodyParams).then { (haiku) -> Promise<Haiku> in
             
             return self.client.authenticator.postHaikuImage(imageData, haiku)
             
@@ -260,7 +305,13 @@ class EditorVM: BaseVM {
         
         guard let field = self.monoField, field.count > 1 else { return completion(false, HaikuCreationError.shortField) }
         
-        self.client.authenticator.putLine(haiku: self.haiku, fieldText: field).then { haiku -> Void in
+        var arguments: [String: Any] = [:]
+        arguments["haikuID"] = self.haiku.id
+        
+        var bodyParams : [String: Any] = [:]
+        bodyParams["line"] = field
+        
+        self.client.authenticator.putLine(arguments: arguments, bodyparameters: bodyParams).then { haiku -> Void in
 
             completion(true, nil)
             
