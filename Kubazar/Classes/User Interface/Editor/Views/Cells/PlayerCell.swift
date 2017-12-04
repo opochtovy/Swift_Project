@@ -23,7 +23,7 @@ class PlayerCell: UITableViewCell {
             
             switch viewModel.status {
             case .done: statusImage = #imageLiteral(resourceName: "iconCheck")
-            case .waiting: statusImage = nil
+            case .none: statusImage = nil
             case .inProgress: statusImage = #imageLiteral(resourceName: "iconInProgress")
             }
             self.btnStatus.setImage(statusImage, for: .normal)

@@ -74,7 +74,6 @@ class EditorVC: ViewController, DecoratorDelegate, UITextFieldDelegate, UITableV
         
         if self.viewModel.editScope == .creator && self.viewModel.playerScope == .solo {
             //create solo haiku
-            print("-- Create solo haiku")
             MBProgressHUD.showAdded(to: self.view, animated: true)
             self.viewModel.createSingleHaiku {[weak self](success, error) in
                 
@@ -90,7 +89,6 @@ class EditorVC: ViewController, DecoratorDelegate, UITextFieldDelegate, UITableV
         }
         else if self.viewModel.editScope == .creator && self.viewModel.playerScope == .multi {
             //create multi haiku
-            print("-- Create multi haiku")
             MBProgressHUD.showAdded(to: self.view, animated: true)
             self.viewModel.createMultiHaiku(completion: { [weak self](success, error) in
                 
@@ -106,7 +104,20 @@ class EditorVC: ViewController, DecoratorDelegate, UITextFieldDelegate, UITableV
         }
         else if self.viewModel.editScope == .player {
             //add line to haiku
-            
+            MBProgressHUD.showAdded(to: self.view, animated: true)
+            self.viewModel.addLine(completion: { [weak self](success, error) in
+                
+                guard let weakSelf = self else { return }
+                MBProgressHUD.hide(for: weakSelf.view, animated: true)
+                if success {
+                    
+                    weakSelf.navigationController?.popToRootViewController(animated: true)
+                }
+                else {
+                    
+                    weakSelf.showErrorAlert()
+                }
+            })
         }
     }
     
@@ -168,14 +179,17 @@ class EditorVC: ViewController, DecoratorDelegate, UITextFieldDelegate, UITableV
             
             self.actionBar.isHidden = true
             self.tblPlayers.isHidden = false
-            self.cstrTableHeight.constant = CGFloat(self.viewModel.numberOfItems()) * self.tableView(self.tblPlayers, heightForRowAt: IndexPath(row: 0, section: 0))
+            
+            if self.viewModel.numberOfItems() > 0 {
+                
+                self.cstrTableHeight.constant = CGFloat(self.viewModel.numberOfItems()) * self.tableView(self.tblPlayers, heightForRowAt: IndexPath(row: 0, section: 0))
+            }
         }
-        
  
         var i: Int = 0
         for textField in self.fields {
             
-            textField.isHidden = self.viewModel.isTextFieldHidden(forIndex: i)
+            textField.isAlfaHidden = !self.viewModel.isTextFieldShown(forIndex: i)
             textField.isSelected = self.viewModel.isEditingEnabled(forIndex: i)
             textField.text = self.viewModel.fields[safe: i]
             i += 1
@@ -249,7 +263,7 @@ class EditorVC: ViewController, DecoratorDelegate, UITextFieldDelegate, UITableV
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         
-        self.viewModel.inputText(forIndex: textField.tag, text: textField.text ?? "")
+        self.viewModel.inputText(forIndex: textField.tag, text: textField.text)
         TipView.hideTip(fromView: textField)
     }
     

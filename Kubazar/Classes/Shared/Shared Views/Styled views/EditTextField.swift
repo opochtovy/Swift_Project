@@ -10,6 +10,12 @@ import UIKit
 
 class EditTextField: UITextField {
     
+    var isAlfaHidden: Bool = false {
+        didSet {
+            self.alpha = isAlfaHidden ? 0.0 : 1.0
+        }
+    }
+    
     override var isSelected: Bool {
         didSet {
             super.isSelected = isSelected

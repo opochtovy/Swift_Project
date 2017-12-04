@@ -54,12 +54,11 @@ class BazarCellVM {
                 completionHandler(nil, true)
             })
         }
-        else if actionType == .publish {
-            
+        else if actionType == .publish {            
+      
             HaikuManager.shared.publish(toPublish: true, haiku: self.haiku)
         }
     }
-    
     //MARK: - Private functions
     
     private func prepareModel() {

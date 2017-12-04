@@ -196,7 +196,7 @@ class SignInVC: ViewController, UITextFieldDelegate {
         // "oleg.pochtovy@mobexs.com", password: "111111"
         // "serge.rylko@mobexs.com", password: "111111"
         // "opochtovy@yahoo.com", password: "111111"
-        self.client.authenticator.signInWithEmailPassword(email: "oleg.pochtovy@mobexs.com", password: "111111", completionHandler: { errorDescription, success in
+        self.client.authenticator.signInWithEmailPassword(email: "serge.rylko@mobexs.com", password: "111111", completionHandler: { errorDescription, success in
             
             MBProgressHUD.hide(for: self.view, animated: true)
             if !success {

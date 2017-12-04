@@ -10,28 +10,39 @@ import Foundation
 
 enum PlayerStatus {
     
-    case waiting
+    case none
     case done
     case inProgress
     
-    var writeText: String {
+    func getWriteText(isMyself: Bool) -> String {
         
+        var result = ""
         switch self {
-        case .waiting:      return NSLocalizedString("PlayerCell_writes", comment: "")
-        case .done:         return NSLocalizedString("PlayerCell_wrote", comment: "")
-        case .inProgress:   return NSLocalizedString("PlayerCell_write", comment: "")
+        
+        case .done:          result = NSLocalizedString("PlayerCell_wrote", comment: "")
+        case .inProgress, .none:
+            
+            if isMyself {
+                
+                result = NSLocalizedString("PlayerCell_write", comment: "")
+            }
+            else {
+                result = NSLocalizedString("PlayerCell_writes", comment: "")
+            }
         }
+        
+        return result
     }
 }
 
 class PlayerCellVM {
     
-    public var status: PlayerStatus = .waiting
+    public var status: PlayerStatus = .none
     public var userURL: URL?
     public var statusText = ""
     private let player: User
     
-    init(withPlayer player: User, status: PlayerStatus, syllablesCount: Int) {
+    init(withPlayer player: User, status: PlayerStatus, syllablesCount: Int, isCurrentUserField: Bool = false) {
         
         self.player = player
         if let url: URL = URL(string: player.avatarURL ?? "") {
@@ -40,7 +51,10 @@ class PlayerCellVM {
         }
         
         self.status = status
-        self.statusText = "\(player.firstName) \(self.status.writeText) \(syllablesCount) \(NSLocalizedString("PlayerCell_syllables", comment: ""))"        
+
+        let playerName = isCurrentUserField ? NSLocalizedString("PlayerCell_you", comment: "") : player.firstName
+        let writeText = self.status.getWriteText(isMyself: isCurrentUserField)
+        self.statusText = "\(playerName) \(writeText) \(syllablesCount) \(NSLocalizedString("PlayerCell_syllables", comment: ""))"
     }
     
     public func getThumbnailVM() -> UserThumbnailVM {

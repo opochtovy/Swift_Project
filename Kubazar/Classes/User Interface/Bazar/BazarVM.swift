@@ -114,41 +114,6 @@ class BazarVM: BaseVM {
         print("BazarVM - updateDataSource : self.dataSource.count =", self.dataSource.count)
     }
     
-    public func refreshData() {
-        
-        switch self.filter {
-        case .all:
-            
-            self.dataSource = HaikuManager.shared.haikus.filter({ (haiku) -> Bool in
-                haiku.published == true
-            })
-            
-        case .active:
-            
-            self.dataSource = HaikuManager.shared.haikus.filter({ (haiku) -> Bool in
-                
-                let isHaikuIncompleted: Bool = haiku.fields.count < 3
-                let isUserParticipant: Bool = haiku.players.contains(where: { (user) -> Bool in
-                    return user.id == HaikuManager.shared.currentUser.id
-                })
-                
-                return isUserParticipant && isHaikuIncompleted
-            })
-            
-        case .mine:
-            
-            self.dataSource = HaikuManager.shared.haikus.filter({ (haiku) -> Bool in
-                
-                let isUserCreator = haiku.creator?.id == HaikuManager.shared.currentUser.id
-                let isUserActiveParticipant = haiku.activePlayers.contains(where: { (user) -> Bool in
-                    return user.id == HaikuManager.shared.currentUser.id
-                })
-                
-                return isUserCreator && isUserActiveParticipant && haiku.isCompleted
-            })
-        }
-    }
-    
     public func deleteHaiku(haiku: Haiku) {
         
         switch self.filter {

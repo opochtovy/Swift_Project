@@ -9,6 +9,22 @@
 import Foundation
 import PromiseKit
 
+enum HaikuCreationError: Error {
+    
+    case shortField
+}
+
+extension HaikuCreationError: LocalizedError {
+    
+    var localizedDescription: String {
+        
+        switch self {
+        case .shortField:
+            return NSLocalizedString("Line is too short", comment: "")
+        }
+    }
+}
+
 class EditorVM: BaseVM {
 
     enum EditScope {
@@ -30,18 +46,33 @@ class EditorVM: BaseVM {
         static let thirdLane = NSLocalizedString("Editor_tip_thirdLine", comment: "")
     }
     
-    var fields: [String] = []
+    public var fields: [String] = []
     public var editScope: EditScope = .creator
     public var playerScope: PlayserScope = .solo
     public var fontSize: Float = Decorator.defaults.fontSize
     public var fontHexColor: String = Decorator.defaults.fontColor
     public var fontFamilyName: String = Decorator.defaults.familyName
+    private var monoField: String?
     
     private let haiku: Haiku
     public var imageData: Data?
     public var haikuBackURL: URL?
     
-    public var nextActionEnabled: Bool = true //TODO: add condition
+    public var nextActionEnabled: Bool {
+        
+        var result = false
+        
+        if self.editScope == .creator {
+            
+            result = true
+        }
+        else if self.editScope == .player {
+            
+            let turnUser = self.haiku.currentTurnUser
+            result = turnUser == HaikuManager.shared.currentUser
+        }
+        return result
+    }
     
     init(client: Client, haiku: Haiku, imageData: Data? = nil) {
         self.haiku = haiku
@@ -56,7 +87,7 @@ class EditorVM: BaseVM {
         
         self.haikuBackURL = URL(string: self.haiku.pictureURL ?? "")
         self.fields = self.haiku.fields.flatMap({$0.text})
-        self.editScope = self.haiku.id.count > 1 ? .player : .creator
+        self.editScope = self.haiku.id.count > 0 ? .player : .creator
         self.playerScope = self.haiku.players.count == 1 ? .solo : .multi
         self.prepareDecorator()
     }
@@ -69,46 +100,65 @@ class EditorVM: BaseVM {
         self.fontSize = self.haiku.decorator.fontSize
         self.fontFamilyName = self.haiku.decorator.fontFamily
     }
-    
-    public func inputText(forIndex index: Int, text: String) {
+        public func inputText(forIndex index: Int, text: String?) {
         
 
-        self.haiku.fields[index].text = text
-        print("-- Field updated")
+        if self.editScope == .creator {
+            
+            self.haiku.fields[index].text = text
+        }
+        else {
+            
+            self.monoField = text
+        }
     }
     
     public func isEditingEnabled(forIndex index: Int) -> Bool {
         
         var result = false
-        
-        // is user solo
-        if self.haiku.players.count == 1 && self.haiku.players.contains(HaikuManager.shared.currentUser) {
+
+        if self.editScope == .creator && self.playerScope == .solo {
             
             result = true
         }
         else {
-
-            let player = self.haiku.players[safe: index]
             
-            result = player == HaikuManager.shared.currentUser
+            let turnUser = self.haiku.currentTurnUser
+            let isCurrentUserTurn: Bool = turnUser == HaikuManager.shared.currentUser
+            let field = self.haiku.fields[index]
+            let isFieldCompleted = field.text != nil
+            
+            if isCurrentUserTurn == true && field.owner == turnUser && !isFieldCompleted {
+                
+                result = true
+            }
         }
-        print("is editing selecting \(index) - \(result)")
+
         return result
     }
     
-    public func isTextFieldHidden(forIndex index: Int) -> Bool {
+    public func isTextFieldShown(forIndex index: Int) -> Bool {
         
-        var result = true
+        var result = false
         
-        if self.haiku.players.count == 1 &&  self.haiku.players.contains(HaikuManager.shared.currentUser) {
+        if self.editScope == .creator && self.playerScope == .solo {
             
-            result = false
+            //show all fields
+            result = true
         }
-        else if self.haiku.finishedFieldsCount >= index {
+        else if self.editScope == .creator && self.playerScope == .multi {
             
-            result = false
+            //show first field
+            result = index == 0
         }
-        print("is hidden \(index) - \(result)")
+        else if self.playerScope == .multi {
+            
+            //show completed fields or your field if your turn
+            let field = self.haiku.fields[index]
+            let isCurrentUserTurn = self.haiku.currentTurnUser == field.owner
+            result = field.text != nil || isCurrentUserTurn
+        }
+        
         return result
     }
     
@@ -139,15 +189,28 @@ class EditorVM: BaseVM {
     
     public func getPlayerCellVM(forIndexPath indexPath: IndexPath) -> PlayerCellVM {
         
-        let status : PlayerStatus = PlayerStatus.done // TODO: add status logic
-        let syllablesCount : Int = 7 // MOcked
-        return PlayerCellVM(withPlayer: self.haiku.players[indexPath.row], status: status, syllablesCount: syllablesCount)
+        var status : PlayerStatus = .none
+        
+        let field: Field = self.haiku.fields[indexPath.row]
+        let turnUser = self.haiku.currentTurnUser
+        if field.text != nil {
+            
+            status = .done
+        }
+        else if field.owner == turnUser {
+            
+            status = .inProgress
+        }
+        
+        let syllablesCount : Int = indexPath.row == 1 ? 7 : 5
+        let isCurrentUserField = field.owner == HaikuManager.shared.currentUser
+        return PlayerCellVM(withPlayer: field.owner, status: status, syllablesCount: syllablesCount, isCurrentUserField: isCurrentUserField)
     }
     
     public func numberOfItems() -> Int {
         
         guard self.editScope == .player else { return 0 }
-        return self.haiku.players.count
+        return self.haiku.fields.count
     }
     
     public func resetDecorator() {
@@ -195,9 +258,10 @@ class EditorVM: BaseVM {
     
     public func addLine(completion: @escaping BaseCompletion) {
         
-        self.client.authenticator.putLine(haiku: self.haiku).then { haiku -> Void in
+        guard let field = self.monoField, field.count > 1 else { return completion(false, HaikuCreationError.shortField) }
         
-            //checkHaiku
+        self.client.authenticator.putLine(haiku: self.haiku, fieldText: field).then { haiku -> Void in
+
             completion(true, nil)
             
         }.catch { error -> Void in

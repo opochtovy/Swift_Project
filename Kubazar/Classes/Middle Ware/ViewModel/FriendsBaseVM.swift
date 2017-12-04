@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PromiseKit
 
 /** FriendsBaseVM is responsable for fetching user contacts and friends */
 
@@ -17,55 +18,31 @@ class FriendsBaseVM: BaseVM {
         self.prepareModel()
     }
     
-    /** override prepareModel to set viewModel data */
+    /** override prepareModel to set child viewModel data */
     internal func prepareModel() {
         
     }
     
     public func getContacts(completion: @escaping BaseCompletion) {
         
-        ContactsManager.shared.requestAssess { (success, error) in
+        ContactsManager.shared.requestAccessSmart().then { _ -> Promise<Void> in
+         
+            return ContactsManager.shared.getAllContactsSmart()
             
-            if success {
+        }.then { _ -> Promise<[User]> in
                 
-                ContactsManager.shared.getAllContacts(completion: { (success, error) in
-                    
-                    if success {
-                        
-                        self.getFriends(completion: { (success, error) in
-                            
-                            if success {
-                                
-                                self.prepareModel()
-                                completion(true, nil)
-                            }
-                            else {
-                                
-                                completion(false, error)
-                            }
-                        })
-                    }
-                    else {
-                        
-                        completion(false, error)
-                    }
-                })
-            }
-        }
-    }
-    
-    private func getFriends(completion: @escaping BaseCompletion) {
-        
-        let phones = ContactsManager.shared.userContacts.flatMap({$0.phones})
-        self.client.authenticator.fetchFriends(phones: phones).then { users -> Void in
+            let phones = ContactsManager.shared.userContacts.flatMap({$0.phones})
+            return self.client.authenticator.fetchFriends(phones: phones)
+                
+        }.then { users -> Void in
             
             HaikuManager.shared.friends = users
             self.filterUserContacts()
             completion(true, nil)
             
-            }.catch { (error) in
-                
-                completion(false, error)
+        }.catch { error in
+            
+            completion(false, error)
         }
     }
     

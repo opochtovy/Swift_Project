@@ -100,7 +100,9 @@ class BazarDetailVM: BaseVM {
         
         //mode choosing
         
-        let authorIds = haiku.fields.flatMap{$0.creatorId}
+        let authorIds = haiku.fields.flatMap { (field) -> String? in
+            field.owner.id
+        }
         
         print("authorIds =", authorIds)
         print("HaikuManager.shared.currentUser.id =", HaikuManager.shared.currentUser.id)

@@ -326,10 +326,7 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
                 self.viewModel.isDataLoading = true
                 self.viewModel.page = self.viewModel.page + 1
                 self.getPersonalHaikus(page: self.viewModel.page, perPage: self.viewModel.perPage)
-                
             }
         }
-        
-        
     }
 }

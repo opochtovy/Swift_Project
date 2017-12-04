@@ -80,7 +80,7 @@
                     </constraints>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testHaikuIMage" translatesAutoresizingMaskIntoConstraints="NO" id="PTg-AQ-laU" customClass="testHaikuIMage">
-                    <rect key="frame" x="0.0" y="92" width="320" height="320"/>
+                    <rect key="frame" x="0.0" y="34" width="320" height="320"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="PTg-AQ-laU" secondAttribute="height" multiplier="1:1" id="YcW-hK-N2M"/>
                     </constraints>
@@ -142,7 +142,7 @@
             </subviews>
             <color key="backgroundColor" red="0.83137254901960778" green="0.85098039215686272" blue="0.85098039215686272" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="PTg-AQ-laU" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="0DI-Fl-tlJ"/>
+                <constraint firstItem="PTg-AQ-laU" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" priority="900" id="0DI-Fl-tlJ"/>
                 <constraint firstItem="PTg-AQ-laU" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="5aa-cy-Ga4"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="VXz-Sr-c7s" secondAttribute="trailing" id="9Pa-wl-PdF"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="VXz-Sr-c7s" secondAttribute="trailing" id="A2y-lq-3e1"/>
@@ -154,6 +154,7 @@
                 <constraint firstItem="tph-YM-ee1" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="NRW-vx-7mD"/>
                 <constraint firstItem="Agf-UN-rfn" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="TAA-Qc-G6A"/>
                 <constraint firstItem="tph-YM-ee1" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" multiplier="0.9" id="f5y-Gk-N5o"/>
+                <constraint firstItem="Agf-UN-rfn" firstAttribute="top" relation="greaterThanOrEqual" secondItem="PTg-AQ-laU" secondAttribute="bottom" id="heY-wg-IJB"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="PTg-AQ-laU" secondAttribute="trailing" id="tUe-lV-Fde"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
