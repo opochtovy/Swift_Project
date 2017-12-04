@@ -55,6 +55,9 @@ class KBNotification: MappableObject {
         switch aType {
         case "nextTurn": type = .nextTurn
         case "like": type = .like
+        case "completed": type = .publish
+        case "firstWarning": type = .remember
+        case "secondWarning": type = .remember
         default: print()
         }
         text <- map["text"]

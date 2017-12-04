@@ -30,6 +30,8 @@ class NotificationsVC: ViewController, UITableViewDataSource, UITableViewDelegat
         super.viewDidLoad()
         self.tblNotifications.register(UINib.init(nibName: "NotificationCell", bundle: nil), forCellReuseIdentifier: NotificationCell.reuseID)
         self.tblNotifications.register(UINib.init(nibName: "RememberCell", bundle: nil), forCellReuseIdentifier: RememberCell.reuseID)
+        self.tblNotifications.rowHeight = UITableViewAutomaticDimension
+        self.tblNotifications.estimatedRowHeight = 75
 
         self.getNotifications()
     }
