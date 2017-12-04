@@ -127,11 +127,11 @@ class ProfileVC: ViewController, UITableViewDelegate, UITableViewDataSource, UII
     
     private func showProgressView() {
         
-        self.progressView.progress = 0.2
+        self.progressView.progress = 0.0
         self.progressView.isHidden = false
     }
     
-    private func uploadUserAtatar(imageData: Data) {
+    private func uploadUserAvatar(imageData: Data) {
         
         self.showProgressView()
         MBProgressHUD.showAdded(to: self.view, animated: true)
@@ -233,7 +233,7 @@ class ProfileVC: ViewController, UITableViewDelegate, UITableViewDataSource, UII
             if let editedImage = UIImage().resizePhoto(image: pickedImage, scale: scale), let data = UIImageJPEGRepresentation(editedImage, 1.0) {
 
                 self.profileImageView.image = editedImage
-                self.uploadUserAtatar(imageData: data)
+                self.uploadUserAvatar(imageData: data)
             }
         }
         

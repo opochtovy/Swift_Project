@@ -88,7 +88,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J0V-Dk-Hvw">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="181"/>
                             <subviews>
-                                <progressView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Cla-Oy-WxU">
+                                <progressView hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Cla-Oy-WxU">
                                     <rect key="frame" x="20" y="89" width="280" height="2"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="2" id="x4y-pj-Ayh"/>
