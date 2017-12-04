@@ -29,6 +29,7 @@ enum StoreKeys {
     static let isUserAuthorized = "isUserAuthorized"
     static let authVerificationID = "authVerificationID"
     static let authToken = "Authentication-Token"
+    static let signInPassword = "Sign-In-Password"
 }
 
 class FirebaseServerClient {
@@ -36,10 +37,10 @@ class FirebaseServerClient {
     typealias BaseCompletion = (_ success: Bool, _ error: Error?) -> Void
     
     static let AuthenticatorStateDidChangeNotification = "AuthenticatorStateDidChangeNotification"
-    static let DeviceTokenDidPutNotification = "DeviceTokenDidPutNotification"
+    static let FCMTokenDidPutNotification = "FCMTokenDidPutNotification"
     
     var sessionManager: SessionManager
-    var deviceToken: Data = Data()
+    var fcmToken: String = ""
     var isJustAfterAuth: Bool = false
     
     public var state : AuthenticatorState? {
@@ -74,6 +75,37 @@ class FirebaseServerClient {
             do {
                 
                 let passwordItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName, account: StoreKeys.authToken, accessGroup: KeychainConfiguration.accessGroup)
+                if let newValue = newValue {
+                    
+                    try passwordItem.savePassword(newValue)
+                }
+            }
+            catch {
+                fatalError("Error saving password to keychain - \(error)")
+            }
+        }
+    }
+    
+    var signInPassword: String? {
+        
+        get {
+            
+            var password = ""
+            do {
+                
+                let passwordItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName, account: StoreKeys.signInPassword, accessGroup: KeychainConfiguration.accessGroup)
+                password = try passwordItem.readPassword()
+            }
+            catch {
+                fatalError("Error reading password from keychain - \(error)")
+            }
+            return password
+        }
+        set {
+            
+            do {
+                
+                let passwordItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName, account: StoreKeys.signInPassword, accessGroup: KeychainConfiguration.accessGroup)
                 if let newValue = newValue {
                     
                     try passwordItem.savePassword(newValue)
@@ -240,7 +272,7 @@ class FirebaseServerClient {
             
             }.then { (_) -> Promise<Void> in
                 
-                return self.putDeviceToken()
+                return self.putFCMToken()
                 
             }.then { (_) -> Void in
                 
@@ -281,11 +313,12 @@ class FirebaseServerClient {
             
             self.isJustAfterAuth = true
             self.state = .authorized
+            self.signInPassword = password
             return self.getToken()
             
             }.then { (_) -> Promise<Void> in
                 
-                return self.putDeviceToken()
+                return self.putFCMToken()
                 
             }.then { (_) -> Void in
                 
@@ -326,13 +359,6 @@ class FirebaseServerClient {
                 
                 if error != nil {
                     
-                    do {
-                        try Auth.auth().signOut()
-                        
-                    } catch let signOutError as NSError {
-                        print ("Error signing out: %@", signOutError)
-                    }
-                    
                     if let error = error {
                         
                         completionHandler(error.localizedDescription, false)
@@ -340,6 +366,7 @@ class FirebaseServerClient {
                     }
                 }
                 
+                self.signInPassword = password
                 completionHandler(nil, true)
             }
         }        
@@ -451,7 +478,7 @@ class FirebaseServerClient {
                     return
                 }
             }
-            
+            self.signInPassword = password
             completionHandler(nil, true)
         }
     }
@@ -488,7 +515,7 @@ class FirebaseServerClient {
         }
     }
     
-    private func getToken() -> Promise<Void> {
+    public func getToken() -> Promise<Void> {
         
         return Promise { fulfill, reject in
             
@@ -500,6 +527,7 @@ class FirebaseServerClient {
                     if let idToken = idToken {
                         
                         self.authToken = idToken
+                        self.sessionManager.adapter = SessionTokenAdapter(sessionToken: idToken)
                         fulfill(())
                         
                     } else if let error = error {
@@ -515,9 +543,9 @@ class FirebaseServerClient {
     
     //MARK: - Alamofire
     
-    public func addDeviceToken(completionHandler:@escaping (String?, Bool) -> ()) {
+    public func addFCMToken(completionHandler:@escaping (String?, Bool) -> ()) {
         
-        self.putDeviceToken().then { (_) -> Void in
+        self.putFCMToken().then { (_) -> Void in
             
             completionHandler(nil, true)
             
@@ -527,25 +555,24 @@ class FirebaseServerClient {
         }
     }
     
-    private func putDeviceToken() -> Promise<Void> {
+    private func putFCMToken() -> Promise<Void> {
         
         return Promise { fulfill, reject in
             
-            if self.deviceToken.count == 0 {
+            if self.fcmToken.count == 0 {
                 print("Error")
             }
             
-            let bodyParameters: [String: String] = ["token": self.deviceToken.base64EncodedString()]
+            let bodyParameters: [String: String] = ["token": self.fcmToken]
             print("bodyParameters =", bodyParameters)
-            let request = AuthenticationRouter.addDeviceToken(bodyParameters: bodyParameters)
+            let request = AuthenticationRouter.addFCMToken(bodyParameters: bodyParameters)
             
-            // ??? - when validate() is here -> reject(erro)
-            self.sessionManager.request(request).response(completionHandler: { dataResponse in
+            self.sessionManager.request(request).validate().response(completionHandler: { dataResponse in
                 
                 if let error = dataResponse.error {
                     
                     reject(error)
-                
+                    return
                 }
                 
                 if let currentUser = Auth.auth().currentUser {
@@ -639,7 +666,30 @@ class FirebaseServerClient {
         }
     }
     
-    private func getHaikusPromise(page: Int, perPage: Int, sort: Int, filter: Int) -> Promise<[Haiku]> {
+    public func reauthenticateUser() -> Promise<Void> {
+        
+        return Promise {  fulfill, reject in
+            
+            let user = Auth.auth().currentUser
+            if let password = self.signInPassword, let email = user?.email {
+                
+                let credential = EmailAuthProvider.credential(withEmail: email, password: password)
+                user?.reauthenticate(with: credential) { error in
+                    if let error = error {
+                        
+                        reject(error)
+                    } else {
+                        
+                        fulfill(())
+                    }
+                }
+            } else {
+                print()
+            }
+        }
+    }
+    
+    public func getHaikusPromise(page: Int, perPage: Int, sort: Int, filter: Int) -> Promise<[Haiku]> {
         
         return Promise { fulfill, reject in
             
@@ -671,19 +721,6 @@ class FirebaseServerClient {
                         
                     case .failure(let error):
                         
-                        self.signOut { (errorDescription, success) in
-                            
-                            UserDefaults.standard.set(false, forKey: StoreKeys.isUserAuthorized)
-                            UserDefaults.standard.synchronize()
-                            self.authToken = ""
-                            self.sessionManager.adapter = nil
-                            
-                            if let authToken = self.authToken, authToken.count > 0 {
-                                
-                                print("FirebaseServerClient : authToken =", authToken)
-                                print("Error")
-                            }
-                        }
                         reject(error)
                     }
                 }

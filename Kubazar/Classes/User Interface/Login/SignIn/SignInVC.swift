@@ -191,7 +191,7 @@ class SignInVC: ViewController, UITextFieldDelegate {
                         print("-- authToken =", authToken)
                         self.client.authenticator.sessionManager.adapter = SessionTokenAdapter(sessionToken: authToken)
                         
-                        let notification = Notification(name: Notification.Name(rawValue: FirebaseServerClient.DeviceTokenDidPutNotification))
+                        let notification = Notification(name: Notification.Name(rawValue: FirebaseServerClient.FCMTokenDidPutNotification))
                         NotificationCenter.default.post(notification)
                     }
                 }
@@ -203,7 +203,7 @@ class SignInVC: ViewController, UITextFieldDelegate {
         // "oleg.pochtovy@mobexs.com", password: "111111"
         // "serge.rylko@mobexs.com", password: "111111"
         // "opochtovy@yahoo.com", password: "111111"
-        self.client.authenticator.signInWithEmailPassword(email: "serge.rylko@mobexs.com", password: "111111", completionHandler: { errorDescription, success in
+        self.client.authenticator.signInWithEmailPassword(email: "oleg.pochtovy@mobexs.com", password: "111111", completionHandler: { errorDescription, success in
             
             MBProgressHUD.hide(for: self.view, animated: true)
             if !success {
@@ -217,7 +217,7 @@ class SignInVC: ViewController, UITextFieldDelegate {
                     print("-- authToken =", authToken)
                     self.client.authenticator.sessionManager.adapter = SessionTokenAdapter(sessionToken: authToken)
                     
-                    let notification = Notification(name: Notification.Name(rawValue: FirebaseServerClient.DeviceTokenDidPutNotification))
+                    let notification = Notification(name: Notification.Name(rawValue: FirebaseServerClient.FCMTokenDidPutNotification))
                     NotificationCenter.default.post(notification)
                 }
             }

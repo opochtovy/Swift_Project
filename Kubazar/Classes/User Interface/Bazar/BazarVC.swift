@@ -62,7 +62,7 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
         
         if !self.client.authenticator.isJustAfterAuth {
             
-            let notification = Notification(name: Notification.Name(rawValue: FirebaseServerClient.DeviceTokenDidPutNotification))
+            let notification = Notification(name: Notification.Name(rawValue: FirebaseServerClient.FCMTokenDidPutNotification))
             NotificationCenter.default.post(notification)
         }
     }
@@ -147,7 +147,7 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
     
     private func setupObserving() {
         
-        NotificationCenter.default.addObserver(self, selector: #selector(BazarVC.getPersonalHaikus), name: NSNotification.Name(rawValue: FirebaseServerClient.DeviceTokenDidPutNotification), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(BazarVC.getPersonalHaikus), name: NSNotification.Name(rawValue: FirebaseServerClient.FCMTokenDidPutNotification), object: nil)
     }
     
     @objc private func getPersonalHaikus(page: Int, perPage: Int, shouldResetDataSource: Bool) {
@@ -171,6 +171,49 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
                 }
             }
         }
+    }
+    
+    public func reauthenticateUser(shouldResetDataSource: Bool) {
+        
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        self.viewModel.reauthenticateUser() { [weak self](haikus, success) in
+            
+            guard let weakSelf = self else { return }
+            
+            MBProgressHUD.hide(for: weakSelf.view, animated: true)
+            
+            if !success {
+                
+                weakSelf.tblView.reloadData()
+            } else {
+                
+                weakSelf.updateContentWithNewHaikus(haikus: haikus, shouldResetDataSource: shouldResetDataSource)
+            }
+        }
+    }
+    
+    override func showWrongResponseAlert(message: String?) {
+        
+        let alertTitle = NSLocalizedString(CommonTitles.errorTitle, comment: "")
+        var alertMessage = NSLocalizedString(CommonTitles.wrongResponseMessage, comment: "")
+        if let message = message {
+            
+            alertMessage = message
+        }
+        
+        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: NSLocalizedString(ButtonTitles.doneButtonTitle, comment: ""), style: .default) { (_) in
+            
+            alertController.dismiss(animated: true, completion: nil)
+            self.reauthenticateUser(shouldResetDataSource: true)
+        }
+        
+        alertController.addAction(okAction)
+        
+        alertController.view.tintColor = #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)
+        
+        self.present(alertController, animated: true, completion: nil)
     }
     
     //MARK: - Actions

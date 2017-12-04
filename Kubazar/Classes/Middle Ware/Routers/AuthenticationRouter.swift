@@ -11,7 +11,7 @@ import Alamofire
 
 enum AuthenticationRouter: URLRequestConvertible {
     
-    case addDeviceToken(bodyParameters: [String: String])
+    case addFCMToken(bodyParameters: Parameters)
     case uploadUserAvatar(contentType: String, multipartFormData: Data)
     case downloadProfileImage(url: URL)
     case getUserInfo(creatorId: String) // that router is to get user info by creatorId different from currentUser
@@ -19,7 +19,7 @@ enum AuthenticationRouter: URLRequestConvertible {
     var method: HTTPMethod {
         
         switch self {
-        case .addDeviceToken: return .put
+        case .addFCMToken: return .put
         case .uploadUserAvatar: return .put
         case .downloadProfileImage: return .get
         case .getUserInfo: return .get
@@ -29,7 +29,7 @@ enum AuthenticationRouter: URLRequestConvertible {
     var path: String {
         
         switch self {
-        case .addDeviceToken(_): return "/user/device"
+        case .addFCMToken(_): return "/user/device"
         case .uploadUserAvatar(_): return "/user/avatar"
         case .downloadProfileImage(_): return ""
         case .getUserInfo(let creatorId): return "/user/info"
@@ -43,10 +43,11 @@ enum AuthenticationRouter: URLRequestConvertible {
         let url = try Client.BaseURL.asURL()
         var urlRequest = URLRequest(url: url.appendingPathComponent(path))
         urlRequest.httpMethod = self.method.rawValue
+        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         switch self {
             
-        case .addDeviceToken(let bodyParameters):
+        case .addFCMToken(let bodyParameters):
             let jsonData = try JSONSerialization.data(withJSONObject: bodyParameters, options: .prettyPrinted)
             urlRequest.httpBody = jsonData
             

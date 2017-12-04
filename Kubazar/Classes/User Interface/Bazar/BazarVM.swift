@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PromiseKit
 
 class BazarVM: BaseVM {
     
@@ -142,5 +143,26 @@ class BazarVM: BaseVM {
         
         self.dataSource.remove(object: haiku)
         self.allHaikus.remove(object: haiku)
+    }
+ 
+    public func reauthenticateUser(completionHandler:@escaping ([Haiku], Bool) -> ()) {
+        
+        self.client.authenticator.reauthenticateUser().then { () -> Promise<Void> in
+            
+            return self.client.authenticator.getToken()
+            
+            }.then { () -> Promise<[Haiku]> in
+                
+                let sortType = self.sort == .date ? 0 : 1
+                return self.client.authenticator.getHaikusPromise(page: self.page, perPage: self.perPage, sort: sortType, filter: self.filter.rawValue)
+                
+            }.then { haikus -> Void in
+                
+                completionHandler(haikus, true)
+            
+            }.catch { error in
+                
+                completionHandler([], false)
+        }
     }
 }

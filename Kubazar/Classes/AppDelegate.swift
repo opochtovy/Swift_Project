@@ -79,10 +79,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         
-        self.client.authenticator.deviceToken = deviceToken
-        print("deviceToken =", deviceToken.base64EncodedString())
-        
         let token = Messaging.messaging().fcmToken
+        self.client.authenticator.fcmToken = token ?? ""
         print("FCM token: \(token ?? "")")
         
         // Pass device token to auth.
@@ -120,6 +118,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         print("Firebase registration token: \(fcmToken)")
         
         let token = Messaging.messaging().fcmToken
+        self.client.authenticator.fcmToken = token ?? ""
         print("FCM token: \(token ?? "")")
     }
 }

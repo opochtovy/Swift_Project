@@ -179,7 +179,7 @@ class CompleteEditProfileVC: ViewController, UIImagePickerControllerDelegate, UI
                 
             } else {
                 
-                let notification = Notification(name: Notification.Name(rawValue: FirebaseServerClient.DeviceTokenDidPutNotification))
+                let notification = Notification(name: Notification.Name(rawValue: FirebaseServerClient.FCMTokenDidPutNotification))
                 NotificationCenter.default.post(notification)
             }
         })
