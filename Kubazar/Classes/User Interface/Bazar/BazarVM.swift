@@ -164,5 +164,7 @@ class BazarVM: BaseVM {
                 
                 completionHandler([], false)
         }
+        
+        print("BazarVM - deleteHaiku : self.dataSource.count =", self.dataSource.count)
     }
 }

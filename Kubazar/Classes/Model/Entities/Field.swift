@@ -14,23 +14,15 @@ class Field: MappableObject {
     public var id: Int = 0
     public var text: String?
     public var owner: User
-    public var creatorId: String?
     
-    /** false if user delete haiku from collection*/
-    public var isActive: Bool = true
-    
-    /** defines user complete editing field*/
-    public var isFinished: Bool = true
-    
-    init(user: User, text: String, finished: Bool = true) {
+    init(user: User, text: String?) {
         self.owner = user
         self.text = text
-        self.isFinished = finished
     }
     
     required convenience init?(map: Map){
         
-        self.init(user: User(), text: "", finished: false)
+        self.init(user: User(), text: nil)
     }
     
     override func mapping(map: Map) {

@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MessageUI
 
-class FriendListVC: ViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+class FriendListVC: ViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UINavigationControllerDelegate {
     
     private var scFilter: UISegmentedControl!
     @IBOutlet private weak var searchBar: UISearchBar!
@@ -39,7 +40,6 @@ class FriendListVC: ViewController, UITableViewDelegate, UITableViewDataSource, 
         self.tblFriends.sectionIndexColor = #colorLiteral(red: 0.537254902, green: 0.537254902, blue: 0.537254902, alpha: 1)
         self.tblFriends.sectionIndexBackgroundColor = UIColor.white
         self.tblFriends.register(UINib.init(nibName: "FriendListCell", bundle: nil), forCellReuseIdentifier: FriendListCell.reuseID)
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -94,6 +94,16 @@ class FriendListVC: ViewController, UITableViewDelegate, UITableViewDataSource, 
         }
     }
     
+    @IBAction private func didPressInviteButton(_ sender: UIButton) {
+        
+        let ctrl = MFMessageComposeViewController.init(rootViewController: self)
+        ctrl.body = "Hi, Dude, you have been invited to Kubazar by other dude"
+        ctrl.subject = "Invite friend"
+        ctrl.delegate = self
+        
+        self.navigationController?.pushViewController(ctrl, animated: true)
+    }
+    
     //MARK: - UITableViewDataSource
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -110,7 +120,7 @@ class FriendListVC: ViewController, UITableViewDelegate, UITableViewDataSource, 
         
         let cell = tableView.dequeueReusableCell(withIdentifier: FriendListCell.reuseID, for: indexPath) as! FriendListCell
         cell.viewModel = self.viewModel.getFriendListCellVM(forIndexPath: indexPath)
-        
+        cell.btnInvite.addTarget(self, action: #selector(FriendListVC.didPressInviteButton(_:)), for: .touchUpInside)
         return cell
     }
     
@@ -175,5 +185,12 @@ class FriendListVC: ViewController, UITableViewDelegate, UITableViewDataSource, 
         
         searchBar.resignFirstResponder()
     }
+}
+
+extension FriendListVC: MFMessageComposeViewControllerDelegate {
     
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        
+        print(result)
+    }
 }

@@ -117,15 +117,8 @@ class BazarDetailVM: BaseVM {
         
         //mode choosing
         
-//        let authorIds = haiku.fields.flatMap{$0.creatorId}
-        var authorIds: [String] = []
-        for field in self.haiku.fields {
-            
-            let creatorId = field.owner.id
-            if !authorIds.contains(creatorId) {
-                
-                authorIds.append(creatorId)
-            }
+        let authorIds = haiku.fields.flatMap { (field) -> String? in
+            field.owner.id
         }
         
         print("authorIds =", authorIds)

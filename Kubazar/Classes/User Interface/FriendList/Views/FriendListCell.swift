@@ -15,7 +15,7 @@ class FriendListCell: UITableViewCell {
     @IBOutlet private weak var vUserThumbnail: UserThumbnail!
     @IBOutlet private weak var lbUserName: UILabel!
     @IBOutlet private weak var lbhaikuCounter: UILabel!
-    @IBOutlet private weak var btnInvite: UIButton!
+    @IBOutlet public weak var btnInvite: UIButton!
     
     public var viewModel: FriendListCellVM! {
         didSet {

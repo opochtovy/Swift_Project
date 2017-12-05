@@ -43,17 +43,6 @@ class HaikuManager {
             haiku.liked = false
         }
     }
-    
-    public func delete(haiku: Haiku, user: User) {
-        
-        for field in haiku.fields {
-            
-            if field.owner == user {
-                
-                field.isActive = false
-            }
-        }
-    }
    
     public func createNewHaiku(_ players: [User] = []) -> Haiku{
         
@@ -61,9 +50,9 @@ class HaikuManager {
         haiku.creator = self.currentUser
         haiku.players = [self.currentUser]
  
-        haiku.fields = [Field(user: haiku.players[0], text: ""),
-                        Field(user: haiku.players[0], text: ""),
-                        Field(user: haiku.players[0], text: "")]
+        haiku.fields = [Field(user: haiku.players[0], text: nil),
+                        Field(user: haiku.players[0], text: nil),
+                        Field(user: haiku.players[0], text: nil)]
         
         return haiku
     }

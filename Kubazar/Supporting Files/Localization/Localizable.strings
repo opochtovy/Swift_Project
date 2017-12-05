@@ -154,6 +154,7 @@
 /**/ "Clipper_edit_photo" = "Edit Photo";
 
 /*PlayerCellVM/*
+/**/ "PlayerCell_you" = "You";
 /**/ "PlayerCell_writes" = "writes";
 /**/ "PlayerCell_wrote" = "wrote";
 /**/ "PlayerCell_write" = "write";

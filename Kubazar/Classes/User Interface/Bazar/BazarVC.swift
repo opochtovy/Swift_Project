@@ -383,7 +383,5 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
                 
             }
         }
-        
-        
     }
 }

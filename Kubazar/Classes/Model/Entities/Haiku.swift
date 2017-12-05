@@ -60,19 +60,14 @@ class Haiku: MappableObject {
 
 extension Haiku {
     
-    public var activePlayers: [User] {
-
-        return self.fields.filter({$0.isActive}).flatMap({$0.owner})
-    }
-    
-    public var finishedFieldsCount: Int {
-    
-        return self.fields.flatMap({$0.isFinished}).count
-    }
-    
     public var friends: [User] {
         
         return self.players.filter{$0 != self.creator}
+    }
+        
+    public var currentTurnUser: User? {
+        
+        return self.fields.filter({$0.text == nil}).first?.owner
     }
 }
 
