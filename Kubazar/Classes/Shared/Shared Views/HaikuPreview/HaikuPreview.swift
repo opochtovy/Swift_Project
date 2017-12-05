@@ -93,7 +93,7 @@ class HaikuPreview: UIView {
         // Setup the font specific variables
         let textColor = UIColor.init(hex: self.viewModel.fontHexColor)// UIColor.white
         let fontSize = CGFloat(self.viewModel.fontSize) * imageScale
-        let textFont: UIFont = UIFont(name: self.viewModel.fontfamilyName, size: fontSize)!
+        let textFont: UIFont = UIFont(name: self.viewModel.fontfamilyName, size: fontSize) ?? UIFont.systemFont(ofSize: fontSize)
         
         //Put the image into a rectangle as large as the original image.
         let rect: CGRect = CGRect(x: 0, y: 0, width: inImage.size.width, height: inImage.size.height)
