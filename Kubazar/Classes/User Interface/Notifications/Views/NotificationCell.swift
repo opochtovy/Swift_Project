@@ -16,7 +16,7 @@ class NotificationBaseCell: UITableViewCell {
 class NotificationCell: NotificationBaseCell {
 
     static public let reuseID = "NotificationCell"
-    static let placeholder = Placeholders.haiku.getRandom()
+    static let userPlaceholder = Placeholders.thumbnail.getRandom()
     
     @IBOutlet private weak var ivUser: UIImageView!
     @IBOutlet private weak var ivHaiku: UIImageView!
@@ -27,16 +27,16 @@ class NotificationCell: NotificationBaseCell {
         
         didSet {
             
-            ivUser.image = nil
+            ivUser.image = NotificationCell.userPlaceholder
             if let url = viewModel.userImageURL {
                 
                 ivUser.af_setImage(withURL: url)
             }
             
-            ivHaiku.image = nil
+            ivHaiku.image = HaikuPreview.placeholder
             if let url = viewModel.haikuImageURL {
                 
-                ivHaiku.af_setImage(withURL: url, placeholderImage: HaikuPreview.placeholder, imageTransition: .crossDissolve(0.2))
+                ivHaiku.af_setImage(withURL: url)
             }
             
             lbNoteInfo.text = viewModel.notificationText
