@@ -23,9 +23,6 @@ class HaikuPreview: UIView {
     
     private var gradient: CAGradientLayer?
     
-    private let imageCache = AutoPurgingImageCache()
-    private let downloader = ImageDownloader()
-    
     public var viewModel: HaikuPreviewVM! {
         didSet {
             

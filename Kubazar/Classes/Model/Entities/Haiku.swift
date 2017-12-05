@@ -49,10 +49,8 @@ class Haiku: MappableObject {
         likesCount <- map["likesCount"]
         finishDate <- map["finishedOn"]
         createDate <- map["createdOn"]
-        
         pictureURL <- map["img.url"]
         decorator <- map["font"]
-        
         fields <- (map["text"])
         players <- (map["owners"])
     }
