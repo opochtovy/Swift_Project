@@ -19,8 +19,7 @@ class FriendListVC: ViewController, UITableViewDelegate, UITableViewDataSource, 
     private var scFilter: UISegmentedControl!
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var tblFriends: UITableView!
-    
-    private var inviteCtrl: MFMessageComposeViewController!
+
     let viewModel: FriendListVM
     
     //MARK: - LifeCycle
@@ -78,7 +77,6 @@ class FriendListVC: ViewController, UITableViewDelegate, UITableViewDataSource, 
         
         self.scFilter.selectedSegmentIndex = self.viewModel.filter.rawValue
         self.tblFriends.reloadData()
-
     }
     
     private func setBarAppearance() {
@@ -207,19 +205,19 @@ class FriendListVC: ViewController, UITableViewDelegate, UITableViewDataSource, 
         guard let phoneNumber = phoneNumbers.first                  else { return }
         guard MFMessageComposeViewController.canSendText() == true  else { return }
         
-        self.inviteCtrl = MFMessageComposeViewController()
-        inviteCtrl.body = "\(userName), You have been invited to Kubazar "
-        inviteCtrl.subject = "Invite friend"
-        inviteCtrl.delegate = self
-        inviteCtrl.recipients = [phoneNumber]
+        let ctrl = MFMessageComposeViewController()
+        ctrl.body = "\(userName), You have been invited to Kubazar "
+        ctrl.subject = "Invite friend"
+        ctrl.delegate = self
+        ctrl.recipients = [phoneNumber]
         
         if phoneNumbers.count == 1 {
             
-            self.present(inviteCtrl, animated: true, completion: nil)
+            self.present(ctrl, animated: true, completion: nil)
         }
         else if phoneNumbers.count > 1 {
             
-            self.showInviteAlert(inviteCtrl)
+            self.showInviteAlert(ctrl)
         }
     }
     //MARK: - MFMessageComposeViewControllerDelegate
