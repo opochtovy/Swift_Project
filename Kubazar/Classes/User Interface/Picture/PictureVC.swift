@@ -28,6 +28,7 @@ class PictureVC: ViewController, UICollectionViewDataSource, UICollectionViewDel
     private lazy var imagePicker: UIImagePickerController = {
         
         let ctrl = UIImagePickerController.init()
+        ctrl.modalPresentationStyle = .overFullScreen
         ctrl.sourceType = .camera
         ctrl.delegate = self
         return ctrl
@@ -80,11 +81,7 @@ class PictureVC: ViewController, UICollectionViewDataSource, UICollectionViewDel
     @IBAction private func didPressTakeNewPhoto(_ sender: UIButton) {
         
         guard UIImagePickerController.isSourceTypeAvailable(.camera) else { return }
-        
-        self.present(self.imagePicker, animated: true) {
-         
-            self.updateContent()
-        }
+        self.present(self.imagePicker, animated: true, completion: nil)
     }
     
     @IBAction private func didPressSurpriseMe(_ sender: UIButton) {
@@ -210,17 +207,18 @@ class PictureVC: ViewController, UICollectionViewDataSource, UICollectionViewDel
         return CGSize(width: side, height: side)
     }
     
-    //MARK: - UICollectionViewDataSource
+    //MARK: - UIImagePickerControllerDelegate
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             
             let imageData = UIImageJPEGRepresentation(image, 1.0)
             self.viewModel.chooseImage(withData: imageData)
-            self.navigateToClipperController()
+            picker.dismiss(animated: true) {
+                
+                self.navigateToClipperController()
+            }
         }
-        
-        picker.dismiss(animated: true, completion: nil)
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
