@@ -18,5 +18,8 @@ target 'Kubazar' do
   pod 'Crashlytics', '~> 3.9'
   pod 'AlamofireImage', '~> 3.3'
   pod 'IQKeyboardManagerSwift', '5.0.0'
+  pod 'FBSDKCoreKit', '~> 4.27'
+  pod 'FBSDKLoginKit', '~> 4.27'
+  pod 'FBSDKShareKit', '~> 4.27'
 
 end

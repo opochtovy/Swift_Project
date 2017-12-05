@@ -8,6 +8,7 @@
 
 import UIKit
 import Social
+import FBSDKShareKit
 
 protocol BazarDetailVCDelegate : class {
     
@@ -98,20 +99,18 @@ class BazarDetailVC: ViewController {
 
             self.present(facebookSheet, animated: true, completion: nil)
         } else {
-            let alert = UIAlertController(title: NSLocalizedString(BazarDetailVC.facebookAlertTitle, comment: ""), message: NSLocalizedString(BazarDetailVC.facebookAlertMessage, comment: ""), preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: NSLocalizedString(ButtonTitles.doneButtonTitle, comment: ""), style: UIAlertActionStyle.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+
+            self.ios11Sharing()
         }
+    }
+    
+    private func ios11Sharing() {
         
-        // test 1
-//        if let image = self.vHaikuContent.imageWithHaiku() {
-//
-//            self.vHaikuContent.saveImageToFile(anImage: image)
-//        }
-        
-        // test 2 - good
-//        let image = self.vHaikuContent.textToImage()
-//        self.vHaikuContent.saveImageToFile(anImage: image)
+        let image = self.vHaikuContent.textToImage()
+        let photo = FBSDKSharePhoto(image: image, userGenerated: true)
+        let content = FBSDKSharePhotoContent()
+        content.photos = [photo]
+        try FBSDKShareDialog.show(from: self, with: content, delegate: nil)
     }
     
     @objc private func didPressPublishButton(_ sender: UIBarButtonItem) {
