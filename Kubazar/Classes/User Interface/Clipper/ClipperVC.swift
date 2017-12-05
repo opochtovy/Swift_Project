@@ -12,9 +12,7 @@ class ClipperVC: ViewController {
 
     @IBOutlet fileprivate weak var imageView: UIImageView!
     @IBOutlet fileprivate weak var scrollView: UIScrollView!
-    
-    @IBOutlet private weak var vClipFrame: UIView!    
-    
+    @IBOutlet private weak var vClipFrame: UIView!
     private var btnDone: UIBarButtonItem!
     
     private let viewModel: ClipperVM
@@ -86,6 +84,8 @@ class ClipperVC: ViewController {
         
         guard let image = imageView.image else { return }
         
+        let resImage = image.fixedOrientation()
+        
         let clipViewRect = self.vClipFrame.bounds
         let scaleMultiplier = 1 / self.scrollView.zoomScale
         let verticalInset = self.scrollView.contentInset.top
@@ -98,7 +98,7 @@ class ClipperVC: ViewController {
                               size: CGSize(width: clipViewRect.width * scaleMultiplier,
                                            height: clipViewRect.height * scaleMultiplier))
         
-        if let cropedImafeRef = image.cgImage?.cropping(to: cropRect) {
+        if let cropedImafeRef = resImage.cgImage?.cropping(to: cropRect) {
             
             let resultImage: UIImage = UIImage.init(cgImage: cropedImafeRef)
             self.viewModel.cropedImageData = UIImageJPEGRepresentation(resultImage, 1.0)
