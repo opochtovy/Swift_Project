@@ -129,9 +129,11 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
     
     private func showReachabilityAlert() {
         
-        self.vReachabilityAlert = ReachabilityAlertView(frame: self.view.frame)
+        self.vReachabilityAlert = ReachabilityAlertView(frame: self.view.bounds)
         self.vReachabilityAlert?.btnRefresh.addTarget(self, action: #selector(BazarVC.didPressRefreshButton(_:)), for: .touchUpInside)
         self.view.addSubview(self.vReachabilityAlert!)
+        
+        self.tblView.isHidden = true
     }
     
     private func hideReachabilityAlert() {
@@ -143,6 +145,8 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
                 subView.removeFromSuperview()
             }
         }
+        
+        self.tblView.isHidden = false
     }
     
     private func setupObserving() {

@@ -49,6 +49,28 @@
                         <action selector="didPressSeeAll:" destination="-1" eventType="touchUpInside" id="hFC-SA-dYZ"/>
                     </connections>
                 </button>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="XiS-ET-yFG">
+                    <rect key="frame" x="16" y="339" width="288" height="140"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Niw-XL-gMF" customClass="ChoosePictureButton" customModule="Kubazar" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="140.5" height="140"/>
+                            <state key="normal" backgroundImage="backGradient1"/>
+                            <connections>
+                                <action selector="didPressTakeNewPhoto:" destination="-1" eventType="touchUpInside" id="SvT-hK-SVb"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uMF-nE-L16" customClass="ChoosePictureButton" customModule="Kubazar" customModuleProvider="target">
+                            <rect key="frame" x="147.5" y="0.0" width="140.5" height="140"/>
+                            <state key="normal" backgroundImage="backGradient2"/>
+                            <connections>
+                                <action selector="didPressSurpriseMe:" destination="-1" eventType="touchUpInside" id="Pa7-Yw-f3v"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" priority="900" constant="140" id="2d2-Zd-G68"/>
+                    </constraints>
+                </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zHn-oh-NVY">
                     <rect key="frame" x="0.0" y="54" width="320" height="240"/>
                     <subviews>
@@ -84,28 +106,6 @@
                         <constraint firstAttribute="height" constant="240" id="oj9-Gc-lod"/>
                     </constraints>
                 </view>
-                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="XiS-ET-yFG">
-                    <rect key="frame" x="16" y="339" width="288" height="140"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Niw-XL-gMF" customClass="ChoosePictureButton" customModule="Kubazar" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="140.5" height="140"/>
-                            <state key="normal" backgroundImage="backGradient1"/>
-                            <connections>
-                                <action selector="didPressTakeNewPhoto:" destination="-1" eventType="touchUpInside" id="SvT-hK-SVb"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uMF-nE-L16" customClass="ChoosePictureButton" customModule="Kubazar" customModuleProvider="target">
-                            <rect key="frame" x="147.5" y="0.0" width="140.5" height="140"/>
-                            <state key="normal" backgroundImage="backGradient2"/>
-                            <connections>
-                                <action selector="didPressSurpriseMe:" destination="-1" eventType="touchUpInside" id="Pa7-Yw-f3v"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                    <constraints>
-                        <constraint firstAttribute="height" priority="900" constant="140" id="2d2-Zd-G68"/>
-                    </constraints>
-                </stackView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>

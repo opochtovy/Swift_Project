@@ -32,4 +32,15 @@ class FriendListCellVM {
         
         return UserThumbnailVM(withUser: self.user)
     }
+    
+    public func getUserNameForInvite() -> String {
+        
+        return self.user.firstName
+    }
+    
+    public func getUserPhoneNumbers() -> [String] {
+        
+        guard let user = self.user as? ContactUser else { return [] }
+        return user.phones
+    }
 }

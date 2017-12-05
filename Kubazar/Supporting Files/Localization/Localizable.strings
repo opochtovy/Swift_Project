@@ -164,6 +164,8 @@
 /**/ "FriendList_kubazar" = "Kubazar";
 /**/ "FriendList_all" = "All";
 /**/ "FriendList_haikus" = "Haikus";
+/**/ "FriendList_invite_alert_title" = "Attention";
+/**/ "FriendList_invite_alert_message" = "Contact have multiple phone numbers.\n Please, make sure chosen number is correct";
 
 /*NotificationsVC*/
 /**/ "Notifications_new" = "New";

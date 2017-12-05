@@ -9,13 +9,17 @@
 import UIKit
 import MessageUI
 
-class FriendListVC: ViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UINavigationControllerDelegate {
+protocol InviteContactDelegate: class {
+    
+    func shouldInviteContact(userName: String, phoneNumbers: [String]) -> ()
+}
+
+class FriendListVC: ViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, MFMessageComposeViewControllerDelegate, UINavigationControllerDelegate, InviteContactDelegate {
     
     private var scFilter: UISegmentedControl!
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var tblFriends: UITableView!
-    
-    
+
     let viewModel: FriendListVM
     
     //MARK: - LifeCycle
@@ -62,6 +66,10 @@ class FriendListVC: ViewController, UITableViewDelegate, UITableViewDataSource, 
                 
                 weakSelf.updateContent()
             }
+            else {
+                
+                print("\(error?.localizedDescription ?? "error")")
+            }
         }
     }
     
@@ -69,7 +77,6 @@ class FriendListVC: ViewController, UITableViewDelegate, UITableViewDataSource, 
         
         self.scFilter.selectedSegmentIndex = self.viewModel.filter.rawValue
         self.tblFriends.reloadData()
-
     }
     
     private func setBarAppearance() {
@@ -82,6 +89,20 @@ class FriendListVC: ViewController, UITableViewDelegate, UITableViewDataSource, 
         self.navigationController?.navigationBar.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     }
     
+    private func showInviteAlert(_ inviteViewController: UIViewController) {
+    
+        let title = NSLocalizedString("FriendList_invite_alert_title", comment: "")
+        let message = NSLocalizedString("FriendList_invite_alert_message", comment: "")
+        let alertCtrl = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let alertAction = UIAlertAction(title:NSLocalizedString("Editor_congrats_alert_ok", comment: ""), style: .default) { (_) in
+            
+            self.present(inviteViewController, animated: true, completion: nil)
+        }
+        
+        alertCtrl.addAction(alertAction)
+        self.present(inviteViewController, animated: true, completion: nil)
+    }
     //MARK: - Actions
     
     @IBAction private func didSelectSegmentControl(_ sender: UISegmentedControl) {
@@ -92,16 +113,6 @@ class FriendListVC: ViewController, UITableViewDelegate, UITableViewDataSource, 
             self.viewModel.prepareModel()
             self.updateContent()
         }
-    }
-    
-    @IBAction private func didPressInviteButton(_ sender: UIButton) {
-        
-        let ctrl = MFMessageComposeViewController.init(rootViewController: self)
-        ctrl.body = "Hi, Dude, you have been invited to Kubazar by other dude"
-        ctrl.subject = "Invite friend"
-        ctrl.delegate = self
-        
-        self.navigationController?.pushViewController(ctrl, animated: true)
     }
     
     //MARK: - UITableViewDataSource
@@ -120,7 +131,7 @@ class FriendListVC: ViewController, UITableViewDelegate, UITableViewDataSource, 
         
         let cell = tableView.dequeueReusableCell(withIdentifier: FriendListCell.reuseID, for: indexPath) as! FriendListCell
         cell.viewModel = self.viewModel.getFriendListCellVM(forIndexPath: indexPath)
-        cell.btnInvite.addTarget(self, action: #selector(FriendListVC.didPressInviteButton(_:)), for: .touchUpInside)
+        cell.delegate = self
         return cell
     }
     
@@ -136,7 +147,7 @@ class FriendListVC: ViewController, UITableViewDelegate, UITableViewDataSource, 
         
         if self.viewModel.getFriendListCellVM(forIndexPath: indexPath).showInviteButton == false {
             
-            if let vm = self.viewModel.getFrieldDetailVM(forIndexPath: indexPath) {
+            if let vm = self.viewModel.getFriendDetailVM(forIndexPath: indexPath) {
                 
                 let ctrl = FriendDetailVC(client: self.client, viewModel: vm)
                 ctrl.hidesBottomBarWhenPushed = true
@@ -185,12 +196,35 @@ class FriendListVC: ViewController, UITableViewDelegate, UITableViewDataSource, 
         
         searchBar.resignFirstResponder()
     }
-}
-
-extension FriendListVC: MFMessageComposeViewControllerDelegate {
     
+    //MARK: - InviteContactDelegate
+    
+    func shouldInviteContact(userName: String, phoneNumbers: [String]) {
+        
+        guard phoneNumbers.count > 0                                else { return }
+        guard let phoneNumber = phoneNumbers.first                  else { return }
+        guard MFMessageComposeViewController.canSendText() == true  else { return }
+        
+        let ctrl = MFMessageComposeViewController()
+        ctrl.body = "\(userName), You have been invited to Kubazar "
+        ctrl.subject = "Invite friend"
+        ctrl.delegate = self
+        ctrl.recipients = [phoneNumber]
+        
+        if phoneNumbers.count == 1 {
+            
+            self.present(ctrl, animated: true, completion: nil)
+        }
+        else if phoneNumbers.count > 1 {
+            
+            self.showInviteAlert(ctrl)
+        }
+    }
+    //MARK: - MFMessageComposeViewControllerDelegate
     func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
         
+        controller.dismiss(animated: true, completion: {})
         print(result)
     }
 }
+

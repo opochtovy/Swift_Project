@@ -16,9 +16,13 @@ class FriendListVM: FriendsBaseVM {
         case kubazar = 0
         case all = 1
     }
-    
+
     public var filter: Filter = .all
-    public var searchFilter: String = ""
+    public var searchFilter: String = "" {
+        didSet {
+            self.prepareModel()
+        }
+    }
     private var users: [User] = []
     
     private var dataSourceSectionKeys: [String] = []
@@ -106,7 +110,7 @@ class FriendListVM: FriendsBaseVM {
         return self.dataSourceSectionKeys
     }
     
-    public func getFrieldDetailVM(forIndexPath indexPath: IndexPath) -> FriendDetailVM? {
+    public func getFriendDetailVM(forIndexPath indexPath: IndexPath) -> FriendDetailVM? {
         
         let sectionKey = self.dataSourceSectionKeys[indexPath.section]
         
@@ -118,21 +122,5 @@ class FriendListVM: FriendsBaseVM {
             
             return nil
         }
-    }
-    
-    public func inviteContact(forIndexPath indexPath: IndexPath, completion: @escaping BaseCompletion) {
-        
-        let sectionKey = self.dataSourceSectionKeys[indexPath.section]
-        
-        guard let user = self.dataSource[sectionKey]?[indexPath.row] as? ContactUser else { return }
-        guard user.phones.count > 0 else { return }
-        self.client.authenticator.postInvite(onPhoneNumber: user.phones[0]).then { _ -> Void in
-            
-            completion(true, nil)
-        
-        }.catch { (error) in
-                
-            completion(false, error)
-        }
-    }
+    }    
 }

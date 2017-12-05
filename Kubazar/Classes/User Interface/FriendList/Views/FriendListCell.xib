@@ -55,6 +55,9 @@
                         <state key="normal" title="Invite">
                             <color key="titleColor" red="0.396078431372549" green="0.73725490196078436" blue="0.72156862745098038" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
+                        <connections>
+                            <action selector="didPressInviteContact:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ECA-8E-fAs"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>
