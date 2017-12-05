@@ -16,6 +16,7 @@ class FriendListCell: UITableViewCell {
     @IBOutlet private weak var lbUserName: UILabel!
     @IBOutlet private weak var lbhaikuCounter: UILabel!
     @IBOutlet public weak var btnInvite: UIButton!
+    public weak var delegate: InviteContactDelegate?
     
     public var viewModel: FriendListCellVM! {
         didSet {
@@ -35,5 +36,15 @@ class FriendListCell: UITableViewCell {
     private func setup() {
 
         self.btnInvite.layer.cornerRadius = 10.0
+    }
+    
+    @IBAction private func didPressInviteContact(_ sender: UIButton) {
+        
+        if let delegate = self.delegate {
+            
+            let userName = self.viewModel.getUserNameForInvite()
+            let phones = self.viewModel.getUserPhoneNumbers()
+            delegate.shouldInviteContact(userName: userName, phoneNumbers: phones)
+        }
     }
 }

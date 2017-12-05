@@ -38,6 +38,7 @@ class FriendsBaseVM: BaseVM {
             
             HaikuManager.shared.friends = users
             self.filterUserContacts()
+            self.prepareModel()
             completion(true, nil)
             
         }.catch { error in
