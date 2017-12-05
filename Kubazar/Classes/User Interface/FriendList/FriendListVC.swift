@@ -14,13 +14,13 @@ protocol InviteContactDelegate: class {
     func shouldInviteContact(userName: String, phoneNumbers: [String]) -> ()
 }
 
-class FriendListVC: ViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UINavigationControllerDelegate, InviteContactDelegate {
+class FriendListVC: ViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, MFMessageComposeViewControllerDelegate, UINavigationControllerDelegate, InviteContactDelegate {
     
     private var scFilter: UISegmentedControl!
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var tblFriends: UITableView!
     
-    
+    private var inviteCtrl: MFMessageComposeViewController!
     let viewModel: FriendListVM
     
     //MARK: - LifeCycle
@@ -91,19 +91,19 @@ class FriendListVC: ViewController, UITableViewDelegate, UITableViewDataSource, 
         self.navigationController?.navigationBar.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     }
     
-    private func showInviteAlert(_ inviteViewController: UINavigationController) {
-        
+    private func showInviteAlert(_ inviteViewController: UIViewController) {
+    
         let title = NSLocalizedString("FriendList_invite_alert_title", comment: "")
         let message = NSLocalizedString("FriendList_invite_alert_message", comment: "")
         let alertCtrl = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
-        let alertAction = UIAlertAction(title: NSLocalizedString("Editor_congrats_alert_ok", comment: ""), style: .default) { (_) in
+        let alertAction = UIAlertAction(title:NSLocalizedString("Editor_congrats_alert_ok", comment: ""), style: .default) { (_) in
             
-            self.navigationController?.pushViewController(inviteViewController, animated: true)
+            self.present(inviteViewController, animated: true, completion: nil)
         }
         
         alertCtrl.addAction(alertAction)
-        self.present(alertCtrl, animated: true, completion: nil)
+        self.present(inviteViewController, animated: true, completion: nil)
     }
     //MARK: - Actions
     
@@ -203,30 +203,30 @@ class FriendListVC: ViewController, UITableViewDelegate, UITableViewDataSource, 
     
     func shouldInviteContact(userName: String, phoneNumbers: [String]) {
         
-        guard phoneNumbers.count > 0 else { return }
-        guard let phoneNumber = phoneNumbers.first else { return }
+        guard phoneNumbers.count > 0                                else { return }
+        guard let phoneNumber = phoneNumbers.first                  else { return }
+        guard MFMessageComposeViewController.canSendText() == true  else { return }
         
-        let ctrl = MFMessageComposeViewController.init(rootViewController: self)
-        ctrl.body = "\(userName), You have been invited to Kubazar "
-        ctrl.subject = "Invite friend"
-        ctrl.delegate = self
-        ctrl.recipients = [phoneNumber]
+        self.inviteCtrl = MFMessageComposeViewController()
+        inviteCtrl.body = "\(userName), You have been invited to Kubazar "
+        inviteCtrl.subject = "Invite friend"
+        inviteCtrl.delegate = self
+        inviteCtrl.recipients = [phoneNumber]
         
         if phoneNumbers.count == 1 {
             
-            self.navigationController?.pushViewController(ctrl, animated: true)
+            self.present(inviteCtrl, animated: true, completion: nil)
         }
         else if phoneNumbers.count > 1 {
             
-            self.showInviteAlert(ctrl)
+            self.showInviteAlert(inviteCtrl)
         }
     }
-}
-
-extension FriendListVC: MFMessageComposeViewControllerDelegate {
-    
+    //MARK: - MFMessageComposeViewControllerDelegate
     func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
         
+        controller.dismiss(animated: true, completion: {})
         print(result)
     }
 }
+
