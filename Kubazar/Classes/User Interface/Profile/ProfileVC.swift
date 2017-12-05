@@ -79,6 +79,9 @@ class ProfileVC: ViewController, UITableViewDelegate, UITableViewDataSource, UII
         if let url = self.client.authenticator.getProfilePhotoURL() {
             
             self.profileImageView.af_setImage(withURL: url, placeholderImage: ProfileVC.placeholder, imageTransition: .crossDissolve(0.2))
+        } else {
+            
+            self.profileImageView.image = ProfileVC.placeholder
         }
     }
     

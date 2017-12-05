@@ -237,7 +237,7 @@ class FirebaseServerClient {
             UserDefaults.standard.synchronize()
             
             completionHandler(nil, true)
-            // in completion block -> self.client.sessionManager.adapter = nil
+            // in completion block -> self.client.sessionManager.adapter = SessionTokenAdapter(sessionToken: "")
             
         } catch let signOutError as NSError {
             
@@ -335,11 +335,20 @@ class FirebaseServerClient {
         return Promise { fulfill, reject in
             
             let credential = EmailAuthProvider.credential(withEmail: email, password: password)
+            print("email =", email)
             
             Auth.auth().signIn(with: credential) { (user, error) in
                 if error != nil, let error = error {
                     
                     reject(error)
+                }
+                if let user = Auth.auth().currentUser {
+                    
+                    print("signInWithEmailAuthProvider : user.email =", user.email ?? "")
+                }
+                if let authToken = self.authToken, authToken.count > 0 {
+                    
+                    print("signInWithEmailAuthProvider : authToken =", authToken)
                 }
                 
                 UserDefaults.standard.set(true, forKey: StoreKeys.isUserAuthorized)
@@ -521,10 +530,12 @@ class FirebaseServerClient {
             
             let user = Auth.auth().currentUser
             if let user = user {
+                print("getToken : user.email =", user.email ?? "")
                 
                 user.getIDTokenForcingRefresh(true, completion: { (idToken, error) in
                     
                     if let idToken = idToken {
+                        print("getToken : idToken =", idToken)
                         
                         self.authToken = idToken
                         self.sessionManager.adapter = SessionTokenAdapter(sessionToken: idToken)
@@ -670,6 +681,7 @@ class FirebaseServerClient {
         
         return Promise {  fulfill, reject in
             
+            // ???
             let user = Auth.auth().currentUser
             if let password = self.signInPassword, let email = user?.email {
                 

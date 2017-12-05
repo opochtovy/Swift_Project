@@ -36,7 +36,7 @@ class RootVC: ViewController {
         self.setNavigationBarAppearance()
         self.setupObserving()
         
-//        self.viewModel.signOut()
+        self.viewModel.signOut()
         
         self.viewModel.checkLoginState()
     }

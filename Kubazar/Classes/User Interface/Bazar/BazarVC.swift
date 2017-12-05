@@ -164,7 +164,8 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
                 if !success {
                     
                     weakSelf.tblView.reloadData()
-                    weakSelf.showWrongResponseAlert(message: "")
+//                    weakSelf.showWrongResponseAlert(message: "")
+                    weakSelf.reauthenticateUser(shouldResetDataSource: true)
                 } else {
                     
                     weakSelf.updateContentWithNewHaikus(haikus: haikus, shouldResetDataSource: shouldResetDataSource)
