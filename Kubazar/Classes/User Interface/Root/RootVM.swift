@@ -81,11 +81,8 @@ class RootVM: BaseVM {
     
     private func deleteAuthToken() {
         
-        if let authToken = self.client.authenticator.authToken, authToken.count > 0 {
-            self.client.authenticator.authToken = ""
-            self.client.authenticator.sessionManager.adapter = SessionTokenAdapter(sessionToken: "")
-            print("RootVM : authToken =", authToken)
-        }
+        self.client.authenticator.authToken = ""
+        self.client.authenticator.sessionManager.adapter = SessionTokenAdapter(sessionToken: "")
     }
     
     //MARK: - Notification
