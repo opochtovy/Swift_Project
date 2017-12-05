@@ -29,7 +29,6 @@ class Field: MappableObject {
         super.mapping(map: map)
         
         text <- map["line"]
-        creatorId <- map["creatorId"]
         owner <- map["creator"]
     }
 }

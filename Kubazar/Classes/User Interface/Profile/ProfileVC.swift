@@ -35,6 +35,7 @@ class ProfileVC: ViewController, UITableViewDelegate, UITableViewDataSource, UII
     
     private let viewModel: ProfileVM
     private var isTblViewEditable: Bool = false
+    private var editButton: UIBarButtonItem = UIBarButtonItem()
     
     lazy private var imagePicker: UIImagePickerController = {
         
@@ -93,7 +94,8 @@ class ProfileVC: ViewController, UITableViewDelegate, UITableViewDataSource, UII
         self.scFilter.addTarget(self, action: #selector(ProfileVC.didSelectSegment), for: .valueChanged)
         self.scFilter.selectedSegmentIndex = self.viewModel.filter.rawValue
         self.navigationItem.titleView = self.scFilter
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString(ProfileVM.infoHeaderButtonTitle, comment: ""), style: .plain, target: self, action: #selector(self.pressRightButton(button:)))
+        self.editButton = UIBarButtonItem(title: NSLocalizedString(ProfileVM.infoHeaderButtonTitle, comment: ""), style: .plain, target: self, action: #selector(self.pressRightButton(button:)))
+        self.navigationItem.rightBarButtonItem = self.editButton
     }
     
     private func updateUserProfile(displayName: String, email: String) {
@@ -254,6 +256,7 @@ class ProfileVC: ViewController, UITableViewDelegate, UITableViewDataSource, UII
         
         let title = self.isTblViewEditable ? NSLocalizedString(ProfileVM.infoHeaderButtonTitle, comment: "") : NSLocalizedString(ButtonTitles.doneButtonTitle, comment: "")
         button.title = title
+        self.editButton.title = title
         
         self.isTblViewEditable = !self.isTblViewEditable
         
@@ -299,6 +302,11 @@ class ProfileVC: ViewController, UITableViewDelegate, UITableViewDataSource, UII
     private func updateContent() {
         
         self.profileContentView.isHidden = self.viewModel.filter == .info
+        if self.viewModel.filter == .profile {
+            self.navigationItem.rightBarButtonItem = self.editButton
+        } else {
+            self.navigationItem.rightBarButtonItem = nil
+        }
     }
     
     @IBAction func actionEditImage(_ sender: UIButton) {
