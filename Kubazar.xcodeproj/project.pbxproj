@@ -166,7 +166,6 @@
 		9EED066E1FB59E5B00CCD82E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED066D1FB59E5B00CCD82E /* User.swift */; };
 		9EED06701FB5A2D300CCD82E /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED066F1FB5A2D300CCD82E /* Array+Extension.swift */; };
 		9EED06721FB5DE3700CCD82E /* Collection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EED06711FB5DE3700CCD82E /* Collection+Extension.swift */; };
-		9EEF0D411FD137D800FAB451 /* FriendsBaseVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEF0D401FD137D800FAB451 /* FriendsBaseVM.swift */; };
 		9EF34D3B1FC0256500BCA63C /* FriendsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF34D3A1FC0256500BCA63C /* FriendsVM.swift */; };
 		9EFB03651FB9800B00A78845 /* BazarDetailVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFB03621FB9800B00A78845 /* BazarDetailVM.swift */; };
 		9EFB03661FB9800B00A78845 /* BazarDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFB03631FB9800B00A78845 /* BazarDetailVC.swift */; };
@@ -351,7 +350,6 @@
 		9EED066D1FB59E5B00CCD82E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9EED066F1FB5A2D300CCD82E /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		9EED06711FB5DE3700CCD82E /* Collection+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extension.swift"; sourceTree = "<group>"; };
-		9EEF0D401FD137D800FAB451 /* FriendsBaseVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsBaseVM.swift; sourceTree = "<group>"; };
 		9EF34D3A1FC0256500BCA63C /* FriendsVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsVM.swift; sourceTree = "<group>"; };
 		9EFB03611FB9800B00A78845 /* BazarDetailVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BazarDetailVC.xib; sourceTree = "<group>"; };
 		9EFB03621FB9800B00A78845 /* BazarDetailVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BazarDetailVM.swift; sourceTree = "<group>"; };
@@ -679,7 +677,6 @@
 			isa = PBXGroup;
 			children = (
 				9E5E8E261FADC41A00CCCBDA /* BaseVM.swift */,
-				9EEF0D401FD137D800FAB451 /* FriendsBaseVM.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1347,7 +1344,6 @@
 				9EC68A321FC5B40D00A7F793 /* ReachabilityAlertView.swift in Sources */,
 				9EFB03741FB997F900A78845 /* CountryCodesVC.swift in Sources */,
 				9E2C694D1FC833FF000A5594 /* FriendListCellVM.swift in Sources */,
-				9EEF0D411FD137D800FAB451 /* FriendsBaseVM.swift in Sources */,
 				9E455BCE1FB07DE600BC9A11 /* WriteMainMenuVM.swift in Sources */,
 				9E15889E1FB452F50063C816 /* BazarCellVM.swift in Sources */,
 				9E5E8E3D1FAE059B00CCCBDA /* SignInVM.swift in Sources */,
