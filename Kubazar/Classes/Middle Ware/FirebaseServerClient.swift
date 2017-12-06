@@ -97,7 +97,9 @@ class FirebaseServerClient {
                 password = try passwordItem.readPassword()
             }
             catch {
-                fatalError("Error reading password from keychain - \(error)")
+//                fatalError("Error reading password from keychain - \(error)")
+                print("!!! - Error reading password from keychain")
+                return password
             }
             return password
         }
