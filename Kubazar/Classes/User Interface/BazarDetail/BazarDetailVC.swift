@@ -21,6 +21,7 @@ class BazarDetailVC: ViewController {
     static let facebookSheetTitle = "BazarDetailVC_facebookSheetTitle"
     static let facebookAlertTitle = "BazarDetailVC_facebookAlertTitle"
     static let facebookAlertMessage = "BazarDetailVC_facebookAlertMessage"
+    static let noNativeFacebookAppAlertMessage = "BazarDetailVC_noNativeFacebookAppAlertMessage"
     
     private enum BackColors {
         
@@ -90,18 +91,42 @@ class BazarDetailVC: ViewController {
     
     @objc private func didPressShareButton(_ sender: UIBarButtonItem) {
         
-        if SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook){
-            let facebookSheet:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
-            facebookSheet.setInitialText(NSLocalizedString(BazarDetailVC.facebookSheetTitle, comment: ""))
-
-            let image = self.vHaikuContent.textToImage()
-            facebookSheet.add(image)
-
-            self.present(facebookSheet, animated: true, completion: nil)
+        let facebookUrl = URL(string: "fb://")
+        if let facebookUrl = facebookUrl {
+            
+            let isInstalled = UIApplication.shared.canOpenURL(facebookUrl)
+            if isInstalled {
+                
+//                if SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook){
+//                    let facebookSheet:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+//                    facebookSheet.setInitialText(NSLocalizedString(BazarDetailVC.facebookSheetTitle, comment: ""))
+//                    
+//                    let image = self.vHaikuContent.textToImage()
+//                    facebookSheet.add(image)
+//                    
+//                    self.present(facebookSheet, animated: true, completion: nil)
+//                } else {
+//                    
+//                    self.ios11Sharing()
+//                }
+                
+                self.ios11Sharing()
+                
+            } else {
+                
+                self.showAlertNoNativeFacebookApp()
+            }
         } else {
-
-            self.ios11Sharing()
+            
+            self.showAlertNoNativeFacebookApp()
         }
+    }
+    
+    private func showAlertNoNativeFacebookApp() {
+        
+        let alert = UIAlertController(title: NSLocalizedString(BazarDetailVC.facebookSheetTitle, comment: ""), message: NSLocalizedString(BazarDetailVC.noNativeFacebookAppAlertMessage, comment: ""), preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString(ButtonTitles.doneButtonTitle, comment: ""), style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     private func ios11Sharing() {
@@ -110,7 +135,15 @@ class BazarDetailVC: ViewController {
         let photo = FBSDKSharePhoto(image: image, userGenerated: true)
         let content = FBSDKSharePhotoContent()
         content.photos = [photo]
-        try FBSDKShareDialog.show(from: self, with: content, delegate: nil)
+        
+//        try FBSDKShareDialog.show(from: self, with: content, delegate: nil)
+//        FBSDKShareDialog.show(from: self, with: content, delegate: nil)
+        
+        let dialog = FBSDKShareDialog()
+        dialog.fromViewController = self
+        dialog.shareContent = content
+        dialog.mode = .shareSheet
+        dialog.show()
     }
     
     @objc private func didPressPublishButton(_ sender: UIBarButtonItem) {

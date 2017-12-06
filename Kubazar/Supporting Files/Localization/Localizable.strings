@@ -87,6 +87,7 @@
 /**/ "BazarDetailVC_facebookSheetTitle" = "Share on Facebook";
 /**/ "BazarDetailVC_facebookAlertTitle" = "Accounts";
 /**/ "BazarDetailVC_facebookAlertMessage" = "Please login to a Facebook account to share.";
+/**/ "BazarDetailVC_noNativeFacebookAppAlertMessage" = "Please install Facebook native app for sharing option.";
 
 /*StartPhoneVerificationVC*/
 /**/"StartPhoneVerificationVC_title" = "Verify phone number";
