@@ -65,6 +65,14 @@ class BazarCellVM {
         return self.haiku.isCompleted
     }
     
+    public func canHaikuBeLiked() -> Bool {
+        
+        let isHaikuSoloWritten = self.haiku.players.count == 1 &&
+            self.haiku.players[0].id == HaikuManager.shared.currentUser.id
+        
+        return self.haiku.published || !isHaikuSoloWritten
+    }
+    
     //MARK: - Private functions
     
     private func prepareModel() {

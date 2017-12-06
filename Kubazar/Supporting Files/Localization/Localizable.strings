@@ -106,7 +106,7 @@
 
 /*CompletePhoneVerificationVC*/
 /**/"CompletePhoneVerificationVC_backButtonTitle" = "Edit number";
-/**/"CompletePhoneVerificationVC_descriptionLabel" = "We have sent you an SMS with a code to the number adove";
+/**/"CompletePhoneVerificationVC_descriptionLabel" = "We have sent you an SMS with a code to the number above";
 /**/"CompletePhoneVerificationVC_completionLabel" = "To complete your phone number verification, please enter the activation code.";
 /**/"CompletePhoneVerificationVC_resendButtonTitle" = "Resend Code";
 /**/"CompletePhoneVerificationVC_wrongCodeAlertTitle" = "Check Code";

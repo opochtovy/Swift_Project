@@ -99,6 +99,7 @@ class CountryCodesVC: ViewController, UITableViewDelegate, UITableViewDataSource
         let cell = self.tableView.cellForRow(at: indexPath) as! CountryCodeCell
         cell.isCellSelected = true
         
+        self.cancel()
     }
     
     @objc private func cancel() {
