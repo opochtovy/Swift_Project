@@ -23,6 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+//        self.resetKeychain()
+        
         if #available(iOS 10.0, *) {
             // For iOS 10 display notification (sent via APNS)
             UNUserNotificationCenter.current().delegate = self
@@ -145,6 +147,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let token = Messaging.messaging().fcmToken
         self.client.authenticator.fcmToken = token ?? ""
         print("FCM token: \(token ?? "")")
+    }
+    
+    //MARK: - Reset All Keychains
+    
+    func resetKeychain() {
+        deleteAllKeysForSecClass(kSecClassGenericPassword)
+        deleteAllKeysForSecClass(kSecClassInternetPassword)
+        deleteAllKeysForSecClass(kSecClassCertificate)
+        deleteAllKeysForSecClass(kSecClassKey)
+        deleteAllKeysForSecClass(kSecClassIdentity)
+    }
+    
+    func deleteAllKeysForSecClass(_ secClass: CFTypeRef) {
+        let dict: [NSString : Any] = [kSecClass : secClass]
+        let result = SecItemDelete(dict as CFDictionary)
+        assert(result == noErr || result == errSecItemNotFound, "Error deleting keychain data (\(result))")
     }
 }
 

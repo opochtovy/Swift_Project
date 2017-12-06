@@ -167,4 +167,28 @@ class BazarVM: BaseVM {
         
         print("BazarVM - deleteHaiku : self.dataSource.count =", self.dataSource.count)
     }
+    
+    public func checkStateOfCurrentUser() -> Bool {
+        
+        return self.client.authenticator.checkStateOfCurrentUser()
+    }
+    
+    public func signOut() {
+        
+        self.client.authenticator.signOut { (errorDescription, success) in
+            
+            self.client.authenticator.state = .unauthorized
+            UserDefaults.standard.set(false, forKey: StoreKeys.isUserAuthorized)
+            UserDefaults.standard.synchronize()
+            self.client.authenticator.authToken = ""
+            self.client.authenticator.sessionManager.adapter = nil
+            HaikuManager.shared.currentUser = User()
+            
+            if let authToken = self.client.authenticator.authToken, authToken.count > 0 {
+                
+                print("BazarVM : authToken =", authToken)
+                print("Error")
+            }
+        }
+    }
 }

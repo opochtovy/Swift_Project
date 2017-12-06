@@ -180,7 +180,7 @@ class StartEditProfileVC: ViewController, UITextFieldDelegate {
                 
                 if !success {
                     
-                    self.client.authenticator.sessionManager.adapter = SessionTokenAdapter(sessionToken: "")
+                    self.client.authenticator.sessionManager.adapter = nil
                     self.showWrongResponseAlert(message: errorDescription)
                 
                 } else {

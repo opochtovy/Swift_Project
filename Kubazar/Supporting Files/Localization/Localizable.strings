@@ -31,7 +31,7 @@
 /**/"ButtonTitles_changeButtonTitle" = "Change";
 
 /**/"CommonTitles_errorTitle" = "Error";
-/**/"CommonTitles_wrongResponseMessage" = "There was an error during your request.";
+/**/"CommonTitles_wrongResponseMessage" = "There was unexpected error during request to server. Please sign in again.";
 
 /*TabbedController*/
 /**/"TabBarTitles_bazar" = "Bazar";

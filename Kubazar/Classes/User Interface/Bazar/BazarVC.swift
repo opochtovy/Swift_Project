@@ -156,7 +156,7 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
     
     @objc private func getPersonalHaikus(page: Int, perPage: Int, shouldResetDataSource: Bool) {
         
-        if self.client.authenticator.state == .authorized {
+        if self.client.authenticator.state == .authorized, self.viewModel.checkStateOfCurrentUser() {
             
             let sortType = self.viewModel.sort == .date ? 0 : 1
             self.client.authenticator.getHaikus(page: self.viewModel.page, perPage: self.viewModel.perPage, sort: sortType, filter: self.viewModel.filter.rawValue) { [weak self](haikus, success) in
@@ -175,6 +175,9 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
                     weakSelf.updateContentWithNewHaikus(haikus: haikus, shouldResetDataSource: shouldResetDataSource)
                 }
             }
+        } else {
+            
+            self.showUnexpectedErrorAlert(message: nil)
         }
     }
     
@@ -212,6 +215,30 @@ class BazarVC: ViewController, UITableViewDelegate, UITableViewDataSource, UIScr
             
             alertController.dismiss(animated: true, completion: nil)
             self.reauthenticateUser(shouldResetDataSource: true)
+        }
+        
+        alertController.addAction(okAction)
+        
+        alertController.view.tintColor = #colorLiteral(red: 0.3450980392, green: 0.7411764706, blue: 0.7333333333, alpha: 1)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    private func showUnexpectedErrorAlert(message: String?) {
+        
+        let alertTitle = NSLocalizedString(CommonTitles.errorTitle, comment: "")
+        var alertMessage = NSLocalizedString(CommonTitles.wrongResponseMessage, comment: "")
+        if let message = message, message.count > 0 {
+            
+            alertMessage = message
+        }
+        
+        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: NSLocalizedString(ButtonTitles.doneButtonTitle, comment: ""), style: .default) { (_) in
+            
+            alertController.dismiss(animated: true, completion: nil)
+            self.viewModel.signOut()
         }
         
         alertController.addAction(okAction)

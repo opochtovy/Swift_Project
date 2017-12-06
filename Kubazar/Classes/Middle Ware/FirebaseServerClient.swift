@@ -66,7 +66,9 @@ class FirebaseServerClient {
                 password = try passwordItem.readPassword()
             }
             catch {
-                fatalError("Error reading password from keychain - \(error)")
+//                fatalError("Error reading password from keychain - \(error)")
+                print("!!! - Error reading authToken from keychain")
+                return password
             }
             return password
         }
@@ -81,7 +83,8 @@ class FirebaseServerClient {
                 }
             }
             catch {
-                fatalError("Error saving password to keychain - \(error)")
+//                fatalError("Error saving authToken to keychain - \(error)")
+                print("!!! - Error saving authToken to keychain")
             }
         }
     }
@@ -98,7 +101,7 @@ class FirebaseServerClient {
             }
             catch {
 //                fatalError("Error reading password from keychain - \(error)")
-                print("!!! - Error reading password from keychain")
+                print("!!! - Error reading signInPassword from keychain")
                 return password
             }
             return password
@@ -114,7 +117,8 @@ class FirebaseServerClient {
                 }
             }
             catch {
-                fatalError("Error saving password to keychain - \(error)")
+//                fatalError("Error saving signInPassword to keychain - \(error)")
+                print("!!! - Error saving signInPassword to keychain")
             }
         }
     }
@@ -144,6 +148,11 @@ class FirebaseServerClient {
             print("user.displayName =", user.displayName ?? "no displayName")
             print("user.phoneNumber =", user.phoneNumber ?? "no phone number")
         }
+    }
+    
+    public func checkStateOfCurrentUser() -> Bool {
+        
+        return Auth.auth().currentUser != nil
     }
     
     public func getUserDisplayName() -> String {
@@ -239,7 +248,7 @@ class FirebaseServerClient {
             UserDefaults.standard.synchronize()
             
             completionHandler(nil, true)
-            // in completion block -> self.client.sessionManager.adapter = SessionTokenAdapter(sessionToken: "")
+            // in completion block -> self.client.sessionManager.adapter = nil
             
         } catch let signOutError as NSError {
             

@@ -33,7 +33,7 @@ class RootVM: BaseVM {
             UserDefaults.standard.set(false, forKey: StoreKeys.isUserAuthorized)
             UserDefaults.standard.synchronize()
             self.client.authenticator.authToken = ""
-            self.client.authenticator.sessionManager.adapter = SessionTokenAdapter(sessionToken: "")
+            self.client.authenticator.sessionManager.adapter = nil
             HaikuManager.shared.currentUser = User()
             
             if let authToken = self.client.authenticator.authToken, authToken.count > 0 {
@@ -82,7 +82,7 @@ class RootVM: BaseVM {
     private func deleteAuthToken() {
         
         self.client.authenticator.authToken = ""
-        self.client.authenticator.sessionManager.adapter = SessionTokenAdapter(sessionToken: "")
+        self.client.authenticator.sessionManager.adapter = nil
     }
     
     //MARK: - Notification
